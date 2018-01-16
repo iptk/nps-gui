@@ -1,6 +1,9 @@
+import React from 'react'
+import {Table} from 'react-toolbox'
+
 import Dataset from '../lib/model/Dataset.js';
 
-class DatasetTable{
+class DatasetTable extends React.Component{
   state = {
     datasets: []
   }
@@ -13,3 +16,5 @@ class DatasetTable{
     />;
   }
 }
+
+export default DatasetTable
