@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Button, Input} from 'react-toolbox';
 
 import BaseLayout from './BaseLayout.js';
 
 function render_dom(){
   ReactDOM.render(
     <BaseLayout>
-      Welcome to NPS
+      <section>
+        <Input type="text" label="Filter" multiline rows="10"/>
+        <Input type="text" label="Filter all" multiline rows="10"/>
+      </section>
     </BaseLayout>,
     document.getElementById('approot')
   );
