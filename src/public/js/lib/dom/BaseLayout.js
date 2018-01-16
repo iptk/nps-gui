@@ -1,25 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {AppBar, IconButton, Layout, List, ListItem, NavDrawer, Panel, Sidebar} from 'react-toolbox';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {AppBar, IconButton, Layout, List, ListItem, NavDrawer, Panel, Sidebar} from 'react-toolbox'
 
 class BaseLayout extends React.Component {
   state = {
     drawerActive: false,
     drawerPinned: false,
     sidebarPinned: false
-  };
+  }
 
   toggleDrawerActive = () => {
-    this.setState({ drawerActive: !this.state.drawerActive });
-  };
+    this.setState({ drawerActive: !this.state.drawerActive })
+  }
 
   toggleDrawerPinned = () => {
-    this.setState({ drawerPinned: !this.state.drawerPinned });
+    this.setState({ drawerPinned: !this.state.drawerPinned })
   }
 
   toggleSidebar = () => {
-    this.setState({ sidebarPinned: !this.state.sidebarPinned });
-  };
+    this.setState({ sidebarPinned: !this.state.sidebarPinned })
+  }
 
   render() {
     return (
@@ -42,8 +42,8 @@ class BaseLayout extends React.Component {
           </div>
         </Sidebar>
       </Layout>
-    );
+    )
   }
 }
 
-export default BaseLayout;
+export default BaseLayout

@@ -1,17 +1,17 @@
-import React from 'react';
-import {Input} from 'react-toolbox';
-import {createStore} from 'redux';
+import React from 'react'
+import {Input} from 'react-toolbox'
+import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
-import FilteredDatasetTable from './container/FilteredDatasetTable'
-import BaseLayout from './dom/BaseLayout';
-import render_dom_delayed from './dom/render_dom';
-import reducer from './reducers/index';
+import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
+import BaseLayout from './lib/dom/BaseLayout'
+import render_dom_delayed from './lib/dom/render_dom'
+import reducer from './lib/reducers/index'
 
-let store = createStore(reducer);
+let store = createStore(reducer)
 
 const applyNewFilter = (type, value) => {
-  value = value.split('\n');
+  value = value.split('\n')
   store.dispatch({
     type: type,
     filter: value
@@ -30,4 +30,4 @@ render_dom_delayed(
       </section>
     </BaseLayout>
   </Provider>
-);
+)
