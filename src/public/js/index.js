@@ -23,9 +23,9 @@ render_dom_delayed(
     <BaseLayout>
       <section>
         <Input type="text" label="Filter" multiline rows={10}
-          onChange={(e) => applyNewFilter('FILTER_SINGLE_CHANGE', this.value)}/>
+          onChange={applyNewFilter.bind(this, 'FILTER_SINGLE_CHANGE')}/>
         <Input type="text" label="Filter all" multiline rows={10}
-          onChange={(e) => applyNewFilter('FILTER_GLOBAL_CHANGE', this.value)}/>
+          onChange={applyNewFilter.bind(this, 'FILTER_GLOBAL_CHANGE')}/>
         <FilteredDatasetTable/>
       </section>
     </BaseLayout>
