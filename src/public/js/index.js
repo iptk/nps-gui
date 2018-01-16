@@ -1,6 +1,7 @@
 import React from 'react';
 import {Input} from 'react-toolbox';
-import {createStore} from 'react-redux';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux'
 
 import FilteredDatasetTable from './container/FilteredDatasetTable'
 import BaseLayout from './dom/BaseLayout';
@@ -18,13 +19,15 @@ const applyNewFilter = (type, value) => {
 }
 
 render_dom_delayed(
-  <BaseLayout>
-    <section>
-      <Input type="text" label="Filter" multiline rows="10"
-        onChange={applyNewFilter('FILTER_SINGLE_CHANGE', this.value)}/>
-      <Input type="text" label="Filter all" multiline rows="10"
-        onChange={applyNewFilter('FILTER_GLOBAL_CHANGE', this.value)}/>
-      <FilteredDatasetTable/>
-    </section>
-  </BaseLayout>
+  <Provider store={store}>
+    <BaseLayout>
+      <section>
+        <Input type="text" label="Filter" multiline rows="10"
+          onChange={(e) => applyNewFilter('FILTER_SINGLE_CHANGE', this.value)}/>
+        <Input type="text" label="Filter all" multiline rows="10"
+          onChange={(e) => applyNewFilter('FILTER_GLOBAL_CHANGE', this.value)}/>
+        <FilteredDatasetTable/>
+      </section>
+    </BaseLayout>
+  </Provider>
 );
