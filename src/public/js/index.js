@@ -22,9 +22,9 @@ render_dom_delayed(
   <Provider store={store}>
     <BaseLayout>
       <section>
-        <Input type="text" label="Filter" multiline rows="10"
+        <Input type="text" label="Filter" multiline rows={10}
           onChange={(e) => applyNewFilter('FILTER_SINGLE_CHANGE', this.value)}/>
-        <Input type="text" label="Filter all" multiline rows="10"
+        <Input type="text" label="Filter all" multiline rows={10}
           onChange={(e) => applyNewFilter('FILTER_GLOBAL_CHANGE', this.value)}/>
         <FilteredDatasetTable/>
       </section>

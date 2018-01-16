@@ -10,7 +10,7 @@ class DatasetTable extends React.Component{
 
   render(){
     return <Table
-      heading={true}
+      heading="true"
       model={Dataset}
       source={this.state.datasets}
     />;
