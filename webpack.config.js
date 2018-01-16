@@ -1,8 +1,7 @@
-const path = require('path');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
-jspath = path.resolve(__dirname, 'src', 'public', 'js');
+jspath = path.resolve(__dirname, 'src', 'public', 'js')
 
 module.exports = {
   entry: {
@@ -46,7 +45,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new MinifyPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
     })

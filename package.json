@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack -p",
+    "build-dev": "webpack --devtool source-map",
+    "watch": "webpack -p --watch",
+    "watch-dev": "webpack --watch --devtool source-map"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
