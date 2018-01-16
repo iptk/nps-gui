@@ -28,9 +28,13 @@ While developing you might want to (re-)pack your js-files. At first enter your 
 Inside your container (with working directory `/app`) run:
 ```bash
   > # pack js-files one single time (using webpack)
-  > yarn run build
+  > yarn run build # webpack -p
+  > # pack js-files in dev-mode (devtools source-mapping)
+  > yarn run build-dev # webpack --devtool source-map
   > # or let webpack watch your files for automatic building
-  > yarn run watch
+  > yarn run watch # webpack -p --watch
+  > # in dev-mode
+  > yarn run watch-dev # webpack --watch --devtool source-map
 ```
 
 # 3rd-party stuff that is not a handled dependency
