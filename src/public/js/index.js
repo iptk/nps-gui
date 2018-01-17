@@ -2,6 +2,7 @@ import React from 'react'
 import {Input} from 'react-toolbox'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
+import debounce from 'lodash/debounce'
 
 import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
 import BaseLayout from './lib/dom/BaseLayout'
@@ -23,9 +24,9 @@ render_dom_delayed(
     <BaseLayout>
       <section>
         <Input type="text" label="Filter" multiline rows={10}
-          onChange={applyNewFilter.bind(this, 'FILTER_SINGLE_CHANGE')}/>
+          onChange={debounce(applyNewFilter.bind(this, 'FILTER_SINGLE_CHANGE'), 600)}/>
         <Input type="text" label="Filter all" multiline rows={10}
-          onChange={applyNewFilter.bind(this, 'FILTER_GLOBAL_CHANGE')}/>
+          onChange={debounce(applyNewFilter.bind(this, 'FILTER_GLOBAL_CHANGE'), 600)}/>
         <FilteredDatasetTable/>
       </section>
     </BaseLayout>
