@@ -1,21 +1,56 @@
-const action_filter_single_change = "FILTER_SINGLE_CHANGE",
-  action_filter_global_change="FILTER_GLOBAL_CHANGE"
+import {combineReducers} from 'redux'
 
-const reducer = (state = [], action) => {
+import {
+  START_LOADING,
+  FILTER_GLOBAL_CHANGE,
+  FILTER_SINGLE_CHANGE,
+  RECEIVE_DATASET
+} from '../actions/index'
+
+const filterReducer = (state = {}, action) => {
   switch(action.type){
-    case action_filter_single_change:
-      return Object.assign({}, state, {
-        filter_global: action.filter
-      })
+    case FILTER_SINGLE_CHANGE:
+      return {
+        ...state,
+        single: action.filter
+      }
 
-    case action_filter_global_change:
-      return Object.assign({}, state, {
-        filter_single: action.filter
-      })
+    case FILTER_GLOBAL_CHANGE:
+      return {
+        ...state,
+        global: action.filter
+      }
 
     default:
       return state
   }
 }
 
-export default reducer
+const loaderReducer = (state = false, action) => {
+  switch(action.type){
+    case START_LOADING:
+      return true
+
+    case RECEIVE_DATASET:
+      return false
+
+    default:
+      return state
+  }
+}
+
+const datasetReducer = (state = [], action) => {
+  switch(action.type){
+    case RECEIVE_DATASET:
+      return action.result
+
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  filter: filterReducer,
+  loading: loaderReducer,
+  dataset: datasetReducer
+})
