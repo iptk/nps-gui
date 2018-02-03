@@ -7,18 +7,27 @@ import {
   RECEIVE_DATASET
 } from '../actions/index'
 
-const filterReducer = (state = {}, action) => {
+const initFilter = {
+  single: [],
+  global: []
+}
+const filterReducer = (state = initFilter, action) => {
   switch(action.type){
     case FILTER_SINGLE_CHANGE:
+      var filter = action.filter.split('\n')
+      filter.forEach(
+        // cut trailing and leading whitespaces, shrink multiple ws to single
+        (o,i,a) => a[i] = o.trim().replace(/ +(?= )/g,'').split(' ')
+      )
       return {
         ...state,
-        single: action.filter
+        single: filter
       }
 
     case FILTER_GLOBAL_CHANGE:
       return {
         ...state,
-        global: action.filter
+        global: action.filter.split(' ')
       }
 
     default:

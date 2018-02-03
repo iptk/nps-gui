@@ -26,8 +26,8 @@ class Index extends React.Component{
 
   applyNewFilter(type, val){
     // update filters in store
-    val = val.split('\n')
     this.store.dispatch({type: type, filter: val})
+    console.log(this.store.getState())
 
     // fetch dataset
     this.store.dispatch(fetchDataset(this.store.getState().filter))
@@ -39,7 +39,7 @@ class Index extends React.Component{
         <section>
           <Input type="text" label="Filter" multiline rows={10}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
-          <Input type="text" label="Filter all" multiline rows={10}
+          <Input type="text" label="Global filter"
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedFilteredDatasetTable/>
         </section>
