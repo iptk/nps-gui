@@ -1,3 +1,5 @@
-class Dataset{
-  tmp = 'asd'
+const Dataset = {
+  tmp: {type: String}
 }
+
+export default Dataset

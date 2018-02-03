@@ -13,7 +13,7 @@ const fetchDataset = (filter) => {
     /*return fetchRequest('/dataset/', 'POST', filter)
       .then(response => response.json())
       .then(json => dispatch({type: RECEIVE_DATASET, result: json}))*/
-    dispatch({type: RECEIVE_DATASET, result: ['asdf', 'dfs']})
+    dispatch({type: RECEIVE_DATASET, result: [{tmp: 'asdf'}, {tmp: 'dfs'}]})
   }
 }
 

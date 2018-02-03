@@ -4,12 +4,16 @@ import React from 'react'
 import {Input} from 'react-toolbox'
 import {createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {Provider} from 'react-redux'
+import {Provider, connect} from 'react-redux'
 import debounce from 'lodash/debounce'
 
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, fetchDataset} from './lib/actions/index'
 import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
 import reducer from './lib/reducers/index'
+
+const _subscribedFilteredDatasetTable = connect(
+  (state) => ({datasets: state.dataset})
+)(FilteredDatasetTable)
 
 class Index extends React.Component{
   constructor(){
@@ -37,7 +41,7 @@ class Index extends React.Component{
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
           <Input type="text" label="Filter all" multiline rows={10}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
-          <FilteredDatasetTable/>
+          <_subscribedFilteredDatasetTable/>
         </section>
       </Provider>
     )
