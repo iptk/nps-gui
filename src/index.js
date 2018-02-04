@@ -6,6 +6,7 @@ import {createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {Provider, connect} from 'react-redux'
 import debounce from 'lodash/debounce'
+import {translate} from 'react-i18next'
 
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, fetchDataset} from './lib/actions/index'
 import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
@@ -47,12 +48,13 @@ class Index extends React.Component{
   }
 
   render(){
+    const {t} = this.props
     return(
       <Provider store={this.store}>
         <section>
-          <Input type="text" label="Filter" multiline rows={10}
+          <Input type="text" label={t('index.filter_single')} multiline rows={10}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
-          <Input type="text" label="Global filter"
+          <Input type="text" label={t('index.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedFilteredDatasetTable/>
           <_subscribedQueryList/>
@@ -62,4 +64,4 @@ class Index extends React.Component{
   }
 }
 
-export default Index
+export default translate('pages')(Index)

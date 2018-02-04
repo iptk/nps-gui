@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {AppBar, IconButton, Layout, List, ListItem, NavDrawer, Panel, Sidebar} from 'react-toolbox'
+import {translate} from 'react-i18next'
 
 class BaseLayout extends React.Component {
   state = {
@@ -22,13 +23,14 @@ class BaseLayout extends React.Component {
   }
 
   render() {
+    const {t} = this.props
     return (
       <Layout>
         <NavDrawer active={this.state.drawerActive}
           pinned={this.state.drawerPinned} permanentAt='xxxl'
           onOverlayClick={ this.toggleDrawerActive }>
             <List selectable ripple>
-              <ListItem caption="Home" to="#"/>
+              <ListItem caption={t('navigation.home')} to="#"/>
             </List>
         </NavDrawer>
         <Panel>
@@ -46,4 +48,4 @@ class BaseLayout extends React.Component {
   }
 }
 
-export default BaseLayout
+export default translate('dom')(BaseLayout)
