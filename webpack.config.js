@@ -5,7 +5,7 @@ jspath = path.resolve(__dirname, 'src')
 
 module.exports = {
   entry: {
-    app: path.resolve(jspath, 'router.js')
+    app: path.resolve(jspath, 'app.js')
   },
   output: {
     path: path.resolve(__dirname, 'public', 'bundle'),
