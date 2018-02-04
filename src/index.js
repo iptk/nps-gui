@@ -9,11 +9,24 @@ import debounce from 'lodash/debounce'
 
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, fetchDataset} from './lib/actions/index'
 import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
+import QueryList from './lib/dom/QueryList'
 import reducer from './lib/reducers/index'
 
 const _subscribedFilteredDatasetTable = connect(
   (state) => ({datasets: state.dataset})
 )(FilteredDatasetTable)
+
+const _subscribedQueryList = connect(
+  (state) => {
+    var chips = []
+    for(var single of state.filter.single){
+      chips.push(single.concat(state.filter.global))
+    }
+    return {
+      queryVals: chips
+    }
+  }
+)(QueryList)
 
 class Index extends React.Component{
   constructor(){
@@ -42,6 +55,7 @@ class Index extends React.Component{
           <Input type="text" label="Global filter"
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedFilteredDatasetTable/>
+          <_subscribedQueryList/>
         </section>
       </Provider>
     )
