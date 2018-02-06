@@ -1,7 +1,7 @@
 import ServerList from './ServerList'
 
 const fetchRequest = (path, method = 'GET', data = '') => {
-  return fetch(ServerList.currentServerString+path, {
+  return fetch(ServerList.currentServerString()+path, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -9,3 +9,5 @@ const fetchRequest = (path, method = 'GET', data = '') => {
     }
   })
 }
+
+export default fetchRequest
