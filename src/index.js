@@ -41,10 +41,10 @@ class Index extends React.Component{
   applyNewFilter(type, val){
     // update filters in store
     this.store.dispatch({type: type, filter: val})
-    console.log(this.store.getState())
 
     // fetch dataset
     this.store.dispatch(fetchDataset(this.store.getState().filter))
+    console.log(this.store.getState())
   }
 
   render(){

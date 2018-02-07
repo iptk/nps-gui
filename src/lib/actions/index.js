@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch'
-
 import fetchRequest from '../util/fetchRequest'
 
 const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
@@ -10,9 +8,10 @@ const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
 const fetchDataset = (filter) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
-    /*return fetchRequest('/dataset/', 'POST', filter)
-      .then(response => response.json())
-      .then(json => dispatch({type: RECEIVE_DATASET, result: json}))*/
+    return fetchRequest('/v2/datasets/filter', 'POST', filter)
+      .then(response => console.log(response))
+      //.then(response => response.json())
+      //.then(json => dispatch({type: RECEIVE_DATASET, result: json}))
     dispatch({type: RECEIVE_DATASET, result: [{tmp: 'asdf'}, {tmp: 'dfs'}]})
   }
 }
