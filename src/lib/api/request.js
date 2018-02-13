@@ -1,29 +1,43 @@
 import fetch from 'cross-fetch'
 
-import {NPS} from './NPS'
+import {NPS} from './nps'
 
 class Request{
-  construct(url, params){
+  constructor({url, method='GET', data=''}){
     this.url = url
-    this.params = params
+    this.method = method
+    this.data = data
   }
 
   fetch(){
-    resp = fetch(NPS.server+path, {
-        method: 'POST',
-        body: JSON.stringify(data),
+    var resp
+    var req = async () => {
+      var resp = await fetch(NPS.server+this.url, {
+        method: this.method,
+        body: JSON.stringify(this.data),
         headers: {
           'Content-Type': 'application/json'
-        }
-      }
-    return new Response(resp, 200)
+        },
+        redirect: 'follow',
+        mode: 'cors'
+      })
+      resp = new Response(await resp)
+    }
+    req()
+    return resp
   }
 }
 
 class Response{
-  construct(response, statuscode){
+  constructor(response, json){
+    var jsondata = async () => {
+      this.json = await response.json()
+    }
     this.response = response
-    this.statuscode = statuscode
+    jsondata()
+    this.statuscode = response.status
+    this.ok = response.ok
+    console.log(this)
   }
 }
 

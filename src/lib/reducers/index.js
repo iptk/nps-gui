@@ -51,7 +51,16 @@ const loaderReducer = (state = false, action) => {
 const datasetReducer = (state = [], action) => {
   switch(action.type){
     case RECEIVE_DATASET:
-      return action.result
+      var datasets = []
+      for(var res of action.result){
+        datasets = [
+          ...datasets,
+          res.datasets.map((item, index) => item.dataset)
+        ]
+      }
+      console.log(action)
+      console.log(datasets)
+      return datasets
 
     default:
       return state
