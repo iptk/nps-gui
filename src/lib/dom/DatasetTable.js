@@ -1,27 +1,32 @@
 import React from 'react'
-import {Table} from 'react-toolbox'
+import {Table, TableHead, TableRow, TableCell} from 'react-toolbox'
 
-import Dataset from '../model/Dataset.js'
+import {Dataset} from '../api/dataset.js'
 
-/*class DatasetTable extends React.Component{
-  state = {
-    datasets: []
+const DatasetTable = ({datasets, keys = []}) => {
+  if(keys.length = 0 && datasets.length > 0){
+    for(var m of datasets[0].getMetadata()){
+      keys.append(m.key)
+    }
   }
+  console.log(datasets)
 
-  render(){
-    return <Table
-      heading="true"
-      model={Dataset}
-      source={this.state.datasets}
-    />
+  var rows = []
+  for(var ds of datasets){
+    var cells = []
+    for(var k of keys){
+      cells.push(<TableCell>{datasets.getMetadata(k).value}</TableCell>)
+    }
+    rows.push(<TableRow>{cells}</TableRow>)
   }
-}*/
-const DatasetTable = ({datasets}) => (
-  <Table
+  return <Table
     heading="true"
-    model={Dataset}
-    source={datasets}
-  />
-)
+  >
+    <TableHead>
+      {keys.map((item, index) => (<TableCell></TableCell>))}
+    </TableHead>
+    {rows}
+  </Table>
+}
 
 export default DatasetTable
