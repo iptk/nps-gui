@@ -44,7 +44,6 @@ class Index extends React.Component{
 
     // fetch dataset
     this.store.dispatch(fetchDataset(this.store.getState().filter))
-    console.log(this.store.getState())
   }
 
   render(){
@@ -56,8 +55,8 @@ class Index extends React.Component{
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
           <Input type="text" label={t('index.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
-          <_subscribedFilteredDatasetTable/>
           <_subscribedQueryList/>
+          <_subscribedFilteredDatasetTable/>
         </section>
       </Provider>
     )
