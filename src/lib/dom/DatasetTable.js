@@ -15,16 +15,16 @@ const DatasetTable = ({datasets, keys = [], editBtn=false}) => {
     var cells = []
     for(var k of keys){
       var meta = ds.getMetadata(k)
-      cells.push(<TableCell>{meta !== null ? meta.value : ""}</TableCell>)
+      cells.push(<TableCell key={k}>{meta !== null ?meta.value :""}</TableCell>)
     }
-    rows.push(<TableRow>{cells}{editBtn ?<TableCell><Button icon="create" flat/></TableCell>: ""}</TableRow>)
+    rows.push(<TableRow key={ds.id}>{cells}{editBtn ?<TableCell key="__edit"><Button icon="create" flat/></TableCell>: ""}</TableRow>)
   }
   return <Table
     heading="true"
   >
-    <TableHead>
-      {keys.map((item, index) => (<TableCell>{item}</TableCell>))}
-      {editBtn ?<TableCell/> :""}
+    <TableHead key="__head">
+      {keys.map((item, index) => (<TableCell key={item}>{item}</TableCell>))}
+      {editBtn ?<TableCell key="__edit"></TableCell> :""}
     </TableHead>
     {rows}
   </Table>
