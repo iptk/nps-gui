@@ -9,22 +9,16 @@ class Request{
     this.data = data
   }
 
-  fetch(){
-    var resp
-    var req = async () => {
-      var resp = await fetch(NPS.server+this.url, {
-        method: this.method,
-        body: JSON.stringify(this.data),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        mode: 'cors'
-      })
-      resp = new Response(await resp)
-    }
-    req()
-    return resp
+  async fetch(){
+    return fetch(NPS.server+this.url, {
+      method: this.method,
+      body: JSON.stringify(this.data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow',
+      mode: 'cors'
+    }).then(resp => new Response(resp))
   }
 }
 
@@ -37,7 +31,6 @@ class Response{
     jsondata()
     this.statuscode = response.status
     this.ok = response.ok
-    console.log(this)
   }
 }
 

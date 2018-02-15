@@ -12,7 +12,9 @@ const fetchDataset = (filter) => {
     for(var f of filter.single){
       filters.push(filter.global.concat(f))
     }
-    dispatch({type: RECEIVE_DATASET, result: Dataset.search(filters)})
+    Dataset.search(filters)
+      .then(res => dispatch({type: RECEIVE_DATASET, result: res}))
+
   }
 }
 
