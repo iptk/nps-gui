@@ -55,11 +55,9 @@ const datasetReducer = (state = [], action) => {
       for(var res of action.result){
         datasets = [
           ...datasets,
-          res.datasets.map((item, index) => item.dataset)
+          ...res.datasets.map((item, index) => item.dataset)
         ]
       }
-      console.log(action)
-      console.log(datasets)
       return datasets
 
     default:
