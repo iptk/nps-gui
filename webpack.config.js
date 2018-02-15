@@ -1,16 +1,14 @@
-const path = require('path');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
-jspath = path.resolve(__dirname, 'src', 'public', 'js');
+jspath = path.resolve(__dirname, 'src')
 
 module.exports = {
   entry: {
-    index: path.resolve(jspath, 'index.js'),
-    search: path.resolve(jspath, 'search.js')
+    app: path.resolve(jspath, 'app.js')
   },
   output: {
-    path: path.resolve(__dirname, 'src', 'public', 'bundle'),
+    path: path.resolve(__dirname, 'public', 'bundle'),
     filename: "[name].nps-gui.bundle.js"
   },
   module: {
@@ -46,7 +44,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new MinifyPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
     })

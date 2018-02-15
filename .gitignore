@@ -1,4 +1,4 @@
 conf/*.yml
 node_modules/
-src/public/bundle/
+public/bundle/
 yarn-error.log
