@@ -3,6 +3,7 @@
     "queries": "Queries"
   },
   "navigation":{
-    "home": "Home"
+    "home": "Home",
+    "searchdataset": "Search"
   }
 }

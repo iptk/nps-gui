@@ -5,7 +5,7 @@ import {
   FILTER_GLOBAL_CHANGE,
   FILTER_SINGLE_CHANGE,
   RECEIVE_DATASET
-} from '../actions/index'
+} from '../actions/searchdataset'
 
 const initFilter = {
   single: [],
