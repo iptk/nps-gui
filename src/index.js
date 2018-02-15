@@ -56,7 +56,7 @@ class Index extends React.Component{
           <Input type="text" label={t('index.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedQueryList/>
-          <_subscribedFilteredDatasetTable/>
+          <_subscribedFilteredDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']}/>
         </section>
       </Provider>
     )
