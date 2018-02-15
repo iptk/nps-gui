@@ -9,13 +9,13 @@ import debounce from 'lodash/debounce'
 import {translate} from 'react-i18next'
 
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, fetchDataset} from './lib/actions/index'
-import FilteredDatasetTable from './lib/dom/FilteredDatasetTable'
+import DatasetTable from './lib/dom/DatasetTable'
 import QueryList from './lib/dom/QueryList'
 import reducer from './lib/reducers/index'
 
-const _subscribedFilteredDatasetTable = connect(
+const _subscribedDatasetTable = connect(
   (state) => ({datasets: state.dataset})
-)(FilteredDatasetTable)
+)(DatasetTable)
 
 const _subscribedQueryList = connect(
   (state) => {
@@ -56,7 +56,7 @@ class Index extends React.Component{
           <Input type="text" label={t('index.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedQueryList/>
-          <_subscribedFilteredDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']}/>
+          <_subscribedDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']}/>
         </section>
       </Provider>
     )
