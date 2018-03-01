@@ -1,12 +1,37 @@
 import {Request} from './request'
 import {KeyValueMetadata} from './metadata'
+import {MetaDataset} from './metadataset'
 
 class Dataset{
-  constructor({index="", type="", id="", metadata = []}){
+  constructor({index="", type="", id="", metadata = [], metadatasets = []}){
     this.index = index
     this.type = type
     this.id = id
     this.metadata = metadata
+    this.metadatasets = metadatasets
+  }
+
+  static getByID(id){
+    if(!id){
+      // TODO: Exception
+    }
+    return (new Request({
+        url: '/v2/datasets/'+id+'/meta',
+        method: 'GET'
+      }))
+      .fetch()
+      .then(resp => {
+        if(resp.statuscode == 200){
+          var metads = []
+          metads = resp.metadatasets.forEach((elem) => {
+            return MetaDataset.getByID(id, elem)
+          })
+          return new Dataset({
+            id: id,
+            metadatasets: metads
+          })
+        }
+      })
   }
 
   static search(filters){

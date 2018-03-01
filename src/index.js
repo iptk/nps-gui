@@ -1,3 +1,4 @@
+import DatasetMeta from './datasetmeta'
 import SearchDataset from './searchdataset'
 
-export {SearchDataset}
+export {DatasetMeta, SearchDataset}

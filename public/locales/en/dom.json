@@ -1,4 +1,8 @@
 {
+  "MetaDatasetCard":{
+    "key": "Key",
+    "value": "Value"
+  },
   "QueryList":{
     "queries": "Queries"
   },
