@@ -50,9 +50,9 @@ class SearchDataset extends React.Component{
     return(
       <Provider store={this.store}>
         <section>
-          <Input type="text" label={t('index.filter_single')} multiline rows={10}
+          <Input type="text" label={t('searchdataset.filter_single')} multiline rows={10}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
-          <Input type="text" label={t('index.filter_global')}
+          <Input type="text" label={t('searchdataset.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedQueryList/>
           <_subscribedDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']} editBtn={true}/>
