@@ -19,7 +19,7 @@ const DatasetTable = ({datasets, keys = [], editBtn=false}) => {
     }
     rows.push(<TableRow key={ds.id}>{cells}{editBtn ?<TableCell key="__edit"><Button icon="create" flat/></TableCell>: ""}</TableRow>)
   }
-  return <Table
+  return (<Table
     heading="true"
   >
     <TableHead key="__head">
@@ -27,7 +27,7 @@ const DatasetTable = ({datasets, keys = [], editBtn=false}) => {
       {editBtn ?<TableCell key="__edit"></TableCell> :""}
     </TableHead>
     {rows}
-  </Table>
+  </Table>)
 }
 
 export default DatasetTable
