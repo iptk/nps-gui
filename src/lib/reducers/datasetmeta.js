@@ -11,7 +11,7 @@ const init = {
 const reducer = (state = init, action) => {
   switch(action.type){
     case RECEIVE_DATASET:
-      return {...state, ds: action.result}
+      return {...state, dataset: action.result}
 
     default:
       return state

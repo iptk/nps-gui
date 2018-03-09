@@ -23,7 +23,7 @@ class Dataset{
       .then(resp => {
         if(resp.statuscode == 200){
           var metads = []
-          metads = resp.metadatasets.forEach((elem) => {
+          metads = resp.json.metadatasets.forEach((elem) => {
             return MetaDataset.getByID(id, elem)
           })
           return new Dataset({
