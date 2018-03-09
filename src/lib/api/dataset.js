@@ -1,6 +1,7 @@
 import {Request} from './request'
 import {KeyValueMetadata} from './metadata'
 import {MetaDataset} from './metadataset'
+import {NPS} from './NPS'
 
 class Dataset{
   constructor({index="", type="", id="", metadata = [], metadatasets = []}){
@@ -81,6 +82,10 @@ class Dataset{
           return []
         }
       })
+  }
+
+  getDownloadURL(){
+    return NPS.server+'/v2/datasets/'+this.id+'.zip'
   }
 
   getMetadata(key = null){

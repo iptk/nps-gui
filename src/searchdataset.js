@@ -55,7 +55,7 @@ class SearchDataset extends React.Component{
           <Input type="text" label={t('searchdataset.filter_global')}
             onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
           <_subscribedQueryList/>
-          <_subscribedDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']} editBtn={true}/>
+          <_subscribedDatasetTable keys={['AcquisitionDateTime', 'PatientsName', 'SeriesDescription']} editBtn={true} dlBtn={true}/>
         </section>
       </Provider>
     )
