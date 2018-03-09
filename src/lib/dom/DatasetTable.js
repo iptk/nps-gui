@@ -17,7 +17,7 @@ const DatasetTable = ({datasets, keys = [], editBtn=false}) => {
       var meta = ds.getMetadata(k)
       cells.push(<TableCell key={k}>{meta !== null ?meta.value :""}</TableCell>)
     }
-    rows.push(<TableRow key={ds.id}>{cells}{editBtn ?<TableCell key="__edit"><Button icon="create" flat/></TableCell>: ""}</TableRow>)
+    rows.push(<TableRow key={ds.id}>{cells}{editBtn ?<TableCell key="__edit"><Button href={"/dataset/"+ds.id+"/meta"} icon="create" flat/></TableCell>: ""}</TableRow>)
   }
   return (<Table
     heading="true"
