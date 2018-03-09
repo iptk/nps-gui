@@ -36,6 +36,7 @@ class BaseLayout extends React.Component {
         </NavDrawer>
         <Panel>
           <AppBar leftIcon='menu' title='NPS' onLeftIconClick={ this.toggleDrawerActive } />
+          <br/>
           {this.props.children}
         </Panel>
         <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>
