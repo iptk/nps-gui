@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {MetaDatasetCard} from './MetaDatasetCard'
+import MetaDatasetCard from './MetaDatasetCard'
 
 const MetaDatasetCardCollection = ({metadatasets}) => {
-  var cards = metadatasets.forEach((mds) => (
-    <section>
+  var cards = metadatasets.map((mds, _) => (
+    <section key={mds.id}>
       <MetaDatasetCard metads={mds}/>
       <br/>
     </section>
