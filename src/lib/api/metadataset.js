@@ -19,8 +19,9 @@ class MetaDataset{
       .fetch()
       .then(resp => {
         if(resp.statuscode == 200){
-          var meta = Object.keys(resp.json).forEach((key) => {
-            return new Metadata(key, resp.json[key])
+          var meta = []
+          Object.keys(resp.json).forEach((key) => {
+            meta.push(new KeyValueMetadata(key, resp.json[key]))
           })
           return new MetaDataset({
             dataset_id: dataset_id,
