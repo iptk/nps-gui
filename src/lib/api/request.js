@@ -10,15 +10,21 @@ class Request{
   }
 
   async fetch(){
-    return fetch(NPS.server+this.url, {
+    var payload = {
       method: this.method,
-      body: JSON.stringify(this.data),
       headers: {
         'Content-Type': 'application/json'
       },
       redirect: 'follow',
       mode: 'cors'
-    }).then(resp => new Response(resp))
+    }
+
+    // body is not allowed for GET and HEAD
+    if(['GET', 'HEAD'].indexOf(this.method) === -1){
+      payload = {...payload, body: JSON.stringify(this.data)}
+    }
+    return fetch(NPS.server+this.url, payload)
+      .then(resp => new Response(resp))
   }
 }
 
