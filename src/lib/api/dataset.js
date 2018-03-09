@@ -1,12 +1,39 @@
 import {Request} from './request'
 import {KeyValueMetadata} from './metadata'
+import {MetaDataset} from './metadataset'
+import {NPS} from './NPS'
 
 class Dataset{
-  constructor({index="", type="", id="", metadata = []}){
+  constructor({index="", type="", id="", metadata = [], metadatasets = []}){
     this.index = index
     this.type = type
     this.id = id
     this.metadata = metadata
+    this.metadatasets = metadatasets
+  }
+
+  static async getByID(id){
+    if(!id){
+      // TODO: Exception
+    }
+    return await (new Request({
+        url: '/v2/datasets/'+id+'/meta',
+        method: 'GET'
+      }))
+      .fetch()
+      .then(async resp => {
+        if(resp.statuscode == 200){
+          var metads = []
+          resp.json.metadatasets.forEach((elem) => {
+            metads.push(MetaDataset.getByID(id, elem))
+          })
+          metads = await Promise.all(metads)
+          return new Dataset({
+            id: id,
+            metadatasets: metads
+          })
+        }
+      })
   }
 
   static search(filters){
@@ -55,6 +82,10 @@ class Dataset{
           return []
         }
       })
+  }
+
+  getDownloadURL(){
+    return NPS.server+'/v2/datasets/'+this.id+'.zip'
   }
 
   getMetadata(key = null){

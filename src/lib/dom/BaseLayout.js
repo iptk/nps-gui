@@ -30,7 +30,8 @@ class BaseLayout extends React.Component {
           pinned={this.state.drawerPinned} permanentAt='xxxl'
           onOverlayClick={ this.toggleDrawerActive }>
             <List selectable ripple>
-              <ListItem caption={t('navigation.home')} to="#"/>
+              <ListItem caption={t('navigation.home')} to="/"/>
+              <ListItem caption={t('navigation.searchdataset')} to="/search"/>
             </List>
         </NavDrawer>
         <Panel>

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Table, TableHead, TableRow, TableCell} from 'react-toolbox'
+import {Button, Table, TableHead, TableRow, TableCell} from 'react-toolbox'
 
 import {Dataset} from '../api/dataset.js'
 
-const DatasetTable = ({datasets, keys = []}) => {
+const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
   if(keys.length == 0 && datasets.length > 0){
     for(var m of datasets[0].getMetadata()){
       keys.push(m.key)
@@ -15,18 +15,37 @@ const DatasetTable = ({datasets, keys = []}) => {
     var cells = []
     for(var k of keys){
       var meta = ds.getMetadata(k)
-      cells.push(<TableCell>{meta !== null ? meta.value : ""}</TableCell>)
+      cells.push(<TableCell key={k}>{meta !== null ?meta.value :""}</TableCell>)
     }
-    rows.push(<TableRow>{cells}</TableRow>)
+
+    // edit + download button
+    var btns = []
+    if(editBtn){
+      btns.push(<Button href={"/dataset/"+ds.id+"/meta"} icon="create" flat/>)
+    }
+    if(dlBtn){
+      btns.push(<Button href={ds.getDownloadURL()} icon="file_download" flat/>)
+    }
+    if(btns.length > 0){
+      cells.push(<TableCell key='__btns'>{btns}</TableCell>)
+    }
+
+    // push row
+    rows.push(
+      <TableRow key={ds.id}>
+        {cells}
+      </TableRow>
+    )
   }
-  return <Table
+  return (<Table
     heading="true"
   >
-    <TableHead>
-      {keys.map((item, index) => (<TableCell>{item}</TableCell>))}
+    <TableHead key="__head">
+      {keys.map((item, index) => (<TableCell key={item}>{item}</TableCell>))}
+      {editBtn ?<TableCell key="__edit"></TableCell> :""}
     </TableHead>
     {rows}
-  </Table>
+  </Table>)
 }
 
 export default DatasetTable

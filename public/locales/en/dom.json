@@ -1,8 +1,13 @@
 {
+  "MetaDatasetCard":{
+    "key": "Key",
+    "value": "Value"
+  },
   "QueryList":{
     "queries": "Queries"
   },
   "navigation":{
-    "home": "Home"
+    "home": "Home",
+    "searchdataset": "Search"
   }
 }

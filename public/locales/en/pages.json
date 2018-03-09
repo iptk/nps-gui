@@ -1,5 +1,11 @@
 {
-  "index":{
+  "datasetmeta":{
+    "actioncard":{
+      "title": "Actions",
+      "download": "Download"
+    }
+  },
+  "searchdataset":{
     "filter_single": "Filter",
     "filter_global": "Global filter"
   }
