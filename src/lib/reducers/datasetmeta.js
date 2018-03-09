@@ -4,9 +4,11 @@ import {
 } from '../actions/datasetmeta'
 
 const init = {
-  dataset: null
+  dataset: {
+    metadatasets: []
+  }
 }
-const reducer = (state = initFilter, action) => {
+const reducer = (state = init, action) => {
   switch(action.type){
     case RECEIVE_DATASET:
       return {...state, ds: action.result}
