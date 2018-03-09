@@ -1,15 +1,15 @@
-import {MetaDataset} from '../api'
+import {Dataset} from '../api'
 
-const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
+const RECEIVE_DATASET = 'RECEIVE_DATASET',
   START_LOADING = 'START_LOADING'
 
-const fetchDataset = (id) => {
+const fetchMetadata = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
-    Dataset.getByID()
+    Dataset.getByID(id)
       .then(ds => dispatch({type: RECEIVE_DATASET, result: ds}))
 
   }
 }
 
-export {fetchDataset}
+export {fetchMetadata, START_LOADING, RECEIVE_DATASET}

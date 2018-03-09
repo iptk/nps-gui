@@ -15,12 +15,18 @@ const _subscribedMDColl = connect(
 )(MetaDatasetCardCollection)
 
 class DatasetMeta extends React.Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.store = createStore(
       reducer,
       applyMiddleware(thunkMiddleware)
     )
+    this.fetchMeta = this.fetchMeta.bind(this)
+    this.fetchMeta()
+  }
+
+  fetchMeta(){
+    this.store.dispatch(fetchMetadata(this.props.match.params.dsid))
   }
 
   render(){
