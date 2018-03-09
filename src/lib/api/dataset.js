@@ -11,21 +11,22 @@ class Dataset{
     this.metadatasets = metadatasets
   }
 
-  static getByID(id){
+  static async getByID(id){
     if(!id){
       // TODO: Exception
     }
-    return (new Request({
+    return await (new Request({
         url: '/v2/datasets/'+id+'/meta',
         method: 'GET'
       }))
       .fetch()
-      .then(resp => {
+      .then(async resp => {
         if(resp.statuscode == 200){
           var metads = []
-          metads = resp.json.metadatasets.forEach((elem) => {
-            return MetaDataset.getByID(id, elem)
+          resp.json.metadatasets.forEach((elem) => {
+            metads.push(MetaDataset.getByID(id, elem))
           })
+          metads = await Promise.all(metads)
           return new Dataset({
             id: id,
             metadatasets: metads
