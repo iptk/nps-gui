@@ -2,6 +2,7 @@
   "datasetmeta":{
     "actioncard":{
       "title": "Aktionen",
+      "dataset": "Datensatz",
       "download": "Download"
     }
   },

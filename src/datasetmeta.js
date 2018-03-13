@@ -23,6 +23,15 @@ const _dlBtn = translate('pages')(connect(
   )
 ))
 
+const _actionCardTitle = translate('pages')(connect(
+  (state) => ({dsid: state.dataset.id})
+)(
+  ({dsid, t}) => (
+    <CardTitle title={t('datasetmeta.actioncard.title')}
+    subtitle={t('datasetmeta.actioncard.dataset')+': '+dsid}/>
+  )
+))
+
 class DatasetMeta extends React.Component{
   constructor(props){
     super(props)
@@ -45,7 +54,7 @@ class DatasetMeta extends React.Component{
         <div>
           <section>
             <Card>
-              <CardTitle title={t('datasetmeta.actioncard.title')}/>
+              <_actionCardTitle/>
               <_dlBtn/>
             </Card>
             <br/>
