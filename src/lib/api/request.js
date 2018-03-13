@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch'
 
-import {NPS} from './nps'
+import {NPS} from './NPS'
 
 class Request{
   constructor({url, method='GET', data=''}){
