@@ -13,7 +13,7 @@ const MetaDatasetCard = ({metads, t}) => {
   ))
   return (<Card>
       <CardTitle title={metads.id}/>
-      <Table>
+      <Table selectable={false}>
         <TableHead>
           <TableCell key='__head_key'>{t('MetaDatasetCard.key')}</TableCell>
           <TableCell key='__head_value'>{t('MetaDatasetCard.value')}</TableCell>
