@@ -1,13 +1,16 @@
 import {
   START_LOADING,
-  RECEIVE_DATASET
+  RECEIVE_DATASET,
+  TAGS_ADDEMPTY,
+  TAGS_UPDATETMP
 } from '../actions/datasetmeta'
 
 const init = {
   dataset: {
     metadatasets: []
   },
-  "downloadurl": "#"
+  "downloadurl": "#",
+  tmpTags: []
 }
 const reducer = (state = init, action) => {
   switch(action.type){
@@ -15,8 +18,22 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         dataset: action.result,
-        downloadurl: action.result.getDownloadURL()
+        downloadurl: action.result.getDownloadURL(),
+        tmpTags: action.result.tags
       }
+
+    case TAGS_ADDEMPTY:
+      return {
+        ...state,
+        tmpTags: [...state.tmpTags, '']
+      }
+
+    case TAGS_UPDATETMP:{
+      return {
+        ...state,
+        tmpTags: action.tags
+      }
+    }
 
     default:
       return state

@@ -7,8 +7,10 @@ import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle} from 'react-toolbox'
 
-import {fetchMetadata} from './lib/actions/datasetmeta'
-import {MetaDatasetCardCollection} from './lib/dom'
+import {
+  fetchMetadata, TAGS_ADDEMPTY, TAGS_UPDATETMP
+} from './lib/actions/datasetmeta'
+import {MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
 const _subscribedMDColl = connect(
@@ -32,6 +34,10 @@ const _actionCardTitle = translate('pages')(connect(
   )
 ))
 
+const _subscribedTagCard = connect(
+  (state) => ({tags: state.tmpTags})
+)(TagCard)
+
 class DatasetMeta extends React.Component{
   constructor(props){
     super(props)
@@ -47,6 +53,23 @@ class DatasetMeta extends React.Component{
     this.store.dispatch(fetchMetadata(this.props.match.params.dsid))
   }
 
+  tagsAdd(){
+    this.store.dispatch({type: TAGS_ADDEMPTY})
+    console.log(this.store.getState())
+  }
+
+  tagsDelete(deleted, remaining){
+    this.store.dispatch({type: TAGS_UPDATETMP, tags: remaining})
+  }
+
+  tagsSave(tags){
+    //
+  }
+
+  tagsEdit(prev, after, all){
+    this.store.dispatch({type: TAGS_UPDATETMP, tags: all})
+  }
+
   render(){
     const {t} = this.props
     return(
@@ -57,6 +80,14 @@ class DatasetMeta extends React.Component{
               <_actionCardTitle/>
               <_dlBtn/>
             </Card>
+            <br/>
+          </section>
+          <section>
+            <_subscribedTagCard
+              onAddTag={this.tagsAdd.bind(this)}
+              onDelete={this.tagsDelete.bind(this)}
+              onSave={this.tagsSave.bind(this)}
+              />
             <br/>
           </section>
           <_subscribedMDColl/>
