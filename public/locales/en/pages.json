@@ -4,7 +4,9 @@
       "title": "Actions",
       "dataset": "Dataset",
       "download": "Download"
-    }
+    },
+    "tagssnackbarcontent": "Your tags have been saved",
+    "tagssnackbarclose": "Close"
   },
   "searchdataset":{
     "filter_single": "Filter",

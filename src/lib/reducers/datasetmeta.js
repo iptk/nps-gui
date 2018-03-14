@@ -1,7 +1,8 @@
 import {
   START_LOADING,
   RECEIVE_DATASET,
-  TAGS_SAVED
+  TAGS_SAVED,
+  TAGS_SAVED_SNACKBAR_TIMEOUT
 } from '../actions/datasetmeta'
 
 const init = {
@@ -9,7 +10,8 @@ const init = {
     metadatasets: [],
     tags: []
   },
-  "downloadurl": "#"
+  "downloadurl": "#",
+  tagsSavedSnackbar: false
 }
 const reducer = (state = init, action) => {
   switch(action.type){
@@ -23,10 +25,14 @@ const reducer = (state = init, action) => {
     case TAGS_SAVED:
       return {
         ...state,
-        dataset: {
-          ...state.dataset,
-          tags: action.tags
-        }
+        dataset: action.dataset,
+        tagsSavedSnackbar: true
+      }
+
+    case TAGS_SAVED_SNACKBAR_TIMEOUT:
+      return {
+        ...state,
+        tagsSavedSnackbar: false
       }
 
     default:

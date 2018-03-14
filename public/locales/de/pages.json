@@ -4,7 +4,9 @@
       "title": "Aktionen",
       "dataset": "Datensatz",
       "download": "Download"
-    }
+    },
+    "tagssnackbarcontent": "Die Tags wurden gespeichert",
+    "tagssnackbarclose": "Schließen"
   },
   "searchdataset":{
     "filter_single": "Filter",

@@ -5,11 +5,9 @@ import {createStore, applyMiddleware} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {Button, Card, CardTitle} from 'react-toolbox'
+import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
-import {
-  fetchMetadata
-} from './lib/actions/datasetmeta'
+import {fetchMetadata, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions/datasetmeta'
 import {MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
@@ -34,6 +32,21 @@ const _actionCardTitle = translate('pages')(connect(
   )
 ))
 
+const _tagsSavedSnackbar = translate('pages')(connect(
+  (state) => ({active: state.tagsSavedSnackbar})
+)(
+  ({active, t, onTimeout}) => (
+    <Snackbar
+      action={t('datasetmeta.tagssnackbarclose')}
+      active={active}
+      label={t('datasetmeta.tagssnackbarcontent')}
+      timeout={2000}
+      onTimeout={onTimeout}
+      type='accept'
+    />
+  )
+))
+
 const _subscribedTagCard = connect(
   (state) => ({tags: state.dataset.tags})
 )(TagCard)
@@ -54,7 +67,11 @@ class DatasetMeta extends React.Component{
   }
 
   tagsSave(tags){
-    //
+    this.store.dispatch(saveTags(this.store.getState()['dataset'], tags))
+  }
+
+  dismissTagsSnackbar(){
+    this.store.dispatch({type: TAGS_SAVED_SNACKBAR_TIMEOUT})
   }
 
   render(){
@@ -74,6 +91,9 @@ class DatasetMeta extends React.Component{
             <br/>
           </section>
           <_subscribedMDColl/>
+          <section>
+            <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
+          </section>
         </div>
       </Provider>
     )

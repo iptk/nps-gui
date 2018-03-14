@@ -13,13 +13,8 @@ class Dataset{
     this.tags = tags
   }
 
-  static async getByID(id){
-    if(!id){
-      // TODO: Exception
-    }
-
-    // fetch tags
-    var tags = (new Request({
+  static fetchTags(id){
+    return (new Request({
         url: '/v2/datasets/'+id+'/tags',
         method: 'GET'
       }))
@@ -30,9 +25,10 @@ class Dataset{
         }
         return []
       })
+  }
 
-    // fetch metadatasets
-    var metadatasets = (new Request({
+  static fetchMetadatasets(id){
+    return (new Request({
         url: '/v2/datasets/'+id+'/meta',
         method: 'GET'
       }))
@@ -47,6 +43,18 @@ class Dataset{
           return metads
         }
       })
+  }
+
+  static async getByID(id){
+    if(!id){
+      // TODO: Exception
+    }
+
+    // fetch tags
+    var tags = this.fetchTags(id)
+
+    // fetch metadatasets
+    var metadatasets = this.fetchMetadatasets(id)
 
     // create dataset
     var ds = new Dataset({
@@ -54,8 +62,6 @@ class Dataset{
       metadatasets: await metadatasets,
       tags: await tags
     })
-    console.log('______________-')
-    console.log(ds)
     return ds
   }
 
@@ -121,6 +127,18 @@ class Dataset{
       }
     }
     return null
+  }
+
+  async save(){
+    var tags = (new Request({
+        url: '/v2/datasets/'+this.id+'/tags',
+        method: 'POST',
+        data: {'tags': this.tags}
+      }))
+      .fetch()
+      .then(resp => this.constructor.fetchTags(this.id))
+    this.tags = await tags
+    return this
   }
 }
 
