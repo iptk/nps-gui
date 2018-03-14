@@ -5,12 +5,16 @@ import {translate} from 'react-i18next'
 
 const MetaDatasetCard = ({metads, t}) => {
   var metadata = metads.getMetadata()
-  var rows = metadata.map((md, _) => (
-    <TableRow key={md.key+'__'+md.value}>
-      <TableCell key={'__key__'+md.key}>{md.key}</TableCell>
-      <TableCell key={'__val__'+md.value}>{md.value}</TableCell>
-    </TableRow>
-  ))
+  var rows = metadata.map((md, _) => {
+    var val = md.value
+    if(Array.isArray(val)){
+      val = val.join('; ')
+    }
+    return (<TableRow key={md.key+'__'+md.value}>
+        <TableCell key={'__key__'+md.key}>{md.key}</TableCell>
+        <TableCell key={'__val__'+md.value}>{val}</TableCell>
+      </TableRow>)
+  })
   return (<Card>
       <CardTitle title={metads.id}/>
       <Table selectable={false}>
