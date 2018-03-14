@@ -4,7 +4,6 @@ import {
   Table, TableRow, TableCell
 } from 'react-toolbox'
 import {translate} from 'react-i18next'
-import debounce from 'lodash/debounce'
 
 /**
  * onDelete: receives an array with deleted index and with the remaining tags, triggered on deletion

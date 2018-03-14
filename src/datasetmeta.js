@@ -11,28 +11,34 @@ import {fetchDataset, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions
 import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
-const _subscribedMDColl = connect(
-  (state) => ({metadatasets: state.dataset.metadatasets})
-)(MetaDatasetCardCollection)
-
-const _dlBtn = translate('pages')(connect(
-  (state) => ({url: state.downloadurl})
-)(
-  ({url, t}) => (
-    <Button href={url} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
-  )
-))
-
+// from lib/dom
 const _subscribedFilesCard = connect(
   (state) => ({dlbase: state.filesbaseurl, files: state.dataset.files})
 )(DatasetFilesCard)
 
+const _subscribedMDColl = connect(
+  (state) => ({metadatasets: state.dataset.metadatasets})
+)(MetaDatasetCardCollection)
+
+const _subscribedTagCard = connect(
+  (state) => ({tags: state.dataset.tags})
+)(TagCard)
+
+// locally defined
 const _actionCardTitle = translate('pages')(connect(
   (state) => ({dsid: state.dataset.id})
 )(
   ({dsid, t}) => (
     <CardTitle title={t('datasetmeta.actioncard.title')}
     subtitle={t('datasetmeta.actioncard.dataset')+': '+dsid}/>
+  )
+))
+
+const _dlBtn = translate('pages')(connect(
+  (state) => ({url: state.downloadurl})
+)(
+  ({url, t}) => (
+    <Button href={url} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
   )
 ))
 
@@ -50,10 +56,6 @@ const _tagsSavedSnackbar = translate('pages')(connect(
     />
   )
 ))
-
-const _subscribedTagCard = connect(
-  (state) => ({tags: state.dataset.tags})
-)(TagCard)
 
 class DatasetMeta extends React.Component{
   constructor(props){

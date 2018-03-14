@@ -5,16 +5,21 @@ import {NPS} from './NPS'
 
 class Dataset{
   constructor({
-    index="", type="", id="", metadata = [], metadatasets = [], tags = [],
-    files = []
+    id = "",
+    index = "",
+    files = "",
+    metadata = [],
+    metadatasets = [],
+    tags = [],
+    type = []
   }){
-    this.index = index
-    this.type = type
     this.id = id
+    this.index = index
+    this.files = files
     this.metadata = metadata
     this.metadatasets = metadatasets
     this.tags = tags
-    this.files = files
+    this.type = type
   }
 
   static fetchTags(id){
