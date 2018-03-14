@@ -4,19 +4,31 @@ import {MetaDataset} from './metadataset'
 import {NPS} from './NPS'
 
 class Dataset{
-  constructor({index="", type="", id="", metadata = [], metadatasets = []}){
+  constructor({index="", type="", id="", metadata = [], metadatasets = [], tags = []}){
     this.index = index
     this.type = type
     this.id = id
     this.metadata = metadata
     this.metadatasets = metadatasets
+    this.tags = tags
   }
 
-  static async getByID(id){
-    if(!id){
-      // TODO: Exception
-    }
-    return await (new Request({
+  static fetchTags(id){
+    return (new Request({
+        url: '/v2/datasets/'+id+'/tags',
+        method: 'GET'
+      }))
+      .fetch()
+      .then(async resp => {
+        if(resp.statuscode == 200){
+          return resp.json.tags
+        }
+        return []
+      })
+  }
+
+  static fetchMetadatasets(id){
+    return (new Request({
         url: '/v2/datasets/'+id+'/meta',
         method: 'GET'
       }))
@@ -28,12 +40,29 @@ class Dataset{
             metads.push(MetaDataset.getByID(id, elem))
           })
           metads = await Promise.all(metads)
-          return new Dataset({
-            id: id,
-            metadatasets: metads
-          })
+          return metads
         }
       })
+  }
+
+  static async getByID(id){
+    if(!id){
+      // TODO: Exception
+    }
+
+    // fetch tags
+    var tags = this.fetchTags(id)
+
+    // fetch metadatasets
+    var metadatasets = this.fetchMetadatasets(id)
+
+    // create dataset
+    var ds = new Dataset({
+      id: id,
+      metadatasets: await metadatasets,
+      tags: await tags
+    })
+    return ds
   }
 
   static search(filters){
@@ -98,6 +127,23 @@ class Dataset{
       }
     }
     return null
+  }
+
+  async save(){
+    var [tags, meta] = await (new Request({
+        url: '/v2/datasets/'+this.id+'/tags',
+        method: 'POST',
+        data: {'tags': this.tags}
+      }))
+      .fetch()
+      .then(resp => [
+        this.constructor.fetchTags(this.id),
+        // as the tags are part of the metadata, we need to reload metadata, too
+        this.constructor.fetchMetadatasets(this.id)
+      ])
+    this.tags = await tags
+    this.metadatasets = await meta
+    return this
   }
 }
 

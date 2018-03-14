@@ -1,9 +1,11 @@
 import {Dataset} from '../api'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
-  START_LOADING = 'START_LOADING'
+  START_LOADING = 'START_LOADING',
+  TAGS_SAVED = 'TAGS_SAVED',
+  TAGS_SAVED_SNACKBAR_TIMEOUT = 'TAGS_SAVED_SNACKBAR_TIMEOUT'
 
-const fetchMetadata = (id) => {
+const fetchDataset = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
     Dataset.getByID(id)
@@ -12,4 +14,20 @@ const fetchMetadata = (id) => {
   }
 }
 
-export {fetchMetadata, START_LOADING, RECEIVE_DATASET}
+const saveTags = (dataset, tags) => {
+  return (dispatch) => {
+    dataset.tags = tags
+    dataset
+      .save()
+      .then(ds => dispatch({type: TAGS_SAVED, dataset: ds}))
+  }
+}
+
+export {
+  fetchDataset,
+  saveTags,
+  START_LOADING,
+  RECEIVE_DATASET,
+  TAGS_SAVED,
+  TAGS_SAVED_SNACKBAR_TIMEOUT
+}

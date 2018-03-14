@@ -1,4 +1,10 @@
 {
+  "TagCard":{
+    "createtag": "Tag hinzufügen",
+    "deleteselected": "Ausgewählte Elemente Löschen",
+    "save": "Tags speichern",
+    "tags": "Tags"
+  },
   "MetaDatasetCard":{
     "key": "Schlüssel",
     "value": "Wert"

@@ -2,8 +2,12 @@
   "datasetmeta":{
     "actioncard":{
       "title": "Actions",
-      "download": "Download"
-    }
+      "dataset": "Dataset",
+      "download": "Download",
+      "reload": "Reload"
+    },
+    "tagssnackbarcontent": "Your tags have been saved",
+    "tagssnackbarclose": "Close"
   },
   "searchdataset":{
     "filter_single": "Filter",

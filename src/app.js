@@ -15,7 +15,7 @@ render_dom_delayed(
         <Route exact path="/" component={SearchDataset}/>
         <Route path="/search" component={SearchDataset}/>
         <Route path="/dataset">
-          <Route path="/dataset/:dsid/meta" component={DatasetMeta}/>
+          <Route path="/dataset/:dsid" component={DatasetMeta}/>
         </Route>
       </BaseLayout>
     </Router>

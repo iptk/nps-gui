@@ -21,7 +21,7 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
     // edit + download button
     var btns = []
     if(editBtn){
-      btns.push(<Button href={"/dataset/"+ds.id+"/meta"} icon="create" flat/>)
+      btns.push(<Button href={"/dataset/"+ds.id} icon="create" flat/>)
     }
     if(dlBtn){
       btns.push(<Button href={ds.getDownloadURL()} icon="file_download" flat/>)
