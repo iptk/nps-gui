@@ -1,4 +1,11 @@
 {
+  "DatasetFilesCard":{
+    "files": "Dateien"
+  },
+  "ObjectTable":{
+    "key": "Schlüssel",
+    "value": "Wert"
+  },
   "TagCard":{
     "createtag": "Tag hinzufügen",
     "deleteselected": "Ausgewählte Elemente Löschen",
@@ -14,6 +21,7 @@
   },
   "navigation":{
     "home": "Home",
-    "searchdataset": "Suche"
+    "searchdataset": "Suche",
+    "metadatasetcollections": "Metadaten"
   }
 }

@@ -1,4 +1,11 @@
 {
+  "DatasetFilesCard":{
+    "files": "Files"
+  },
+  "ObjectTable":{
+    "key": "Key",
+    "value": "Value"
+  },
   "TagCard":{
     "createtag": "Create new tag",
     "deleteselected": "Delete selected tags",
@@ -14,6 +21,7 @@
   },
   "navigation":{
     "home": "Home",
-    "searchdataset": "Search"
+    "searchdataset": "Search",
+    "metadatasetcollections": "Metadata"
   }
 }

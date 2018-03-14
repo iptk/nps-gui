@@ -32,6 +32,7 @@ class BaseLayout extends React.Component {
             <List selectable ripple>
               <ListItem caption={t('navigation.home')} to="/"/>
               <ListItem caption={t('navigation.searchdataset')} to="/search"/>
+              <ListItem caption={t('navigation.metadatasetcollections')} to="/metadata/collections"/>
             </List>
         </NavDrawer>
         <Panel>
