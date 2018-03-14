@@ -8,9 +8,11 @@ import {
 const init = {
   dataset: {
     metadatasets: [],
-    tags: []
+    tags: [],
+    files: []
   },
-  "downloadurl": "#",
+  downloadurl: "#",
+  filesbaseurl: "#",
   tagsSavedSnackbar: false
 }
 const reducer = (state = init, action) => {
@@ -19,7 +21,8 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         dataset: action.result,
-        downloadurl: action.result.getDownloadURL()
+        downloadurl: action.result.getDownloadURL(),
+        filesbaseurl: action.result.getDataDownloadBaseURL()
       }
 
     case TAGS_SAVED:

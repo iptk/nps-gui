@@ -4,13 +4,17 @@ import {MetaDataset} from './metadataset'
 import {NPS} from './NPS'
 
 class Dataset{
-  constructor({index="", type="", id="", metadata = [], metadatasets = [], tags = []}){
+  constructor({
+    index="", type="", id="", metadata = [], metadatasets = [], tags = [],
+    files = []
+  }){
     this.index = index
     this.type = type
     this.id = id
     this.metadata = metadata
     this.metadatasets = metadatasets
     this.tags = tags
+    this.files = files
   }
 
   static fetchTags(id){
@@ -45,6 +49,20 @@ class Dataset{
       })
   }
 
+  static fetchData(id){
+    return (new Request({
+        url: '/v2/datasets/'+id+'/data',
+        method: 'GET'
+      }))
+      .fetch()
+      .then(async resp => {
+        if(resp.statuscode == 200){
+          return resp.json.files
+        }
+        return []
+      })
+  }
+
   static async getByID(id){
     if(!id){
       // TODO: Exception
@@ -56,11 +74,15 @@ class Dataset{
     // fetch metadatasets
     var metadatasets = this.fetchMetadatasets(id)
 
+    // fetch files
+    var data = this.fetchData(id)
+
     // create dataset
     var ds = new Dataset({
       id: id,
       metadatasets: await metadatasets,
-      tags: await tags
+      tags: await tags,
+      files: await data
     })
     return ds
   }
@@ -115,6 +137,10 @@ class Dataset{
 
   getDownloadURL(){
     return NPS.server+'/v2/datasets/'+this.id+'.zip'
+  }
+
+  getDataDownloadBaseURL(){
+    return NPS.server+'/v2/datasets/'+this.id+"/data/"
   }
 
   getMetadata(key = null){

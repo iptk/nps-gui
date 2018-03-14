@@ -8,7 +8,7 @@ import {translate} from 'react-i18next'
 import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
 import {fetchDataset, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions/datasetmeta'
-import {MetaDatasetCardCollection, TagCard} from './lib/dom'
+import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
 const _subscribedMDColl = connect(
@@ -22,6 +22,10 @@ const _dlBtn = translate('pages')(connect(
     <Button href={url} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
   )
 ))
+
+const _subscribedFilesCard = connect(
+  (state) => ({dlbase: state.filesbaseurl, files: state.dataset.files})
+)(DatasetFilesCard)
 
 const _actionCardTitle = translate('pages')(connect(
   (state) => ({dsid: state.dataset.id})
@@ -90,6 +94,10 @@ class DatasetMeta extends React.Component{
           </section>
           <section>
             <_subscribedTagCard onSave={this.tagsSave.bind(this)}/>
+            <br/>
+          </section>
+          <section>
+            <_subscribedFilesCard/>
             <br/>
           </section>
           <_subscribedMDColl/>

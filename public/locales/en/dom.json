@@ -1,4 +1,7 @@
 {
+  "DatasetFilesCard":{
+    "files": "Files"
+  },
   "TagCard":{
     "createtag": "Create new tag",
     "deleteselected": "Delete selected tags",
