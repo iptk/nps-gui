@@ -52,7 +52,7 @@ class TagCard extends React.Component{
 
   saveCard = () => {
     if(this.props.onSave){
-      this.props.onSave(this.state.tags)
+      this.props.onSave(this.state.tags.filter((elem) => elem.length > 0))
     }
   }
 
