@@ -9,6 +9,11 @@
     "tagssnackbarcontent": "Die Tags wurden gespeichert",
     "tagssnackbarclose": "Schließen"
   },
+  "metadatacollections":{
+    "count": "Anzahl",
+    "reload": "Aktualisieren",
+    "title": "Metadata-collections"
+  },
   "searchdataset":{
     "filter_single": "Filter",
     "filter_global": "Globale Filter"

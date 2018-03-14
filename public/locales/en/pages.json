@@ -9,6 +9,11 @@
     "tagssnackbarcontent": "Your tags have been saved",
     "tagssnackbarclose": "Close"
   },
+  "metadatacollections":{
+    "count": "Total",
+    "reload": "Reload",
+    "title": "Metadata collections"
+  },
   "searchdataset":{
     "filter_single": "Filter",
     "filter_global": "Global filter"
