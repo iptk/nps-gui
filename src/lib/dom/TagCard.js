@@ -38,13 +38,18 @@ class TagCard extends React.Component{
     }
   }
   deleteRows = () => {
-    var remaining = this.state.tags.filter(
-      (item, idx) => !this.state.selected.includes(idx)
-    )
+    // The loop has to be used as the state somehow isn't updated
+    // when remaining is created using tags.filter
+    var remaining = this.state.tags
+    for(var i = this.state.selected.length-1; i >= 0; i--){
+      remaining.splice(this.state.selected[i], 1)
+    }
+
     this.setState({
       selected: [],
       tags: remaining
     })
+
     if(this.props.onDelete){
       this.props.onDelete(this.state.selected, remaining)
     }
@@ -99,7 +104,10 @@ class TagCard extends React.Component{
     this.state.tags = tags
 
     var rows = this.state.tags.map((tag, idx) => (
-      <TableRow key={'__tagrow_'+idx}>
+      <TableRow key={'__tagrow_'+idx}
+        selectable={true}
+        selected={this.state.selected.includes(idx)}
+      >
         <TableCell key='__tag'>
           <Input type='text' name={'__tag_'+idx} key={'__tag_'+idx}
             value={this.state.tags[idx]}
@@ -113,7 +121,10 @@ class TagCard extends React.Component{
     ))
     return (<Card>
         <CardTitle title={t('TagCard.tags')}/>
-        <Table multiselectable="true" onRowSelect={this.handleSelection.bind(this)}>
+        <Table selectable multiSelectable
+          onRowSelect={this.handleSelection.bind(this)}
+          selected={this.state.selected}
+        >
           {rows}
         </Table>
         <CardActions>
