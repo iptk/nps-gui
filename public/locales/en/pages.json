@@ -3,7 +3,8 @@
     "actioncard":{
       "title": "Actions",
       "dataset": "Dataset",
-      "download": "Download"
+      "download": "Download",
+      "reload": "Reload"
     },
     "tagssnackbarcontent": "Your tags have been saved",
     "tagssnackbarclose": "Close"

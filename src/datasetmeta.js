@@ -7,7 +7,7 @@ import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
-import {fetchMetadata, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions/datasetmeta'
+import {fetchDataset, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions/datasetmeta'
 import {MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
@@ -58,12 +58,12 @@ class DatasetMeta extends React.Component{
       reducer,
       applyMiddleware(thunkMiddleware)
     )
-    this.fetchMeta = this.fetchMeta.bind(this)
-    this.fetchMeta()
+    this.fetchDs = this.fetchDs.bind(this)
+    this.fetchDs()
   }
 
-  fetchMeta(){
-    this.store.dispatch(fetchMetadata(this.props.match.params.dsid))
+  fetchDs(){
+    this.store.dispatch(fetchDataset(this.props.match.params.dsid))
   }
 
   tagsSave(tags){
@@ -83,6 +83,8 @@ class DatasetMeta extends React.Component{
             <Card>
               <_actionCardTitle/>
               <_dlBtn/>
+              <Button label={t('datasetmeta.actioncard.reload')} icon='update'
+                onMouseUp={this.fetchDs.bind(this)} flat/>
             </Card>
             <br/>
           </section>

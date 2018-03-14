@@ -5,7 +5,7 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
   TAGS_SAVED = 'TAGS_SAVED',
   TAGS_SAVED_SNACKBAR_TIMEOUT = 'TAGS_SAVED_SNACKBAR_TIMEOUT'
 
-const fetchMetadata = (id) => {
+const fetchDataset = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
     Dataset.getByID(id)
@@ -24,7 +24,7 @@ const saveTags = (dataset, tags) => {
 }
 
 export {
-  fetchMetadata,
+  fetchDataset,
   saveTags,
   START_LOADING,
   RECEIVE_DATASET,

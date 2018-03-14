@@ -3,7 +3,8 @@
     "actioncard":{
       "title": "Aktionen",
       "dataset": "Datensatz",
-      "download": "Download"
+      "download": "Download",
+      "reload": "Neu laden"
     },
     "tagssnackbarcontent": "Die Tags wurden gespeichert",
     "tagssnackbarclose": "Schließen"

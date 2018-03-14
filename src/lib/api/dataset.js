@@ -130,14 +130,19 @@ class Dataset{
   }
 
   async save(){
-    var tags = (new Request({
+    var [tags, meta] = await (new Request({
         url: '/v2/datasets/'+this.id+'/tags',
         method: 'POST',
         data: {'tags': this.tags}
       }))
       .fetch()
-      .then(resp => this.constructor.fetchTags(this.id))
+      .then(resp => [
+        this.constructor.fetchTags(this.id),
+        // as the tags are part of the metadata, we need to reload metadata, too
+        this.constructor.fetchMetadatasets(this.id)
+      ])
     this.tags = await tags
+    this.metadatasets = await meta
     return this
   }
 }
