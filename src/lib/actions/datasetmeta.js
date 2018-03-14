@@ -2,8 +2,7 @@ import {Dataset} from '../api'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
   START_LOADING = 'START_LOADING',
-  TAGS_ADDEMPTY = 'TAGS_ADDEMPTY',
-  TAGS_UPDATETMP = 'TAGS_UPDATETMP'
+  TAGS_SAVED = 'TAGS_SAVED'
 
 const fetchMetadata = (id) => {
   return (dispatch) => {
@@ -14,4 +13,4 @@ const fetchMetadata = (id) => {
   }
 }
 
-export {fetchMetadata, START_LOADING, RECEIVE_DATASET, TAGS_ADDEMPTY, TAGS_UPDATETMP}
+export {fetchMetadata, START_LOADING, RECEIVE_DATASET, TAGS_SAVED}

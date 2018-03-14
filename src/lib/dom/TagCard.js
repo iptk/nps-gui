@@ -7,7 +7,7 @@ import {translate} from 'react-i18next'
 import debounce from 'lodash/debounce'
 
 /**
- * onDelete: receives an array with deleted tags and with the remaining tags, triggered on deletion
+ * onDelete: receives an array with deleted index and with the remaining tags, triggered on deletion
  * onSave: receives an array with the current tags, triggered on save-button
  * onEdit: receives an array with the old and the new tag
  */
@@ -25,23 +25,26 @@ class TagCard extends React.Component{
     }
   }
 
-  componentDidMount(){
+  deleteRow = (index) => {
+    var remaining = this.state.tags
+    remaining.splice(index, 1)
+    var remSelected = this.state.selected.filter((item) => item != index)
     this.setState({
-      tags: this.props.tags
+      selected: remSelected,
+      tags: remaining
     })
-  }
-
-  deleteRow = (tag) => {
-    var remaining = this.props.tags.filter(item => item != tag)
     if(this.props.onDelete){
-      this.props.onDelete([tag], remaining)
+      this.props.onDelete([index], remaining)
     }
   }
   deleteRows = () => {
-    // wrong! selected does only include indices, not the items
-    var remaining = this.props.tags.filter(
-      item => !this.state.selected.includes(item)
+    var remaining = this.state.tags.filter(
+      (item, idx) => !this.state.selected.includes(idx)
     )
+    this.setState({
+      selected: [],
+      tags: remaining
+    })
     if(this.props.onDelete){
       this.props.onDelete(this.state.selected, remaining)
     }
@@ -54,7 +57,7 @@ class TagCard extends React.Component{
   }
 
   editTag = (idx, val) => {
-    var prev = this.props.tags[idx]
+    var prev = this.state.tags[idx]
     var tags = this.state.tags
     tags[idx] = val
     this.setState({
@@ -68,12 +71,16 @@ class TagCard extends React.Component{
 
   handleSelection = (selected) => {
     this.setState({
-      ...this.state,
       selected: selected
     })
   }
 
   addTag = () => {
+    var tags = this.state.tags
+    tags.push('')
+    this.setState({
+      tags: tags
+    })
     if(this.props.onAddTag){
       this.props.onAddTag()
     }
@@ -91,32 +98,27 @@ class TagCard extends React.Component{
     // don't use setState to prevent a rerender-loop
     this.state.tags = tags
 
-    var rows = this.state.tags.map((tag, idx) => {
-      var dlCell = ''
-      if(this.props.onDelete){
-        dlCell = <TableCell key='__dlBtn'>
-            <Button icon='delete' onMouseUp={this.deleteRow.bind(this, tag)} flat/>
-          </TableCell>
-      }
-
-      return <TableRow key={'__tagrow_'+idx}>
+    var rows = this.state.tags.map((tag, idx) => (
+      <TableRow key={'__tagrow_'+idx}>
         <TableCell key='__tag'>
           <Input type='text' name={'__tag_'+idx} key={'__tag_'+idx}
             value={this.state.tags[idx]}
             onChange={this.editTag.bind(this, idx)}
             />
         </TableCell>
-        {dlCell}
+        <TableCell key='__dlBtn'>
+          <Button icon='delete' onMouseUp={this.deleteRow.bind(this, idx)} flat/>
+        </TableCell>
       </TableRow>
-    })
+    ))
     return (<Card>
         <CardTitle title={t('TagCard.tags')}/>
         <Table multiselectable="true" onRowSelect={this.handleSelection.bind(this)}>
           {rows}
         </Table>
         <CardActions>
-          {onAddTag ?<Button icon='create' label={t('TagCard.createtag')} onMouseUp={this.addTag.bind(this)}/> :''}
-          {onDelete ?<Button icon='delete' label={t('TagCard.deleteselected')} onMouseUp={this.deleteRows.bind(this)}/> :''}
+          <Button icon='create' label={t('TagCard.createtag')} onMouseUp={this.addTag.bind(this)}/>
+          <Button icon='delete' label={t('TagCard.deleteselected')} onMouseUp={this.deleteRows.bind(this)}/>
           {onSave ?<Button icon='save' label={t('TagCard.save')} onMouseUp={this.saveCard.bind(this)}/> :''}
         </CardActions>
       </Card>)
