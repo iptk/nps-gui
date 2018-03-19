@@ -8,7 +8,7 @@
   },
   "TagCard":{
     "createtag": "Tag hinzufügen",
-    "deleteselected": "Ausgewählte Elemente Löschen",
+    "deleteselected": "Ausgewählte Elemente löschen",
     "save": "Tags speichern",
     "tags": "Tags"
   },
