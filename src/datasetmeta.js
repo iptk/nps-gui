@@ -10,6 +10,7 @@ import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 import {
   fetchDataset,
   fetchMetadataAliases,
+  saveMetadata,
   saveTags,
   TAGS_SAVED_SNACKBAR_TIMEOUT
 } from './lib/actions/datasetmeta'
@@ -94,6 +95,10 @@ class DatasetMeta extends React.Component{
     this.store.dispatch({type: TAGS_SAVED_SNACKBAR_TIMEOUT})
   }
 
+  saveMetaset(metaset){
+    this.store.dispatch(saveMetadata(metaset))
+  }
+
   render(){
     const {t} = this.props
     return(
@@ -118,7 +123,7 @@ class DatasetMeta extends React.Component{
             <_subscribedFilesCard/>
             <br/>
           </section>
-          <_subscribedMDColl/>
+          <_subscribedMDColl onSave={this.saveMetaset.bind(this)}/>
           <section>
             <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
           </section>

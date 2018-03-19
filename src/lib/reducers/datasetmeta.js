@@ -2,6 +2,7 @@ import {
   START_LOADING,
   RECEIVE_DATASET,
   RECEIVE_ALIASES,
+  METADATA_SAVED,
   TAGS_SAVED,
   TAGS_SAVED_SNACKBAR_TIMEOUT
 } from '../actions/datasetmeta'
@@ -33,6 +34,12 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         maliases: action.aliases
+      }
+
+    case METADATA_SAVED:
+      return {
+        ...state,
+        dataset: state.dataset.updateMetaDataset(action.metadataset)
       }
 
     case TAGS_SAVED:
