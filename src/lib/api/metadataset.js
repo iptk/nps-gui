@@ -57,6 +57,37 @@ class MetaDataset{
     }
     return null
   }
+
+  save(){
+    if(!this.dataset_id){
+      // TODO: Exception
+    }
+    var metadata = {}
+    for(var m of this.metadata){
+      metadata[m.key] = m.value
+    }
+    return (new Request({
+        url: '/v2/datasets/'+this.dataset_id+'/meta/save',
+        method: 'POST',
+        data: {
+          id: this.id,
+          metadata: metadata
+        }
+      }))
+      .fetch()
+      .then(resp => {
+        if(resp.statuscode == 200){
+          this.id = resp.json.id
+          var meta = Object.keys(resp.json.metadata).map(
+            (val) => new KeyValueMetadata(
+              val, resp.json.metadata[val]
+            )
+          )
+          this.metadata = meta
+          return this
+        }
+      })
+  }
 }
 
 export {MetaDataset}
