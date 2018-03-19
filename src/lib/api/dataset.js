@@ -176,6 +176,20 @@ class Dataset{
     this.metadatasets = await meta
     return this
   }
+
+  updateMetaDataset(newMeta){
+    var updated = false
+    for(var i = 0; i < this.metadata.length; i++){
+      if(this.metadata[i].id == newMeta.id){
+        this.metadata[i] = newMeta
+        break
+      }
+    }
+    if(!updated){
+      this.metadata.push(newMeta)
+    }
+    return this
+  }
 }
 
 export {Dataset}
