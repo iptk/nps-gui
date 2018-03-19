@@ -13,7 +13,10 @@
     "tags": "Tags"
   },
   "MetaDatasetCard":{
+    "addrow": "Add pair",
+    "deleteselected": "Delete selected elements",
     "key": "Key",
+    "save": "Save",
     "value": "Value"
   },
   "QueryList":{
