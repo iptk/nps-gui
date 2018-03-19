@@ -4,7 +4,8 @@
       "title": "Aktionen",
       "dataset": "Datensatz",
       "download": "Download",
-      "reload": "Neu laden"
+      "reload": "Neu laden",
+      "reloadmaliases": "Metadaten-Aliase neu laden"
     },
     "tagssnackbarcontent": "Die Tags wurden gespeichert",
     "tagssnackbarclose": "Schließen"

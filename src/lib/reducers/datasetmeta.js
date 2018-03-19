@@ -1,11 +1,15 @@
 import {
   START_LOADING,
   RECEIVE_DATASET,
+  RECEIVE_ALIASES,
   TAGS_SAVED,
   TAGS_SAVED_SNACKBAR_TIMEOUT
 } from '../actions/datasetmeta'
 
 const init = {
+  maliases: {
+    aliases: {}
+  },
   dataset: {
     metadatasets: [],
     tags: [],
@@ -23,6 +27,12 @@ const reducer = (state = init, action) => {
         dataset: action.result,
         downloadurl: action.result.getDownloadURL(),
         filesbaseurl: action.result.getDataDownloadBaseURL()
+      }
+
+    case RECEIVE_ALIASES:
+      return {
+        ...state,
+        maliases: action.aliases
       }
 
     case TAGS_SAVED:

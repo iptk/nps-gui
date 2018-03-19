@@ -7,7 +7,12 @@ import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
-import {fetchDataset, saveTags, TAGS_SAVED_SNACKBAR_TIMEOUT} from './lib/actions/datasetmeta'
+import {
+  fetchDataset,
+  fetchMetadataAliases,
+  saveTags,
+  TAGS_SAVED_SNACKBAR_TIMEOUT
+} from './lib/actions/datasetmeta'
 import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
@@ -17,7 +22,10 @@ const _subscribedFilesCard = connect(
 )(DatasetFilesCard)
 
 const _subscribedMDColl = connect(
-  (state) => ({metadatasets: state.dataset.metadatasets})
+  (state) => ({
+    metadatasets: state.dataset.metadatasets,
+    aliases: state.maliases.aliases
+  })
 )(MetaDatasetCardCollection)
 
 const _subscribedTagCard = connect(
@@ -64,8 +72,14 @@ class DatasetMeta extends React.Component{
       reducer,
       applyMiddleware(thunkMiddleware)
     )
+    this.fetchMAliases = this.fetchMAliases.bind(this)
+    this.fetchMAliases()
     this.fetchDs = this.fetchDs.bind(this)
     this.fetchDs()
+  }
+
+  fetchMAliases(){
+    this.store.dispatch(fetchMetadataAliases())
   }
 
   fetchDs(){
@@ -91,6 +105,8 @@ class DatasetMeta extends React.Component{
               <_dlBtn/>
               <Button label={t('datasetmeta.actioncard.reload')} icon='update'
                 onMouseUp={this.fetchDs.bind(this)} flat/>
+              <Button label={t('datasetmeta.actioncard.reloadmaliases')}
+                icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
             </Card>
             <br/>
           </section>

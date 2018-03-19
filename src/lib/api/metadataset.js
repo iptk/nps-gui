@@ -8,6 +8,20 @@ class MetaDataset{
     this.metadata = metadata
   }
 
+  static getAliases(){
+    return (new Request({
+        url: '/v2/metadata/aliases',
+        method: 'GET'
+      }))
+      .fetch()
+      .then(resp => {
+        if(resp.statuscode == 200){
+          return resp.json
+        }
+        return {aliases:{}}
+      })
+  }
+
   static getByID(dataset_id, id){
     if(!id){
       // TODO: Exception
