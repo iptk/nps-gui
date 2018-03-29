@@ -9,7 +9,7 @@ class Dataset{
     index = "",
     files = "",
     metadata = [],
-    metadatasets = [],
+    metadatasets = {},
     tags = [],
     type = []
   }){
@@ -45,11 +45,16 @@ class Dataset{
       .then(async resp => {
         if(resp.statuscode == 200){
           var metads = []
+          var metadict = {}
+          // TODO: find a cheaper way
           resp.json.metadatasets.forEach((elem) => {
             metads.push(MetaDataset.getByID(id, elem))
           })
           metads = await Promise.all(metads)
-          return metads
+          metads.forEach((elem) => {
+            metadict[elem.id] = elem
+          })
+          return metadict
         }
       })
   }
@@ -177,17 +182,8 @@ class Dataset{
     return this
   }
 
-  updateMetaDataset(newMeta){
-    var updated = false
-    for(var i = 0; i < this.metadata.length; i++){
-      if(this.metadata[i].id == newMeta.id){
-        this.metadata[i] = newMeta
-        break
-      }
-    }
-    if(!updated){
-      this.metadata.push(newMeta)
-    }
+  updateMetaDataset(meta){
+    this.metadatasets[meta.id] = meta
     return this
   }
 }

@@ -24,7 +24,7 @@ const _subscribedFilesCard = connect(
 
 const _subscribedMDColl = connect(
   (state) => ({
-    metadatasets: state.dataset.metadatasets,
+    metadatasets: Object.values(state.dataset.metadatasets),
     aliases: state.maliases.aliases
   })
 )(MetaDatasetCardCollection)
