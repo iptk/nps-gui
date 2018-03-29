@@ -8,6 +8,12 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
   TAGS_SAVED = 'TAGS_SAVED',
   TAGS_SAVED_SNACKBAR_TIMEOUT = 'TAGS_SAVED_SNACKBAR_TIMEOUT'
 
+const deleteMetadata = (dataset, metaid) => {
+  return (dispatch) => {
+    dataset.deleteMetaDataset(metaid)
+      .then(succ => dispatch({type: RECEIVE_DATASET, result: dataset}))
+  }
+}
 const fetchDataset = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
@@ -41,6 +47,7 @@ const saveTags = (dataset, tags) => {
 }
 
 export {
+  deleteMetadata,
   fetchDataset,
   fetchMetadataAliases,
   saveMetadata,

@@ -8,6 +8,7 @@ import {translate} from 'react-i18next'
 import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
 import {
+  deleteMetadata,
   fetchDataset,
   fetchMetadataAliases,
   saveMetadata,
@@ -99,6 +100,12 @@ class DatasetMeta extends React.Component{
     this.store.dispatch(saveMetadata(metaset))
   }
 
+  deleteMetaset(meta){
+    this.store.dispatch(deleteMetadata(
+      this.store.getState()['dataset'], meta.id
+    ))
+  }
+
   render(){
     const {t} = this.props
     return(
@@ -123,7 +130,7 @@ class DatasetMeta extends React.Component{
             <_subscribedFilesCard/>
             <br/>
           </section>
-          <_subscribedMDColl onSave={this.saveMetaset.bind(this)}/>
+          <_subscribedMDColl onSave={this.saveMetaset.bind(this)} onDelete={this.deleteMetaset.bind(this)}/>
           <section>
             <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
           </section>

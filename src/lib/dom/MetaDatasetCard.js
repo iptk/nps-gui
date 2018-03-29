@@ -76,6 +76,14 @@ class MetaDatasetCard extends React.Component{
     }
   }
 
+  deleteCard = () => {
+    var meta = this.state.metaset
+    meta.metadata = meta.metadata.filter((elem) => elem.key.length > 0)
+    if(this.props.onDelete){
+      this.props.onDelete(meta)
+    }
+  }
+
   render(){
     var {aliases, metads, t, onSave} = this.props
     this.state.metaset = metads
@@ -141,6 +149,7 @@ class MetaDatasetCard extends React.Component{
               <Button icon='create' label={t('MetaDatasetCard.addrow')} onMouseUp={this.addRow.bind(this)}/>
               <Button icon='delete' label={t('MetaDatasetCard.deleteselected')} onMouseUp={this.deleteRows.bind(this)}/>
               <Button icon='save' label={t('MetaDatasetCard.save')} onMouseUp={this.saveCard.bind(this)}/>
+              <Button icon='delete_forever' label={t('MetaDatasetCard.deletedataset')} onMouseUp={this.deleteCard.bind(this)}/>
             </CardActions>
           : ''
         }

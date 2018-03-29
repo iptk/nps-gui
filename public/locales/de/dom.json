@@ -14,6 +14,7 @@
   },
   "MetaDatasetCard":{
     "addrow": "Paar hinzufügen",
+    "deletedataset": "Metadatensatz löschen",
     "deleteselected": "Ausgewählte Elemente löschen",
     "key": "Schlüssel",
     "save": "Speichern",

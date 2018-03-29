@@ -186,6 +186,24 @@ class Dataset{
     this.metadatasets[meta.id] = meta
     return this
   }
+
+  async deleteMetaDataset(metaid){
+    if(metaid in this.metadatasets){
+      return (await new Request({
+          url: '/v2/datasets/'+this.id+'/meta/'+metaid+'/delete',
+          method: 'GET'
+        }))
+        .fetch()
+        .then(resp => {
+          if(resp.json.success){
+            delete this.metadatasets[metaid]
+            return true
+          }
+          return false
+        })
+    }
+    return false
+  }
 }
 
 export {Dataset}
