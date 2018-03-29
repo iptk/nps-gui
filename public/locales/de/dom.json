@@ -16,6 +16,7 @@
     "addrow": "Paar hinzufügen",
     "deletedataset": "Metadatensatz löschen",
     "deleteselected": "Ausgewählte Elemente löschen",
+    "generatenewid": "(Zufällige ID)",
     "key": "Schlüssel",
     "save": "Speichern",
     "value": "Wert"

@@ -204,6 +204,12 @@ class Dataset{
     }
     return false
   }
+
+  removeMetaDataset(metaid){
+    if(metaid in this.metadatasets){
+      delete this.metadatasets[metaid]
+    }
+  }
 }
 
 export {Dataset}

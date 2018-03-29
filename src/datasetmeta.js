@@ -13,7 +13,8 @@ import {
   fetchMetadataAliases,
   saveMetadata,
   saveTags,
-  TAGS_SAVED_SNACKBAR_TIMEOUT
+  TAGS_SAVED_SNACKBAR_TIMEOUT,
+  ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
 import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
@@ -25,7 +26,7 @@ const _subscribedFilesCard = connect(
 
 const _subscribedMDColl = connect(
   (state) => ({
-    metadatasets: Object.values(state.dataset.metadatasets),
+    metadatasets: state.dataset.metadatasets,
     aliases: state.maliases.aliases
   })
 )(MetaDatasetCardCollection)
@@ -96,13 +97,17 @@ class DatasetMeta extends React.Component{
     this.store.dispatch({type: TAGS_SAVED_SNACKBAR_TIMEOUT})
   }
 
-  saveMetaset(metaset){
-    this.store.dispatch(saveMetadata(metaset))
+  addMetaset(){
+    this.store.dispatch({type: ADD_EMPTY_METADATASET})
   }
 
-  deleteMetaset(meta){
+  saveMetaset(metaset, isNewSet){
+    this.store.dispatch(saveMetadata(metaset, isNewSet))
+  }
+
+  deleteMetaset(meta, isNewSet){
     this.store.dispatch(deleteMetadata(
-      this.store.getState()['dataset'], meta.id
+      this.store.getState()['dataset'], meta.id, isNewSet
     ))
   }
 
@@ -119,6 +124,8 @@ class DatasetMeta extends React.Component{
                 onMouseUp={this.fetchDs.bind(this)} flat/>
               <Button label={t('datasetmeta.actioncard.reloadmaliases')}
                 icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
+              <Button label={t('datasetmeta.actioncard.addmetadataset')}
+                icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
             </Card>
             <br/>
           </section>

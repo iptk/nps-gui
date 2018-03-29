@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Button, Card, CardActions, CardTitle, Input,
+  Button, Card, CardActions, CardTitle, Dropdown, Input,
   Table, TableHead, TableRow, TableCell
 } from 'react-toolbox'
 import {translate} from 'react-i18next'
@@ -12,7 +12,8 @@ class MetaDatasetCard extends React.Component{
     super(props)
     this.state = {
       selected: [],
-      tags: props.tags
+      tags: props.tags,
+      isNewSet: false
     }
   }
 
@@ -72,7 +73,11 @@ class MetaDatasetCard extends React.Component{
     var meta = this.state.metaset
     meta.metadata = meta.metadata.filter((elem) => elem.key.length > 0)
     if(this.props.onSave){
-      this.props.onSave(meta)
+      this.props.onSave(meta, this.state.isNewSet)
+      this.setState({
+        ...this.state,
+        isNewSet: false
+      })
     }
   }
 
@@ -80,12 +85,21 @@ class MetaDatasetCard extends React.Component{
     var meta = this.state.metaset
     meta.metadata = meta.metadata.filter((elem) => elem.key.length > 0)
     if(this.props.onDelete){
-      this.props.onDelete(meta)
+      this.props.onDelete(meta, this.state.isNewSet)
     }
   }
 
+  changeID = (id) => {
+    var meta = this.state.metaset
+    meta.id = id
+    this.setState({
+      ...this.state,
+      metaset: meta
+    })
+  }
+
   render(){
-    var {aliases, metads, t, onSave} = this.props
+    var {aliases, freeIDs, metads, t, onSave} = this.props
     this.state.metaset = metads
 
     var editable = onSave ?true :false
@@ -130,9 +144,24 @@ class MetaDatasetCard extends React.Component{
     var alias = aliases[metads.id]
     var title = alias || metads.id
     var subtitle = alias ?metads.id :''
+    var spinner = ''
+    if(!title || this.state.isNewSet){
+      this.state.isNewSet = true
+      var spinnerIDs = [
+        {value: "", label: t('MetaDatasetCard.generatenewid')},
+        ...freeIDs.map((elem) => ({
+          value: elem,
+          label: aliases[elem]
+        }))
+      ]
+      spinner = <Dropdown
+        onChange={this.changeID.bind(this)}
+        source={spinnerIDs}
+        value={this.state.metaset.id}/>
+    }
 
     return (<Card>
-        <CardTitle title={title} subtitle={subtitle}/>
+        <CardTitle title={title} subtitle={subtitle}>{spinner}</CardTitle>
         <Table selectable={editable} multiSelectable={editable}
           onRowSelect={this.handleSelection.bind(this)}
           selected={this.state.selected}

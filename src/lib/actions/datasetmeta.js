@@ -6,14 +6,26 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
   ALIASES_SAVED = 'ALIASES_SAVED',
   METADATA_SAVED = 'METADATA_SAVED',
   TAGS_SAVED = 'TAGS_SAVED',
-  TAGS_SAVED_SNACKBAR_TIMEOUT = 'TAGS_SAVED_SNACKBAR_TIMEOUT'
+  TAGS_SAVED_SNACKBAR_TIMEOUT = 'TAGS_SAVED_SNACKBAR_TIMEOUT',
+  ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
 
-const deleteMetadata = (dataset, metaid) => {
+const deleteMetadata = (dataset, metaid, isNewSet) => {
   return (dispatch) => {
-    dataset.deleteMetaDataset(metaid)
-      .then(succ => dispatch({type: RECEIVE_DATASET, result: dataset}))
+    if(isNewSet){
+      dataset.removeMetaDataset('__empty')
+      dataset.metadatasets = {...dataset.metadatasets}
+      dispatch({type: RECEIVE_DATASET, result: dataset})
+    }
+    else{
+      dataset.deleteMetaDataset(metaid)
+        .then(succ => {
+          dataset.metadatasets = {...dataset.metadatasets}
+          dispatch({type: RECEIVE_DATASET, result: dataset})
+        })
+    }
   }
 }
+
 const fetchDataset = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
@@ -30,10 +42,12 @@ const fetchMetadataAliases = () => {
   }
 }
 
-const saveMetadata = (metaset) => {
+const saveMetadata = (metaset, isNewSet) => {
   return (dispatch) => {
     metaset.save()
-      .then(meta => dispatch({type: METADATA_SAVED, metadataset: meta}))
+      .then(meta => dispatch({
+          type: METADATA_SAVED, metadataset: meta, isNewSet: isNewSet
+      }))
   }
 }
 
@@ -52,10 +66,12 @@ export {
   fetchMetadataAliases,
   saveMetadata,
   saveTags,
+  ADD_EMPTY_METADATASET,
   START_LOADING,
   RECEIVE_DATASET,
   RECEIVE_ALIASES,
   ALIASES_SAVED,
+  METADATA_SAVED,
   TAGS_SAVED,
   TAGS_SAVED_SNACKBAR_TIMEOUT
 }

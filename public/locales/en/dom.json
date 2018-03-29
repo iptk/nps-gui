@@ -16,6 +16,7 @@
     "addrow": "Add pair",
     "deletedataset": "Delete full metadataset",
     "deleteselected": "Delete selected elements",
+    "generatenewid": "(Random ID)",
     "key": "Key",
     "save": "Save",
     "value": "Value"
