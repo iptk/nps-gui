@@ -2,9 +2,11 @@
   "datasetmeta":{
     "actioncard":{
       "title": "Actions",
+      "addmetadataset": "Add metadataset",
       "dataset": "Dataset",
       "download": "Download",
-      "reload": "Reload"
+      "reload": "Reload",
+      "reloadmaliases": "Reload metadaten aliases"
     },
     "tagssnackbarcontent": "Your tags have been saved",
     "tagssnackbarclose": "Close"

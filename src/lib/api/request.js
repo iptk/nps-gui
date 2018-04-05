@@ -1,5 +1,6 @@
 import fetch from 'cross-fetch'
 
+import {NetworkException} from './exceptions'
 import {NPS} from './NPS'
 
 class Request{
@@ -25,6 +26,13 @@ class Request{
     }
     return fetch(NPS.server+this.url, payload)
       .then(resp => new Response(resp))
+      .catch(err => {
+        throw new NetworkException({
+          msg: "Error retrieving "+this.url+" as "+this.method,
+          data: this,
+          ancestor: err
+        })
+      })
   }
 }
 

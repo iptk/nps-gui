@@ -13,8 +13,19 @@
     "tags": "Tags"
   },
   "MetaDatasetCard":{
+    "addrow": "Add pair",
+    "deletedataset": "Delete full metadataset",
+    "deleteselected": "Delete selected elements",
+    "generatenewid": "(Random ID)",
     "key": "Key",
+    "save": "Save",
     "value": "Value"
+  },
+  "Page":{
+    "error":{
+      "close": "Close",
+      "network": "This request could not be solved due to network or backend problems."
+    }
   },
   "QueryList":{
     "queries": "Queries"

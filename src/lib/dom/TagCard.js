@@ -74,6 +74,7 @@ class TagCard extends React.Component{
   }
 
   handleSelection = (selected) => {
+    selected = selected.filter(elem => Number.isInteger(elem))
     this.setState({
       selected: selected
     })

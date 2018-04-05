@@ -8,13 +8,24 @@
   },
   "TagCard":{
     "createtag": "Tag hinzufügen",
-    "deleteselected": "Ausgewählte Elemente Löschen",
+    "deleteselected": "Ausgewählte Elemente löschen",
     "save": "Tags speichern",
     "tags": "Tags"
   },
   "MetaDatasetCard":{
+    "addrow": "Paar hinzufügen",
+    "deletedataset": "Metadatensatz löschen",
+    "deleteselected": "Ausgewählte Elemente löschen",
+    "generatenewid": "(Zufällige ID)",
     "key": "Schlüssel",
+    "save": "Speichern",
     "value": "Wert"
+  },
+  "Page":{
+    "error":{
+      "close": "Schließen",
+      "network": "Die Anfrage konnte aufgrund eines Netzwerk- oder Backendfehlers nicht abgeschlossen werden."
+    }
   },
   "QueryList":{
     "queries": "Abfragen"

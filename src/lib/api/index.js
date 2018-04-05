@@ -1,7 +1,23 @@
 import {Dataset} from './dataset'
-import Metadata from './metadata'
+import {
+  Exception,
+  BackendException,
+  ExecutionException,
+  InvalidArgumentException
+} from './exceptions'
+import KeyValueMetadata from './metadata'
 import MetadataCollection from './metadatacollection'
 import MetaDataset from './metadataset'
 import {NPS} from './NPS'
 
-export {Dataset, Metadata, MetadataCollection, MetaDataset, NPS}
+export {
+  Dataset,
+  Exception,
+  BackendException,
+  ExecutionException,
+  InvalidArgumentException,
+  KeyValueMetadata,
+  MetadataCollection,
+  MetaDataset,
+  NPS
+}

@@ -1,3 +1,4 @@
+import {InvalidArgumentException} from './exceptions'
 import {Request} from './request'
 import {KeyValueMetadata} from './metadata'
 import {MetaDataset} from './metadataset'
@@ -9,7 +10,7 @@ class Dataset{
     index = "",
     files = "",
     metadata = [],
-    metadatasets = [],
+    metadatasets = {},
     tags = [],
     type = []
   }){
@@ -22,6 +23,12 @@ class Dataset{
     this.type = type
   }
 
+  async awaitPromises(){
+    this.metadatasets = await Promise.resolve(this.metadatasets)
+    this.tags = await Promise.resolve(this.tags)
+    this.data = await Promise.resolve(this.data)
+  }
+
   static fetchTags(id){
     return (new Request({
         url: '/v2/datasets/'+id+'/tags',
@@ -32,7 +39,10 @@ class Dataset{
         if(resp.statuscode == 200){
           return resp.json.tags
         }
-        return []
+        throw new BackendException({
+          msg: "Error fetching tags",
+          data: resp
+        })
       })
   }
 
@@ -45,11 +55,16 @@ class Dataset{
       .then(async resp => {
         if(resp.statuscode == 200){
           var metads = []
+          var metadict = {}
+          // TODO: find a cheaper way
           resp.json.metadatasets.forEach((elem) => {
             metads.push(MetaDataset.getByID(id, elem))
           })
           metads = await Promise.all(metads)
-          return metads
+          metads.forEach((elem) => {
+            metadict[elem.id] = elem
+          })
+          return metadict
         }
       })
   }
@@ -68,9 +83,9 @@ class Dataset{
       })
   }
 
-  static async getByID(id){
+  static async getByID(id, usePromises=false){
     if(!id){
-      // TODO: Exception
+      throw new InvalidArgumentException({msg: "ID is not set"})
     }
 
     // fetch tags
@@ -85,16 +100,19 @@ class Dataset{
     // create dataset
     var ds = new Dataset({
       id: id,
-      metadatasets: await metadatasets,
-      tags: await tags,
-      files: await data
+      metadatasets: usePromises ?metadatasets :await metadatasets,
+      tags: usePromises ?tags :await tags,
+      files: usePromises ?data :await data
     })
     return ds
   }
 
   static search(filters){
-    if(Array.isArray(filters)){
-      // TODO: Exception
+    if(!Array.isArray(filters)){
+      throw new InvalidArgumentException({
+        msg: "filters is not an array",
+        data: filters
+      })
     }
     if(filters.length > 0 && !Array.isArray(filters)){
       filters = [filters]
@@ -175,6 +193,35 @@ class Dataset{
     this.tags = await tags
     this.metadatasets = await meta
     return this
+  }
+
+  updateMetaDataset(meta){
+    this.metadatasets[meta.id] = meta
+    return this
+  }
+
+  async deleteMetaDataset(metaid){
+    if(metaid in this.metadatasets){
+      return (await new Request({
+          url: '/v2/datasets/'+this.id+'/meta/'+metaid+'/delete',
+          method: 'GET'
+        }))
+        .fetch()
+        .then(resp => {
+          if(resp.json.success){
+            delete this.metadatasets[metaid]
+            return true
+          }
+          return false
+        })
+    }
+    return false
+  }
+
+  removeMetaDataset(metaid){
+    if(metaid in this.metadatasets){
+      delete this.metadatasets[metaid]
+    }
   }
 }
 
