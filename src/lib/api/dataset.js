@@ -108,8 +108,11 @@ class Dataset{
   }
 
   static search(filters){
-    if(Array.isArray(filters)){
-      throw new InvalidArgumentException({msg: "filters is not an array"})
+    if(!Array.isArray(filters)){
+      throw new InvalidArgumentException({
+        msg: "filters is not an array",
+        data: filters
+      })
     }
     if(filters.length > 0 && !Array.isArray(filters)){
       filters = [filters]
