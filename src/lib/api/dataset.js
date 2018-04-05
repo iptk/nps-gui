@@ -1,3 +1,4 @@
+import {InvalidArgumentException} from './exceptions'
 import {Request} from './request'
 import {KeyValueMetadata} from './metadata'
 import {MetaDataset} from './metadataset'
@@ -32,7 +33,10 @@ class Dataset{
         if(resp.statuscode == 200){
           return resp.json.tags
         }
-        return []
+        throw new BackendException({
+          msg: "Error fetching tags",
+          data: resp
+        })
       })
   }
 
@@ -75,7 +79,7 @@ class Dataset{
 
   static async getByID(id){
     if(!id){
-      // TODO: Exception
+      throw new InvalidArgumentException({msg: "ID is not set"})
     }
 
     // fetch tags
@@ -99,7 +103,7 @@ class Dataset{
 
   static search(filters){
     if(Array.isArray(filters)){
-      // TODO: Exception
+      throw new InvalidArgumentException({msg: "filters is not an array"})
     }
     if(filters.length > 0 && !Array.isArray(filters)){
       filters = [filters]

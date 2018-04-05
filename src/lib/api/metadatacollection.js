@@ -1,3 +1,4 @@
+import {BackendException} from './exceptions'
 import {Request} from './request'
 
 class MetadataCollection{
@@ -33,7 +34,10 @@ class MetadataCollection{
             ))
           }
         }
-        return {}
+        throw new BackendException({
+          msg: "Cannot load collections",
+          data: resp
+        })
       })
   }
 }
