@@ -61,7 +61,6 @@ class MetaDatasetCard extends React.Component{
     this.setState({
       metaset: meta
     })
-    console.log(this.state.selected)
   }
 
   handleSelection = (selected) => {
@@ -69,7 +68,6 @@ class MetaDatasetCard extends React.Component{
     this.setState({
       selected: selected
     })
-    console.log(selected)
   }
 
   saveCard = () => {
