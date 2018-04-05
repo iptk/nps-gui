@@ -12,14 +12,14 @@ import {DatasetTable, QueryList} from './lib/dom'
 import reducer from './lib/reducers/searchdataset'
 
 const _subscribedDatasetTable = connect(
-  (state) => ({datasets: state.dataset})
+  (state) => ({datasets: state.s.dataset})
 )(DatasetTable)
 
 const _subscribedQueryList = connect(
   (state) => {
     var chips = []
-    for(var single of state.filter.single){
-      chips.push(single.concat(state.filter.global))
+    for(var single of state.s.filter.single){
+      chips.push(single.concat(state.s.filter.global))
     }
     return {
       queryVals: chips
@@ -37,7 +37,7 @@ class SearchDataset extends Page{
     this.store.dispatch({type: type, filter: val})
 
     // fetch dataset
-    this.store.dispatch(fetchDataset(this.store.getState().filter))
+    this.store.dispatch(fetchDataset(this.store.getState().s.filter))
   }
 
   render(){

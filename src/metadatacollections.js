@@ -13,7 +13,7 @@ import {MetadataCollectionCard} from './lib/dom'
 import {NPS} from './lib/api'
 
 const _subCardTitle = translate('pages')(connect(
-  (state) => ({count: state.total})
+  (state) => ({count: state.s.total})
 )(
   ({count, t}) => (
     <CardTitle
@@ -24,7 +24,7 @@ const _subCardTitle = translate('pages')(connect(
 ))
 
 const _collectionCards = connect(
-  (state) => ({collections: state.collections})
+  (state) => ({collections: state.s.collections})
 )(
   ({collections}) => (
     collections.map((coll) => (

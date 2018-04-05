@@ -21,6 +21,12 @@
     "save": "Speichern",
     "value": "Wert"
   },
+  "Page":{
+    "error":{
+      "close": "Schließen",
+      "network": "Die Anfrage konnte aufgrund eines Netzwerk- oder Backendfehlers nicht abgeschlossen werden."
+    }
+  },
   "QueryList":{
     "queries": "Abfragen"
   },

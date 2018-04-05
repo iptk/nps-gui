@@ -21,6 +21,12 @@
     "save": "Save",
     "value": "Value"
   },
+  "Page":{
+    "error":{
+      "close": "Close",
+      "network": "This request could not be solved due to network or backend problems."
+    }
+  },
   "QueryList":{
     "queries": "Queries"
   },

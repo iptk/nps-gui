@@ -20,23 +20,23 @@ import Page from './lib/dom/Page'
 
 // from lib/dom
 const _subscribedFilesCard = connect(
-  (state) => ({dlbase: state.filesbaseurl, files: state.dataset.files})
+  (state) => ({dlbase: state.s.filesbaseurl, files: state.s.dataset.files})
 )(DatasetFilesCard)
 
 const _subscribedMDColl = connect(
   (state) => ({
-    metadatasets: state.dataset.metadatasets,
-    aliases: state.maliases.aliases
+    metadatasets: state.s.dataset.metadatasets,
+    aliases: state.s.maliases.aliases
   })
 )(MetaDatasetCardCollection)
 
 const _subscribedTagCard = connect(
-  (state) => ({tags: state.dataset.tags})
+  (state) => ({tags: state.s.dataset.tags})
 )(TagCard)
 
 // locally defined
 const _actionCardTitle = translate('pages')(connect(
-  (state) => ({dsid: state.dataset.id})
+  (state) => ({dsid: state.s.dataset.id})
 )(
   ({dsid, t}) => (
     <CardTitle title={t('datasetmeta.actioncard.title')}
@@ -45,7 +45,7 @@ const _actionCardTitle = translate('pages')(connect(
 ))
 
 const _dlBtn = translate('pages')(connect(
-  (state) => ({url: state.downloadurl})
+  (state) => ({url: state.s.downloadurl})
 )(
   ({url, t}) => (
     <Button href={url} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
@@ -53,7 +53,7 @@ const _dlBtn = translate('pages')(connect(
 ))
 
 const _tagsSavedSnackbar = translate('pages')(connect(
-  (state) => ({active: state.tagsSavedSnackbar})
+  (state) => ({active: state.s.tagsSavedSnackbar})
 )(
   ({active, t, onTimeout}) => (
     <Snackbar
@@ -85,7 +85,7 @@ class DatasetMeta extends Page{
   }
 
   tagsSave(tags){
-    this.store.dispatch(saveTags(this.store.getState()['dataset'], tags))
+    this.store.dispatch(saveTags(this.store.getState().s.dataset, tags))
   }
 
   dismissTagsSnackbar(){
@@ -102,7 +102,7 @@ class DatasetMeta extends Page{
 
   deleteMetaset(meta, isNewSet){
     this.store.dispatch(deleteMetadata(
-      this.store.getState()['dataset'], meta.id, isNewSet
+      this.store.getState().s.dataset, meta.id, isNewSet
     ))
   }
 
