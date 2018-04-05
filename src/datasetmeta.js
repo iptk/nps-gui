@@ -1,9 +1,7 @@
 import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
-import {createStore, applyMiddleware} from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import {Provider, connect} from 'react-redux'
+import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
 
@@ -18,6 +16,7 @@ import {
 } from './lib/actions/datasetmeta'
 import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
+import Page from './lib/dom/Page'
 
 // from lib/dom
 const _subscribedFilesCard = connect(
@@ -68,13 +67,9 @@ const _tagsSavedSnackbar = translate('pages')(connect(
   )
 ))
 
-class DatasetMeta extends React.Component{
+class DatasetMeta extends Page{
   constructor(props){
-    super(props)
-    this.store = createStore(
-      reducer,
-      applyMiddleware(thunkMiddleware)
-    )
+    super(props, reducer)
     this.fetchMAliases = this.fetchMAliases.bind(this)
     this.fetchMAliases()
     this.fetchDs = this.fetchDs.bind(this)
@@ -113,36 +108,34 @@ class DatasetMeta extends React.Component{
 
   render(){
     const {t} = this.props
-    return(
-      <Provider store={this.store}>
-        <div>
-          <section>
-            <Card>
-              <_actionCardTitle/>
-              <_dlBtn/>
-              <Button label={t('datasetmeta.actioncard.reload')} icon='update'
-                onMouseUp={this.fetchDs.bind(this)} flat/>
-              <Button label={t('datasetmeta.actioncard.reloadmaliases')}
-                icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
-              <Button label={t('datasetmeta.actioncard.addmetadataset')}
-                icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
-            </Card>
-            <br/>
-          </section>
-          <section>
-            <_subscribedTagCard onSave={this.tagsSave.bind(this)}/>
-            <br/>
-          </section>
-          <section>
-            <_subscribedFilesCard/>
-            <br/>
-          </section>
-          <_subscribedMDColl onSave={this.saveMetaset.bind(this)} onDelete={this.deleteMetaset.bind(this)}/>
-          <section>
-            <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
-          </section>
-        </div>
-      </Provider>
+    return super.render(
+      <div>
+        <section>
+          <Card>
+            <_actionCardTitle/>
+            <_dlBtn/>
+            <Button label={t('datasetmeta.actioncard.reload')} icon='update'
+              onMouseUp={this.fetchDs.bind(this)} flat/>
+            <Button label={t('datasetmeta.actioncard.reloadmaliases')}
+              icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
+            <Button label={t('datasetmeta.actioncard.addmetadataset')}
+              icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
+          </Card>
+          <br/>
+        </section>
+        <section>
+          <_subscribedTagCard onSave={this.tagsSave.bind(this)}/>
+          <br/>
+        </section>
+        <section>
+          <_subscribedFilesCard/>
+          <br/>
+        </section>
+        <_subscribedMDColl onSave={this.saveMetaset.bind(this)} onDelete={this.deleteMetaset.bind(this)}/>
+        <section>
+          <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
+        </section>
+      </div>
     )
   }
 }

@@ -1,12 +1,11 @@
 import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
-import {createStore, applyMiddleware} from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import {Provider, connect} from 'react-redux'
+import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle} from 'react-toolbox'
 
+import Page from './lib/dom/Page'
 import {fetchCollections} from './lib/actions/metadatacollections'
 import reducer from './lib/reducers/metadatacollections'
 import {MetadataCollectionCard} from './lib/dom'
@@ -37,13 +36,9 @@ const _collectionCards = connect(
   )
 )
 
-class MetadataCollections extends React.Component{
-  constructor(){
-    super()
-    this.store = createStore(
-      reducer,
-      applyMiddleware(thunkMiddleware)
-    )
+class MetadataCollections extends Page{
+  constructor(props){
+    super(props, reducer)
     const load = this.loadCollections.bind(this)
     load()
   }
@@ -55,21 +50,19 @@ class MetadataCollections extends React.Component{
 
   render(){
     const {t} = this.props
-    return(
-      <Provider store={this.store}>
-        <section>
-          <Card>
-            <_subCardTitle/>
-            <Button
-              onMouseUp={this.loadCollections.bind(this)}
-              label={t('metadatacollections.reload')}
-              icon='update' flat
-            />
-          </Card>
-          <br/>
-          <_collectionCards/>
-        </section>
-      </Provider>
+    return super.render(
+      <section>
+        <Card>
+          <_subCardTitle/>
+          <Button
+            onMouseUp={this.loadCollections.bind(this)}
+            label={t('metadatacollections.reload')}
+            icon='update' flat
+          />
+        </Card>
+        <br/>
+        <_collectionCards/>
+      </section>
     )
   }
 }
