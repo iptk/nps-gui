@@ -23,6 +23,12 @@ class Dataset{
     this.type = type
   }
 
+  async awaitPromises(){
+    this.metadatasets = await Promise.resolve(this.metadatasets)
+    this.tags = await Promise.resolve(this.tags)
+    this.data = await Promise.resolve(this.data)
+  }
+
   static fetchTags(id){
     return (new Request({
         url: '/v2/datasets/'+id+'/tags',
@@ -77,7 +83,7 @@ class Dataset{
       })
   }
 
-  static async getByID(id){
+  static async getByID(id, usePromises=false){
     if(!id){
       throw new InvalidArgumentException({msg: "ID is not set"})
     }
@@ -94,9 +100,9 @@ class Dataset{
     // create dataset
     var ds = new Dataset({
       id: id,
-      metadatasets: await metadatasets,
-      tags: await tags,
-      files: await data
+      metadatasets: usePromises ?metadatasets :await metadatasets,
+      tags: usePromises ?tags :await tags,
+      files: usePromises ?data :await data
     })
     return ds
   }
