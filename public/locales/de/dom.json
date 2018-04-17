@@ -36,6 +36,7 @@
   },
   "navigation":{
     "home": "Home",
+    "jobs": "Jobs",
     "searchdataset": "Suche",
     "metadatasetcollections": "Metadaten"
   }

@@ -11,6 +11,10 @@
     "tagssnackbarcontent": "Die Tags wurden gespeichert",
     "tagssnackbarclose": "Schließen"
   },
+  "jobsoverview":{
+    "actions": "Aktionen",
+    "refresh": "Aktualisieren"
+  },
   "metadatacollections":{
     "count": "Anzahl",
     "reload": "Aktualisieren",

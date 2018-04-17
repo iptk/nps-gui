@@ -1,6 +1,7 @@
 import BaseLayout from './BaseLayout'
 import DatasetFilesCard from './DatasetFilesCard'
 import DatasetTable from './DatasetTable'
+import JobCard from './JobCard'
 import MetaDatasetCard from './MetaDatasetCard'
 import MetadataCollectionCard from './MetadataCollectionCard'
 import MetaDatasetCardCollection from './MetaDatasetCardCollection'
@@ -13,6 +14,7 @@ export {
   BaseLayout,
   DatasetFilesCard,
   DatasetTable,
+  JobCard,
   MetaDatasetCard,
   MetadataCollectionCard,
   MetaDatasetCardCollection,
