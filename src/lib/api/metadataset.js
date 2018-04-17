@@ -139,9 +139,16 @@ class MetaDataset{
 }
 
 class SpecialMetaDatasets{
-  static async getJobs(){
+  static async getJobs(offset, count){
+    var url = '/v2/jobs'
+    if(offset){
+      url += '/'+offset
+      if(count){
+        url += '/'+count
+      }
+    }
     return await MetaDataset.getMetadataList({
-      url: '/v2/jobs', key: 'jobs'
+      url: url, key: 'jobs'
     })
   }
 }
