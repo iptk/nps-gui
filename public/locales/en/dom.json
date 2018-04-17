@@ -2,6 +2,10 @@
   "DatasetFilesCard":{
     "files": "Files"
   },
+  "JobCard":{
+    "dataset": "Datensatz",
+    "jobs": "Jobs"
+  },
   "ObjectTable":{
     "key": "Key",
     "value": "Value"
