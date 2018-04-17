@@ -4,7 +4,11 @@
   },
   "JobCard":{
     "dataset": "Datensatz",
-    "jobs": "Jobs"
+    "jobs": "Jobs",
+    "status": {
+      "pending": "ausstehend",
+      "scheduled": "eingereiht"
+    }
   },
   "ObjectTable":{
     "key": "Schlüssel",

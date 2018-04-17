@@ -1,16 +1,25 @@
-import {RECEIVE_JOBS} from '../actions/jobsoverview'
+import {
+  RECEIVE_PENDING_JOBS,
+  RECEIVE_SCHEDULED_JOBS
+} from '../actions/jobsoverview'
 
 const init = {
-  jobs: []
+  jobs_pending: [],
+  jobs_scheduled: []
 }
 
 const reducer = (state = init, action) => {
   switch(action.type){
-    case RECEIVE_JOBS:
-      console.log(action)
+    case RECEIVE_PENDING_JOBS:
       return {
         ...state,
-        jobs: action.jobs
+        jobs_pending: action.jobs
+      }
+
+    case RECEIVE_SCHEDULED_JOBS:
+      return {
+        ...state,
+        jobs_scheduled: action.jobs
       }
 
     default:

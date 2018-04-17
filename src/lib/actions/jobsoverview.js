@@ -1,13 +1,27 @@
 import {SpecialMetaDatasets} from '../api'
 
-const RECEIVE_JOBS = 'RECEIVE_JOBS'
+const RECEIVE_PENDING_JOBS = 'RECEIVE_PENDING_JOBS',
+  RECEIVE_SCHEDULED_JOBS = 'RECEIVE_SCHEDULED_JOBS'
 
-const fetchJobs = () => {
+const fetchPendingJobs = () => {
   return (dispatch) => {
     SpecialMetaDatasets
       .getJobs()
-      .then(jobs => dispatch({type: RECEIVE_JOBS, jobs: jobs}))
+      .then(jobs => dispatch({type: RECEIVE_PENDING_JOBS, jobs: jobs}))
   }
 }
 
-export {RECEIVE_JOBS, fetchJobs}
+const fetchScheduledJobs = () => {
+  return (dispatch) => {
+    SpecialMetaDatasets
+      .getJobs(-20)
+      .then(jobs => dispatch({type: RECEIVE_SCHEDULED_JOBS, jobs: jobs}))
+  }
+}
+
+export {
+  RECEIVE_PENDING_JOBS,
+  RECEIVE_SCHEDULED_JOBS,
+  fetchPendingJobs,
+  fetchScheduledJobs
+}

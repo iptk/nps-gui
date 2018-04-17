@@ -5,10 +5,14 @@ import {Button, Card, CardTitle} from 'react-toolbox'
 
 import {JobCard, Page} from './lib/dom'
 import reducer from './lib/reducers/jobsoverview'
-import {fetchJobs} from './lib/actions/jobsoverview'
+import {fetchPendingJobs, fetchScheduledJobs} from './lib/actions/jobsoverview'
 
-const _JobCard = connect(
-  (state) => ({jobs: state.s.jobs})
+const _pendingJobCard = connect(
+  (state) => ({jobs: state.s.jobs_pending})
+)(JobCard)
+
+const _scheduledJobCard = connect(
+  (state) => ({jobs: state.s.jobs_scheduled})
 )(JobCard)
 
 class JobsOverview extends Page{
@@ -19,7 +23,8 @@ class JobsOverview extends Page{
   }
 
   getJobs(){
-    this.store.dispatch(fetchJobs())
+    this.store.dispatch(fetchPendingJobs())
+    this.store.dispatch(fetchScheduledJobs())
   }
 
   render(){
@@ -32,7 +37,9 @@ class JobsOverview extends Page{
             label={t('jobsoverview.refresh')}/>
         </Card>
         <br/>
-        <_JobCard/>
+        <_pendingJobCard status="pending"/>
+        <br/>
+        <_scheduledJobCard status="scheduled"/>
       </div>
     )
   }
