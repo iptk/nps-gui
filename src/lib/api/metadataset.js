@@ -38,14 +38,8 @@ class MetaDataset{
       .fetch()
       .then(resp => {
         if(resp.statuscode == 200){
-          var meta = []
-          Object.keys(resp.json).forEach((key) => {
-            meta.push(new KeyValueMetadata(key, resp.json[key]))
-          })
-          return new MetaDataset({
-            dataset_id: dataset_id,
-            id: id,
-            metadata: meta
+          return this.jsonToMetadataset({
+            id: id, dataset_id: dataset_id, json: resp.json
           })
         }
         throw new BackendException({
@@ -53,6 +47,47 @@ class MetaDataset{
           data: resp
         })
       })
+  }
+
+  static getMetadataList({
+    url, method="GET", data=null, // fetching-params
+    key, dataset_id, metadata_id // interpreting-params
+  }){
+    return (new Request({
+        url: url,
+        method: method,
+        data: data
+      }))
+      .fetch()
+      .then(resp => {
+        if(resp.statuscode == 200){
+          var metasets = key ? resp.json[key] : resp.json
+          metasets = metasets.map((metaset) => (
+            this.jsonToMetadataset({
+              id: metadata_id, dataset_id: dataset_id,
+              json: metaset, metadata_key: "metadata"
+            })
+          ))
+          return metasets
+        }
+        throw new BackendException({
+          msg: "Cannot fetch metadatset-list from '"+url+"' with method "
+            +method,
+          data: resp
+        })
+      })
+  }
+
+  static jsonToMetadataset({id, dataset_id, json, metadata_key}){
+    var metadata = metadata_key ?json[metadata_key] :json
+    var meta = Object.keys(metadata).map((key) => (
+      new KeyValueMetadata(key, metadata[key])
+    ))
+    return new MetaDataset({
+      dataset_id: (metadata_key ?json.dataset_id :null) || dataset_id || "",
+      id: (metadata_key ?json.id :null) || id || "",
+      metadata: meta
+    })
   }
 
   getMetadata(key = null){
@@ -103,5 +138,13 @@ class MetaDataset{
   }
 }
 
-export {MetaDataset}
+class SpecialMetaDatasets{
+  static async getJobs(){
+    return await MetaDataset.getMetadataList({
+      url: '/v2/jobs', key: 'jobs'
+    })
+  }
+}
+
+export {MetaDataset, SpecialMetaDatasets}
 export default MetaDataset
