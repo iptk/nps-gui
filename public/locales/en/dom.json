@@ -14,9 +14,10 @@
   },
   "MetaDatasetCard":{
     "addrow": "Add pair",
+    "chooseid": "Choose ID",
     "deletedataset": "Delete full metadataset",
     "deleteselected": "Delete selected elements",
-    "generatenewid": "(Random ID)",
+    "generatenewid": "(Leave empty to generate a random ID)",
     "key": "Key",
     "save": "Save",
     "value": "Value"

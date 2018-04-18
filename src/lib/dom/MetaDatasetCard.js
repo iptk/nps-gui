@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Button, Card, CardActions, CardTitle, Dropdown, Input,
+  Button, Card, CardActions, CardTitle, Autocomplete, Input,
   Table, TableHead, TableRow, TableCell
 } from 'react-toolbox'
 import {translate} from 'react-i18next'
@@ -148,16 +148,13 @@ class MetaDatasetCard extends React.Component{
     var spinner = ''
     if(!title || this.state.isNewSet){
       this.state.isNewSet = true
-      var spinnerIDs = [
-        {value: "", label: t('MetaDatasetCard.generatenewid')},
-        ...freeIDs.map((elem) => ({
-          value: elem,
-          label: aliases[elem]
-        }))
-      ]
-      spinner = <Dropdown
+      spinner = <Autocomplete
+        label={t('MetaDatasetCard.chooseid')}
+        hint={t('MetaDatasetCard.generatenewid')}
         onChange={this.changeID.bind(this)}
-        source={spinnerIDs}
+        source={aliases}
+        multiple={false}
+        direction="down"
         value={this.state.metaset.id}/>
     }
 
