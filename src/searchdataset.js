@@ -6,9 +6,8 @@ import {connect} from 'react-redux'
 import debounce from 'lodash/debounce'
 import {translate} from 'react-i18next'
 
-import Page from './lib/dom/Page'
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, fetchDataset} from './lib/actions/searchdataset'
-import {DatasetTable, QueryList} from './lib/dom'
+import {DatasetTable, Page, QueryList} from './lib/dom'
 import reducer from './lib/reducers/searchdataset'
 
 const _subscribedDatasetTable = connect(

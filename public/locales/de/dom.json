@@ -2,6 +2,14 @@
   "DatasetFilesCard":{
     "files": "Dateien"
   },
+  "JobCard":{
+    "dataset": "Datensatz",
+    "jobs": "Jobs",
+    "status": {
+      "pending": "ausstehend",
+      "scheduled": "eingereiht"
+    }
+  },
   "ObjectTable":{
     "key": "Schlüssel",
     "value": "Wert"
@@ -14,9 +22,10 @@
   },
   "MetaDatasetCard":{
     "addrow": "Paar hinzufügen",
+    "chooseid": "ID wählen",
     "deletedataset": "Metadatensatz löschen",
     "deleteselected": "Ausgewählte Elemente löschen",
-    "generatenewid": "(Zufällige ID)",
+    "generatenewid": "(Leer lassen für zufällige ID)",
     "key": "Schlüssel",
     "save": "Speichern",
     "value": "Wert"
@@ -32,6 +41,7 @@
   },
   "navigation":{
     "home": "Home",
+    "jobs": "Jobs",
     "searchdataset": "Suche",
     "metadatasetcollections": "Metadaten"
   }

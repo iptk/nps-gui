@@ -1,5 +1,6 @@
 import DatasetMeta from './datasetmeta'
+import JobsOverview from './jobsoverview'
 import MetadataCollections from './metadatacollections'
 import SearchDataset from './searchdataset'
 
-export {DatasetMeta, MetadataCollections, SearchDataset}
+export {DatasetMeta, JobsOverview, MetadataCollections, SearchDataset}

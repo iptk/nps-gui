@@ -31,6 +31,7 @@ class BaseLayout extends React.Component {
           onOverlayClick={ this.toggleDrawerActive }>
             <List selectable ripple>
               <ListItem caption={t('navigation.home')} to="/"/>
+              <ListItem caption={t('navigation.jobs')} to="/jobs"/>
               <ListItem caption={t('navigation.searchdataset')} to="/search"/>
               <ListItem caption={t('navigation.metadatasetcollections')} to="/metadata/collections"/>
             </List>
