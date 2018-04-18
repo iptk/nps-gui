@@ -2,6 +2,14 @@
   "DatasetFilesCard":{
     "files": "Dateien"
   },
+  "JobCard":{
+    "dataset": "Datensatz",
+    "jobs": "Jobs",
+    "status": {
+      "pending": "ausstehend",
+      "scheduled": "eingereiht"
+    }
+  },
   "ObjectTable":{
     "key": "Schlüssel",
     "value": "Wert"
@@ -33,6 +41,7 @@
   },
   "navigation":{
     "home": "Home",
+    "jobs": "Jobs",
     "searchdataset": "Suche",
     "metadatasetcollections": "Metadaten"
   }

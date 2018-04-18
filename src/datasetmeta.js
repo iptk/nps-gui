@@ -14,9 +14,8 @@ import {
   TAGS_SAVED_SNACKBAR_TIMEOUT,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
-import {DatasetFilesCard, MetaDatasetCardCollection, TagCard} from './lib/dom'
+import {DatasetFilesCard, MetaDatasetCardCollection, Page, TagCard} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
-import Page from './lib/dom/Page'
 
 // from lib/dom
 const _subscribedFilesCard = connect(

@@ -5,10 +5,9 @@ import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 import {Button, Card, CardTitle} from 'react-toolbox'
 
-import Page from './lib/dom/Page'
 import {fetchCollections} from './lib/actions/metadatacollections'
 import reducer from './lib/reducers/metadatacollections'
-import {MetadataCollectionCard} from './lib/dom'
+import {Page, MetadataCollectionCard} from './lib/dom'
 
 import {NPS} from './lib/api'
 

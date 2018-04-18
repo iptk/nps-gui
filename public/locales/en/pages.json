@@ -11,6 +11,10 @@
     "tagssnackbarcontent": "Your tags have been saved",
     "tagssnackbarclose": "Close"
   },
+  "jobsoverview":{
+    "actions": "Actions",
+    "refresh": "Refresh"
+  },
   "metadatacollections":{
     "count": "Total",
     "reload": "Reload",
