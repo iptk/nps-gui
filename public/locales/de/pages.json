@@ -6,7 +6,8 @@
       "dataset": "Datensatz",
       "download": "Download",
       "reload": "Neu laden",
-      "reloadmaliases": "Metadaten-Aliase neu laden"
+      "reloadmaliases": "Metadaten-Aliase neu laden",
+      "startjob": "Job einreihen"
     },
     "tagssnackbarcontent": "Die Tags wurden gespeichert",
     "tagssnackbarclose": "Schließen"

@@ -11,6 +11,7 @@ import {
   fetchMetadataAliases,
   saveMetadata,
   saveTags,
+  startJob,
   TAGS_SAVED_SNACKBAR_TIMEOUT,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
@@ -105,6 +106,10 @@ class DatasetMeta extends Page{
     ))
   }
 
+  startJob(){
+    this.store.dispatch(startJob(this.store.getState().s.dataset.id))
+  }
+
   render(){
     const {t} = this.props
     return super.render(
@@ -119,6 +124,8 @@ class DatasetMeta extends Page{
               icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
             <Button label={t('datasetmeta.actioncard.addmetadataset')}
               icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
+            <Button label={t('datasetmeta.actioncard.startjob')}
+              icon='schedule' onMouseUp={this.startJob.bind(this)} flat/>
           </Card>
           <br/>
         </section>
