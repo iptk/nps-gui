@@ -8,6 +8,7 @@ class Exception extends Error{
 }
 
 class BackendException extends Exception{}
+class ConfigurationException extends Exception{}
 class ExecutionException extends Exception{}
 class InvalidArgumentException extends Exception{}
 class NetworkException extends Exception{}
@@ -16,6 +17,7 @@ export default Exception
 export {
   Exception,
   BackendException,
+  ConfigurationException,
   ExecutionException,
   InvalidArgumentException
 }

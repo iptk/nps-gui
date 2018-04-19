@@ -2,6 +2,7 @@ import {Dataset} from './dataset'
 import {
   Exception,
   BackendException,
+  ConfigurationException,
   ExecutionException,
   InvalidArgumentException
 } from './exceptions'
@@ -14,11 +15,14 @@ export {
   Dataset,
   Exception,
   BackendException,
+  ConfigurationException,
   ExecutionException,
   InvalidArgumentException,
+  NetworkException,
   KeyValueMetadata,
   MetadataCollection,
   MetaDataset,
   NPS,
   SpecialMetaDatasets
 }
+export default NPS
