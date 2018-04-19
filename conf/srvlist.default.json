@@ -1,7 +1,7 @@
 {
   "servers":{
     "localhost": {
-      "server": "https://localhost:80/",
+      "uri": "http://localhost:8080/",
       "description": "Local test-server"
     }
   },
