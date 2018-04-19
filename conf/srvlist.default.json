@@ -1,0 +1,9 @@
+{
+  "servers":{
+    "localhost": {
+      "server": "https://localhost:80/",
+      "description": "Local test-server"
+    }
+  },
+  "default": "localhost"
+}
