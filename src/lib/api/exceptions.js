@@ -19,5 +19,6 @@ export {
   BackendException,
   ConfigurationException,
   ExecutionException,
-  InvalidArgumentException
+  InvalidArgumentException,
+  NetworkException
 }

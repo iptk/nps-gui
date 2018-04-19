@@ -4,7 +4,8 @@ import {
   BackendException,
   ConfigurationException,
   ExecutionException,
-  InvalidArgumentException
+  InvalidArgumentException,
+  NetworkException
 } from './exceptions'
 import KeyValueMetadata from './metadata'
 import MetadataCollection from './metadatacollection'
