@@ -1,0 +1,9 @@
+{
+  "servers":{
+    "localhost": {
+      "uri": "http://localhost:8080/",
+      "description": "Local test-server"
+    }
+  },
+  "default": "localhost"
+}

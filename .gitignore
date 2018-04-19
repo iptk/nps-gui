@@ -1,4 +1,5 @@
-conf/*.yml
+conf/*
+!conf/*.default.json
 node_modules/
 public/bundle/
 yarn-error.log

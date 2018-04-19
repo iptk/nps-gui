@@ -24,7 +24,7 @@ class Request{
     if(['GET', 'HEAD'].indexOf(this.method) === -1){
       payload = {...payload, body: JSON.stringify(this.data)}
     }
-    return fetch(NPS.server+this.url, payload)
+    return fetch(NPS.getServerURI()+this.url, payload)
       .then(resp => new Response(resp))
       .catch(err => {
         throw new NetworkException({
