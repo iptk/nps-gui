@@ -6,6 +6,6 @@ COPY . /app
 RUN yarn install && yarn run build
 
 # remove development-stuff and source
-RUN rm README.md package.json postcss.config.js webpack.config.js yarn-error.log yarn.lock node_modules/ src/ -rf
+RUN rm README.md package.json postcss.config.js webpack.config.js yarn-error.log yarn.lock src/ -rf
 
 CMD ["node", "/app/server/server.js"]
