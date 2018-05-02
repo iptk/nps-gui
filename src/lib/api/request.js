@@ -17,7 +17,8 @@ class Request{
         'Content-Type': 'application/json'
       },
       redirect: 'follow',
-      mode: 'cors'
+      mode: 'cors',
+      credentials: 'include'
     }
 
     // body is not allowed for GET and HEAD
