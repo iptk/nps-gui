@@ -48,7 +48,7 @@ class Dataset{
 
   static fetchMetadatasets(id){
     return (new Request({
-        url: '/v2/datasets/'+id+'/meta',
+        url: '/v3/datasets/'+id+'/meta',
         method: 'GET'
       }))
       .fetch()
@@ -71,7 +71,7 @@ class Dataset{
 
   static fetchData(id){
     return (new Request({
-        url: '/v2/datasets/'+id+'/data',
+        url: '/v3/datasets/'+id+'/data',
         method: 'GET'
       }))
       .fetch()
@@ -118,7 +118,7 @@ class Dataset{
       filters = [filters]
     }
     return (new Request({
-        url: '/v2/datasets/search',
+        url: '/v3/datasets/search',
         method: 'POST',
         data: {'filters': filters}
       }))
@@ -159,11 +159,11 @@ class Dataset{
   }
 
   getDownloadURL(){
-    return NPS.server+'/v2/datasets/'+this.id+'.zip'
+    return NPS.server+'/v3/datasets/'+this.id+'.zip'
   }
 
   getDataDownloadBaseURL(){
-    return NPS.server+'/v2/datasets/'+this.id+"/data/"
+    return NPS.server+'/v3/datasets/'+this.id+"/data/"
   }
 
   getMetadata(key = null){
@@ -180,7 +180,7 @@ class Dataset{
 
   async save(){
     var [tags, meta] = await (new Request({
-        url: '/v2/datasets/'+this.id+'/tags',
+        url: '/v3/datasets/'+this.id+'/tags',
         method: 'POST',
         data: {'tags': this.tags}
       }))
@@ -203,8 +203,8 @@ class Dataset{
   async deleteMetaDataset(metaid){
     if(metaid in this.metadatasets){
       return (await new Request({
-          url: '/v2/datasets/'+this.id+'/meta/'+metaid+'/delete',
-          method: 'GET'
+          url: '/v2/datasets/'+this.id+'/meta/'+metaid,
+          method: 'Delete'
         }))
         .fetch()
         .then(resp => {

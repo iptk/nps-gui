@@ -21,7 +21,7 @@ class MetadataCollection{
 
   static fetchAll(){
     return (new Request({
-        url: '/v2/metadata/collections',
+        url: '/v3/metadata/collections',
         method: 'GET'
       }))
       .fetch()

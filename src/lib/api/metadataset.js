@@ -15,7 +15,7 @@ class MetaDataset{
 
   static getAliases(){
     return (new Request({
-        url: '/v2/metadata/aliases',
+        url: '/v3/metadata/aliases',
         method: 'GET'
       }))
       .fetch()
@@ -32,7 +32,7 @@ class MetaDataset{
       throw new InvalidArgumentException({msg: "id is not set"})
     }
     return (new Request({
-        url: '/v2/datasets/'+dataset_id+'/meta/'+id,
+        url: '/v3/datasets/'+dataset_id+'/meta/'+id,
         method: 'GET'
       }))
       .fetch()
@@ -111,12 +111,9 @@ class MetaDataset{
       metadata[m.key] = m.value
     }
     return (new Request({
-        url: '/v2/datasets/'+this.dataset_id+'/meta/save',
+        url: '/v2/datasets/'+this.dataset_id+'/meta/'+this.id,
         method: 'POST',
-        data: {
-          id: this.id,
-          metadata: metadata
-        }
+        data: metadata
       }))
       .fetch()
       .then(resp => {
