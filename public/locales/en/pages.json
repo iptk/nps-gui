@@ -23,6 +23,7 @@
   },
   "searchdataset":{
     "filter_single": "Filter",
-    "filter_global": "Global filter"
+    "filter_global": "Global filter",
+    "fields": "Fields"
   }
 }

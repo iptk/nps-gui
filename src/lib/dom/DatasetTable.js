@@ -15,7 +15,12 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
   for(var ds of datasets){
     var cells = []
     cells.push(<TableCell key={'__ID'}>{ds.id}</TableCell>)
+    var firstCell = true
     for(var k of keys){
+      if(firstCell){
+        firstCell = false
+        continue
+      }
       var meta = ds.getMetadata(k)
       cells.push(<TableCell key={k}>{meta !== null ?meta.value :""}</TableCell>)
     }

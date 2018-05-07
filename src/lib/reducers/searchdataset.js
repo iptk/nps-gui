@@ -4,12 +4,14 @@ import {
   START_LOADING,
   FILTER_GLOBAL_CHANGE,
   FILTER_SINGLE_CHANGE,
-  RECEIVE_DATASET
+  RECEIVE_DATASET,
+  FIELDS_CHANGE
 } from '../actions/searchdataset'
 
 const initFilter = {
   single: [],
-  global: []
+  global: [],
+  fields: []
 }
 const filterReducer = (state = initFilter, action) => {
   switch(action.type){
@@ -28,6 +30,12 @@ const filterReducer = (state = initFilter, action) => {
       return {
         ...state,
         global: action.filter.split(' ')
+      }
+
+    case FIELDS_CHANGE:
+      return {
+        ...state,
+        fields: action.fields
       }
 
     default:

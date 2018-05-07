@@ -90,7 +90,7 @@ class Dataset{
     return ds
   }
 
-  static search(filters){
+  static search(filters, fields){
     if(!Array.isArray(filters)){
       throw new InvalidArgumentException({
         msg: "filters is not an array",
@@ -101,16 +101,28 @@ class Dataset{
       filters = [filters]
     }
     filters = filters.map((elem) => '('+elem.join(',')+')').join(' OR ')
+    var url = '/v3/datasets/search?q='+encodeURIComponent(filters)
+    if(fields){
+      url += '&fields='+encodeURIComponent(fields.join(','))
+    }
     return (new Request({
-        url: '/v3/datasets/search?q='+encodeURIComponent(filters),
+        url: url,
         method: 'GET'
       }))
       .fetch()
       .then(async resp => {
         if(resp.statuscode == 200 && resp.json.success){
-          var datasets = await Promise.all(resp.json.datasets.map((ds) =>
-            (Dataset.getByID(ds.id))
-          ))
+          var datasets = await Promise.all(resp.json.datasets.map(async (ds)=>{
+            var datas = await Dataset.getByID(ds.id)
+            var metadata = []
+            for(var m in ds){
+              if(m != 'id'){
+                metadata.push(new KeyValueMetadata(m, ds[m]))
+              }
+            }
+            datas.metadata = metadata
+            return datas
+          }))
           return datasets
         }
         else{

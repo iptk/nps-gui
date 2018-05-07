@@ -3,7 +3,8 @@ import {Dataset} from '../api'
 const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
   FILTER_SINGLE_CHANGE = 'FILTER_SINGLE_CHANGE',
   RECEIVE_DATASET = 'RECEIVE_DATASET',
-  START_LOADING = 'START_LOADING'
+  START_LOADING = 'START_LOADING',
+  FIELDS_CHANGE = 'FIELDS_CHANGE'
 
 const fetchDataset = (filter) => {
   return (dispatch) => {
@@ -12,10 +13,10 @@ const fetchDataset = (filter) => {
     for(var f of filter.single){
       filters.push(filter.global.concat(f))
     }
-    Dataset.search(filters)
+    Dataset.search(filters, filter.fields)
       .then(res => dispatch({type: RECEIVE_DATASET, result: res}))
 
   }
 }
 
-export {FILTER_GLOBAL_CHANGE, FILTER_SINGLE_CHANGE, RECEIVE_DATASET, fetchDataset}
+export {FILTER_GLOBAL_CHANGE, FILTER_SINGLE_CHANGE, RECEIVE_DATASET, FIELDS_CHANGE, fetchDataset}
