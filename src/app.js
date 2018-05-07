@@ -7,7 +7,6 @@ import NPS from './lib/api'
 
 import {
   DatasetMeta,
-  JobsOverview,
   MetadataCollections,
   SearchDataset
 } from './index';
@@ -24,9 +23,6 @@ NPS.fetchConfiguration(window.location.origin+'/conf/serverlist')
             <Route path="/search" component={SearchDataset}/>
             <Route path="/dataset">
               <Route path="/dataset/:dsid" component={DatasetMeta}/>
-            </Route>
-            <Route path="/jobs">
-              <Route exact path="/jobs" component={JobsOverview}/>
             </Route>
             <Route path="/metadata">
               <Route path="/metadata/collections" component={MetadataCollections}/>

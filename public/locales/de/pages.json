@@ -6,15 +6,8 @@
       "dataset": "Datensatz",
       "download": "Download",
       "reload": "Neu laden",
-      "reloadmaliases": "Metadaten-Aliase neu laden",
-      "startjob": "Job einreihen"
-    },
-    "tagssnackbarcontent": "Die Tags wurden gespeichert",
-    "tagssnackbarclose": "Schließen"
-  },
-  "jobsoverview":{
-    "actions": "Aktionen",
-    "refresh": "Aktualisieren"
+      "reloadmaliases": "Metadaten-Aliase neu laden"
+    }
   },
   "metadatacollections":{
     "count": "Anzahl",

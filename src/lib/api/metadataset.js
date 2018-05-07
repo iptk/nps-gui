@@ -135,36 +135,5 @@ class MetaDataset{
   }
 }
 
-class SpecialMetaDatasets{
-  static async getJobs(offset, count){
-    var url = '/v2/jobs'
-    if(offset){
-      url += '/'+offset
-      if(count){
-        url += '/'+count
-      }
-    }
-    return await MetaDataset.getMetadataList({
-      url: url, key: 'jobs'
-    })
-  }
-
-  static async startJob(dataset_id){
-    return (new Request({
-        url: '/v2/jobs/start/'+dataset_id
-      }))
-      .fetch()
-      .then(resp => {
-        if(resp.statuscode == 200){
-          return resp.json
-        }
-        throw new BackendException({
-          msg: "Cannot start job for dataset "+dataset_id,
-          data: resp
-        })
-      })
-  }
-}
-
-export {MetaDataset, SpecialMetaDatasets}
+export {MetaDataset}
 export default MetaDataset

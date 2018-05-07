@@ -2,23 +2,9 @@
   "DatasetFilesCard":{
     "files": "Files"
   },
-  "JobCard":{
-    "dataset": "Datensatz",
-    "jobs": "Jobs",
-    "status": {
-      "pending": "pending",
-      "scheduled": "scheduled"
-    }
-  },
   "ObjectTable":{
     "key": "Key",
     "value": "Value"
-  },
-  "TagCard":{
-    "createtag": "Create new tag",
-    "deleteselected": "Delete selected tags",
-    "save": "Save tags",
-    "tags": "Tags"
   },
   "MetaDatasetCard":{
     "addrow": "Add pair",
@@ -41,7 +27,6 @@
   },
   "navigation":{
     "home": "Home",
-    "jobs": "Jobs",
     "searchdataset": "Search",
     "metadatasetcollections": "Metadata"
   }

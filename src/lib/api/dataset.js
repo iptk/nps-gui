@@ -9,24 +9,17 @@ class Dataset{
     id = "",
     files = "",
     metadata = [],
-    metadatasets = {},
-    tags = []
+    metadatasets = {}
   }){
     this.id = id
     this.files = files
     this.metadata = metadata
     this.metadatasets = metadatasets
-    this.tags = tags
   }
 
   async awaitPromises(){
     this.metadatasets = await Promise.resolve(this.metadatasets)
-    this.tags = await Promise.resolve(this.tags)
     this.data = await Promise.resolve(this.data)
-  }
-
-  static fetchTags(id){
-    return []
   }
 
   static fetchMetadatasets(id){
@@ -71,9 +64,6 @@ class Dataset{
       throw new InvalidArgumentException({msg: "ID is not set"})
     }
 
-    // fetch tags
-    var tags = this.fetchTags(id)
-
     // fetch metadatasets
     var metadatasets = this.fetchMetadatasets(id)
 
@@ -84,7 +74,6 @@ class Dataset{
     var ds = new Dataset({
       id: id,
       metadatasets: usePromises ?metadatasets :await metadatasets,
-      tags: usePromises ?tags :await tags,
       files: usePromises ?data :await data
     })
     return ds
@@ -152,19 +141,7 @@ class Dataset{
   }
 
   async save(){
-    var [tags, meta] = await (new Request({
-        url: '/v3/datasets/'+this.id+'/tags',
-        method: 'POST',
-        data: {'tags': this.tags}
-      }))
-      .fetch()
-      .then(resp => [
-        this.constructor.fetchTags(this.id),
-        // as the tags are part of the metadata, we need to reload metadata, too
-        this.constructor.fetchMetadatasets(this.id)
-      ])
-    this.tags = await tags
-    this.metadatasets = await meta
+    // nothing to do here atm
     return this
   }
 

@@ -12,7 +12,6 @@ class MetaDatasetCard extends React.Component{
     super(props)
     this.state = {
       selected: [],
-      tags: props.tags,
       isNewSet: false
     }
   }
@@ -44,7 +43,7 @@ class MetaDatasetCard extends React.Component{
   }
   deleteRows = () => {
     // The loop has to be used as the state somehow isn't updated
-    // when remaining is created using tags.filter
+    // when remaining is created using array.filter
     var meta = this.state.metaset
     for(var i = this.state.selected.length-1; i >= 0; i--){
       meta.metadata.splice(this.state.selected[i], 1)
@@ -117,7 +116,7 @@ class MetaDatasetCard extends React.Component{
         >
           <TableCell key={'__key__'+idx}>
             {onSave
-              ?<Input type='text' name={'__tag_'+idx} key={'__tag_'+idx}
+              ?<Input type='text' name={'__meta_'+idx} key={'__meta_'+idx}
                   value={this.state.metaset.metadata[idx].key}
                   onChange={this.editKey.bind(this, idx)}
                 />

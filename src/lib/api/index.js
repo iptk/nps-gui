@@ -9,7 +9,7 @@ import {
 } from './exceptions'
 import KeyValueMetadata from './metadata'
 import MetadataCollection from './metadatacollection'
-import {MetaDataset, SpecialMetaDatasets} from './metadataset'
+import {MetaDataset} from './metadataset'
 import {NPS} from './NPS'
 
 export {
@@ -23,7 +23,6 @@ export {
   KeyValueMetadata,
   MetadataCollection,
   MetaDataset,
-  NPS,
-  SpecialMetaDatasets
+  NPS
 }
 export default NPS

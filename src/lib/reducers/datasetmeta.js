@@ -3,9 +3,7 @@ import {
   START_LOADING,
   RECEIVE_DATASET,
   RECEIVE_ALIASES,
-  METADATA_SAVED,
-  TAGS_SAVED,
-  TAGS_SAVED_SNACKBAR_TIMEOUT
+  METADATA_SAVED
 } from '../actions/datasetmeta'
 
 import {MetaDataset} from '../api'
@@ -16,12 +14,10 @@ const init = {
   },
   dataset: {
     metadatasets: [],
-    tags: [],
     files: []
   },
   downloadurl: undefined,
-  filesbaseurl: "#",
-  tagsSavedSnackbar: false
+  filesbaseurl: "#"
 }
 const reducer = (state = init, action) => {
   switch(action.type){
@@ -59,19 +55,6 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         dataset: ds
-      }
-
-    case TAGS_SAVED:
-      return {
-        ...state,
-        dataset: action.dataset,
-        tagsSavedSnackbar: true
-      }
-
-    case TAGS_SAVED_SNACKBAR_TIMEOUT:
-      return {
-        ...state,
-        tagsSavedSnackbar: false
       }
 
     default:

@@ -6,15 +6,8 @@
       "dataset": "Dataset",
       "download": "Download",
       "reload": "Reload",
-      "reloadmaliases": "Reload metadaten aliases",
-      "startjob": "Schedule job"
-    },
-    "tagssnackbarcontent": "Your tags have been saved",
-    "tagssnackbarclose": "Close"
-  },
-  "jobsoverview":{
-    "actions": "Actions",
-    "refresh": "Refresh"
+      "reloadmaliases": "Reload metadaten aliases"
+    }
   },
   "metadatacollections":{
     "count": "Total",

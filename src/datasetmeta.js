@@ -10,12 +10,9 @@ import {
   fetchDataset,
   fetchMetadataAliases,
   saveMetadata,
-  saveTags,
-  startJob,
-  TAGS_SAVED_SNACKBAR_TIMEOUT,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
-import {DatasetFilesCard, MetaDatasetCardCollection, Page, TagCard} from './lib/dom'
+import {DatasetFilesCard, MetaDatasetCardCollection, Page} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
 // from lib/dom
@@ -29,10 +26,6 @@ const _subscribedMDColl = connect(
     aliases: state.s.maliases.aliases
   })
 )(MetaDatasetCardCollection)
-
-const _subscribedTagCard = connect(
-  (state) => ({tags: state.s.dataset.tags})
-)(TagCard)
 
 // locally defined
 const _actionCardTitle = translate('pages')(connect(
@@ -49,21 +42,6 @@ const _dlBtn = translate('pages')(connect(
 )(
   ({url, t}) => (
     <Button href={url} disabled={url == undefined} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
-  )
-))
-
-const _tagsSavedSnackbar = translate('pages')(connect(
-  (state) => ({active: state.s.tagsSavedSnackbar})
-)(
-  ({active, t, onTimeout}) => (
-    <Snackbar
-      action={t('datasetmeta.tagssnackbarclose')}
-      active={active}
-      label={t('datasetmeta.tagssnackbarcontent')}
-      timeout={2000}
-      onTimeout={onTimeout}
-      type='accept'
-    />
   )
 ))
 
@@ -84,14 +62,6 @@ class DatasetMeta extends Page{
     this.store.dispatch(fetchDataset(this.props.match.params.dsid))
   }
 
-  tagsSave(tags){
-    this.store.dispatch(saveTags(this.store.getState().s.dataset, tags))
-  }
-
-  dismissTagsSnackbar(){
-    this.store.dispatch({type: TAGS_SAVED_SNACKBAR_TIMEOUT})
-  }
-
   addMetaset(){
     this.store.dispatch({type: ADD_EMPTY_METADATASET})
   }
@@ -104,10 +74,6 @@ class DatasetMeta extends Page{
     this.store.dispatch(deleteMetadata(
       this.store.getState().s.dataset, meta.id, isNewSet
     ))
-  }
-
-  startJob(){
-    this.store.dispatch(startJob(this.store.getState().s.dataset.id))
   }
 
   render(){
@@ -124,13 +90,7 @@ class DatasetMeta extends Page{
               icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
             <Button label={t('datasetmeta.actioncard.addmetadataset')}
               icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
-            <Button label={t('datasetmeta.actioncard.startjob')}
-              icon='schedule' onMouseUp={this.startJob.bind(this)} flat/>
           </Card>
-          <br/>
-        </section>
-        <section>
-          <_subscribedTagCard onSave={this.tagsSave.bind(this)}/>
           <br/>
         </section>
         <section>
@@ -138,9 +98,6 @@ class DatasetMeta extends Page{
           <br/>
         </section>
         <_subscribedMDColl onSave={this.saveMetaset.bind(this)} onDelete={this.deleteMetaset.bind(this)}/>
-        <section>
-          <_tagsSavedSnackbar onTimeout={this.dismissTagsSnackbar.bind(this)}/>
-        </section>
       </div>
     )
   }
