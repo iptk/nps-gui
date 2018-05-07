@@ -48,7 +48,7 @@ const _dlBtn = translate('pages')(connect(
   (state) => ({url: state.s.downloadurl})
 )(
   ({url, t}) => (
-    <Button href={url} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
+    <Button href={url} disabled={url == undefined} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
   )
 ))
 

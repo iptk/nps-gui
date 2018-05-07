@@ -29,23 +29,6 @@ class Dataset{
     this.data = await Promise.resolve(this.data)
   }
 
-  static fetchTags(id){
-    return (new Request({
-        url: '/v2/datasets/'+id+'/tags',
-        method: 'GET'
-      }))
-      .fetch()
-      .then(async resp => {
-        if(resp.statuscode == 200){
-          return resp.json.tags
-        }
-        throw new BackendException({
-          msg: "Error fetching tags",
-          data: resp
-        })
-      })
-  }
-
   static fetchMetadatasets(id){
     return (new Request({
         url: '/v3/datasets/'+id+'/meta',
@@ -159,11 +142,11 @@ class Dataset{
   }
 
   getDownloadURL(){
-    return NPS.server+'/v3/datasets/'+this.id+'.zip'
+    return NPS.getServerURI()+'/v3/datasets/'+this.id+'.zip'
   }
 
   getDataDownloadBaseURL(){
-    return NPS.server+'/v3/datasets/'+this.id+"/data/"
+    return NPS.getServerURI()+'/v3/datasets/'+this.id+"/data/"
   }
 
   getMetadata(key = null){
