@@ -7,26 +7,26 @@ import {NPS} from './NPS'
 class Dataset{
   constructor({
     id = "",
-    index = "",
     files = "",
     metadata = [],
     metadatasets = {},
-    tags = [],
-    type = []
+    tags = []
   }){
     this.id = id
-    this.index = index
     this.files = files
     this.metadata = metadata
     this.metadatasets = metadatasets
     this.tags = tags
-    this.type = type
   }
 
   async awaitPromises(){
     this.metadatasets = await Promise.resolve(this.metadatasets)
     this.tags = await Promise.resolve(this.tags)
     this.data = await Promise.resolve(this.data)
+  }
+
+  static fetchTags(id){
+    return []
   }
 
   static fetchMetadatasets(id){
@@ -100,40 +100,18 @@ class Dataset{
     if(filters.length > 0 && !Array.isArray(filters)){
       filters = [filters]
     }
+    filters = filters.map((elem) => '('+elem.join(',')+')').join(' OR ')
     return (new Request({
-        url: '/v3/datasets/search',
-        method: 'POST',
-        data: {'filters': filters}
+        url: '/v3/datasets/search?q='+encodeURIComponent(filters),
+        method: 'GET'
       }))
       .fetch()
-      .then(resp => {
-        if(resp.statuscode == 200){
-          //iterate over datasets
-          var rows = []
-          for(var res of resp.json['results']){
-            var datasets = []
-            for(var ds of res['datasets']){
-              var meta = []
-              Object.keys(ds._source)
-                .forEach(key => {
-                  meta.push(new KeyValueMetadata(key, ds._source[key]))
-                })
-              datasets.push({
-                'score': ds['_score'],
-                'dataset': new Dataset({
-                  index: ds['_index'],
-                  type: ds['_type'],
-                  id: ds['_id'],
-                  metadata: meta
-                })
-              })
-            }
-            rows.push({
-              'total': res['total'],
-              'datasets': datasets
-            })
-          }
-          return rows
+      .then(async resp => {
+        if(resp.statuscode == 200 && resp.json.success){
+          var datasets = await Promise.all(resp.json.datasets.map((ds) =>
+            (Dataset.getByID(ds.id))
+          ))
+          return datasets
         }
         else{
           return []

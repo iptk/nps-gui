@@ -4,7 +4,8 @@ import {Button, Table, TableHead, TableRow, TableCell} from 'react-toolbox'
 import {Dataset} from '../api/dataset.js'
 
 const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
-  if(keys.length == 0 && datasets.length > 0){
+  keys = ['ID', ...keys]
+  if(keys.length == 1 && datasets.length > 0){
     for(var m of datasets[0].getMetadata()){
       keys.push(m.key)
     }
@@ -13,6 +14,7 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
   var rows = []
   for(var ds of datasets){
     var cells = []
+    cells.push(<TableCell key={'__ID'}>{ds.id}</TableCell>)
     for(var k of keys){
       var meta = ds.getMetadata(k)
       cells.push(<TableCell key={k}>{meta !== null ?meta.value :""}</TableCell>)
