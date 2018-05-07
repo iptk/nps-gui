@@ -6,7 +6,7 @@ class NPS{
   static serverConfig = {}
   static usedServer = null
 
-  static getServerURI(name){
+  static getServer(name){
     if(!name){
       if(this.usedServer){
         name = this.usedServer
@@ -25,14 +25,13 @@ class NPS{
     }
 
     if(name in this.serverConfig.servers){
-      return this.serverConfig.servers[name].uri
+      return new Server({name: name, ...this.serverConfig.servers[name]})
     }
 
     throw new ConfigurationException({
       msg: "Server '"+name+"' not found",
       data: this.serverConfig
     })
-    return "http://localhost:8080"
   }
 
   static async fetchConfiguration(url){
@@ -57,6 +56,23 @@ class NPS{
 
   static useServer(serverName){
     this.usedServer = serverName
+  }
+}
+
+class Server{
+  constructor({name, uri, cors=true, credentials=true, description=''}){
+    this.name = name
+    this.uri = uri
+    this._cors = cors
+    this._credentials = credentials
+    this.description = description
+  }
+
+  get cors(){
+    return this._cors == undefined ? false : this._cors
+  }
+  get credentials(){
+    return this._credentials ? 'include' : 'omit'
   }
 }
 

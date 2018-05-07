@@ -19,7 +19,7 @@ const init = {
     tags: [],
     files: []
   },
-  downloadurl: "#",
+  downloadurl: undefined,
   filesbaseurl: "#",
   tagsSavedSnackbar: false
 }

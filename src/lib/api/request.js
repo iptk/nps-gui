@@ -11,21 +11,22 @@ class Request{
   }
 
   async fetch(){
+    var srv = NPS.getServer()
     var payload = {
       method: this.method,
       headers: {
         'Content-Type': 'application/json'
       },
       redirect: 'follow',
-      mode: 'cors',
-      credentials: 'include'
+      mode: srv.cors,
+      credentials: srv.credentials
     }
 
     // body is not allowed for GET and HEAD
     if(['GET', 'HEAD'].indexOf(this.method) === -1){
       payload = {...payload, body: JSON.stringify(this.data)}
     }
-    return fetch(NPS.getServerURI()+this.url, payload)
+    return fetch(srv.uri+this.url, payload)
       .then(resp => new Response(resp))
       .catch(err => {
         throw new NetworkException({

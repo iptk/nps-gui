@@ -142,11 +142,11 @@ class Dataset{
   }
 
   getDownloadURL(){
-    return NPS.getServerURI()+'/v3/datasets/'+this.id+'.zip'
+    return NPS.getServer().uri+'/v3/datasets/'+this.id+'.zip'
   }
 
   getDataDownloadBaseURL(){
-    return NPS.getServerURI()+'/v3/datasets/'+this.id+"/data/"
+    return NPS.getServer().uri+'/v3/datasets/'+this.id+"/data/"
   }
 
   getMetadata(key = null){
