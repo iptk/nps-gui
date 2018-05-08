@@ -94,6 +94,7 @@ class Dataset{
     if(fields){
       url += '&fields='+encodeURIComponent(fields.join(','))
     }
+    url += '&per_page=5000'
     return (new Request({
         url: url,
         method: 'GET'
