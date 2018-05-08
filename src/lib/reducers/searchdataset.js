@@ -5,13 +5,17 @@ import {
   FILTER_GLOBAL_CHANGE,
   FILTER_SINGLE_CHANGE,
   RECEIVE_DATASET,
-  FIELDS_CHANGE
+  FIELDS_CHANGE,
+  START_CHANGE,
+  COUNT_CHANGE
 } from '../actions/searchdataset'
 
 const initFilter = {
   single: [],
   global: [],
-  fields: []
+  fields: [],
+  count: 10,
+  start: 0
 }
 const filterReducer = (state = initFilter, action) => {
   switch(action.type){
@@ -36,6 +40,22 @@ const filterReducer = (state = initFilter, action) => {
       return {
         ...state,
         fields: action.fields
+      }
+
+    case COUNT_CHANGE:
+      return {
+        ...state,
+        count: Number(action.count)
+      }
+
+    case START_CHANGE:
+      var start = Number(state.start) + Number(action.forward ?state.count :-state.count)
+      if(start < 0){
+        start = 0
+      }
+      return {
+        ...state,
+        start: start
       }
 
     default:

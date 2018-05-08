@@ -17,6 +17,10 @@
   "searchdataset":{
     "filter_single": "Filter",
     "filter_global": "Global filter",
-    "fields": "Fields"
+    "fields": "Fields",
+    "pagebackwards": "Page backwards",
+    "pageforwards": "Page forwards",
+    "resultcount": "Number of results",
+    "results": "Results"
   }
 }

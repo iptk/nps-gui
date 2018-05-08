@@ -79,7 +79,7 @@ class Dataset{
     return ds
   }
 
-  static search(filters, fields){
+  static search(filters, fields, start=0, count=10){
     if(!Array.isArray(filters)){
       throw new InvalidArgumentException({
         msg: "filters is not an array",
@@ -94,7 +94,13 @@ class Dataset{
     if(fields){
       url += '&fields='+encodeURIComponent(fields.join(','))
     }
-    url += '&per_page=5000'
+    if(count){
+      url += '&per_page='+encodeURIComponent(count)
+    }
+    if(start){
+      url += '&start='+encodeURIComponent(start)
+    }
+    console.log(url)
     return (new Request({
         url: url,
         method: 'GET'
