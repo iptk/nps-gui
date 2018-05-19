@@ -27,7 +27,7 @@ class Request{
       payload = {...payload, body: JSON.stringify(this.data)}
     }
     return fetch(srv.uri+this.url, payload)
-      .then(resp => new Response(resp))
+      .then(resp => new Response(resp, this))
       .catch(err => {
         throw new NetworkException({
           msg: "Error retrieving "+this.url+" as "+this.method,
@@ -39,10 +39,11 @@ class Request{
 }
 
 class Response{
-  constructor(response, json){
+  constructor(response, request){
     var jsondata = async () => {
       this.json = await response.json()
     }
+    this.request = request
     this.response = response
     jsondata()
     this.statuscode = response.status
