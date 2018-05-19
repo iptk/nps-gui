@@ -1,16 +1,18 @@
 import React from 'react'
 import {translate} from 'react-i18next'
-import Table, {TableBody, TableHead, TableRow, TableCell} from 'material-ui/Table'
-import List, {ListItem} from 'material-ui/List'
-import TextField from 'material-ui/TextField'
-import MenuItem from 'material-ui/Menu/MenuItem'
-import Collapse from 'material-ui/transitions/Collapse'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
+import Collapse from '@material-ui/core/Collapse'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
 import debounce from 'lodash/debounce'
-
-//        <TableCell key={'__key__'+row.key}>{row.key}</TableCell>
-//        <TableCell key={'__val__'+row.key}>{row.value}</TableCell>
-//        <TableCell key='__head_key'>{t('ObjectTable.key')}</TableCell>
-//        <TableCell key='__head_value'>{t('ObjectTable.value')}</TableCell>
 
 class ObjectTable extends React.Component{
   constructor(props){
@@ -36,14 +38,16 @@ class ObjectTable extends React.Component{
 
   render(){
     var rows = Object.keys(this.state.obj).map((key) => (
-      <ObjectRow key={key} value={this.state.obj[key]}/>
+      <ObjectRow elemkey={key} key={key} elemvalue={this.state.obj[key]}/>
     ))
     return (
       <Table>
         <TableHead>
-          <TableCell>t('ObjectTable.key')</TableCell>
-          <TableCell>t('ObjectTable.value')</TableCell>
-          <TableCell>t('ObjectTable.type')</TableCell>
+          <TableRow>
+            <TableCell>t('ObjectTable.key')</TableCell>
+            <TableCell>t('ObjectTable.value')</TableCell>
+            <TableCell>t('ObjectTable.type')</TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {rows}
@@ -56,18 +60,21 @@ class ObjectTable extends React.Component{
 class _ObjectRow extends React.Component{
   constructor(props){
     super(props)
-    var valText = props.value.toString()
+    var valText = props.elemvalue.toString()
+    var valType = Array.isArray(props.elemvalue)
+      ?'array' :typeof props.elemvalue
     var disabledVal = false
-    if(typeof props.value == 'object' || typeof props.value == 'array'){
-      valText = '('+(typeof props.value)+')'
+
+    if(valType == 'object' || valType == 'array'){
+      valText = `(${valType})`
       disabledVal = true
     }
     this.state = {
-      key: props.key,
-      prevKey: props.key,
-      value: props.value,
-      type: typeof props.value,
-      valField: '',
+      key: props.elemkey,
+      prevKey: props.elemkey,
+      value: props.elemvalue,
+      type: Array.isArray(props.elemvalue) ?'array' :typeof props.elemvalue,
+      valField: valText,
       disabledVal: disabledVal,
       collapsed: true
     }
@@ -89,55 +96,77 @@ class _ObjectRow extends React.Component{
     })
   }
 
-  render(){
-    var {t, key, value} = this.props
-    var valField = <TextField value={this.state.valField} id='select-val'
-      disabled={this.state.disabledVal}
-      onChange={debounce(this.changeValue.bind(this), 600)}
-    />
-    var collapse = <div/>
-
+  generateValueField(){
     if(this.state.type == 'boolean'){
-      valField = <TextField select id='select-val' value={this.state.valField}
-        onChange={this.changeValue.bind(this)}
-      >
-        <MenuItem key='true' value={true}>True</MenuItem>
-        <MenuItem key='false' value={false}>False</MenuItem>
-      </TextField>
-    }
-    else if(this.state.type == 'object'){
-      collapse = (
-        <Collapse in={!this.state.collapsed} timeout='auto'>
-          <ObjectTable obj={this.state.val}
-            onChange={this.changeValue.bind(this)}/>
-        </Collapse>
+      return (
+        <TextField select id='select-val' value={this.state.value}
+          onChange={this.changeValue.bind(this)}
+        >
+          <MenuItem key='true' value={true}>True</MenuItem>
+          <MenuItem key='false' value={false}>False</MenuItem>
+        </TextField>
       )
     }
-    else if(this.state.type == 'array'){
-      collapse = (
-        <Collapse in={!this.state.collapsed} timout='auto'>
-          <ValueList values={this.state.value}/>
-        </Collapse>
-      )
+    else if(this.state.type == 'object' || this.state.type == 'array'){
+      /*return (
+        <React.Fragment>
+          {this.state.valField}
+          {this.state.expanded ?<ExpandLess/> :<ExpandMore/>}
+        </React.Fragment>
+      )*/
     }
     return (
+      <React.Fragment>
+        <TextField value={this.state.valField} id='select-val'
+          disabled={this.state.disabledVal}
+          onChange={debounce(this.changeValue.bind(this), 600)}
+        />
+        {this.state.type == 'object' || this.state.type == 'array'
+          ?(this.state.expanded ?<ExpandLess/> :<ExpandMore/>) :''
+        }
+      </React.Fragment>
+    )
+  }
+
+  generateTypeField(){
+    return (
+      <TextField select id="select-type" value={this.state.type}
+        onChange={this.changeType.bind(this)}
+      >
+        <MenuItem key="array" value="array">Array</MenuItem>
+        <MenuItem key="boolean" value="boolean">Boolean</MenuItem>
+        <MenuItem key="number" value="number">Number</MenuItem>
+        <MenuItem key="object" value="object">Object</MenuItem>
+        <MenuItem key="string" value="string">Text</MenuItem>
+      </TextField>
+    )
+  }
+
+  render(){
+    return (
       <TableRow>
-        <TableCell>{key}</TableCell>
-        <TableCell>{valField}</TableCell>
-        <TableCell>
-          <TextField select id="select-type" value={this.state.type}
-            onChange={this.changeType.bind(this)}
-          >
-            <MenuItem>Array</MenuItem>
-            <MenuItem>Boolean</MenuItem>
-            <MenuItem>Number</MenuItem>
-            <MenuItem>Object</MenuItem>
-            <MenuItem>Text</MenuItem>
-          </TextField>
-        </TableCell>
-        <Collapse in={!this.state.collapsed} timeout='auto'>
-        </Collapse>
+        <TableCell>{this.state.key}</TableCell>
+        <TableCell>{this.generateValueField()}</TableCell>
+        <TableCell>{this.generateTypeField()}</TableCell>
       </TableRow>
+    )
+  }
+}
+
+class _DetailRow extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      expanded: false
+    }
+  }
+
+  render(){
+    return (
+      <Collapse component='tr' in={this.state.expanded} timeout='auto'>
+        <td colspan="3">
+        </td>
+      </Collapse>
     )
   }
 }
@@ -174,7 +203,8 @@ class _ValueList extends React.Component{
   }
 }
 
-const ObjectRow = translate('dome')(_ObjectRow)
+const DetailRow = translate('dom')(_DetailRow)
+const ObjectRow = translate('dom')(_ObjectRow)
 const ValueList = translate('dom')(_ValueList)
 
 export default translate('dom')(ObjectTable)

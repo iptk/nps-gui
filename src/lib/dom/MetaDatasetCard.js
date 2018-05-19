@@ -1,7 +1,9 @@
 import React from 'react'
 import {translate} from 'react-i18next'
-import Card, {CardHeader, CardContent} from 'material-ui/Card'
-import Collapse from 'material-ui/transitions/Collapse'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import Collapse from '@material-ui/core/Collapse'
 
 import ObjectTable from './ObjectTable'
 
@@ -12,14 +14,14 @@ class MetaDatasetCard extends React.Component{
       expanded: true
     }
   }
-  
+
   render(){
     var {metads} = this.props
     return (
       <Card>
         <CardHeader/>
         <Collapse in={this.state.expanded} timeout='auto'>
-          <ObjectTable obj={metads}/>
+          <ObjectTable obj={metads.metadata}/>
         </Collapse>
       </Card>
     )

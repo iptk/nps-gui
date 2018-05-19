@@ -14,6 +14,8 @@ class MetaDataset{
   }
 
   static getAliases(){
+    // tmp until this function does exist again
+    return new Promise(() => ({aliases: {}}))
     return (new Request({
         url: '/v3/metadata/aliases',
         method: 'GET'
@@ -80,13 +82,10 @@ class MetaDataset{
 
   static jsonToMetadataset({id, dataset_id, json, metadata_key}){
     var metadata = metadata_key ?json[metadata_key] :json
-    var meta = Object.keys(metadata).map((key) => (
-      new KeyValueMetadata(key, metadata[key])
-    ))
     return new MetaDataset({
       dataset_id: (metadata_key ?json.dataset_id :null) || dataset_id || "",
       id: (metadata_key ?json.id :null) || id || "",
-      metadata: meta
+      metadata: metadata
     })
   }
 
@@ -94,37 +93,23 @@ class MetaDataset{
     if(key === null){
       return this.metadata
     }
-    for(var m of this.metadata){
-      if(m.key == key){
-        return m
-      }
-    }
-    return null
+    return this.metadata[key]
   }
 
   save(){
     if(!this.dataset_id){
       throw new ExecutionException({msg: "dataset_id is not defined"})
     }
-    var metadata = {}
-    for(var m of this.metadata){
-      metadata[m.key] = m.value
-    }
     return (new Request({
         url: '/v2/datasets/'+this.dataset_id+'/meta/'+this.id,
         method: 'POST',
-        data: metadata
+        data: this.metadata
       }))
       .fetch()
       .then(resp => {
         if(resp.statuscode == 200){
           this.id = resp.json.id
-          var meta = Object.keys(resp.json.metadata).map(
-            (val) => new KeyValueMetadata(
-              val, resp.json.metadata[val]
-            )
-          )
-          this.metadata = meta
+          this.metadata = resp.json.metadata
           return this
         }
         throw new BackendException({
