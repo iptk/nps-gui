@@ -41,7 +41,16 @@ class Request{
 class Response{
   constructor(response, request){
     var jsondata = async () => {
-      this.json = await response.json()
+      try{
+        this.json = await response.json()
+      }
+      catch(err){
+        throw new NetworkException({
+          msg: "Error parsing json for "+request.url+" ["+request.method+"]",
+          data: this,
+          ancestor: err
+        })
+      }
     }
     this.request = request
     this.response = response
