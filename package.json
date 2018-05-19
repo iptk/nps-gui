@@ -6,6 +6,8 @@
     "watch-dev": "webpack --watch --devtool source-map"
   },
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
@@ -21,7 +23,6 @@
     "i18next-browser-languagedetector": "^2.1.0",
     "i18next-xhr-backend": "^1.5.1",
     "lodash": "^4.17.4",
-    "material-ui": "^1.0.0-beta.45",
     "postcss": "^6.0.16",
     "postcss-cssnext": "^3.0.2",
     "postcss-each": "^0.10.0",
