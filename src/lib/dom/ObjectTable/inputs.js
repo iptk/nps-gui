@@ -50,6 +50,7 @@ const _ValueInput = ({type, onChange, value, expanded, onExpand, readonly}) => {
       <TextField value={value} id='select-val'
         onChange={onChange} multiline={type == 'string'}
         disabled={readonly}
+        type={type == 'string' ?'text' :'number'}
       />
     </React.Fragment>
   )

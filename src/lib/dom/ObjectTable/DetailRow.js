@@ -56,7 +56,7 @@ class _DetailRow extends React.Component{
       value: value
     })
     if(this.props.onChange){
-      this.props.onChange(evt.target.value)
+      this.props.onChange(value)
     }
   }
 

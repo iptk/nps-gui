@@ -35,10 +35,14 @@ class _ValueArrayRow extends React.Component{
   }
 
   changeType(evt){
+    var val = castValue(this.state.value, evt.target.value)
     this.setState({
-      value: castValue(this.state.value, evt.target.value),
+      value: val,
       type: evt.target.value
     })
+    if(this.props.onChange){
+      this.props.onchange(val)
+    }
   }
 
   changeDetailValue(value){

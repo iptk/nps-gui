@@ -17,7 +17,6 @@ class _ObjectRow extends React.Component{
 
     this.state = {
       key: props.elemkey,
-      prevKey: props.elemkey,
       value: props.elemvalue,
       type: Array.isArray(props.elemvalue) ?'array' :typeof props.elemvalue,
       expanded: false
@@ -34,36 +33,37 @@ class _ObjectRow extends React.Component{
   }
 
   changeKey(evt){
-    var prevKey = this.state.prevKey
     this.setState({
-      prevKey: this.state.key,
       key: evt.target.value
     })
     if(this.props.onChange){
-      this.props.onChange(prevKey, evt.target.value, this.state.value)
+      this.props.onChange(evt.target.value, this.state.value)
     }
   }
 
   changeType(evt){
+    var val = castValue(this.state.value, evt.target.value)
     this.setState({
-      value: castValue(this.state.value, evt.target.value),
+      value: val,
       type: evt.target.value
     })
+    if(this.props.onChange){
+      this.props.onChange(this.state.key, val)
+    }
   }
 
   changeValue(evt){
-    evt.persist()
     this.setState({
       value: evt.target.value
     })
     if(this.props.onChange){
-      this.props.onChange(this.state.prevKey, this.state.key, evt.target.value)
+      this.props.onChange(this.state.key, evt.target.value)
     }
   }
 
   delete(){
     if(this.props.onRemove){
-      this.props.onRemove(this.state.key)
+      this.props.onRemove()
     }
   }
 

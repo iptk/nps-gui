@@ -15,48 +15,55 @@ class ObjectTable extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      obj: props.obj
+      obj: props.obj,
+      keys: Object.keys(props.obj)
     }
   }
 
   addElement(){
-    var key = 'Key'
-    for(var i = 0;; i++){
-      if(key in this.state.obj){
-        key = 'Key '+i
-        continue
-      }
-      break
-    }
-    var obj = this.state.obj
-    obj[key] = ""
+    var keys = this.state.keys
+    keys.push('')
     this.setState({
-      obj: obj
+      keys: keys
     })
     if(this.props.onChange){
       this.props.onChange(obj)
     }
   }
 
-  changeRow(oldKey, newKey, value){
+  changeRow(keyIdx, newKey, value){
     var obj = this.state.obj
+    var keys = this.state.keys
+    var oldKey = keys[keyIdx]
+
     if(oldKey == newKey){
       obj[oldKey] = value
     }
     else{
       delete obj[oldKey]
       obj[newKey] = value
+      keys[keyIdx] = newKey
     }
+    this.setState({
+      obj: obj,
+      keys: keys
+    })
     if(this.props.onChange){
       this.props.onChange(obj)
     }
   }
 
-  deleteRow(key){
+  deleteRow(idx){
+    var keys = this.state.keys
+    var key = keys[idx]
+    delete keys[idx]
+
     var obj = this.state.obj
     delete obj[key]
+
     this.setState({
-      obj: obj
+      obj: obj,
+      keys: key
     })
   }
 
@@ -68,17 +75,18 @@ class ObjectTable extends React.Component{
 
   render(){
     var {readonly, t} = this.props
-    var rows = Object.keys(this.state.obj).map((key) => (
-      <ObjectRow elemkey={key} key={key} elemvalue={this.state.obj[key]}
-        onRemove={this.deleteRow.bind(this)} readonly={readonly}/>
+    var rows = this.state.keys.map((key, idx) => (
+      <ObjectRow elemkey={key} key={idx} elemvalue={this.state.obj[key]}
+        onRemove={this.deleteRow.bind(this, idx)} readonly={readonly}
+        onChange={this.changeRow.bind(this, idx)}/>
     ))
     return (
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>t('ObjectTable.key')</TableCell>
-            <TableCell>t('ObjectTable.value')</TableCell>
-            <TableCell>t('ObjectTable.type')</TableCell>
+            <TableCell>{t('ObjectTable.key')}</TableCell>
+            <TableCell>{t('ObjectTable.value')}</TableCell>
+            <TableCell>{t('ObjectTable.type')}</TableCell>
             {readonly ?null :<TableCell></TableCell>}
           </TableRow>
         </TableHead>
@@ -94,7 +102,7 @@ class ObjectTable extends React.Component{
                   {t('ObjectTable.add')}
                 </Button>
                 {this.props.onSave
-                  ?<Button onclick={this.save.bind(this)}>
+                  ?<Button onClick={this.save.bind(this)}>
                       <Icon>save</Icon>
                       {t('ObjectTable.save')}
                     </Button>
