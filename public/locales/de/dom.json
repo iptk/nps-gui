@@ -4,7 +4,17 @@
   },
   "ObjectTable":{
     "key": "Schlüssel",
-    "value": "Wert"
+    "value": "Wert",
+    "type": "Typ",
+    "add": "Hinzufügen",
+    "save": "Speichern",
+    "types":{
+      "array": "Liste",
+      "boolean": "Wahrheitswert",
+      "number": "Zahl",
+      "object": "Objekt",
+      "string": "Text"
+    }
   },
   "MetaDatasetCard":{
     "addrow": "Paar hinzufügen",
