@@ -11,15 +11,44 @@ class MetaDatasetCard extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      expanded: true
+      expanded: true,
+      metaset = props.metads
+    }
+  }
+
+  expand(){
+    this.setState({
+      expanded: !this.state.expanded
+    })
+  }
+
+  save(obj){
+    var mds = this.state.metads
+    metads.metadata = obj
+    this.setState({
+      metaset: mds
+    })
+    if(this.props.save){
+      this.props.save(mds)
     }
   }
 
   render(){
-    var {metads} = this.props
+    var {aliases, metads} = this.props
+
+    var alias = aliases[metads.id]
+    var title = alias || metads.id
+    var subtitle = alias ?metads.id :''
+
     return (
       <Card>
-        <CardHeader/>
+        <CardHeader title={title} subtitle={subtitle}
+          action={
+            <IconButton onClick={this.expand.bind(this)}>
+              <Icon>{this.state.expanded ?'expand_less' :'expand_more'}</Icon>
+            </IconButton>
+          }
+        />
         <Collapse in={this.state.expanded} timeout='auto'>
           <ObjectTable obj={metads.metadata}/>
         </Collapse>
