@@ -66,7 +66,7 @@ class SearchDataset extends Page{
   }
 
   render(){
-    const {t} = this.props
+    const {classes, t} = this.props
     return super.render(
       <section>
         <Input type="text" label={t('searchdataset.filter_single')} multiline rows={10}
