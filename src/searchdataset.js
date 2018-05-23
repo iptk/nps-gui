@@ -38,6 +38,7 @@ const _resultNums = translate('page')(connect(
 class SearchDataset extends Page{
   constructor(props){
     super(props, reducer)
+    this.store.dispatch({type: FIELDS_CHANGE, fields: ["PatientsName", "SeriesDescription", "AcquisitionsDate"]})
   }
 
   applyNewFilter(type, val){
@@ -65,7 +66,7 @@ class SearchDataset extends Page{
   }
 
   render(){
-    const {t} = this.props
+    const {classes, t} = this.props
     return super.render(
       <section>
         <Input type="text" label={t('searchdataset.filter_single')} multiline rows={10}
@@ -73,6 +74,7 @@ class SearchDataset extends Page{
         <Input type="text" label={t('searchdataset.filter_global')}
           onChange={debounce(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
         <Input type="text" label={t('searchdataset.fields')}
+          placeholder="PatientsName,SeriesDescription,AcquisitionsDate"
           onChange={debounce(this.applyFields.bind(this), 600)}/>
         <section>
           <Input type="number" label={t('searchdataset.resultcount')}

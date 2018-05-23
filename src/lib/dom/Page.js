@@ -6,6 +6,30 @@ import {translate} from 'react-i18next'
 
 import commonReducer from '../reducers/_common'
 
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const styles = (theme) => ({
+  tableProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12
+  }
+})
+
+const _loadingIcon = connect(
+  (state) => ({loading: state.c.loading})
+)(
+  withStyles(styles)(({classes, loading}) => {
+    if(loading){
+      return <CircularProgress size={24} className={classes.tableProgress}/>
+    }
+    return null
+  })
+)
+
 class Page extends React.Component{
   constructor(props, reducer){
     super(props)
@@ -24,6 +48,7 @@ class Page extends React.Component{
       <Provider store={this.store}>
         <div>
           {children}
+          <_loadingIcon/>
         </div>
       </Provider>
     )

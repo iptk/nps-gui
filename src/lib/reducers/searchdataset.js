@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux'
 
 import {
-  START_LOADING,
   FILTER_GLOBAL_CHANGE,
   FILTER_SINGLE_CHANGE,
   RECEIVE_DATASET,
@@ -63,19 +62,6 @@ const filterReducer = (state = initFilter, action) => {
   }
 }
 
-const loaderReducer = (state = false, action) => {
-  switch(action.type){
-    case START_LOADING:
-      return true
-
-    case RECEIVE_DATASET:
-      return false
-
-    default:
-      return state
-  }
-}
-
 const datasetReducer = (state = [], action) => {
   switch(action.type){
     case RECEIVE_DATASET:
@@ -88,6 +74,5 @@ const datasetReducer = (state = [], action) => {
 
 export default combineReducers({
   filter: filterReducer,
-  loading: loaderReducer,
   dataset: datasetReducer
 })
