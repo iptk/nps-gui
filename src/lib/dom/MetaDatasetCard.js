@@ -12,7 +12,7 @@ class MetaDatasetCard extends React.Component{
     super(props)
     this.state = {
       expanded: true,
-      metaset = props.metads
+      metaset: props.metads
     }
   }
 
