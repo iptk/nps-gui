@@ -14,6 +14,8 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
 
+import {changePage} from '../util'
+
 const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -45,13 +47,13 @@ class BaseLayout extends React.Component {
       <div>
         <div className={classes.toolbar}/>
         <List>
-          <ListItem onClick={this.changePage.bind(this, '/')} button>
+          <ListItem onClick={()=>{changePage('/')}} button>
             <ListItemText primary={t('navigation.home')}/>
           </ListItem>
-          <ListItem onClick={this.changePage.bind(this, '/search')} button>
+          <ListItem onClick={()=>{changePage('/search')}} button>
             <ListItemText primary={t('navigation.searchdataset')}/>
           </ListItem>
-          <ListItem onClick={this.changePage.bind(this, '/metadata/collections')} button>
+          <ListItem onClick={()=>{changePage('/metadata/collections')}} button>
             <ListItemText primary={t('navigation.metadatasetcollections')}/>
           </ListItem>
         </List>
