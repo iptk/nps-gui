@@ -6,8 +6,8 @@ import {translate} from 'react-i18next'
 
 import commonReducer from '../reducers/_common'
 
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = (theme) => ({
   tableProgress: {
