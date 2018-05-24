@@ -1,7 +1,15 @@
 import React from 'react'
-import {Button, Table, TableHead, TableRow, TableCell} from 'react-toolbox'
 
-import {Dataset} from '../api/dataset.js'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+
+import {Dataset} from '../api/dataset'
+import {changePage} from '../util'
 
 const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
   keys = ['ID', ...keys]
@@ -28,10 +36,18 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
     // edit + download button
     var btns = []
     if(editBtn){
-      btns.push(<Button href={"/dataset/"+ds.id} icon="create" flat/>)
+      btns.push(
+        <Button onClick={()=>{changePage('/dataset/'+ds.id)}}>
+          <Icon>create</Icon>
+        </Button>
+      )
     }
     if(dlBtn){
-      btns.push(<Button href={ds.getDownloadURL()} icon="file_download" flat/>)
+      btns.push(
+        <Button href={ds.getDownloadURL()}>
+          <Icon>file_download</Icon>
+        </Button>
+      )
     }
     if(btns.length > 0){
       cells.push(<TableCell key='__btns'>{btns}</TableCell>)
@@ -44,15 +60,19 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
       </TableRow>
     )
   }
-  return (<Table
-    heading="true"
-  >
-    <TableHead key="__head">
-      {keys.map((item, index) => (<TableCell key={item}>{item}</TableCell>))}
-      {editBtn ?<TableCell key="__edit"></TableCell> :""}
-    </TableHead>
-    {rows}
-  </Table>)
+  return (
+    <Table>
+      <TableHead key="__head">
+        <TableRow>
+          {keys.map((item, index) => (<TableCell key={item}>{item}</TableCell>))}
+          {editBtn ?<TableCell key="__edit"></TableCell> :""}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows}
+      </TableBody>
+    </Table>
+  )
 }
 
 export default DatasetTable

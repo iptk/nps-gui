@@ -3,7 +3,11 @@ import 'babel-polyfill' // for cross-fetch
 import React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {Button, Card, CardTitle} from 'react-toolbox'
+
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import Icon from '@material-ui/core/Icon'
 
 import {fetchCollections} from './lib/actions/metadatacollections'
 import reducer from './lib/reducers/metadatacollections'
@@ -15,9 +19,9 @@ const _subCardTitle = translate('pages')(connect(
   (state) => ({count: state.s.total})
 )(
   ({count, t}) => (
-    <CardTitle
+    <CardHeader
       title={t('metadatacollections.title')}
-      subtitle={t('metadatacollections.count')+': '+count}
+      subheader={t('metadatacollections.count')+': '+count}
     />
   )
 ))
@@ -53,11 +57,10 @@ class MetadataCollections extends Page{
       <section>
         <Card>
           <_subCardTitle/>
-          <Button
-            onMouseUp={this.loadCollections.bind(this)}
-            label={t('metadatacollections.reload')}
-            icon='update' flat
-          />
+          <Button onClick={this.loadCollections.bind(this)}>
+            <Icon>update</Icon>
+            {t('metadatacollections.reload')}
+          </Button>
         </Card>
         <br/>
         <_collectionCards/>

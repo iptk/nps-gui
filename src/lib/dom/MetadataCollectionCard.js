@@ -1,12 +1,14 @@
 import React from 'react'
-import {Card, CardTitle} from 'react-toolbox'
+
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
 
 import ObjectTable from './ObjectTable'
 
 const MetadataCollectionCard = ({collection}) => (
   <Card>
-    <CardTitle title={collection.name} subtitle={collection.identifier}/>
-    <ObjectTable object={collection}/>
+    <CardHeader title={collection.name} subheader={collection.identifier}/>
+    <ObjectTable obj={collection} readonly={true}/>
   </Card>
 )
 
