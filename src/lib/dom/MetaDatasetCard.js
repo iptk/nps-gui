@@ -39,7 +39,6 @@ class MetaDatasetCard extends React.Component{
   selectID(selection){
     var mds = this.state.metaset
     mds.id = selection.value
-    console.log(mds)
     this.setState({
       metaset: mds
     })
@@ -51,11 +50,6 @@ class MetaDatasetCard extends React.Component{
     var alias = aliases[metads.id]
     var title = alias || metads.id
     var subtitle = alias ?metads.id :''
-    aliases = {
-      "qwe": "asdf",
-      "rew": "dfs",
-      "ttt": "gfd"
-    }
 
     return (
       <Card>

@@ -100,7 +100,7 @@ class Dataset{
     if(start){
       url += '&start='+encodeURIComponent(start)
     }
-    console.log(url)
+    
     return (new Request({
         url: url,
         method: 'GET'

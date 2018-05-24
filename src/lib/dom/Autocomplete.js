@@ -72,7 +72,6 @@ class Autocomplete extends React.Component{
   }
 
   onSelect(selection){
-    console.log(selection)
     if(this.props.onSelect){
       this.props.onSelect(selection)
     }
