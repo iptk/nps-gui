@@ -16,7 +16,7 @@ class ObjectTable extends React.Component{
     super(props)
     this.state = {
       obj: props.obj,
-      keys: Object.keys(props.obj)
+      keys: Object.keys(props.obj) || []
     }
   }
 
@@ -63,7 +63,7 @@ class ObjectTable extends React.Component{
 
     this.setState({
       obj: obj,
-      keys: key
+      keys: keys
     })
   }
 

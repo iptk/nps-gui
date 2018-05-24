@@ -1,6 +1,9 @@
 import debounce from 'lodash/debounce'
 
 const castValue = (value, type) => {
+  if(value === null || value === undefined){
+    value = ''
+  }
   var curType = typeof value
   var primitive = curType != 'object'
   if(Array.isArray(value)){
