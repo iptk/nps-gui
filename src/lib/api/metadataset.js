@@ -5,6 +5,7 @@ import {
   ExecutionException,
   InvalidArgumentException
 } from './exceptions'
+import {generateID} from './util'
 
 class MetaDataset{
   constructor({dataset_id = "", id="", metadata = []}){
@@ -99,6 +100,11 @@ class MetaDataset{
   save(){
     if(!this.dataset_id){
       throw new ExecutionException({msg: "dataset_id is not defined"})
+    }
+
+    // generate a random id
+    if(!this.id){
+      this.id = generateID(40)
     }
     return (new Request({
         url: '/v3/datasets/'+this.dataset_id+'/meta/'+this.id,
