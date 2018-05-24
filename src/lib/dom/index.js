@@ -1,3 +1,4 @@
+import Autocomplete from './Autocomplete'
 import BaseLayout from './BaseLayout'
 import DatasetFilesCard from './DatasetFilesCard'
 import DatasetTable from './DatasetTable'
@@ -9,6 +10,7 @@ import Page from './Page'
 import QueryList from './QueryList'
 
 export {
+  Autocomplete,
   BaseLayout,
   DatasetFilesCard,
   DatasetTable,
