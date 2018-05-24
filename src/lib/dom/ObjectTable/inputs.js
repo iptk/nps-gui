@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 
 const KeyInput = ({onChange, readonly, value}) => (
   <TextField value={value} id='select-key' onChange={onChange}
-    readonly={readonly}/>
+    readOnly={readonly}/>
 )
 
 const _TypeInput = ({type, onChange, readonly, t}) => (
@@ -49,7 +49,7 @@ const _ValueInput = ({type, onChange, value, expanded, onExpand, readonly}) => {
     <React.Fragment>
       <TextField value={value} id='select-val'
         onChange={onChange} multiline={type == 'string'}
-        disabled={readonly}
+        readOnly={readonly}
         type={type == 'string' ?'text' :'number'}
       />
     </React.Fragment>
