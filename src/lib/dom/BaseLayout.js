@@ -1,54 +1,110 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {AppBar, IconButton, Layout, List, ListItem, NavDrawer, Panel, Sidebar} from 'react-toolbox'
 import {translate} from 'react-i18next'
 
+import AppBar from '@material-ui/core/AppBar'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import Icon from '@material-ui/core/Icon'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import {withStyles} from '@material-ui/core/styles'
+
+const styles = theme => ({
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  toolbar: theme.mixins.toolbar
+})
+
 class BaseLayout extends React.Component {
-  state = {
-    drawerActive: false,
-    drawerPinned: false,
-    sidebarPinned: false
+  constructor(props){
+    super(props)
+    this.state = {
+      open: false
+    }
   }
 
-  toggleDrawerActive = () => {
-    this.setState({ drawerActive: !this.state.drawerActive })
+  changePage(url){
+    this.props.history.push(url)
   }
 
-  toggleDrawerPinned = () => {
-    this.setState({ drawerPinned: !this.state.drawerPinned })
-  }
-
-  toggleSidebar = () => {
-    this.setState({ sidebarPinned: !this.state.sidebarPinned })
+  toggleDrawer = () => {
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   render() {
-    const {t} = this.props
+    const {classes, t} = this.props
+    const drawer = (
+      <div>
+        <div className={classes.toolbar}/>
+        <List>
+          <ListItem onClick={this.changePage.bind(this, '/')} button>
+            <ListItemText primary={t('navigation.home')}/>
+          </ListItem>
+          <ListItem onClick={this.changePage.bind(this, '/search')} button>
+            <ListItemText primary={t('navigation.searchdataset')}/>
+          </ListItem>
+          <ListItem onClick={this.changePage.bind(this, '/metadata/collections')} button>
+            <ListItemText primary={t('navigation.metadatasetcollections')}/>
+          </ListItem>
+        </List>
+      </div>
+    )
     return (
-      <Layout>
-        <NavDrawer active={this.state.drawerActive}
-          pinned={this.state.drawerPinned} permanentAt='xxxl'
-          onOverlayClick={ this.toggleDrawerActive }>
-            <List selectable ripple>
-              <ListItem caption={t('navigation.home')} to="/"/>
-              <ListItem caption={t('navigation.searchdataset')} to="/search"/>
-              <ListItem caption={t('navigation.metadatasetcollections')} to="/metadata/collections"/>
-            </List>
-        </NavDrawer>
-        <Panel>
-          <AppBar leftIcon='menu' title='NPS' onLeftIconClick={ this.toggleDrawerActive } />
-          <br/>
+      <div className={classes.root}>
+        <AppBar position="absolute" className={classes.appBar}>
+          <Toolbar>
+            <IconButton onClick={this.toggleDrawer} color="inherit">
+              <Icon>menu</Icon>
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              NPS
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            open={this.state.open}
+            onClose={this.toggleDrawer}
+            ModalProps={{
+              keepMounted: true
+            }}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            classes={{paper: classes.drawerPaper}}
+            open
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <main>
+          <div className={classes.toolbar}/>
           {this.props.children}
-        </Panel>
-        <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>
-          <div><IconButton icon='close' onClick={ this.toggleSidebar }/></div>
-          <div style={{ flex: 1 }}>
-            <p>asdf</p>
-          </div>
-        </Sidebar>
-      </Layout>
+        </main>
+      </div>
     )
   }
 }
 
-export default translate('dom')(BaseLayout)
+export default translate('dom')(
+  withStyles(styles)(BaseLayout)
+)

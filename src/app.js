@@ -14,11 +14,13 @@ import {BaseLayout} from './lib/dom'
 import render_dom_delayed from './lib/dom/render_dom'
 import i18n from './lib/util/i18n'
 
+const history = createBrowserHistory()
+
 NPS.fetchConfiguration(window.location.origin+'/conf/serverlist')
   .then(() => render_dom_delayed(
       <I18nextProvider i18n={i18n}>
-        <Router history={createBrowserHistory()}>
-          <BaseLayout>
+        <Router history={history}>
+          <BaseLayout history={history}>
             <Route exact path="/" component={SearchDataset}/>
             <Route path="/search" component={SearchDataset}/>
             <Route path="/dataset">
