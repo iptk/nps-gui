@@ -1,7 +1,7 @@
 import {Dataset, MetaDataset} from '../api'
+import {START_LOADING, STOP_LOADING} from './_common'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
-  START_LOADING = 'START_LOADING',
   RECEIVE_ALIASES = 'RECEIVE_ALIASES',
   ALIASES_SAVED = 'ALIASES_SAVED',
   METADATA_SAVED = 'METADATA_SAVED',
@@ -9,16 +9,19 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
 
 const deleteMetadata = (dataset, metaid, isNewSet) => {
   return (dispatch) => {
+    dispatch({type: START_LOADING})
     if(isNewSet){
       dataset.removeMetaDataset('__empty')
       dataset.metadatasets = {...dataset.metadatasets}
       dispatch({type: RECEIVE_DATASET, result: dataset})
+      dispatch({type: STOP_LOADING})
     }
     else{
       dataset.deleteMetaDataset(metaid)
         .then(succ => {
           dataset.metadatasets = {...dataset.metadatasets}
           dispatch({type: RECEIVE_DATASET, result: dataset})
+          dispatch({type: STOP_LOADING})
         })
     }
   }
@@ -28,24 +31,35 @@ const fetchDataset = (id) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
     Dataset.getByID(id)
-      .then(ds => dispatch({type: RECEIVE_DATASET, result: ds}))
+      .then(ds => {
+        dispatch({type: RECEIVE_DATASET, result: ds})
+        dispatch({type: STOP_LOADING})
+      })
 
   }
 }
 
 const fetchMetadataAliases = () => {
   return (dispatch) => {
+    dispatch({type: START_LOADING})
     MetaDataset.getAliases()
-      .then(aliases => dispatch({type: RECEIVE_ALIASES, aliases: aliases}))
+      .then(aliases => {
+        dispatch({type: RECEIVE_ALIASES, aliases: aliases})
+        dispatch({type: STOP_LOADING})
+      })
   }
 }
 
 const saveMetadata = (metaset, isNewSet) => {
   return (dispatch) => {
+    dispatch({type: START_LOADING})
     metaset.save()
-      .then(meta => dispatch({
+      .then(meta => {
+        dispatch({
           type: METADATA_SAVED, metadataset: meta, isNewSet: isNewSet
-      }))
+        })
+        dispatch({type: STOP_LOADING})
+      })
   }
 }
 
@@ -55,7 +69,6 @@ export {
   fetchMetadataAliases,
   saveMetadata,
   ADD_EMPTY_METADATASET,
-  START_LOADING,
   RECEIVE_DATASET,
   RECEIVE_ALIASES,
   ALIASES_SAVED,

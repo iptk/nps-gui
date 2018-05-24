@@ -160,7 +160,7 @@ class Dataset{
   async deleteMetaDataset(metaid){
     if(metaid in this.metadatasets){
       return (await new Request({
-          url: '/v2/datasets/'+this.id+'/meta/'+metaid,
+          url: '/v3/datasets/'+this.id+'/meta/'+metaid,
           method: 'Delete'
         }))
         .fetch()

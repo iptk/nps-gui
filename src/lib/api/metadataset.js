@@ -101,7 +101,7 @@ class MetaDataset{
       throw new ExecutionException({msg: "dataset_id is not defined"})
     }
     return (new Request({
-        url: '/v2/datasets/'+this.dataset_id+'/meta/'+this.id,
+        url: '/v3/datasets/'+this.dataset_id+'/meta/'+this.id,
         method: 'POST',
         data: this.metadata
       }))
