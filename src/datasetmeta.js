@@ -3,7 +3,11 @@ import 'babel-polyfill' // for cross-fetch
 import React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
-import {Button, Card, CardTitle, Snackbar} from 'react-toolbox'
+
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import Icon from '@material-ui/core/Icon'
 
 import {
   deleteMetadata,
@@ -32,8 +36,8 @@ const _actionCardTitle = translate('pages')(connect(
   (state) => ({dsid: state.s.dataset.id})
 )(
   ({dsid, t}) => (
-    <CardTitle title={t('datasetmeta.actioncard.title')}
-    subtitle={t('datasetmeta.actioncard.dataset')+': '+dsid}/>
+    <CardHeader title={t('datasetmeta.actioncard.title')}
+    subheader={t('datasetmeta.actioncard.dataset')+': '+dsid}/>
   )
 ))
 
@@ -41,7 +45,10 @@ const _dlBtn = translate('pages')(connect(
   (state) => ({url: state.s.downloadurl})
 )(
   ({url, t}) => (
-    <Button href={url} disabled={url == undefined} icon="file_download" label={t('datasetmeta.actioncard.download')} flat/>
+    <Button href={url} disabled={url == undefined} fullWidth>
+      <Icon>file_download</Icon>
+      {t('datasetmeta.actioncard.download')}
+    </Button>
   )
 ))
 
@@ -84,12 +91,18 @@ class DatasetMeta extends Page{
           <Card>
             <_actionCardTitle/>
             <_dlBtn/>
-            <Button label={t('datasetmeta.actioncard.reload')} icon='update'
-              onMouseUp={this.fetchDs.bind(this)} flat/>
-            <Button label={t('datasetmeta.actioncard.reloadmaliases')}
-              icon='update' onMouseUp={this.fetchMAliases.bind(this)} flat/>
-            <Button label={t('datasetmeta.actioncard.addmetadataset')}
-              icon='add' onMouseUp={this.addMetaset.bind(this)} flat/>
+            <Button onClick={this.fetchDs.bind(this)} fullWidth>
+              <Icon>update</Icon>
+              {t('datasetmeta.actioncard.reload')}
+            </Button>
+            <Button onClick={this.fetchMAliases.bind(this)} fullWidth>
+              <Icon>update</Icon>
+              {t('datasetmeta.actioncard.reloadmaliases')}
+            </Button>
+            <Button onClick={this.addMetaset.bind(this)} fullWidth>
+              <Icon>add</Icon>
+              {t('datasetmeta.actioncard.addmetadataset')}
+            </Button>
           </Card>
           <br/>
         </section>
