@@ -71,34 +71,20 @@ class BaseLayout extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Hidden mdUp>
-          <Drawer
-            variant="temporary"
-            open={this.state.open}
-            onClose={this.toggleDrawer}
-            ModalProps={{
-              keepMounted: true
-            }}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden smDown implementation="css">
-          <Drawer
-            variant="permanent"
-            classes={{paper: classes.drawerPaper}}
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <main>
+        <Drawer
+          variant="temporary"
+          open={this.state.open}
+          onClose={this.toggleDrawer}
+          ModalProps={{
+            keepMounted: true
+          }}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <main className={classes.content}>
           <div className={classes.toolbar}/>
           {this.props.children}
         </main>
