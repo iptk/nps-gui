@@ -41,7 +41,7 @@ const _resultNums = translate('page')(connect(
 class SearchDataset extends Page{
   constructor(props){
     super(props, reducer)
-    this.store.dispatch({type: FIELDS_CHANGE, fields: ["PatientsName", "SeriesDescription", "AcquisitionDate", "SeriesDate"]})
+    this.store.dispatch({type: FIELDS_CHANGE, fields: ["PatientName", "SeriesDescription", "AcquisitionDate", "SeriesDate"]})
   }
 
   applyNewFilter(type, target){
@@ -80,7 +80,7 @@ class SearchDataset extends Page{
           onChange={debounceWrapper(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
         <TextField type="text" label={t('searchdataset.fields')}
           fullWidth margin='normal'
-          defaultValue="PatientsName,SeriesDescription,AcquisitionDate,SeriesDate"
+          defaultValue="PatientName,SeriesDescription,AcquisitionDate,SeriesDate"
           onChange={debounceWrapper(this.applyFields.bind(this), 600)}/>
         <br/>
         <section>
