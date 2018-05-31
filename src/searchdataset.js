@@ -29,7 +29,7 @@ const _subscribedQueryList = connect(
   }
 )(QueryList)
 
-const _resultNums = translate('page')(connect(
+const _resultNums = translate('pages')(connect(
   (state) => ({
     start: state.s.filter.start,
     end: state.s.filter.start + state.s.dataset.length
