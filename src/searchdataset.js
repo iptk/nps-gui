@@ -4,6 +4,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {translate} from 'react-i18next'
 
+import {Link} from 'react-router-dom'
+
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import TextField from '@material-ui/core/TextField'
@@ -36,6 +38,24 @@ const _resultNums = translate('pages')(connect(
   })
 )(
   ({end, start, t}) => (<p>{t('searchdataset.results')} {start} - {end}</p>)
+))
+
+const _directDSLinks = translate('pages')(connect(
+  (state) => ({ids: state.s.filter.recognizedIDs})
+)(
+  ({ids, t}) => {
+    if(ids.length === 0){
+      return null
+    }
+    return (
+      <p>
+        {t('searchdataset.jumptods')}
+        {ids.map((id) => (
+          <Button component={Link} to={'/dataset/'+id}>{id}</Button>
+        ))}
+      </p>
+    )
+  }
 ))
 
 class SearchDataset extends Page{
@@ -88,6 +108,7 @@ class SearchDataset extends Page{
             fullWidth margin='normal'
             onChange={debounceWrapper(this.changeCount.bind(this), 600)}
             defaultValue="10"/>
+          <_directDSLinks/>
           <Button onClick={this.changeStart.bind(this, false)} variant='flat'>
             <Icon>chevron_left</Icon>
             {t('searchdataset.pagebackwards')}
