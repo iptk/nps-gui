@@ -6,13 +6,15 @@ import {
   RECEIVE_DATASET,
   FIELDS_CHANGE,
   START_CHANGE,
-  COUNT_CHANGE
+  COUNT_CHANGE,
+  RECOGNIZE_IDS
 } from '../actions/searchdataset'
 
 const initFilter = {
   single: [],
   global: [],
   fields: [],
+  recognizedIDs: [],
   count: 10,
   start: 0
 }
@@ -55,6 +57,12 @@ const filterReducer = (state = initFilter, action) => {
       return {
         ...state,
         start: start
+      }
+
+    case RECOGNIZE_IDS:
+      return {
+        ...state,
+        recognizedIDs: action.ids
       }
 
     default:

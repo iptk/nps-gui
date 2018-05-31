@@ -18,6 +18,7 @@
     "filter_single": "Filter",
     "filter_global": "Global filter",
     "fields": "Fields",
+    "jumptods": "Jump to dataset:",
     "pagebackwards": "Page backwards",
     "pageforwards": "Page forwards",
     "resultcount": "Number of results",
