@@ -84,7 +84,7 @@ class BaseLayout extends React.Component {
         >
           {drawer}
         </Drawer>
-        <main className={classes.content}>
+        <main>
           <div className={classes.toolbar}/>
           {this.props.children}
         </main>
