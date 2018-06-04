@@ -7,10 +7,11 @@ const publicPath = path.resolve(__dirname, '..', 'public')
 const confPath = path.resolve(__dirname, '..', 'conf')
 
 // serve config
-app.get('/conf/serverlist', function(req, res){
-  var srvPath = path.resolve(confPath, 'srvlist.json')
+app.get('/conf/:name', function(req, res){
+  var name = req.params.name
+  var srvPath = path.resolve(confPath, name+'.json')
   if(!fs.existsSync(srvPath)){
-    srvPath = path.resolve(confPath, 'srvlist.default.json')
+    srvPath = path.resolve(confPath, name+'.default.json')
   }
   res.sendFile(srvPath)
 })
