@@ -84,7 +84,7 @@ class _DetailRow extends React.Component{
 
   render(){
     var {expanded, readonly, t} = this.props
-    content = null
+    var content = null
     if(this.state.type == 'array'){
       content = (
         <Table>
