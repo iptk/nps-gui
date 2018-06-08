@@ -1,20 +1,20 @@
 import {START_LOADING, STOP_LOADING} from '../actions/_common'
 
 const init = {
-  loading: false
+  loading: 0
 }
 const commonReducer = (state=init, action) => {
   switch(action.type){
     case START_LOADING:
       return {
         ...state,
-        loading: true
+        loading: state.loading < 0 ?1 :state.loading+1
       }
 
     case STOP_LOADING:
       return {
         ...state,
-        loading: false
+        loading: state.loading > 0 ?state.loading-1 :0
       }
     default:
       return state

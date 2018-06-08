@@ -23,7 +23,7 @@ const _loadingIcon = connect(
   (state) => ({loading: state.c.loading})
 )(
   withStyles(styles)(({classes, loading}) => {
-    if(loading){
+    if(loading > 0){
       return <CircularProgress size={24} className={classes.tableProgress}/>
     }
     return null
