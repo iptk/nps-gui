@@ -37,14 +37,14 @@ const DatasetTable = ({datasets, keys = [], editBtn=false, dlBtn=false}) => {
     var btns = []
     if(editBtn){
       btns.push(
-        <Button onClick={()=>{changePage('/dataset/'+ds.id)}}>
+        <Button key='__btnedit' onClick={()=>{changePage('/dataset/'+ds.id)}}>
           <Icon>create</Icon>
         </Button>
       )
     }
     if(dlBtn){
       btns.push(
-        <Button href={ds.getDownloadURL()}>
+        <Button key='__btndl' href={ds.getDownloadURL()}>
           <Icon>file_download</Icon>
         </Button>
       )
