@@ -22,6 +22,7 @@ const filterReducer = (state = initFilter, action) => {
   switch(action.type){
     case FILTER_SINGLE_CHANGE:
       var filter = action.filter.split('\n')
+      filter = filter.filter(line => line.length > 0)
       filter.forEach(
         // cut trailing and leading whitespaces, shrink multiple ws to single
         (o,i,a) => a[i] = o.trim().replace(/ +(?= )/g,'').split(' ')
