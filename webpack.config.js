@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const VersionFile = require('webpack-version-file')
 
 jspath = path.resolve(__dirname, 'src')
 
@@ -46,6 +47,11 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
+    }),
+    new VersionFile({
+      output: './public/version',
+      package: './package.json',
+      template: './versiontemplate.ejs'
     })
   ]
 }
