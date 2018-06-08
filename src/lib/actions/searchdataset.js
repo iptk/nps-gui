@@ -24,7 +24,16 @@ const fetchDataset = (filter) => {
       }
       filters.push(filter.global.concat(f))
     }
+
     dispatch({type: RECOGNIZE_IDS, ids: ids})
+
+    // Don't ask the api without a query
+    if(filters.length === 0){
+      dispatch({type: RECEIVE_DATASET, result: []})
+      dispatch({type: STOP_LOADING})
+      return
+    }
+
     Dataset.search(filters, filter.fields, filter.start, filter.count)
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
