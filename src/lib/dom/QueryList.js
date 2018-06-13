@@ -25,7 +25,7 @@ const QueryList = ({classes, queryVals, t}) => {
     )
   })
   return (
-    <List subheader={<ListSubheader>{t('QueryList.queries')}</ListSubheader>} fullWidth>
+    <List subheader={<ListSubheader>{t('QueryList.queries')}</ListSubheader>}>
       {items}
     </List>
   )
