@@ -2,4 +2,5 @@ conf/*
 !conf/*.default.json
 node_modules/
 public/bundle/
+public/version
 yarn-error.log
