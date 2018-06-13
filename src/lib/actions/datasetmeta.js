@@ -7,10 +7,10 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
   METADATA_SAVED = 'METADATA_SAVED',
   ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
 
-const deleteMetadata = (dataset, metaid, isNewSet) => {
+const deleteMetadata = (dataset, metaid) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
-    if(isNewSet){
+    if(metaid === ''){
       dataset.removeMetaDataset('__empty')
       dataset.metadatasets = {...dataset.metadatasets}
       dispatch({type: RECEIVE_DATASET, result: dataset})

@@ -44,8 +44,14 @@ class MetaDatasetCard extends React.Component{
     })
   }
 
+  deleteMds(){
+    if(this.props.onDelete){
+      this.props.onDelete(this.props.metads.id)
+    }
+  }
+
   render(){
-    var {aliases, metads, onSave} = this.props
+    var {aliases, metads, onSave, onDelete} = this.props
 
     var alias = aliases[metads.id]
     var title = alias || metads.id
@@ -74,7 +80,9 @@ class MetaDatasetCard extends React.Component{
           </CardContent>
         }
         <Collapse in={this.state.expanded} timeout='auto'>
-          <ObjectTable obj={metads.metadata} onSave={onSave}/>
+          <ObjectTable obj={metads.metadata} onSave={this.save.bind(this)}
+            onDelete={this.props.onDelete ?this.deleteMds.bind(this) :null}
+          />
         </Collapse>
       </Card>
     )

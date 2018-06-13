@@ -79,7 +79,7 @@ class DatasetMeta extends Page{
 
   deleteMetaset(meta, isNewSet){
     this.store.dispatch(deleteMetadata(
-      this.store.getState().s.dataset, meta.id, isNewSet
+      this.store.getState().s.dataset, meta.id
     ))
   }
 

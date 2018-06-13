@@ -8,6 +8,7 @@
     "type": "Type",
     "add": "Add",
     "save": "Save",
+    "delete": "Delete",
     "types":{
       "array": "Array",
       "boolean": "Boolean",

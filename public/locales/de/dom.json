@@ -8,6 +8,7 @@
     "type": "Typ",
     "add": "Hinzufügen",
     "save": "Speichern",
+    "delete": "Löschen",
     "types":{
       "array": "Liste",
       "boolean": "Wahrheitswert",
