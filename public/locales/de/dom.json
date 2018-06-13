@@ -18,14 +18,8 @@
     }
   },
   "MetaDatasetCard":{
-    "addrow": "Paar hinzufügen",
     "chooseid": "ID wählen",
-    "deletedataset": "Metadatensatz löschen",
-    "deleteselected": "Ausgewählte Elemente löschen",
-    "generatenewid": "(Leer lassen für zufällige ID)",
-    "key": "Schlüssel",
-    "save": "Speichern",
-    "value": "Wert"
+    "generatenewid": "(Leer lassen für zufällige ID)"
   },
   "Page":{
     "error":{
