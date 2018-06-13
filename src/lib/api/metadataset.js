@@ -16,7 +16,7 @@ class MetaDataset{
 
   static getAliases(){
     // tmp until this function does exist again
-    return new Promise(() => ({aliases: {}}))
+    return new Promise((resolve, reject) => {resolve({aliases: {}})})
     return (new Request({
         url: '/v3/metadata/aliases',
         method: 'GET'

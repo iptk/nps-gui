@@ -7,12 +7,12 @@ import TextField from '@material-ui/core/TextField'
 
 const KeyInput = ({onChange, readonly, value}) => (
   <TextField value={value} id='select-key' onChange={onChange}
-    readOnly={readonly}/>
+    readOnly={readonly} fullWidth/>
 )
 
 const _TypeInput = ({type, onChange, readonly, t}) => (
   <TextField select id="select-type" value={type}
-    onChange={onChange} disabled={readonly}
+    onChange={onChange} disabled={readonly} fullWidth
   >
     <MenuItem key="array" value="array">{t('ObjectTable.types.array')}</MenuItem>
     <MenuItem key="boolean" value="boolean">{t('ObjectTable.types.boolean')}</MenuItem>
@@ -26,7 +26,7 @@ const _ValueInput = ({type, onChange, value, expanded, onExpand, readonly}) => {
   if(type == 'boolean'){
     return (
       <TextField select id='select-val' value={value}
-        onChange={onChange} disabled={readonly}
+        onChange={onChange} disabled={readonly} fullWidth
       >
         <MenuItem key='true' value={true}>True</MenuItem>
         <MenuItem key='false' value={false}>False</MenuItem>
@@ -49,7 +49,7 @@ const _ValueInput = ({type, onChange, value, expanded, onExpand, readonly}) => {
     <React.Fragment>
       <TextField value={value} id='select-val'
         onChange={onChange} multiline={type == 'string'}
-        readOnly={readonly}
+        readOnly={readonly} fullWidth
         type={type == 'string' ?'text' :'number'}
       />
     </React.Fragment>
