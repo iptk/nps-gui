@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Autocomplete from './Autocomplete'
 import ObjectTable from './ObjectTable'
 
-class MetaDatasetCard extends React.Component{
+class _MetaDatasetCard extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -51,7 +51,7 @@ class MetaDatasetCard extends React.Component{
   }
 
   render(){
-    var {aliases, metads, onSave, onDelete} = this.props
+    var {aliases, metads, onSave, onDelete, t} = this.props
 
     var alias = aliases[metads.id]
     var title = alias || metads.id
@@ -70,7 +70,7 @@ class MetaDatasetCard extends React.Component{
           :<CardContent>
             <Autocomplete
               suggestions={aliases}
-              label='Chooooooooose'
+              label={t('MetaDatasetCard.chooseid')+' '+t('MetaDatasetCard.generatenewid')}
               sugCount='5'
               onSelect={this.selectID.bind(this)}
             />
@@ -88,6 +88,8 @@ class MetaDatasetCard extends React.Component{
     )
   }
 }
+
+const MetaDatasetCard = translate('dom')(_MetaDatasetCard)
 
 export default MetaDatasetCard
 export {MetaDatasetCard}
