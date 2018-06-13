@@ -31,8 +31,8 @@ class MetaDatasetCard extends React.Component{
     this.setState({
       metaset: mds
     })
-    if(this.props.save){
-      this.props.save(mds)
+    if(this.props.onSave){
+      this.props.onSave(mds)
     }
   }
 

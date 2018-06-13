@@ -56,9 +56,10 @@ const fetchMetadataAliases = () => {
   }
 }
 
-const saveMetadata = (metaset, isNewSet) => {
+const saveMetadata = (metaset) => {
   return (dispatch) => {
     dispatch({type: START_LOADING})
+    var isNewSet = metaset.id === ''
     metaset.save()
       .then(meta => {
         dispatch({
