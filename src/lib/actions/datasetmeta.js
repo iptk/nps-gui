@@ -21,6 +21,8 @@ const deleteMetadata = (dataset, metaid, isNewSet) => {
         .then(succ => {
           dataset.metadatasets = {...dataset.metadatasets}
           dispatch({type: RECEIVE_DATASET, result: dataset})
+        })
+        .finally(() => {
           dispatch({type: STOP_LOADING})
         })
     }
@@ -33,6 +35,8 @@ const fetchDataset = (id) => {
     Dataset.getByID(id)
       .then(ds => {
         dispatch({type: RECEIVE_DATASET, result: ds})
+      })
+      .finally(() => {
         dispatch({type: STOP_LOADING})
       })
 
@@ -45,6 +49,8 @@ const fetchMetadataAliases = () => {
     MetaDataset.getAliases()
       .then(aliases => {
         dispatch({type: RECEIVE_ALIASES, aliases: aliases})
+      })
+      .finally(() => {
         dispatch({type: STOP_LOADING})
       })
   }
@@ -58,6 +64,8 @@ const saveMetadata = (metaset, isNewSet) => {
         dispatch({
           type: METADATA_SAVED, metadataset: meta, isNewSet: isNewSet
         })
+      })
+      .finally(() => {
         dispatch({type: STOP_LOADING})
       })
   }
