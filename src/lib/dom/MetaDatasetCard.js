@@ -45,7 +45,7 @@ class MetaDatasetCard extends React.Component{
   }
 
   render(){
-    var {aliases, metads} = this.props
+    var {aliases, metads, onSave} = this.props
 
     var alias = aliases[metads.id]
     var title = alias || metads.id
@@ -74,7 +74,7 @@ class MetaDatasetCard extends React.Component{
           </CardContent>
         }
         <Collapse in={this.state.expanded} timeout='auto'>
-          <ObjectTable obj={metads.metadata}/>
+          <ObjectTable obj={metads.metadata} onSave={onSave}/>
         </Collapse>
       </Card>
     )
