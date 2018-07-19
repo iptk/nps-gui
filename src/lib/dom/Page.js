@@ -20,7 +20,7 @@ const styles = (theme) => ({
 })
 
 const _loadingIcon = connect(
-  (state) => ({loading: state.c.loading})
+  (state) => ({loading: state.g.loading})
 )(
   withStyles(styles)(({classes, loading}) => {
     if(loading > 0){
@@ -34,8 +34,8 @@ class Page extends React.Component{
   constructor(props, reducer){
     super(props)
     var mergedReducer = combineReducers({
-      s: reducer,       // s: _specific_ for the page
-      c: commonReducer  // c: _common_ for every page
+      l: reducer,       // l: _local_ for the page
+      g: commonReducer  // g: _global_ for every page
     })
     this.store = createStore(
       mergedReducer,

@@ -21,19 +21,19 @@ import reducer from './lib/reducers/datasetmeta'
 
 // from lib/dom
 const _subscribedFilesCard = connect(
-  (state) => ({dlbase: state.s.filesbaseurl, files: state.s.dataset.files})
+  (state) => ({dlbase: state.l.filesbaseurl, files: state.l.dataset.files})
 )(DatasetFilesCard)
 
 const _subscribedMDColl = connect(
   (state) => ({
-    metadatasets: state.s.dataset.metadatasets,
-    aliases: state.s.maliases.aliases
+    metadatasets: state.l.dataset.metadatasets,
+    aliases: state.l.maliases.aliases
   })
 )(MetaDatasetCardCollection)
 
 // locally defined
 const _actionCardTitle = translate('pages')(connect(
-  (state) => ({dsid: state.s.dataset.id})
+  (state) => ({dsid: state.l.dataset.id})
 )(
   ({dsid, t}) => (
     <CardHeader title={t('datasetmeta.actioncard.title')}
@@ -42,7 +42,7 @@ const _actionCardTitle = translate('pages')(connect(
 ))
 
 const _dlBtn = translate('pages')(connect(
-  (state) => ({url: state.s.downloadurl})
+  (state) => ({url: state.l.downloadurl})
 )(
   ({url, t}) => (
     <Button href={url} disabled={url == undefined} fullWidth>
@@ -79,7 +79,7 @@ class DatasetMeta extends Page{
 
   deleteMetaset(meta, isNewSet){
     this.store.dispatch(deleteMetadata(
-      this.store.getState().s.dataset, meta.id, isNewSet
+      this.store.getState().l.dataset, meta.id, isNewSet
     ))
   }
 
