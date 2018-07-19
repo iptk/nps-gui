@@ -33,7 +33,7 @@ class DatasetCompare extends Page{
     const {t} = this.props
     return super.render(
       <div>
-        <_dlListCard onDelete={this.removeDs.bind(this)}/>
+        <_dsListCard onDelete={this.removeDs.bind(this)}/>
       </div>
     )
   }
