@@ -1,5 +1,6 @@
 import Autocomplete from './Autocomplete'
 import BaseLayout from './BaseLayout'
+import CollapsableCard from './CollapsableCard'
 import DatasetFilesCard from './DatasetFilesCard'
 import DatasetListCard from './DatasetListCard'
 import DatasetTable from './DatasetTable'

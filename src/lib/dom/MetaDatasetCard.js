@@ -8,21 +8,17 @@ import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 
 import Autocomplete from './Autocomplete'
+import CollapsableCard from './CollapsableCard'
 import ObjectTable from './ObjectTable'
 
-class MetaDatasetCard extends React.Component{
+class MetaDatasetCard extends CollapsableCard{
   constructor(props){
     super(props)
     this.state = {
+      ...this.state,
       expanded: false,
       metaset: props.metads
     }
-  }
-
-  expand(){
-    this.setState({
-      expanded: !this.state.expanded
-    })
   }
 
   save(obj){
@@ -51,32 +47,16 @@ class MetaDatasetCard extends React.Component{
     var title = alias || metads.id
     var subtitle = alias ?metads.id :''
 
-    return (
-      <Card>
-        {title
-          ?<CardHeader title={title} subtitle={subtitle}
-            action={
-              <IconButton onClick={this.expand.bind(this)}>
-                <Icon>{this.state.expanded ?'expand_less' :'expand_more'}</Icon>
-              </IconButton>
-            }
-          />
-          :<CardContent>
-            <Autocomplete
-              suggestions={aliases}
-              label='Chooooooooose'
-              sugCount='5'
-              onSelect={this.selectID.bind(this)}
-            />
-            <IconButton onClick={this.expand.bind(this)}>
-              <Icon>{this.state.expanded ?'expand_less' :'expand_more'}</Icon>
-            </IconButton>
-          </CardContent>
-        }
-        <Collapse in={this.state.expanded} timeout='auto'>
-          <ObjectTable obj={metads.metadata} onSave={onSave}/>
-        </Collapse>
-      </Card>
+    return super.render(
+      title
+        ? [title, subtitle]
+        : <Autocomplete
+            suggestions={aliases}
+            label='Chooooooooose'
+            sugCount='5'
+            onSelect={this.selectID.bind(this)}
+          />,
+      <ObjectTable obj={metads.metadata} onSave={onSave}/>
     )
   }
 }

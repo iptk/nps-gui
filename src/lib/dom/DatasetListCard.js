@@ -11,19 +11,9 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 
-class DatasetListCard extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      expanded: false
-    }
-  }
+import CollapsableCard from './CollapsableCard'
 
-  expand(){
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
+class DatasetListCard extends CollapsableCard{
   render(){
     var {dsids, onDelete, t} = this.props
     var rows = dsids.map((id) => (
@@ -36,21 +26,12 @@ class DatasetListCard extends React.Component{
         </ListItemSecondaryAction>
       </ListItem>
     ))
-    return (
-      <Card>
-        <CardHeader title={t('DatasetListCard.title')}
-          action={
-            <IconButton onClick={this.expand.bind(this)}>
-              <Icon>{this.state.expanded ?'expand_less' :'expand_more'}</Icon>
-            </IconButton>
-          }
-        />
-        <Collapse in={this.state.expanded} timeout='auto'>
-          <List>
-            {rows}
-          </List>
-        </Collapse>
-      </Card>)
+    return super.render(
+      t('DatasetListCard.title'),
+      <List>
+        {rows}
+      </List>
+    )
   }
 }
 
