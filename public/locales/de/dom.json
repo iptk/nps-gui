@@ -2,6 +2,9 @@
   "DatasetFilesCard":{
     "files": "Dateien"
   },
+  "DatasetListCard":{
+    "title": "Datensätze"
+  },
   "ObjectTable":{
     "key": "Schlüssel",
     "value": "Wert",
@@ -36,6 +39,7 @@
     "queries": "Abfragen"
   },
   "navigation":{
+    "datasetcompare": "Datensätze vergleichen",
     "home": "Home",
     "searchdataset": "Suche",
     "metadatasetcollections": "Metadaten"

@@ -1,6 +1,7 @@
 import Autocomplete from './Autocomplete'
 import BaseLayout from './BaseLayout'
 import DatasetFilesCard from './DatasetFilesCard'
+import DatasetListCard from './DatasetListCard'
 import DatasetTable from './DatasetTable'
 import MetaDatasetCard from './MetaDatasetCard'
 import MetadataCollectionCard from './MetadataCollectionCard'
@@ -13,6 +14,7 @@ export {
   Autocomplete,
   BaseLayout,
   DatasetFilesCard,
+  DatasetListCard,
   DatasetTable,
   MetaDatasetCard,
   MetadataCollectionCard,
