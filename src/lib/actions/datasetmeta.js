@@ -1,8 +1,7 @@
-import {Dataset, MetaDataset} from '../api'
+import {Dataset} from '../api'
 import {G_START_LOADING, G_STOP_LOADING} from './_common'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
-  RECEIVE_ALIASES = 'RECEIVE_ALIASES',
   ALIASES_SAVED = 'ALIASES_SAVED',
   METADATA_SAVED = 'METADATA_SAVED',
   ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
@@ -43,19 +42,6 @@ const fetchDataset = (id) => {
   }
 }
 
-const fetchMetadataAliases = () => {
-  return (dispatch) => {
-    dispatch({type: G_START_LOADING})
-    MetaDataset.getAliases()
-      .then(aliases => {
-        dispatch({type: RECEIVE_ALIASES, aliases: aliases})
-      })
-      .finally(() => {
-        dispatch({type: G_STOP_LOADING})
-      })
-  }
-}
-
 const saveMetadata = (metaset, isNewSet) => {
   return (dispatch) => {
     dispatch({type: G_START_LOADING})
@@ -74,11 +60,9 @@ const saveMetadata = (metaset, isNewSet) => {
 export {
   deleteMetadata,
   fetchDataset,
-  fetchMetadataAliases,
   saveMetadata,
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
-  RECEIVE_ALIASES,
   ALIASES_SAVED,
   METADATA_SAVED
 }

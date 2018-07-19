@@ -1,7 +1,12 @@
-import {G_START_LOADING, G_STOP_LOADING} from '../actions/_common'
+import {
+  G_START_LOADING,
+  G_STOP_LOADING,
+  G_RECEIVE_METADATA_ALIASES
+} from '../actions/_common'
 
 const init = {
-  loading: 0
+  loading: 0,
+  metadataAliases: {}
 }
 const commonReducer = (state=init, action) => {
   switch(action.type){
@@ -15,6 +20,12 @@ const commonReducer = (state=init, action) => {
       return {
         ...state,
         loading: state.loading > 0 ?state.loading-1 :0
+      }
+
+    case G_RECEIVE_METADATA_ALIASES:
+      return {
+        ...state,
+        metadataAliases: action.aliases
       }
     default:
       return state

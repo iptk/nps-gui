@@ -9,10 +9,10 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
 
+import {gFetchMetadataAliases} from './lib/actions/_common'
 import {
   deleteMetadata,
   fetchDataset,
-  fetchMetadataAliases,
   saveMetadata,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
@@ -27,7 +27,7 @@ const _subscribedFilesCard = connect(
 const _subscribedMDColl = connect(
   (state) => ({
     metadatasets: state.l.dataset.metadatasets,
-    aliases: state.l.maliases.aliases
+    aliases: state.g.metadataAliases
   })
 )(MetaDatasetCardCollection)
 
@@ -62,7 +62,7 @@ class DatasetMeta extends Page{
   }
 
   fetchMAliases(){
-    this.store.dispatch(fetchMetadataAliases())
+    this.store.dispatch(gFetchMetadataAliases())
   }
 
   fetchDs(){

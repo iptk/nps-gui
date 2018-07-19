@@ -1,16 +1,12 @@
 import {
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
-  RECEIVE_ALIASES,
   METADATA_SAVED
 } from '../actions/datasetmeta'
 
 import {MetaDataset} from '../api'
 
 const init = {
-  maliases: {
-    aliases: {}
-  },
   dataset: {
     metadatasets: [],
     files: []
@@ -37,12 +33,6 @@ const reducer = (state = init, action) => {
         dataset: action.result,
         downloadurl: action.result.getDownloadURL(),
         filesbaseurl: action.result.getDataDownloadBaseURL()
-      }
-
-    case RECEIVE_ALIASES:
-      return {
-        ...state,
-        maliases: action.aliases
       }
 
     case METADATA_SAVED:
