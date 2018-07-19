@@ -9,7 +9,11 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
 
-import {gFetchMetadataAliases} from './lib/actions/_common'
+import {
+  G_ADD_DATASETS_TO_COMPARISON,
+  G_REMOVE_DATASETS_FROM_COMPARISON,
+  gFetchMetadataAliases
+} from './lib/actions/_common'
 import {
   deleteMetadata,
   fetchDataset,
@@ -52,6 +56,29 @@ const _dlBtn = translate('pages')(connect(
   )
 ))
 
+const _compBtn = translate('pages')(connect(
+  (state) => ({dsid: state.l.dataset.id, dsComp: state.g.datasetCompare})
+)(
+  ({dsid, dsComp, onClick, t}) => {
+    var inComp = dsid !== undefined && dsComp.includes(dsid)
+    return (
+      <Button disabled={dsid == undefined} fullWidth
+        onClick={onClick.bind(this, inComp
+            ?G_REMOVE_DATASETS_FROM_COMPARISON
+            :G_ADD_DATASETS_TO_COMPARISON,
+          dsid
+        )}
+      >
+        <Icon>{inComp ?'turned_in' :'turned_in_not'}</Icon>
+        {inComp
+          ?t('datasetmeta.actioncard.removefromcomp')
+          :t('datasetmeta.actioncard.addtocomp')
+        }
+      </Button>
+    )
+  }
+))
+
 class DatasetMeta extends Page{
   constructor(props){
     super(props, reducer)
@@ -83,6 +110,10 @@ class DatasetMeta extends Page{
     ))
   }
 
+  toggleComp(signal, dsid){
+    this.store.dispatch({type: signal, dsids: [dsid]})
+  }
+
   render(){
     const {t} = this.props
     return super.render(
@@ -103,6 +134,7 @@ class DatasetMeta extends Page{
               <Icon>add</Icon>
               {t('datasetmeta.actioncard.addmetadataset')}
             </Button>
+            <_compBtn onClick={this.toggleComp.bind(this)}/>
           </Card>
           <br/>
         </section>

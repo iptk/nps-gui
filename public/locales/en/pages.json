@@ -3,10 +3,12 @@
     "actioncard":{
       "title": "Actions",
       "addmetadataset": "Add metadataset",
+      "addtocomp": "Add to comparison",
       "dataset": "Dataset",
       "download": "Download",
       "reload": "Reload",
-      "reloadmaliases": "Reload metadaten aliases"
+      "reloadmaliases": "Reload metadaten aliases",
+      "removefromcomp": "Remove from comparison"
     }
   },
   "metadatacollections":{
