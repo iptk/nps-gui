@@ -1,4 +1,7 @@
 {
+  "ChooseMetaDatasetsCard":{
+    "metasets": "Metadatasets"
+  },
   "DatasetFilesCard":{
     "files": "Files"
   },

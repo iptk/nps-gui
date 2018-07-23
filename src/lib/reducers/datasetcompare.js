@@ -1,23 +1,25 @@
 import {
-  ADD_EMPTY_METADATASET,
-  RECEIVE_DATASET,
-  METADATA_SAVED
+  RECEIVE_DATASETS,
+  UPDATE_SELECTED_MIDS
 } from '../actions/datasetcompare'
 
 import {MetaDataset} from '../api'
 
 const init = {
-  dataset: {
-    metadatasets: [],
-    files: []
-  }
+  datasets: []
 }
 const reducer = (state = init, action) => {
   switch(action.type){
-    case RECEIVE_DATASET:
+    case RECEIVE_DATASETS:
       return {
         ...state,
-        dataset: action.result
+        datasets: action.result
+      }
+
+    case UPDATE_SELECTED_MIDS:
+      return {
+        ...state,
+        selectedMids: action.mids
       }
 
     default:

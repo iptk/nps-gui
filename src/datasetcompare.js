@@ -8,21 +8,45 @@ import {
   G_REMOVE_DATASETS_FROM_COMPARISON,
   gFetchMetadataAliases
 } from './lib/actions/_common'
-import {fetchDataset} from './lib/actions/datasetcompare'
-import {DatasetListCard, Page} from './lib/dom'
+import {fetchDatasets, UPDATE_SELECTED_MIDS} from './lib/actions/datasetcompare'
+import {ChooseMetaDatasetsCard, DatasetListCard, Page} from './lib/dom'
 import reducer from './lib/reducers/datasetcompare'
 
-const _dsListCard = translate('pages')(connect(
+const _dsListCard = connect(
   (state) => ({dsids: state.g.datasetCompare})
 )(
   ({dsids, onDelete, t}) => (
     <DatasetListCard dsids={dsids} onDelete={onDelete}/>
   )
-))
+)
+
+const _chooseMetaCard = connect(
+  (state) => ({dss: state.l.datasets, ma: state.g.metadataAliases})
+)(
+  ({dss, ma}) => (
+    <ChooseMetaDatasetsCard datasets={dss} metaaliases={ma}
+    />
+  )
+)
 
 class DatasetCompare extends Page{
   constructor(props){
     super(props, reducer)
+    this.store.dispatch(fetchDatasets(this.store.getState().g.datasetCompare))
+  }
+
+  onSelectedChange = (mid, selected) => {
+    var selection = this.store.getState().l.selectedMids
+    if(selected){
+      selection.push(selected)
+    }
+    else{
+      var idx = selection.indexOf(selected)
+      if(idx >= 0){
+        array.splice(idx, 1)
+      }
+    }
+    this.store.dispatch({type: UPDATE_SELECTED_MIDS, mids: selection})
   }
 
   removeDs(id){
@@ -34,6 +58,8 @@ class DatasetCompare extends Page{
     return super.render(
       <div>
         <_dsListCard onDelete={this.removeDs.bind(this)}/>
+        <br/>
+        <_chooseMetaCard/>
       </div>
     )
   }

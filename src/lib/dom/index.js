@@ -1,5 +1,6 @@
 import Autocomplete from './Autocomplete'
 import BaseLayout from './BaseLayout'
+import ChooseMetaDatasetsCard from './ChooseMetaDatasetsCard'
 import CollapsableCard from './CollapsableCard'
 import DatasetFilesCard from './DatasetFilesCard'
 import DatasetListCard from './DatasetListCard'
@@ -14,6 +15,8 @@ import QueryList from './QueryList'
 export {
   Autocomplete,
   BaseLayout,
+  CollapsableCard,
+  ChooseMetaDatasetsCard,
   DatasetFilesCard,
   DatasetListCard,
   DatasetTable,
