@@ -8,6 +8,7 @@ import DatasetTable from './DatasetTable'
 import MetaDatasetCard from './MetaDatasetCard'
 import MetadataCollectionCard from './MetadataCollectionCard'
 import MetaDatasetCardCollection from './MetaDatasetCardCollection'
+import MetaDatasetComparisonCard from './MetaDatasetComparisonCard'
 import ObjectTable from './ObjectTable'
 import Page from './Page'
 import QueryList from './QueryList'
@@ -23,6 +24,7 @@ export {
   MetaDatasetCard,
   MetadataCollectionCard,
   MetaDatasetCardCollection,
+  MetaDatasetComparisonCard,
   ObjectTable,
   Page,
   QueryList

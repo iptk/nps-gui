@@ -9,7 +9,12 @@ import {
   gFetchMetadataAliases
 } from './lib/actions/_common'
 import {fetchDatasets, UPDATE_SELECTED_MIDS} from './lib/actions/datasetcompare'
-import {ChooseMetaDatasetsCard, DatasetListCard, Page} from './lib/dom'
+import {
+  ChooseMetaDatasetsCard,
+  DatasetListCard,
+  MetaDatasetComparisonCard,
+  Page
+} from './lib/dom'
 import reducer from './lib/reducers/datasetcompare'
 
 const _dsListCard = connect(
@@ -26,6 +31,14 @@ const _chooseMetaCard = connect(
   ({dss, ma}) => (
     <ChooseMetaDatasetsCard datasets={dss} metaaliases={ma}
     />
+  )
+)
+
+const _metaComparisonCards = connect(
+  (state) => ({dss: state.l.datasets, mids: state.l.selectedMids})
+)(
+  ({dss, mids}) => (
+    mids.map(mid => <MetaDatasetComparisonCard metaid={mid} datasets={dss}/>)
   )
 )
 
@@ -60,6 +73,10 @@ class DatasetCompare extends Page{
         <_dsListCard onDelete={this.removeDs.bind(this)}/>
         <br/>
         <_chooseMetaCard/>
+        <br/>
+        <section>
+          <_metaComparisonCards/>
+        </section>
       </div>
     )
   }

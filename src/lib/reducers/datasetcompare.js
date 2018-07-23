@@ -6,7 +6,8 @@ import {
 import {MetaDataset} from '../api'
 
 const init = {
-  datasets: []
+  datasets: [],
+  selectedMids: []
 }
 const reducer = (state = init, action) => {
   switch(action.type){

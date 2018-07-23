@@ -32,6 +32,10 @@
     "save": "Save",
     "value": "Value"
   },
+  "MetaDatasetComparisonCard":{
+    "csvexport": "Export to CSV",
+    "dataset": "Dataset-ID"
+  },
   "Page":{
     "error":{
       "close": "Close",
