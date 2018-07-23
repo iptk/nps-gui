@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
 
+import {G_RESTORE_STATE_FROM_COOKIES} from '../actions/_common'
 import commonReducer from '../reducers/_common'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -41,6 +42,7 @@ class Page extends React.Component{
       mergedReducer,
       applyMiddleware(thunkMiddleware)
     )
+    this.store.dispatch({type: G_RESTORE_STATE_FROM_COOKIES})
   }
 
   render(children = ''){

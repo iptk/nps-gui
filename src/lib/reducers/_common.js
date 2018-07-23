@@ -3,8 +3,10 @@ import {
   G_STOP_LOADING,
   G_ADD_DATASETS_TO_COMPARISON,
   G_RECEIVE_METADATA_ALIASES,
-  G_REMOVE_DATASETS_FROM_COMPARISON
+  G_REMOVE_DATASETS_FROM_COMPARISON,
+  G_RESTORE_STATE_FROM_COOKIES
 } from '../actions/_common'
+import Cookie from 'js-cookie'
 
 const init = {
   loading: 0,
@@ -13,6 +15,12 @@ const init = {
 }
 const commonReducer = (state=init, action) => {
   switch(action.type){
+    case G_RESTORE_STATE_FROM_COOKIES:
+      return {
+        ...state,
+        datasetCompare: Cookie.getJSON('g_compareDS') || state.datasetCompare
+      }
+
     case G_START_LOADING:
       return {
         ...state,
@@ -37,6 +45,9 @@ const commonReducer = (state=init, action) => {
           changed = true
         }
       })
+      if(changed){
+        Cookie.set('g_compareDS', comp, {expires: 90})
+      }
       return {
         ...state,
         datasetCompare: changed ?[...comp] :comp
@@ -61,6 +72,9 @@ const commonReducer = (state=init, action) => {
           changed = true
         }
       })
+      if(changed){
+        Cookie.set('g_compareDS', comp, {expires: 90})
+      }
       return {
         ...state,
         datasetCompare: changed ?[...comp] :comp
