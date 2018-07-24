@@ -28,8 +28,9 @@ const _dsListCard = connect(
 const _chooseMetaCard = connect(
   (state) => ({dss: state.l.datasets, ma: state.g.metadataAliases})
 )(
-  ({dss, ma}) => (
+  ({dss, ma, onStatusChange}) => (
     <ChooseMetaDatasetsCard datasets={dss} metaaliases={ma}
+      onStatusChange={onStatusChange}
     />
   )
 )
@@ -38,7 +39,12 @@ const _metaComparisonCards = connect(
   (state) => ({dss: state.l.datasets, mids: state.l.selectedMids})
 )(
   ({dss, mids}) => (
-    mids.map(mid => <MetaDatasetComparisonCard metaid={mid} datasets={dss}/>)
+    mids.map(mid =>
+      <React.Fragment key={mid}>
+        <MetaDatasetComparisonCard metaid={mid} datasets={dss}/>
+        <br/>
+      </React.Fragment>
+    )
   )
 )
 
@@ -49,17 +55,9 @@ class DatasetCompare extends Page{
   }
 
   onSelectedChange = (mid, selected) => {
-    var selection = this.store.getState().l.selectedMids
-    if(selected){
-      selection.push(selected)
-    }
-    else{
-      var idx = selection.indexOf(selected)
-      if(idx >= 0){
-        array.splice(idx, 1)
-      }
-    }
-    this.store.dispatch({type: UPDATE_SELECTED_MIDS, mids: selection})
+    this.store.dispatch(
+      {type: UPDATE_SELECTED_MIDS, mid: mid, selected: selected}
+    )
   }
 
   removeDs(id){
@@ -72,7 +70,7 @@ class DatasetCompare extends Page{
       <div>
         <_dsListCard onDelete={this.removeDs.bind(this)}/>
         <br/>
-        <_chooseMetaCard/>
+        <_chooseMetaCard onStatusChange={this.onSelectedChange.bind(this)}/>
         <br/>
         <section>
           <_metaComparisonCards/>

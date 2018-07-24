@@ -4,6 +4,7 @@ import {translate} from 'react-i18next'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
@@ -16,48 +17,56 @@ class MetaDatasetComparisonCard extends CollapsableCard{
   }
 
   render(){
-    var {datasets, metaid} = this.props
+    var {datasets, metaid, t} = this.props
     var metaKeys = []
+    var flat = []
+    // two arrays instead of an {id: meta}-object to prevent additional
+    // runtime of Object.keys(...)
+    var ids = []
     for(var ds of datasets){
       if(metaid in ds.metadatasets){
+        var f = Object.flatten(ds.metadatasets[metaid].metadata)
         // we need to do this for every dataset as some keys might be missing
         // in some datasets. The complexity is horrible :(
-        for(var mkey in ds.metadatasets[metaid]){
-          if(!metakeys.includes(mkey)){
-            metakeys.push(mkey)
+        for(var mkey in f){
+          if(!metaKeys.includes(mkey)){
+            metaKeys.push(mkey)
           }
         }
+        flat.push(f)
+        ids.push(ds.id)
       }
     }
 
-    var rows = datasets
-      .filter(ds => metaid in ds.metadatasets)
-      .map((ds) => {
-        var cells = [<TableCell>ds.id</TableCell>]
-        for(var mk in metakeys){
+    var rows = ids.map((id, idx) => {
+        var cells = [<TableCell key='__dsid_'>{id}</TableCell>]
+        for(var mk of metaKeys){
           cells.push(
-            <TableCell>{
-              mk in ds.metadatasets[metaid]
-                ? ds.metadatasets[metaid][mk]
+            <TableCell key={mk}>{
+              (mk in flat[idx])
+                ? flat[idx][mk]
                 : '-'
             }</TableCell>
           )
         }
-        return (<TableRow>{cells}</TableRow>)
+        return (<TableRow key={idx}>{cells}</TableRow>)
       })
+      
     return super.render(
-      t('DatasetFilesCard.files'),
+      metaid,
       <div>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>{t('MetaDatasetComparisonCard.dataset')}</TableCell>
+              <TableCell key='__dsid_'>{t('MetaDatasetComparisonCard.dataset')}</TableCell>
               {
-                metaKeys.map(mk => <TableCell>mk</TableCell>)
+                metaKeys.map(mk => <TableCell key={mk}>{mk}</TableCell>)
               }
             </TableRow>
           </TableHead>
-          {rows}
+          <TableBody>
+            {rows}
+          </TableBody>
         </Table>
         <Button>
           <Icon>save_alt</Icon>
