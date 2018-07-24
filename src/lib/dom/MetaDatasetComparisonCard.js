@@ -12,10 +12,6 @@ import TableRow from '@material-ui/core/TableRow'
 import CollapsableCard from './CollapsableCard'
 
 class MetaDatasetComparisonCard extends CollapsableCard{
-  dlCSV = (dss) => {
-    // TODO
-  }
-
   render(){
     var {datasets, metaid, t} = this.props
     var metaKeys = []
@@ -23,6 +19,8 @@ class MetaDatasetComparisonCard extends CollapsableCard{
     // two arrays instead of an {id: meta}-object to prevent additional
     // runtime of Object.keys(...)
     var ids = []
+    var csv = 'Dataset-ID'
+
     for(var ds of datasets){
       if(metaid in ds.metadatasets){
         var f = Object.flatten(ds.metadatasets[metaid].metadata)
@@ -38,20 +36,28 @@ class MetaDatasetComparisonCard extends CollapsableCard{
       }
     }
 
+    var tableHead = metaKeys.map(mk => {
+      csv += `;${mk}`
+      return <TableCell key={mk}>{mk}</TableCell>
+    })
+    csv += '\n'
+
     var rows = ids.map((id, idx) => {
         var cells = [<TableCell key='__dsid_'>{id}</TableCell>]
+        csv += id
         for(var mk of metaKeys){
+          var val = (mk in flat[idx]) ?flat[idx][mk] :'-'
+          csv += `;${val}`
           cells.push(
-            <TableCell key={mk}>{
-              (mk in flat[idx])
-                ? flat[idx][mk]
-                : '-'
-            }</TableCell>
+            <TableCell key={mk}>{val}</TableCell>
           )
         }
+        csv += '\n'
         return (<TableRow key={idx}>{cells}</TableRow>)
       })
-      
+
+    csv = btoa(csv)
+
     return super.render(
       metaid,
       <div>
@@ -59,16 +65,14 @@ class MetaDatasetComparisonCard extends CollapsableCard{
           <TableHead>
             <TableRow>
               <TableCell key='__dsid_'>{t('MetaDatasetComparisonCard.dataset')}</TableCell>
-              {
-                metaKeys.map(mk => <TableCell key={mk}>{mk}</TableCell>)
-              }
+              {tableHead}
             </TableRow>
           </TableHead>
           <TableBody>
             {rows}
           </TableBody>
         </Table>
-        <Button>
+        <Button href={'data:text/csv;base64,'+csv} download={metaid+'.csv'}>
           <Icon>save_alt</Icon>
           {t('MetaDatasetComparisonCard.csvexport')}
         </Button>
