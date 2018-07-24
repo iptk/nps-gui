@@ -7,6 +7,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import CollapsableCard from './CollapsableCard'
 
@@ -35,15 +36,17 @@ class ChooseMetaDatasetsCard extends CollapsableCard{
     })
 
     var rows = Object.keys(mdCount).map((mid) => (
-      <ListItem button key={mid} dense button>
-        <Checkbox onChange={(evt, checked) => onSelCh(mid, checked)}
-          disableRipple
-        />
-        <ListItemText primary={
-          (mid in metaaliases ?metaaliases[mid] :mid)
-          + ` (${mdCount[mid]} / ${dsCount})`
-        }/>
-      </ListItem>
+      <Tooltip title={mid} key={mid} enterDelay={600}>
+        <ListItem button key={mid} dense button>
+          <Checkbox onChange={(evt, checked) => onSelCh(mid, checked)}
+            disableRipple
+          />
+          <ListItemText primary={
+            (mid in metaaliases ?metaaliases[mid] :mid)
+            + ` (${mdCount[mid]} / ${dsCount})`
+          }/>
+        </ListItem>
+      </Tooltip>
     ))
 
     return super.render(
