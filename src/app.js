@@ -5,6 +5,7 @@ import {I18nextProvider} from 'react-i18next'
 import NPS from './lib/api'
 
 import {
+  DatasetCompare,
   DatasetMeta,
   MetadataCollections,
   SearchDataset
@@ -22,6 +23,9 @@ NPS.fetchConfiguration(window.location.origin+'/conf/srvlist')
             <Route path="/search" component={SearchDataset}/>
             <Route path="/dataset">
               <Route path="/dataset/:dsid" component={DatasetMeta}/>
+            </Route>
+            <Route path="/datasets">
+              <Route path="/datasets/compare" component={DatasetCompare}/>
             </Route>
             <Route path="/metadata">
               <Route path="/metadata/collections" component={MetadataCollections}/>

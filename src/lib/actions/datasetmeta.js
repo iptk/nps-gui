@@ -1,20 +1,19 @@
-import {Dataset, MetaDataset} from '../api'
-import {START_LOADING, STOP_LOADING} from './_common'
+import {Dataset} from '../api'
+import {G_START_LOADING, G_STOP_LOADING} from './_common'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
-  RECEIVE_ALIASES = 'RECEIVE_ALIASES',
   ALIASES_SAVED = 'ALIASES_SAVED',
   METADATA_SAVED = 'METADATA_SAVED',
   ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
 
 const deleteMetadata = (dataset, metaid, isNewSet) => {
   return (dispatch) => {
-    dispatch({type: START_LOADING})
+    dispatch({type: G_START_LOADING})
     if(isNewSet){
       dataset.removeMetaDataset('__empty')
       dataset.metadatasets = {...dataset.metadatasets}
       dispatch({type: RECEIVE_DATASET, result: dataset})
-      dispatch({type: STOP_LOADING})
+      dispatch({type: G_STOP_LOADING})
     }
     else{
       dataset.deleteMetaDataset(metaid)
@@ -23,7 +22,7 @@ const deleteMetadata = (dataset, metaid, isNewSet) => {
           dispatch({type: RECEIVE_DATASET, result: dataset})
         })
         .finally(() => {
-          dispatch({type: STOP_LOADING})
+          dispatch({type: G_STOP_LOADING})
         })
     }
   }
@@ -31,34 +30,21 @@ const deleteMetadata = (dataset, metaid, isNewSet) => {
 
 const fetchDataset = (id) => {
   return (dispatch) => {
-    dispatch({type: START_LOADING})
+    dispatch({type: G_START_LOADING})
     Dataset.getByID(id)
       .then(ds => {
         dispatch({type: RECEIVE_DATASET, result: ds})
       })
       .finally(() => {
-        dispatch({type: STOP_LOADING})
+        dispatch({type: G_STOP_LOADING})
       })
 
-  }
-}
-
-const fetchMetadataAliases = () => {
-  return (dispatch) => {
-    dispatch({type: START_LOADING})
-    MetaDataset.getAliases()
-      .then(aliases => {
-        dispatch({type: RECEIVE_ALIASES, aliases: aliases})
-      })
-      .finally(() => {
-        dispatch({type: STOP_LOADING})
-      })
   }
 }
 
 const saveMetadata = (metaset, isNewSet) => {
   return (dispatch) => {
-    dispatch({type: START_LOADING})
+    dispatch({type: G_START_LOADING})
     metaset.save()
       .then(meta => {
         dispatch({
@@ -66,7 +52,7 @@ const saveMetadata = (metaset, isNewSet) => {
         })
       })
       .finally(() => {
-        dispatch({type: STOP_LOADING})
+        dispatch({type: G_STOP_LOADING})
       })
   }
 }
@@ -74,11 +60,9 @@ const saveMetadata = (metaset, isNewSet) => {
 export {
   deleteMetadata,
   fetchDataset,
-  fetchMetadataAliases,
   saveMetadata,
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
-  RECEIVE_ALIASES,
   ALIASES_SAVED,
   METADATA_SAVED
 }

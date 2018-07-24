@@ -10,9 +10,13 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
 
 import {
+  G_ADD_DATASETS_TO_COMPARISON,
+  G_REMOVE_DATASETS_FROM_COMPARISON,
+  gFetchMetadataAliases
+} from './lib/actions/_common'
+import {
   deleteMetadata,
   fetchDataset,
-  fetchMetadataAliases,
   saveMetadata,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
@@ -21,19 +25,19 @@ import reducer from './lib/reducers/datasetmeta'
 
 // from lib/dom
 const _subscribedFilesCard = connect(
-  (state) => ({dlbase: state.s.filesbaseurl, files: state.s.dataset.files})
+  (state) => ({dlbase: state.l.filesbaseurl, files: state.l.dataset.files})
 )(DatasetFilesCard)
 
 const _subscribedMDColl = connect(
   (state) => ({
-    metadatasets: state.s.dataset.metadatasets,
-    aliases: state.s.maliases.aliases
+    metadatasets: state.l.dataset.metadatasets,
+    aliases: state.g.metadataAliases
   })
 )(MetaDatasetCardCollection)
 
 // locally defined
 const _actionCardTitle = translate('pages')(connect(
-  (state) => ({dsid: state.s.dataset.id})
+  (state) => ({dsid: state.l.dataset.id})
 )(
   ({dsid, t}) => (
     <CardHeader title={t('datasetmeta.actioncard.title')}
@@ -42,7 +46,7 @@ const _actionCardTitle = translate('pages')(connect(
 ))
 
 const _dlBtn = translate('pages')(connect(
-  (state) => ({url: state.s.downloadurl})
+  (state) => ({url: state.l.downloadurl})
 )(
   ({url, t}) => (
     <Button href={url} disabled={url == undefined} fullWidth>
@@ -50,6 +54,29 @@ const _dlBtn = translate('pages')(connect(
       {t('datasetmeta.actioncard.download')}
     </Button>
   )
+))
+
+const _compBtn = translate('pages')(connect(
+  (state) => ({dsid: state.l.dataset.id, dsComp: state.g.datasetCompare})
+)(
+  ({dsid, dsComp, onClick, t}) => {
+    var inComp = dsid !== undefined && dsComp.includes(dsid)
+    return (
+      <Button disabled={dsid == undefined} fullWidth
+        onClick={onClick.bind(this, inComp
+            ?G_REMOVE_DATASETS_FROM_COMPARISON
+            :G_ADD_DATASETS_TO_COMPARISON,
+          dsid
+        )}
+      >
+        <Icon>{inComp ?'turned_in' :'turned_in_not'}</Icon>
+        {inComp
+          ?t('datasetmeta.actioncard.removefromcomp')
+          :t('datasetmeta.actioncard.addtocomp')
+        }
+      </Button>
+    )
+  }
 ))
 
 class DatasetMeta extends Page{
@@ -62,7 +89,7 @@ class DatasetMeta extends Page{
   }
 
   fetchMAliases(){
-    this.store.dispatch(fetchMetadataAliases())
+    this.store.dispatch(gFetchMetadataAliases())
   }
 
   fetchDs(){
@@ -79,8 +106,12 @@ class DatasetMeta extends Page{
 
   deleteMetaset(meta, isNewSet){
     this.store.dispatch(deleteMetadata(
-      this.store.getState().s.dataset, meta.id, isNewSet
+      this.store.getState().l.dataset, meta.id, isNewSet
     ))
+  }
+
+  toggleComp(signal, dsid){
+    this.store.dispatch({type: signal, dsids: [dsid]})
   }
 
   render(){
@@ -103,6 +134,7 @@ class DatasetMeta extends Page{
               <Icon>add</Icon>
               {t('datasetmeta.actioncard.addmetadataset')}
             </Button>
+            <_compBtn onClick={this.toggleComp.bind(this)}/>
           </Card>
           <br/>
         </section>

@@ -1,6 +1,12 @@
 {
+  "ChooseMetaDatasetsCard":{
+    "metasets": "Metadatasets"
+  },
   "DatasetFilesCard":{
     "files": "Files"
+  },
+  "DatasetListCard":{
+    "title": "Datasets"
   },
   "ObjectTable":{
     "key": "Key",
@@ -26,6 +32,10 @@
     "save": "Save",
     "value": "Value"
   },
+  "MetaDatasetComparisonCard":{
+    "csvexport": "Export to CSV",
+    "dataset": "Dataset-ID"
+  },
   "Page":{
     "error":{
       "close": "Close",
@@ -36,6 +46,7 @@
     "queries": "Queries"
   },
   "navigation":{
+    "datasetcompare": "Compare datasets",
     "home": "Home",
     "searchdataset": "Search",
     "metadatasetcollections": "Metadata"
