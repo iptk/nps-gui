@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import CollapsableCard from './CollapsableCard'
 
@@ -49,7 +50,9 @@ class MetaDatasetComparisonCard extends CollapsableCard{
           var val = (mk in flat[idx]) ?flat[idx][mk] :'-'
           csv += `;${val}`
           cells.push(
-            <TableCell key={mk}>{val}</TableCell>
+            <Tooltip key={mk} title={mk} enterDelay={600}>
+              <TableCell>{val}</TableCell>
+            </Tooltip>
           )
         }
         csv += '\n'
