@@ -58,7 +58,7 @@ class CollapsableCard extends React.Component{
     return (
       <Card>
         {cardHeader}
-        <Collapse in={this.state._expanded} timeout='auto'>
+        <Collapse in={this.state._expanded} timeout='auto' style={{width: '100%', overflowX: 'auto'}}>
           {content}
         </Collapse>
       </Card>)
