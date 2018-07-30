@@ -38,7 +38,16 @@ const _resultNums = translate('pages')(connect(
     total: state.l.filter.total
   })
 )(
-  ({end, start, total, t}) => (<p>{t('searchdataset.results')} {start} - {end} / {total}</p>)
+  ({end, start, total, t}) => {
+    if(total != 0){
+      start += 1
+      end += 1
+      total += 1
+    }
+    return(
+      <p>{t('searchdataset.results')} {start} - {end} / {total}</p>
+    )
+  }
 ))
 
 const _directDSLinks = translate('pages')(connect(
