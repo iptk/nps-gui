@@ -37,7 +37,7 @@ const filterReducer = (state = initFilter, action) => {
     case FILTER_GLOBAL_CHANGE:
       return {
         ...state,
-        global: action.filter.split(' ')
+        global: action.filter.split(' ').filter(f => f !== '')
       }
 
     case FIELDS_CHANGE:
