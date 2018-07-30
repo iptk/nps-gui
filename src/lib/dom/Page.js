@@ -7,6 +7,7 @@ import {translate} from 'react-i18next'
 import {G_RESTORE_STATE_FROM_COOKIES} from '../actions/_common'
 import commonReducer from '../reducers/_common'
 
+import {MessageLevel, MessageSnackbar} from '../dom'
 import { withStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -51,6 +52,7 @@ class Page extends React.Component{
         <div>
           {children}
           <_loadingIcon/>
+          <MessageSnackbar/>
         </div>
       </Provider>
     )
