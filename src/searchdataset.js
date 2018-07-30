@@ -34,10 +34,11 @@ const _subscribedQueryList = connect(
 const _resultNums = translate('pages')(connect(
   (state) => ({
     start: state.l.filter.start,
-    end: state.l.filter.start + state.l.dataset.length
+    end: state.l.filter.end,
+    total: state.l.filter.total
   })
 )(
-  ({end, start, t}) => (<p>{t('searchdataset.results')} {start} - {end}</p>)
+  ({end, start, total, t}) => (<p>{t('searchdataset.results')} {start} - {end} / {total}</p>)
 ))
 
 const _directDSLinks = translate('pages')(connect(

@@ -16,7 +16,9 @@ const initFilter = {
   fields: [],
   recognizedIDs: [],
   count: 10,
-  start: 0
+  start: 0,
+  end: 0,
+  total: 0
 }
 const filterReducer = (state = initFilter, action) => {
   switch(action.type){
@@ -66,6 +68,14 @@ const filterReducer = (state = initFilter, action) => {
         recognizedIDs: action.ids
       }
 
+    case RECEIVE_DATASET:
+      return {
+        ...state,
+        start: action.result.range.start,
+        end: action.result.range.end,
+        total: action.result.range.max
+      }
+
     default:
       return state
   }
@@ -74,7 +84,7 @@ const filterReducer = (state = initFilter, action) => {
 const datasetReducer = (state = [], action) => {
   switch(action.type){
     case RECEIVE_DATASET:
-      return action.result
+      return action.result.datasets
 
     default:
       return state
