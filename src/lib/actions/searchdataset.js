@@ -22,7 +22,6 @@ const fetchDataset = (filter) => {
           ids.push(sf)
         }
       }
-      console.log(f)
       filters.push(filter.global.concat(f))
     }
     if(filters.length === 0){ // only global filters
