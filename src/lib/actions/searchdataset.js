@@ -1,6 +1,6 @@
 import {Dataset} from '../api'
 
-import {START_LOADING, STOP_LOADING} from './_common'
+import {G_START_LOADING, G_STOP_LOADING} from './_common'
 
 const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
   FILTER_SINGLE_CHANGE = 'FILTER_SINGLE_CHANGE',
@@ -12,7 +12,7 @@ const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
 
 const fetchDataset = (filter) => {
   return (dispatch) => {
-    dispatch({type: START_LOADING})
+    dispatch({type: G_START_LOADING})
     var filters = []
     var regex = RegExp(/^([a-z\d]{40})$/, 'i')
     var ids = []
@@ -24,20 +24,23 @@ const fetchDataset = (filter) => {
       }
       filters.push(filter.global.concat(f))
     }
+    if(filters.length === 0){ // only global filters
+        filters.push(filter.global)
+    }
 
     dispatch({type: RECOGNIZE_IDS, ids: ids})
 
     // Don't ask the api without a query
     if(filters.length === 0){
       dispatch({type: RECEIVE_DATASET, result: []})
-      dispatch({type: STOP_LOADING})
+      dispatch({type: G_STOP_LOADING})
       return
     }
 
     Dataset.search(filters, filter.fields, filter.start, filter.count)
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
-        dispatch({type: STOP_LOADING})
+        dispatch({type: G_STOP_LOADING})
       })
   }
 }

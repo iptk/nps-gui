@@ -16,14 +16,14 @@ import reducer from './lib/reducers/searchdataset'
 import {debounceWrapper} from './lib/util'
 
 const _subscribedDatasetTable = connect(
-  (state) => ({datasets: state.s.dataset, keys: state.s.filter.fields})
+  (state) => ({datasets: state.l.dataset, keys: state.l.filter.fields})
 )(DatasetTable)
 
 const _subscribedQueryList = connect(
   (state) => {
     var chips = []
-    for(var single of state.s.filter.single){
-      chips.push(single.concat(state.s.filter.global))
+    for(var single of state.l.filter.single){
+      chips.push(single.concat(state.l.filter.global))
     }
     return {
       queryVals: chips
@@ -33,15 +33,25 @@ const _subscribedQueryList = connect(
 
 const _resultNums = translate('pages')(connect(
   (state) => ({
-    start: state.s.filter.start,
-    end: state.s.filter.start + state.s.dataset.length
+    start: state.l.filter.start,
+    end: state.l.filter.end,
+    total: state.l.filter.total
   })
 )(
-  ({end, start, t}) => (<p>{t('searchdataset.results')} {start} - {end}</p>)
+  ({end, start, total, t}) => {
+    if(total != 0){
+      start += 1
+      end += 1
+      total += 1
+    }
+    return(
+      <p>{t('searchdataset.results')} {start} - {end} / {total}</p>
+    )
+  }
 ))
 
 const _directDSLinks = translate('pages')(connect(
-  (state) => ({ids: state.s.filter.recognizedIDs})
+  (state) => ({ids: state.l.filter.recognizedIDs})
 )(
   ({ids, t}) => {
     if(ids.length === 0){
@@ -69,23 +79,23 @@ class SearchDataset extends Page{
     this.store.dispatch({type: type, filter: target.value})
 
     // fetch dataset
-    this.store.dispatch(fetchDataset(this.store.getState().s.filter))
+    this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
   applyFields(target){
     var fields = target.value.split(',')
     this.store.dispatch({type: FIELDS_CHANGE, fields: fields})
-    this.store.dispatch(fetchDataset(this.store.getState().s.filter))
+    this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
   changeCount(target){
     this.store.dispatch({type: COUNT_CHANGE, count: target.value})
-    this.store.dispatch(fetchDataset(this.store.getState().s.filter))
+    this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
   changeStart(forward){
     this.store.dispatch({type: START_CHANGE, forward: forward})
-    this.store.dispatch(fetchDataset(this.store.getState().s.filter))
+    this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
   render(){

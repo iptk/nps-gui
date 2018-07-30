@@ -1,6 +1,12 @@
 {
+  "ChooseMetaDatasetsCard":{
+    "metasets": "Metadatensätze"
+  },
   "DatasetFilesCard":{
     "files": "Dateien"
+  },
+  "DatasetListCard":{
+    "title": "Datensätze"
   },
   "ObjectTable":{
     "key": "Schlüssel",
@@ -26,6 +32,10 @@
     "save": "Speichern",
     "value": "Wert"
   },
+  "MetaDatasetComparisonCard":{
+    "csvexport": "Als CSV exportieren",
+    "dataset": "Datensatz-ID"
+  },
   "Page":{
     "error":{
       "close": "Schließen",
@@ -36,6 +46,7 @@
     "queries": "Abfragen"
   },
   "navigation":{
+    "datasetcompare": "Datensätze vergleichen",
     "home": "Home",
     "searchdataset": "Suche",
     "metadatasetcollections": "Metadaten"

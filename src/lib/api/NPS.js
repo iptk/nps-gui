@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch'
 
-import {ConfigurationException} from './exceptions'
+import {ConfigurationException, NetworkException} from './exceptions'
 
 class NPS{
   static serverConfig = {}

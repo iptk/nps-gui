@@ -2,11 +2,13 @@
   "datasetmeta":{
     "actioncard":{
       "title": "Aktionen",
+      "addtocomp": "Zum Vergleich hinzufügen",
       "addmetadataset": "Metadatensatz hinzufügen",
       "dataset": "Datensatz",
       "download": "Download",
       "reload": "Neu laden",
-      "reloadmaliases": "Metadaten-Aliase neu laden"
+      "reloadmaliases": "Metadaten-Aliase neu laden",
+      "removefromcomp": "Aus dem Vergleich entfernen"
     }
   },
   "metadatacollections":{

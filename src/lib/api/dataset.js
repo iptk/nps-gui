@@ -100,7 +100,7 @@ class Dataset{
     if(start){
       url += '&start='+encodeURIComponent(start)
     }
-    
+
     return (new Request({
         url: url,
         method: 'GET'
@@ -119,10 +119,10 @@ class Dataset{
             datas.metadata = metadata
             return datas
           }))
-          return datasets
+          return {range: resp.json.range, datasets: datasets}
         }
         else{
-          return []
+          return {range: {start: 0, end: 0, max: 0}, datasets: []}
         }
       })
   }
