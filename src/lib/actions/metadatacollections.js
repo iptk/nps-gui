@@ -13,10 +13,10 @@ const fetchCollections = (id) => {
         dispatch({type: RECEIVE_DATASET, result: res})
       })
       .catch(err => {
-        notifyUser(dispatch, {
+        /*notifyUser(dispatch, {
           message: "metadatacollections.fetch",
           level: NotificationLevel.ERROR
-        })
+        })*/
       })
       .finally(() => {
         dispatch({type: G_STOP_LOADING})
