@@ -97,7 +97,7 @@ class MessageSnackbar extends React.Component{
   }
 }
 
-MessageSnackbar = translate('dom')(
+MessageSnackbar = translate('err')(
   withStyles(messageStyles)(MessageSnackbar)
 )
 
