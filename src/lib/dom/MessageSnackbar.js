@@ -51,7 +51,7 @@ class MessageSnackbar extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      open: props.message !== undefined && props.message.length > 0
+      open: true
     }
   }
 
@@ -64,6 +64,7 @@ class MessageSnackbar extends React.Component{
 
   render(){
     var {classes, level, message, needsTranslation=false, t} = this.props
+    this.state.open = true
     const handleClose = this.handleClose.bind(this)
     return (
       <Snackbar
