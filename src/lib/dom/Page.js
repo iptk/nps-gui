@@ -52,7 +52,7 @@ class Page extends React.Component{
         <div>
           {children}
           <_loadingIcon/>
-          <MessageSnackbar/>
+          <MessageSnackbar message="asdf" level={MessageLevel.SUCCESS} needsTranslation={false}/>
         </div>
       </Provider>
     )
