@@ -1,1 +1,24 @@
-{}
+{
+  "_common":{
+    "fetchmeta": "Failed to fetch metadata-aliases"
+  },
+  "common":{
+    "err":{
+      "fetchmultids": "Error while loading the dataset",
+      "fetchsingleds": "Error while loading the datasets0"
+    }
+  },
+  "datasetmeta":{
+    "err":{
+      "deletemeta": "Error while deleting the metadataset",
+      "savemeta": "Error while saving the metadataset"
+    },
+    "succ":{
+      "deletemeta": "Metadataset deleted",
+      "savemeta": "Metadataset saved"
+    }
+  },
+  "metadatacollections":{
+    "fetch": "Error while loading metadata-collections"
+  }
+}
