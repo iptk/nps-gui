@@ -4,7 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import {Provider, connect} from 'react-redux'
 import {translate} from 'react-i18next'
 
-import {G_RESTORE_STATE_FROM_COOKIES} from '../actions/_common'
+import {
+  G_NOTIFICATION_CLOSE, G_RESTORE_STATE_FROM_COOKIES
+} from '../actions/_common'
 import commonReducer from '../reducers/_common'
 
 import {MessageLevel, MessageSnackbar} from '../dom'
@@ -32,6 +34,20 @@ const _loadingIcon = connect(
   })
 )
 
+const _notificationSnackbar = connect(
+  (state) => ({msg: state.g.notifications.current})
+)(
+  ({msg, onClose}) => {
+    if(msg !== undefined){
+      return (
+        <MessageSnackbar message={msg.message} level={msg.level}
+          needsTranslation={msg.needsTranslation} onClose={onClose}/>
+      )
+    }
+    return ''
+  }
+)
+
 class Page extends React.Component{
   constructor(props, reducer){
     super(props)
@@ -46,13 +62,17 @@ class Page extends React.Component{
     this.store.dispatch({type: G_RESTORE_STATE_FROM_COOKIES})
   }
 
+  closeNotification = () => {
+    this.store.dispatch({type: G_NOTIFICATION_CLOSE})
+  }
+
   render(children = ''){
     return (
       <Provider store={this.store}>
         <div>
           {children}
           <_loadingIcon/>
-          <MessageSnackbar message="asdf" level={MessageLevel.SUCCESS} needsTranslation={false}/>
+          <_notificationSnackbar onClose={this.closeNotification}/>
         </div>
       </Provider>
     )
