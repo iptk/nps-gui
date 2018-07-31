@@ -40,6 +40,8 @@ const fetchDataset = (filter) => {
     Dataset.search(filters, filter.fields, filter.start, filter.count)
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
+      })
+      .finally(() => {
         dispatch({type: G_STOP_LOADING})
       })
   }

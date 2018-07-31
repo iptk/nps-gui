@@ -10,6 +10,8 @@ const fetchCollections = (id) => {
       .fetchAll()
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
+      })
+      .finally(() => {
         dispatch({type: G_STOP_LOADING})
       })
 
