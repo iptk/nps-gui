@@ -48,7 +48,6 @@ const commonReducer = (state=init, action) => {
       else{
         notif.queue.push(action.notification)
       }
-      console.log(notif)
 
       return {
         ...state,
@@ -58,7 +57,6 @@ const commonReducer = (state=init, action) => {
     case G_NOTIFICATION_CLOSE:
       var notif = state.notifications
       notif.current = notif.queue.shift()
-      console.log(notif)
       return {
         ...state,
         notifications: {...notif}
