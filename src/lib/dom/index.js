@@ -5,7 +5,7 @@ import CollapsableCard from './CollapsableCard'
 import DatasetFilesCard from './DatasetFilesCard'
 import DatasetListCard from './DatasetListCard'
 import DatasetTable from './DatasetTable'
-import {MessageSnackbar, MessageLevel} from './MessageSnackbar'
+import {NotificationSnackbar, NotificationLevel} from './NotificationSnackbar'
 import MetaDatasetCard from './MetaDatasetCard'
 import MetadataCollectionCard from './MetadataCollectionCard'
 import MetaDatasetCardCollection from './MetaDatasetCardCollection'
@@ -26,8 +26,8 @@ export {
   MetadataCollectionCard,
   MetaDatasetCardCollection,
   MetaDatasetComparisonCard,
-  MessageLevel,
-  MessageSnackbar,
+  NotificationLevel,
+  NotificationSnackbar,
   ObjectTable,
   Page,
   QueryList

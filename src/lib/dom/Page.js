@@ -9,7 +9,7 @@ import {
 } from '../actions/_common'
 import commonReducer from '../reducers/_common'
 
-import {MessageLevel, MessageSnackbar} from '../dom'
+import {NotificationSnackbar} from '.'
 import { withStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -40,7 +40,7 @@ const _notificationSnackbar = connect(
   ({msg, onClose}) => {
     if(msg !== undefined){
       return (
-        <MessageSnackbar message={msg.message} level={msg.level}
+        <NotificationSnackbar message={msg.message} level={msg.level}
           needsTranslation={msg.needsTranslation} onClose={onClose}/>
       )
     }

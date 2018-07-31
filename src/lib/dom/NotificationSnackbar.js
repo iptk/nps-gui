@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 
-const MessageLevel = Object.freeze({
+const NotificationLevel = Object.freeze({
   ERROR: {class: 'error', icon: 'error'},
   WARNING: {class: 'warning', icon: 'warning'},
   INFO: {class: 'info', icon: 'info'},
@@ -47,7 +47,7 @@ const messageStyles = theme => ({
   }
 })
 
-class MessageSnackbar extends React.Component{
+class NotificationSnackbar extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -98,9 +98,9 @@ class MessageSnackbar extends React.Component{
   }
 }
 
-MessageSnackbar = translate('err')(
-  withStyles(messageStyles)(MessageSnackbar)
+NotificationSnackbar = translate('err')(
+  withStyles(messageStyles)(NotificationSnackbar)
 )
 
-export default MessageSnackbar
-export {MessageLevel, MessageSnackbar}
+export default NotificationSnackbar
+export {NotificationLevel, NotificationSnackbar}
