@@ -1,4 +1,5 @@
 import {MetaDataset} from '../api/metadataset'
+import {NotificationLevel, notifyUser} from '../util/notification'
 
 const G_START_LOADING = 'G_START_LOADING',
   G_STOP_LOADING = 'G_STOP_LOADING',
@@ -15,6 +16,13 @@ const gFetchMetadataAliases = () => {
     MetaDataset.getAliases()
       .then(aliases => {
         dispatch({type: G_RECEIVE_METADATA_ALIASES, aliases: aliases})
+      })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "_common.fetchmeta",
+          level: NotificationLevel.ERROR,
+          needsTranslation: true
+        })
       })
       .finally(() => {
         dispatch({type: G_STOP_LOADING})

@@ -1,5 +1,6 @@
 import {MetadataCollection} from '../api'
 import {G_START_LOADING, G_STOP_LOADING} from './_common'
+import {NotificationLevel, notifyUser} from '../util/notification'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET'
 
@@ -10,6 +11,12 @@ const fetchCollections = (id) => {
       .fetchAll()
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
+      })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "metadatacollections.fetch",
+          level: NotificationLevel.ERROR
+        })
       })
       .finally(() => {
         dispatch({type: G_STOP_LOADING})

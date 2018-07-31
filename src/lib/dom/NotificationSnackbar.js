@@ -11,13 +11,6 @@ import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 
-const NotificationLevel = Object.freeze({
-  ERROR: {class: 'error', icon: 'error'},
-  WARNING: {class: 'warning', icon: 'warning'},
-  INFO: {class: 'info', icon: 'info'},
-  SUCCESS: {class: 'success', icon: 'check_circle'}
-})
-
 const messageStyles = theme => ({
   success: {
     backgroundColor: green[600],
@@ -103,4 +96,4 @@ NotificationSnackbar = translate('err')(
 )
 
 export default NotificationSnackbar
-export {NotificationLevel, NotificationSnackbar}
+export {NotificationSnackbar}

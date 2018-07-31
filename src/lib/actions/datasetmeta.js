@@ -1,5 +1,6 @@
 import {Dataset} from '../api'
 import {G_START_LOADING, G_STOP_LOADING} from './_common'
+import {NotificationLevel, notifyUser} from '../util/notification'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
   ALIASES_SAVED = 'ALIASES_SAVED',
@@ -20,6 +21,16 @@ const deleteMetadata = (dataset, metaid, isNewSet) => {
         .then(succ => {
           dataset.metadatasets = {...dataset.metadatasets}
           dispatch({type: RECEIVE_DATASET, result: dataset})
+          notifyUser(dispatch,{
+            message: "datasetmeta.succ.deletemeta",
+            level: NotificationLevel.SUCCESS
+          })
+        })
+        .catch(err => {
+          notifyUser(dispatch, {
+            message: "datasetmeta.err.deletemeta",
+            level: NotificationLevel.ERROR
+          })
         })
         .finally(() => {
           dispatch({type: G_STOP_LOADING})
@@ -35,6 +46,12 @@ const fetchDataset = (id) => {
       .then(ds => {
         dispatch({type: RECEIVE_DATASET, result: ds})
       })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "common.err.fetchsingleds",
+          level: NotificationLevel.ERROR
+        })
+      })
       .finally(() => {
         dispatch({type: G_STOP_LOADING})
       })
@@ -49,6 +66,16 @@ const saveMetadata = (metaset, isNewSet) => {
       .then(meta => {
         dispatch({
           type: METADATA_SAVED, metadataset: meta, isNewSet: isNewSet
+        })
+        notifyUser(dispatch, {
+          message: "datasetmeta.succ.savemeta",
+          level: NotificationLevel.SUCCESS
+        })
+      })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "datasetmeta.err.savemeta",
+          level: NotificationLevel.ERROR
         })
       })
       .finally(() => {
