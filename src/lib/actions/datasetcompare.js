@@ -1,5 +1,6 @@
 import {Dataset} from '../api'
-import {G_START_LOADING, G_STOP_LOADING} from './_common'
+import {G_START_LOADING, G_STOP_LOADING, G_NOTIFICATION_ADD} from './_common'
+import {NotificationLevel, notifyUser} from '../util/notification'
 
 const RECEIVE_DATASETS = 'RECEIVE_DATASETS',
   UPDATE_SELECTED_MIDS = 'UPDATE_SELECTED_MIDS'
@@ -14,6 +15,13 @@ const fetchDatasets = (ids) => {
     var allp = Promise.all(promises)
     allp.then(dss => {
       dispatch({type: RECEIVE_DATASETS, result: dss})
+    })
+    .catch(err => {
+      notifyUser(dispatch, {
+        message: "common.err.fetchmultids",
+        needsTranslation: true,
+        level: NotificationLevel.ERROR
+      })
     })
     .finally(() => {
       dispatch({type: G_STOP_LOADING})

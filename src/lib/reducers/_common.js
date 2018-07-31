@@ -2,6 +2,8 @@ import {
   G_START_LOADING,
   G_STOP_LOADING,
   G_ADD_DATASETS_TO_COMPARISON,
+  G_NOTIFICATION_ADD,
+  G_NOTIFICATION_CLOSE,
   G_RECEIVE_METADATA_ALIASES,
   G_REMOVE_DATASETS_FROM_COMPARISON,
   G_RESTORE_STATE_FROM_COOKIES
@@ -11,7 +13,11 @@ import Cookie from 'js-cookie'
 const init = {
   loading: 0,
   metadataAliases: {},
-  datasetCompare: []
+  datasetCompare: [],
+  notifications: {
+    current: undefined,
+    queue: []
+  }
 }
 const commonReducer = (state=init, action) => {
   switch(action.type){
@@ -31,6 +37,29 @@ const commonReducer = (state=init, action) => {
       return {
         ...state,
         loading: state.loading > 0 ?state.loading-1 :0
+      }
+
+    case G_NOTIFICATION_ADD:
+      var notif = state.notifications
+
+      if(!state.notifications.current){
+        notif.current = action.notification
+      }
+      else{
+        notif.queue.push(action.notification)
+      }
+
+      return {
+        ...state,
+        notifications: {...notif}
+      }
+
+    case G_NOTIFICATION_CLOSE:
+      var notif = state.notifications
+      notif.current = notif.queue.shift()
+      return {
+        ...state,
+        notifications: {...notif}
       }
 
     case G_ADD_DATASETS_TO_COMPARISON:

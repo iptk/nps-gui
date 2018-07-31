@@ -1,6 +1,7 @@
 import {Dataset} from '../api'
 
 import {G_START_LOADING, G_STOP_LOADING} from './_common'
+import {NotificationLevel, notifyUser} from '../util/notification'
 
 const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
   FILTER_SINGLE_CHANGE = 'FILTER_SINGLE_CHANGE',
@@ -40,6 +41,14 @@ const fetchDataset = (filter) => {
     Dataset.search(filters, filter.fields, filter.start, filter.count)
       .then(res => {
         dispatch({type: RECEIVE_DATASET, result: res})
+      })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "common.err.fetchmultids",
+          level: NotificationLevel.ERROR
+        })
+      })
+      .finally(() => {
         dispatch({type: G_STOP_LOADING})
       })
   }
