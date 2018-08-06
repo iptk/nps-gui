@@ -12,7 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 import CollapsableCard from './CollapsableCard'
 
-class MetaDatasetComparisonCard extends CollapsableCard{
+class CompTable extends React.PureComponent{
   render(){
     var {datasets, metaid, t} = this.props
     var metaKeys = []
@@ -61,8 +61,9 @@ class MetaDatasetComparisonCard extends CollapsableCard{
 
     csv = btoa(csv)
 
-    return super.render(
-      metaid,
+    console.log('render')
+
+    return (
       <div>
         <Table>
           <TableHead>
@@ -80,6 +81,15 @@ class MetaDatasetComparisonCard extends CollapsableCard{
           {t('MetaDatasetComparisonCard.csvexport')}
         </Button>
       </div>
+    )
+  }
+}
+
+class MetaDatasetComparisonCard extends CollapsableCard{
+  render(){
+    return super.render(
+      this.props.metaid,
+      <CompTable {...this.props}/>
     )
   }
 }

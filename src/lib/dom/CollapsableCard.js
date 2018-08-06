@@ -13,7 +13,7 @@ const _expandBtn = ({expanded, onClick}) => (
   </IconButton>
 )
 
-class CollapsableCard extends React.Component{
+class CollapsableCard extends React.PureComponent{
   constructor(props){
     super(props)
     this.state = {
