@@ -2,6 +2,7 @@
 
 ## v0.2.2
 - Introduce changelog
+- Fixes on MetaDatasetCard (dataset detail view), save, delete, autocomplete on new mds
 
 ## v0.2.1
 - Add datasets to comparison from search
