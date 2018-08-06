@@ -65,9 +65,13 @@ class NotificationSnackbar extends React.Component{
     const handleClose = this.handleClose.bind(this)
     if(link){
       action = <Button component={Link} to={link.href} color='secondary'
+        key='action'
         onClick={this.handleClose.bind(this)}>
           {link.needsTranslation ?t(link.text) :link.text}
         </Button>
+    }
+    if(!link && action){
+      action = React.closeElement(action, {key: 'action'})
     }
     var closeBtn = <IconButton
         key="close"
