@@ -1,6 +1,7 @@
 {
   "_common":{
-    "fetchmeta": "Aliase für Metadaten konnten nicht geladen werden."
+    "fetchmeta": "Aliase für Metadaten konnten nicht geladen werden.",
+    "go": "Ansehen"
   },
   "common":{
     "err":{
@@ -20,5 +21,8 @@
   },
   "metadatacollections":{
     "fetch": "Fehler beim Laden der Metadata-collections"
+  },
+  "searchdataset":{
+    "updatedcomp": "Vergleich erfolgreich geändert"
   }
 }
