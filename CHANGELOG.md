@@ -5,6 +5,7 @@
 - Fixes on MetaDatasetCard (dataset detail view), save, delete, autocomplete on new mds
 - Allow custom links and action in notifications
 - Search: notify user after changing comparison
+- Speedup comparison
 
 ## v0.2.1
 - Add datasets to comparison from search
