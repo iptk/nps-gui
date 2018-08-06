@@ -73,6 +73,12 @@ class ObjectTable extends React.Component{
     }
   }
 
+  delete(){
+    if(this.props.onDelete){
+      this.props.onDelete(this.state.obj)
+    }
+  }
+
   render(){
     var {readonly, t} = this.props
     var rows = this.state.keys.map((key, idx) => (
@@ -105,6 +111,13 @@ class ObjectTable extends React.Component{
                   ?<Button onClick={this.save.bind(this)}>
                       <Icon>save</Icon>
                       {t('ObjectTable.save')}
+                    </Button>
+                  :null
+                }
+                {this.props.onDelete
+                  ?<Button onClick={this.delete.bind(this)}>
+                      <Icon>delete_forever</Icon>
+                      {t('ObjectTable.delete')}
                     </Button>
                   :null
                 }

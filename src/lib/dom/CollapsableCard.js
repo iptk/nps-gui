@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import Collapse from '@material-ui/core/Collapse'
 import Icon from '@material-ui/core/Icon'
@@ -12,7 +13,7 @@ const _expandBtn = ({expanded, onClick}) => (
   </IconButton>
 )
 
-class CollapsableCard extends React.Component{
+class CollapsableCard extends React.PureComponent{
   constructor(props){
     super(props)
     this.state = {

@@ -7,7 +7,7 @@ const RECEIVE_DATASET = 'RECEIVE_DATASET',
   METADATA_SAVED = 'METADATA_SAVED',
   ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
 
-const deleteMetadata = (dataset, metaid, isNewSet) => {
+const deleteMetadata = (dataset, metaid) => {
   return (dispatch) => {
     dispatch({type: G_START_LOADING})
     if(isNewSet){
@@ -59,7 +59,7 @@ const fetchDataset = (id) => {
   }
 }
 
-const saveMetadata = (metaset, isNewSet) => {
+const saveMetadata = (metaset) => {
   return (dispatch) => {
     dispatch({type: G_START_LOADING})
     metaset.save()

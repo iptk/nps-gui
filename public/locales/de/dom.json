@@ -18,6 +18,7 @@
     "type": "Typ",
     "add": "Hinzufügen",
     "save": "Speichern",
+    "delete": "Löschen",
     "types":{
       "array": "Liste",
       "boolean": "Wahrheitswert",
@@ -27,14 +28,8 @@
     }
   },
   "MetaDatasetCard":{
-    "addrow": "Paar hinzufügen",
     "chooseid": "ID wählen",
-    "deletedataset": "Metadatensatz löschen",
-    "deleteselected": "Ausgewählte Elemente löschen",
-    "generatenewid": "(Leer lassen für zufällige ID)",
-    "key": "Schlüssel",
-    "save": "Speichern",
-    "value": "Wert"
+    "generatenewid": "(Leer lassen für zufällige ID)"
   },
   "MetaDatasetComparisonCard":{
     "csvexport": "Als CSV exportieren",

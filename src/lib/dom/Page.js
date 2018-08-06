@@ -40,8 +40,7 @@ const _notificationSnackbar = connect(
   ({msg, onClose}) => {
     if(msg !== undefined){
       return (
-        <NotificationSnackbar message={msg.message} level={msg.level}
-          needsTranslation={msg.needsTranslation} onClose={onClose}/>
+        <NotificationSnackbar onClose={onClose} {...msg}/>
       )
     }
     return ''

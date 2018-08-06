@@ -1,6 +1,7 @@
 {
   "_common":{
-    "fetchmeta": "Failed to fetch metadata-aliases"
+    "fetchmeta": "Failed to fetch metadata-aliases",
+    "go": "Go"
   },
   "common":{
     "err":{
@@ -20,5 +21,8 @@
   },
   "metadatacollections":{
     "fetch": "Error while loading metadata-collections"
+  },
+  "searchdataset":{
+    "updatedcomp": "Comparison changed"
   }
 }

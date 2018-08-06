@@ -8,10 +8,13 @@ const NotificationLevel = Object.freeze({
 })
 
 const notifyUser = (dispatch, {
-  message, level=NotificationLevel.INFO, needsTranslation=true
+  message, level=NotificationLevel.INFO, needsTranslation=true, ...attrs
 }) => {
   dispatch({type: G_NOTIFICATION_ADD, notification:{
-    message: message, level: level, needsTranslation: needsTranslation
+    message: message,
+    level: level,
+    needsTranslation: needsTranslation,
+    ...attrs
   }})
 }
 

@@ -18,6 +18,7 @@
     "type": "Type",
     "add": "Add",
     "save": "Save",
+    "delete": "Delete",
     "types":{
       "array": "Array",
       "boolean": "Boolean",
@@ -27,14 +28,8 @@
     }
   },
   "MetaDatasetCard":{
-    "addrow": "Add pair",
     "chooseid": "Choose ID",
-    "deletedataset": "Delete full metadataset",
-    "deleteselected": "Delete selected elements",
-    "generatenewid": "(Leave empty to generate a random ID)",
-    "key": "Key",
-    "save": "Save",
-    "value": "Value"
+    "generatenewid": "(Leave empty to generate a random ID)"
   },
   "MetaDatasetComparisonCard":{
     "csvexport": "Export to CSV",

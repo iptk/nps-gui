@@ -2,10 +2,12 @@ import React from 'react'
 import {translate} from 'react-i18next'
 import {withStyles} from '@material-ui/core/styles'
 import classNames from 'classnames'
+import {Link} from 'react-router-dom'
 
 import amber from '@material-ui/core/colors/amber'
 import green from '@material-ui/core/colors/green'
 
+import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -56,9 +58,28 @@ class NotificationSnackbar extends React.Component{
   }
 
   render(){
-    var {classes, level, message, needsTranslation=false, t} = this.props
+    var {
+      classes, level, message, needsTranslation=false, t, link, action
+    } = this.props
     this.state.open = true
     const handleClose = this.handleClose.bind(this)
+    if(link){
+      action = <Button component={Link} to={link.href} color='secondary'
+        key='action'
+        onClick={this.handleClose.bind(this)}>
+          {link.needsTranslation ?t(link.text) :link.text}
+        </Button>
+    }
+    if(!link && action){
+      action = React.closeElement(action, {key: 'action'})
+    }
+    var closeBtn = <IconButton
+        key="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <Icon className={classes.icon}>close</Icon>
+      </IconButton>
     return (
       <Snackbar
         open={this.state.open}
@@ -76,15 +97,7 @@ class NotificationSnackbar extends React.Component{
               {needsTranslation ?t(message) :message}
             </span>
           }
-          action={[
-            <IconButton
-              key="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <Icon className={classes.icon}>close</Icon>
-            </IconButton>
-          ]}
+          action={action ?[action, closeBtn] :closeBtn}
         />
       </Snackbar>
     )
