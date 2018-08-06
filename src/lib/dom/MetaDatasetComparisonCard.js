@@ -61,8 +61,6 @@ class CompTable extends React.PureComponent{
 
     csv = btoa(csv)
 
-    console.log('render')
-
     return (
       <div>
         <Table>
