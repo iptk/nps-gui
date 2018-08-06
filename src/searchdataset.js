@@ -18,6 +18,7 @@ import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, FIELDS_CHANGE, START_CHANGE,
 import {DatasetTable, Page, QueryList} from './lib/dom'
 import reducer from './lib/reducers/searchdataset'
 import {debounceWrapper} from './lib/util'
+import {notifyUser, NotificationLevel} from './lib/util/notification.js'
 
 const _subscribedDatasetTable = connect(
   (state) => ({
@@ -106,12 +107,28 @@ class SearchDataset extends Page{
     this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
-  addToCompare(ids){
+  notifyDSCompChange(ids, type){
+    if(!ids || Array.isArray(ids) && ids.length === 0){
+      return
+    }
     this.store.dispatch({type: G_ADD_DATASETS_TO_COMPARISON, dsids: ids})
+    notifyUser(this.store.dispatch,
+      {
+        level: NotificationLevel.SUCCESS,
+        message: "searchdataset.updatedcomp",
+        link: {
+          href: '/datasets/compare', text: '_common.go', needsTranslation: true
+        }
+      }
+    )
+  }
+
+  addToCompare(ids){
+    this.notifyDSCompChange(ids, G_ADD_DATASETS_TO_COMPARISON)
   }
 
   removeFromCompare(ids){
-    this.store.dispatch({type: G_REMOVE_DATASETS_FROM_COMPARISON, dsids: ids})
+    this.notifyDSCompChange(ids, G_REMOVE_DATASETS_FROM_COMPARISON)
   }
 
   render(){
