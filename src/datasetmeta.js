@@ -100,8 +100,8 @@ class DatasetMeta extends Page{
     this.store.dispatch({type: ADD_EMPTY_METADATASET})
   }
 
-  saveMetaset(metaset, isNewSet){
-    this.store.dispatch(saveMetadata(metaset, isNewSet))
+  saveMetaset(metaset){
+    this.store.dispatch(saveMetadata(metaset))
   }
 
   deleteMetaset(meta, isNewSet){

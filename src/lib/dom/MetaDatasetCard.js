@@ -5,7 +5,7 @@ import Autocomplete from './Autocomplete'
 import CollapsableCard from './CollapsableCard'
 import ObjectTable from './ObjectTable'
 
-class MetaDatasetCard extends CollapsableCard{
+class _MetaDatasetCard extends CollapsableCard{
   constructor(props){
     super(props)
     this.state = {
@@ -21,8 +21,8 @@ class MetaDatasetCard extends CollapsableCard{
     this.setState({
       metaset: mds
     })
-    if(this.props.save){
-      this.props.save(mds)
+    if(this.props.onSave){
+      this.props.onSave(mds)
     }
   }
 
@@ -34,8 +34,14 @@ class MetaDatasetCard extends CollapsableCard{
     })
   }
 
+  deleteMds(){
+    if(this.props.onDelete){
+      this.props.onDelete(this.props.metads.id)
+    }
+  }
+
   render(){
-    var {aliases, metads, onSave} = this.props
+    var {aliases, metads, onSave, onDelete, t} = this.props
 
     var alias = aliases[metads.id]
     var title = alias || metads.id
@@ -54,6 +60,8 @@ class MetaDatasetCard extends CollapsableCard{
     )
   }
 }
+
+const MetaDatasetCard = translate('dom')(_MetaDatasetCard)
 
 export default MetaDatasetCard
 export {MetaDatasetCard}
