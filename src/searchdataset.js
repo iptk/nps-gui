@@ -10,13 +10,21 @@ import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import TextField from '@material-ui/core/TextField'
 
+import {
+  G_ADD_DATASETS_TO_COMPARISON,
+  G_REMOVE_DATASETS_FROM_COMPARISON
+} from './lib/actions/_common'
 import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, FIELDS_CHANGE, START_CHANGE, COUNT_CHANGE, fetchDataset} from './lib/actions/searchdataset'
 import {DatasetTable, Page, QueryList} from './lib/dom'
 import reducer from './lib/reducers/searchdataset'
 import {debounceWrapper} from './lib/util'
 
 const _subscribedDatasetTable = connect(
-  (state) => ({datasets: state.l.dataset, keys: state.l.filter.fields})
+  (state) => ({
+    datasets: state.l.dataset,
+    keys: state.l.filter.fields,
+    comparison: state.g.datasetCompare
+  })
 )(DatasetTable)
 
 const _subscribedQueryList = connect(
@@ -98,6 +106,14 @@ class SearchDataset extends Page{
     this.store.dispatch(fetchDataset(this.store.getState().l.filter))
   }
 
+  addToCompare(ids){
+    this.store.dispatch({type: G_ADD_DATASETS_TO_COMPARISON, dsids: ids})
+  }
+
+  removeFromCompare(ids){
+    this.store.dispatch({type: G_REMOVE_DATASETS_FROM_COMPARISON, dsids: ids})
+  }
+
   render(){
     const {classes, t} = this.props
     return super.render(
@@ -130,7 +146,10 @@ class SearchDataset extends Page{
           <_resultNums/>
         </section>
         <_subscribedQueryList/>
-        <_subscribedDatasetTable editBtn={true} dlBtn={true}/>
+        <_subscribedDatasetTable editBtn={true} dlBtn={true}
+          onAddToCompare={this.addToCompare.bind(this)}
+          onRemoveFromCompare={this.removeFromCompare.bind(this)}
+        />
       </section>
     )
   }

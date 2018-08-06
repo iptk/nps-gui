@@ -1,6 +1,8 @@
 import React from 'react'
+import {translate} from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
 import Icon from '@material-ui/core/Icon'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -17,7 +19,10 @@ class DatasetTable extends React.Component{
     super(props)
     this.state = {
       orderBy: '',
-      order: 'asc'
+      order: 'asc',
+      selected: [],
+      numRows: 0,
+      numChecked: 0
     }
   }
 
@@ -43,10 +48,64 @@ class DatasetTable extends React.Component{
     return val.toLowerCase()
   }
 
+  checkAll = (evt, selectAll) => {
+    var selected = selectAll
+      ?this.props.datasets.map(ds => ds.id)
+      :[]
+    this.setState({
+      selected: selected,
+      numChecked: selectAll ?this.state.numRows :0
+    })
+  }
+
+  checkDS = (id) => {
+    var selected = this.state.selected
+    var idx = selected.indexOf(id)
+    if(idx < 0){
+      selected.push(id)
+    }
+    else{
+      selected.splice(idx, 1)
+    }
+    this.setState({
+      selected: selected,
+      numChecked: this.state.numChecked + (idx < 0 ?1 :-1)
+    })
+  }
+
+  addToCompare = () => {
+    if(this.props.onAddToCompare){
+      this.props.onAddToCompare(this.state.selected)
+    }
+  }
+
+  removeFromCompare = () => {
+    if(this.props.onRemoveFromCompare){
+      this.props.onRemoveFromCompare(this.state.selected)
+    }
+  }
+
+  toggleCompare = (id) => {
+    if(this.props.comparison.includes(id)){
+      if(this.props.onAddToCompare){
+        this.props.onAddToCompare([id])
+      }
+    }
+    else{
+      if(this.props.onRemoveFromCompare){
+        this.props.onRemoveFromCompare([id])
+      }
+    }
+  }
+
   render(){
     const defaultVals = {datasets: [], keys: [], editBtn: false, dlBtn: false}
-    var {datasets, keys, editBtn, dlBtn} = {...defaultVals, ...this.props}
+    var {datasets, keys, editBtn, dlBtn, t} = {...defaultVals, ...this.props}
     var {orderBy, order} = this.state
+
+    this.state.numRows = datasets.length
+
+    // order datasets
     if(orderBy){
       datasets = order === 'desc'
         ? datasets.sort((a, b) => (
@@ -63,9 +122,16 @@ class DatasetTable extends React.Component{
       }
     }
 
+    // create rows
     var rows = []
     for(var ds of datasets){
       var cells = []
+      var checked = this.state.selected.includes(ds.id)
+      cells.push(
+        <TableCell key={'__checkbox'}>
+          <Checkbox checked={checked}/>
+        </TableCell>
+      )
       cells.push(<TableCell key={'__ID'}>{ds.id}</TableCell>)
       var firstCell = true
       for(var k of keys){
@@ -79,6 +145,13 @@ class DatasetTable extends React.Component{
 
       // edit + download button
       var btns = []
+      if(this.props.comparison){
+        btns.push(
+          <Button key='__btncompare' onClick={this.toggleCompare.bind(this, ds.id)}>
+            <Icon>compare_arrows</Icon>
+          </Button>
+        )
+      }
       if(editBtn){
         btns.push(
           <Button key='__btnedit' onClick={()=>{changePage('/dataset/'+ds.id)}}>
@@ -99,7 +172,12 @@ class DatasetTable extends React.Component{
 
       // push row
       rows.push(
-        <TableRow key={ds.id}>
+        <TableRow key={ds.id}
+          onClick={this.checkDS.bind(this, ds.id)}
+          role="checkbox"
+          aria-checked={checked}
+          selected={checked}
+        >
           {cells}
         </TableRow>
       )
@@ -108,6 +186,16 @@ class DatasetTable extends React.Component{
       <Table>
         <TableHead key="__head">
           <TableRow>
+            <TableCell>
+              <Checkbox
+                indeterminate={
+                  this.state.numChecked > 0
+                  && this.state.numChecked < this.state.numRows
+                }
+                checked={this.state.numChecked === this.state.numRows}
+                onChange={this.checkAll}
+              />
+            </TableCell>
             {keys.map((item, index) => (
               <TableCell key={item} sortDirection={orderBy === item ?order :false}>
                 <TableSortLabel
@@ -124,10 +212,20 @@ class DatasetTable extends React.Component{
         </TableHead>
         <TableBody>
           {rows}
+          <TableRow>
+            <TableCell colSpan={keys.length+2}>
+              <Button onClick={this.addToCompare}>
+                {t('DatasetTable.addtocompare')}
+              </Button>
+              <Button onClick={this.removeFromCompare}>
+                {t('DatasetTable.removefromcompare')}
+              </Button>
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     )
   }
 }
 
-export default DatasetTable
+export default translate('dom')(DatasetTable)

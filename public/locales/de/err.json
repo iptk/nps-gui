@@ -1,0 +1,24 @@
+{
+  "_common":{
+    "fetchmeta": "Aliase für Metadaten konnten nicht geladen werden."
+  },
+  "common":{
+    "err":{
+      "fetchmultids": "Fehler beim Laden der Datensätze",
+      "fetchsingleds": "Fehler beim Laden des Datensatzes"
+    }
+  },
+  "datasetmeta":{
+    "err":{
+      "deletemeta": "Fehler beim entfernen des Metadatensatzes",
+      "savemeta": "Fehler beim speichern der Metadaten"
+    },
+    "succ":{
+      "deletemeta": "Metadatensatz gelöscht",
+      "savemeta": "Metadatensatz gespeichert"
+    }
+  },
+  "metadatacollections":{
+    "fetch": "Fehler beim Laden der Metadata-collections"
+  }
+}

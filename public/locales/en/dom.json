@@ -8,6 +8,10 @@
   "DatasetListCard":{
     "title": "Datasets"
   },
+  "DatasetTable":{
+    "addtocompare": "Add selection to comparison",
+    "removefromcompare": "Remove selection from comparison"
+  },
   "ObjectTable":{
     "key": "Key",
     "value": "Value",
