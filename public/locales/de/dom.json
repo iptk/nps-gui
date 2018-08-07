@@ -1,4 +1,10 @@
 {
+  "charts":{
+    "ChartType":{
+      "line": "Linie",
+      "bar": "Balken"
+    }
+  },
   "ChooseMetaDatasetsCard":{
     "metasets": "Metadatensätze"
   },
@@ -32,6 +38,11 @@
     "generatenewid": "(Leer lassen für zufällige ID)"
   },
   "MetaDatasetComparisonCard":{
+    "chart":{
+      "charttype": "Graphen-Art",
+      "xaxis": "X-Achse",
+      "yaxis": "Y-Achse"
+    },
     "csvexport": "Als CSV exportieren",
     "dataset": "Datensatz-ID"
   },
