@@ -39,7 +39,9 @@
   },
   "MetaDatasetComparisonCard":{
     "chart":{
+      "arraywarning": "Only one of your chosen axis represents an array. Please choose two sequences or two single-value fields.",
       "charttype": "Chart type",
+      "sequence": "sequence",
       "xaxis": "X-Axis",
       "yaxis": "Y-Axis"
     },

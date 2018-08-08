@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Icon from '@material-ui/core/Icon'
 import MenuItem from '@material-ui/core/MenuItem'
+import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -13,6 +14,10 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TextField from '@material-ui/core/TextField'
 import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+
+import amber from '@material-ui/core/colors/amber'
+import white from '@material-ui/core/colors/amber'
 
 import {ChartType} from './charts'
 import CollapsableCard from './CollapsableCard'
@@ -27,6 +32,13 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '30%',
     minWidth: '200'
+  },
+  chartWarning: {
+    backgroundColor: amber[700],
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    margin: theme.spacing.unit
   }
 })
 
@@ -168,8 +180,11 @@ class CompChartSectionFields extends React.PureComponent{
     }
     this.state.keys = keys
 
+    var seqAdd = ` (${t('MetaDatasetComparisonCard.chart.sequence')})`
     var keyItems = Object.keys(keys).map(k => (
-      <MenuItem key={k} value={k}>{keys[k].label}</MenuItem>
+      <MenuItem key={k} value={k}>
+        {keys[k].label+(keys[k].type === 'array' ?seqAdd :'')}
+      </MenuItem>
     ))
 
     return (
@@ -262,6 +277,11 @@ class CompChartSection extends React.PureComponent{
         <CompChartSectionFields {...this.props}
           onChangeType={this.handleChangeType.bind(this)}
           onChangeAxis={this.handleChangeAxis.bind(this)}
+        />
+        <CompChartChart {...this.props}
+          chartType={this.state.chartType}
+          xAxis={this.state.xAxis}
+          yAxis={this.state.yAxis}
         />
       </section>
     )

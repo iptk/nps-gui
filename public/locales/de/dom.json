@@ -39,7 +39,9 @@
   },
   "MetaDatasetComparisonCard":{
     "chart":{
+      "arraywarning": "Nur eine der Ausgewählten Achsen repräsentiert eine Sequenz. Bitte wählen Sie zwei Sequenzen oder zwei einfach-wertige Felder.",
       "charttype": "Graphen-Art",
+      "sequence": "Sequenz",
       "xaxis": "X-Achse",
       "yaxis": "Y-Achse"
     },
