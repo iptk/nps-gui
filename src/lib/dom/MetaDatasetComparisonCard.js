@@ -127,11 +127,26 @@ class CompChartSectionFields extends React.PureComponent{
     }
   }
 
-  getUsableKeys(obj){
-    // totally wrong, but placeholder
-    return Object.keys(Object.flatten(obj)).map(k => ({
-      label: k, type: 'string'
-    }))
+  getUsableKeys(obj, parentKey = ''){
+    if(parentKey.length > 0){
+      parentKey += '.'
+    }
+
+    var keys = []
+    for(var key in obj){
+      if(Array.isArray(obj[key])){
+        keys.push({label: parentKey+key, type: 'array'})
+      }
+      else if(typeof obj[key] === 'object'){
+        keys = keys.concat(
+          getRecursKeys(obj[key], parentKey+key)
+        )
+      }
+      else{
+        keys.push({label: parentKey+key, type: typeof obj[key]})
+      }
+    }
+    return keys
   }
 
   render(){
