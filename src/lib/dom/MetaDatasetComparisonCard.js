@@ -152,7 +152,6 @@ class CompChartSectionFields extends React.PureComponent{
   render(){
     var {classes, datasets, metaid, t} = this.props
 
-    // TODO: __dsid_ => t('....dsid')
     var keys = {'__dsid_': {label: t('MetaDatasetComparisonCard.dataset'), type: 'dsid'}}
     for(var ds of datasets){
       if(metaid in ds.metadatasets){
