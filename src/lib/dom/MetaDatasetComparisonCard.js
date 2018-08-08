@@ -106,8 +106,9 @@ class CompChartSectionFields extends React.PureComponent{
     super(props)
     this.state = {
       chartType: 'LINE_CHART',
-      xKey: '__dsid_',
-      yKey: '__dsid_'
+      xKey: '',
+      yKey: '',
+      keys: []
     }
   }
   changeType(evt){
@@ -123,7 +124,7 @@ class CompChartSectionFields extends React.PureComponent{
       [axis+'Key']: evt.target.value
     })
     if(this.props.onChangeAxis){
-      this.props.onChangeAxis(axis, evt.target.value)
+      this.props.onChangeAxis(axis, this.state.keys[evt.target.value])
     }
   }
 
@@ -165,7 +166,7 @@ class CompChartSectionFields extends React.PureComponent{
         }
       }
     }
-    this.state[keys] = keys
+    this.state.keys = keys
 
     var keyItems = Object.keys(keys).map(k => (
       <MenuItem key={k} value={k}>{keys[k].label}</MenuItem>
@@ -209,14 +210,48 @@ class CompChartSectionFields extends React.PureComponent{
   }
 }
 
+class CompChartChart extends React.PureComponent{
+  render(){
+    var {classes, xAxis, yAxis, datasets, chartType, t} = this.props
+
+    // Do not display anything if axis are not chosen
+    if(xAxis === null || yAxis === null){
+      return ''
+    }
+
+    var yArr = yAxis.type === 'array'
+    if(xAxis.type === 'array' ?!yArr :yArr){
+      return <section>
+          <Paper elevation={1} className={classes.chartWarning}>
+            <Typography variant='body2'>
+              {t('MetaDatasetComparisonCard.chart.arraywarning')}
+            </Typography>
+          </Paper>
+        </section>
+    }
+    return <div/>
+  }
+}
+
 class CompChartSection extends React.PureComponent{
   constructor(props){
     super(props)
     this.state = {
       chartType: 'LINE_CHART',
-      xKey: '__dsid_',
-      yKey: '__dsid_'
+      xAxis: null,
+      yAxis: null
     }
+  }
+
+  handleChangeType(type){
+    this.setState({
+      chartType: type
+    })
+  }
+  handleChangeAxis(axis, key){
+    this.setState({
+      [axis+'Axis']: key
+    })
   }
 
   render(){
@@ -224,7 +259,10 @@ class CompChartSection extends React.PureComponent{
 
     return (
       <section>
-        <CompChartSectionFields {...this.props}/>
+        <CompChartSectionFields {...this.props}
+          onChangeType={this.handleChangeType.bind(this)}
+          onChangeAxis={this.handleChangeAxis.bind(this)}
+        />
       </section>
     )
   }
