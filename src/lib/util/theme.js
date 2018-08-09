@@ -1,4 +1,4 @@
-var loadTheme = async () => {
+const loadTheme = async () => {
   return await fetch(
     '/conf/theme',
     {method: 'GET', redirect: 'follow'}
