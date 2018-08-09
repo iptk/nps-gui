@@ -4,6 +4,13 @@ NPS-GUI is a web-client for the [Neuroimage Processing System (NPS)](https://git
 # Configuration
 The `conf`-directory contains all files used to configure the client. Please duplicate the `*.default.json` file to remove the `.default` and adjust them to your needs. `*.default.json` are used as a fallback.
 
+file | description
+--- | ---
+npscustom | customization of the appearance of the surface
+npsdefaults | default values for inputs
+srvlist | server/s to use
+theme | surface-theme. See [material-ui documentation](https://material-ui.com/customization/themes/#theme-provider) for more information
+
 # Using docker-image
 `nps-gui` is the docker image. See _Developing nps-gui_.
 ```bash
