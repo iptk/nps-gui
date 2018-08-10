@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.3
+- Customization
+- CI/CD
+
 ## v0.2.2
 - Introduce changelog
 - Fixes on MetaDatasetCard (dataset detail view), save, delete, autocomplete on new mds
