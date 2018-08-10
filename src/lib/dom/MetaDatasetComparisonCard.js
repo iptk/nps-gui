@@ -113,6 +113,7 @@ class CompTable extends React.PureComponent{
   }
 }
 
+@withStyles(styles)
 class CompChartSectionFields extends React.PureComponent{
   constructor(props){
     super(props)
@@ -225,6 +226,7 @@ class CompChartSectionFields extends React.PureComponent{
   }
 }
 
+@withStyles(styles)
 class CompChartChart extends React.PureComponent{
   render(){
     var {classes, xAxis, yAxis, datasets, chartType, t} = this.props
@@ -303,6 +305,4 @@ class MetaDatasetComparisonCard extends CollapsableCard{
   }
 }
 
-export default translate('dom')(
-  withStyles(styles)(MetaDatasetComparisonCard)
-)
+export default translate('dom')(MetaDatasetComparisonCard)

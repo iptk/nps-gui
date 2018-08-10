@@ -42,6 +42,7 @@ const messageStyles = theme => ({
   }
 })
 
+@withStyles(messageStyles)
 class NotificationSnackbar extends React.Component{
   constructor(props){
     super(props)
@@ -104,9 +105,7 @@ class NotificationSnackbar extends React.Component{
   }
 }
 
-NotificationSnackbar = translate('err')(
-  withStyles(messageStyles)(NotificationSnackbar)
-)
+NotificationSnackbar = translate('err')(NotificationSnackbar)
 
 export default NotificationSnackbar
 export {NotificationSnackbar}
