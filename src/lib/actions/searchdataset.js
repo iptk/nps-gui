@@ -25,7 +25,7 @@ const fetchDataset = (filter) => {
       }
       filters.push(filter.global.concat(f))
     }
-    if(filters.length === 0){ // only global filters
+    if(filters.length === 0 && filter.global.length > 0){ // only global filters
         filters.push(filter.global)
     }
 
@@ -33,7 +33,15 @@ const fetchDataset = (filter) => {
 
     // Don't ask the api without a query
     if(filters.length === 0){
-      dispatch({type: RECEIVE_DATASET, result: []})
+      const dummy = {
+        datasets: [],
+        range:{
+          start: 0,
+          end: 0,
+          max: 0
+        }
+      }
+      dispatch({type: RECEIVE_DATASET, result: dummy})
       dispatch({type: G_STOP_LOADING})
       return
     }

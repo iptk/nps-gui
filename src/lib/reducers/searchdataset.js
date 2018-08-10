@@ -27,7 +27,7 @@ const filterReducer = (state = initFilter, action) => {
       filter = filter.filter(line => line.length > 0)
       filter.forEach(
         // cut trailing and leading whitespaces, shrink multiple ws to single
-        (o,i,a) => a[i] = o.trim().replace(/ +(?= )/g,'').split(' ')
+        (o,i,a) => a[i] = o.trim().replace(/ +(?= )/g,'').split(' ').filter(f => f !== '')
       )
       return {
         ...state,

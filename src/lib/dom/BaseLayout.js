@@ -16,6 +16,8 @@ import {withStyles} from '@material-ui/core/styles'
 
 import {changePage} from '../util'
 
+import NPSContext from '../util/NPSContext'
+
 const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -69,9 +71,13 @@ class BaseLayout extends React.Component {
             <IconButton onClick={this.toggleDrawer} color="inherit">
               <Icon>menu</Icon>
             </IconButton>
+            <NPSContext.custom.Consumer>
+            {({__page}) => (
             <Typography variant="title" color="inherit" noWrap>
-              NPS
+              {__page.title}
             </Typography>
+            )}
+            </NPSContext.custom.Consumer>
           </Toolbar>
         </AppBar>
         <Drawer

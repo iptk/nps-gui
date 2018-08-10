@@ -19,6 +19,7 @@ import {DatasetTable, Page, QueryList} from './lib/dom'
 import reducer from './lib/reducers/searchdataset'
 import {debounceWrapper} from './lib/util'
 import {notifyUser, NotificationLevel} from './lib/util/notification.js'
+import NPSContext from './lib/util/NPSContext'
 
 const _subscribedDatasetTable = connect(
   (state) => ({
@@ -80,7 +81,23 @@ const _directDSLinks = translate('pages')(connect(
 class SearchDataset extends Page{
   constructor(props){
     super(props, reducer)
-    this.store.dispatch({type: FIELDS_CHANGE, fields: ["PatientName", "SeriesDescription", "AcquisitionDate", "SeriesDate"]})
+    this.applyDefaults()
+  }
+
+  applyDefaults(searchdataset){
+    this.store.dispatch({
+      type: FILTER_SINGLE_CHANGE,
+      filter: this.props.npsdefaults.filter
+    })
+    this.store.dispatch({
+      type: COUNT_CHANGE, count: this.props.npsdefaults.count
+    })
+    this.store.dispatch({
+      type: FIELDS_CHANGE, fields: this.props.npsdefaults.fields.split(',')
+    })
+    this.applyNewFilter(
+      FILTER_GLOBAL_CHANGE, {value: this.props.npsdefaults.filterGlobal}
+    )
   }
 
   applyNewFilter(type, target){
@@ -132,25 +149,27 @@ class SearchDataset extends Page{
   }
 
   render(){
-    const {classes, t} = this.props
+    const {classes, npsdefaults, t} = this.props
     return super.render(
       <section>
         <TextField type="text" label={t('searchdataset.filter_single')}
           fullWidth multiline rows={5} margin='normal'
+          defaultValue={npsdefaults.filter}
           onChange={debounceWrapper(this.applyNewFilter.bind(this, FILTER_SINGLE_CHANGE), 600)}/>
         <TextField type="text" label={t('searchdataset.filter_global')}
           fullWidth margin='normal'
+          defaultValue={npsdefaults.filterGlobal}
           onChange={debounceWrapper(this.applyNewFilter.bind(this, FILTER_GLOBAL_CHANGE), 600)}/>
         <TextField type="text" label={t('searchdataset.fields')}
           fullWidth margin='normal'
-          defaultValue="PatientName,SeriesDescription,AcquisitionDate,SeriesDate"
+          defaultValue={npsdefaults.fields}
           onChange={debounceWrapper(this.applyFields.bind(this), 600)}/>
         <br/>
         <section>
           <TextField type="number" label={t('searchdataset.resultcount')}
             fullWidth margin='normal'
             onChange={debounceWrapper(this.changeCount.bind(this), 600)}
-            defaultValue="10"/>
+            defaultValue={npsdefaults.count}/>
           <_directDSLinks/>
           <Button onClick={this.changeStart.bind(this, false)} variant='flat'>
             <Icon>chevron_left</Icon>
@@ -172,4 +191,12 @@ class SearchDataset extends Page{
   }
 }
 
-export default translate('pages')(SearchDataset)
+export default translate('pages')(
+  (props) => (
+    <NPSContext.defaults.Consumer>
+      {({searchdataset}) => (
+        <SearchDataset npsdefaults={searchdataset} {...props}/>
+      )}
+    </NPSContext.defaults.Consumer>
+  )
+)
