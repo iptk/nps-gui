@@ -21,10 +21,10 @@ import white from '@material-ui/core/colors/amber'
 
 import 'react-vis/dist/style.css'
 import {
+  FlexibleXYPlot,
   HorizontalGridLines,
   VerticalGridLines,
   XAxis,
-  XYPlot,
   YAxis
 } from 'react-vis'
 
@@ -51,7 +51,12 @@ const styles = theme => ({
   },
   chartContainer: {
     padding: theme.spacing.unit * 2,
-    margin: theme.spacing.unit
+    margin: 'auto',
+    height: '100%',
+    width: '100%',
+    maxHeight: '100vh',
+    maxWidth: '100vw',
+    boxSizing: 'border-box'
   }
 })
 
@@ -328,9 +333,7 @@ class CompChartChart extends React.PureComponent{
     // display the graph!
     return (
       <div className={classes.chartContainer}>
-        <XYPlot
-          height={500}
-          width={500}
+        <FlexibleXYPlot
           xType='linear'
           yType='linear'
         >
@@ -343,7 +346,7 @@ class CompChartChart extends React.PureComponent{
             var Component = ChartType[chartType].class
             return <Component data={d} key={idx}/>
           })}
-        </XYPlot>
+        </FlexibleXYPlot>
       </div>
     )
   }
