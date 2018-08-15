@@ -2,7 +2,9 @@
   "charts":{
     "ChartType":{
       "line": "Linie",
-      "bar": "Balken"
+      "bar": "Balken",
+      "mark": "Punkte",
+      "linemark": "Linie mit Punkten"
     }
   },
   "ChooseMetaDatasetsCard":{

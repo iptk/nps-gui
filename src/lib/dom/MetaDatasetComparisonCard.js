@@ -19,6 +19,15 @@ import Typography from '@material-ui/core/Typography'
 import amber from '@material-ui/core/colors/amber'
 import white from '@material-ui/core/colors/amber'
 
+import 'react-vis/dist/style.css'
+import {
+  HorizontalGridLines,
+  VerticalGridLines,
+  XAxis,
+  XYPlot,
+  YAxis
+} from 'react-vis'
+
 import {ChartType} from './charts'
 import CollapsableCard from './CollapsableCard'
 
@@ -38,6 +47,10 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    margin: theme.spacing.unit
+  },
+  chartContainer: {
+    padding: theme.spacing.unit * 2,
     margin: theme.spacing.unit
   }
 })
@@ -228,14 +241,78 @@ class CompChartSectionFields extends React.PureComponent{
 
 @withStyles(styles)
 class CompChartChart extends React.PureComponent{
+  getNestedData(keys, obj, defaultVal=0){
+    var cur = obj
+    for(var k of keys){
+      if(!(k in cur)){
+        return defaultVal
+      }
+      cur = cur[k]
+    }
+    return cur
+  }
+
+  sortData(data){
+    data.sort((a,b) => a.x-b.x)
+    return data
+  }
+
+  transformData(xAxis, yAxis, datasets, metaid){
+    var data = []
+    var xKeys = xAxis.label.split('.')
+    var yKeys = yAxis.label.split('.')
+
+    // if xAxis is an array, yAxis also is one
+    if(xAxis.type === 'array'){
+      for(var ds of datasets){
+        if(!(metaid in ds.metadatasets)){
+          continue
+        }
+        var x = this.getNestedData(xKeys, ds.metadatasets[metaid].metadata)
+        var y = this.getNestedData(yKeys, ds.metadatasets[metaid].metadata)
+        var dat = []
+        if(x.length > y.length){
+          data.push(this.sortData(x.map((val, idx) => ({
+            x: val,
+            y: idx < y.length ?y[idx] :0
+          }))))
+        }
+        else{
+          data.push(this.sortData(x.map((val, idx) => ({
+            y: val,
+            x: idx < x.length ?x[idx] :0
+          }))))
+        }
+      }
+    }
+    else{
+      for(var ds of datasets){
+        if(!(metaid in ds.metadatasets)){
+          continue
+        }
+        data.push({
+          x: xAxis.type === 'dsid'
+            ?ds.id
+            :this.getNestedData(xKeys, ds.metadatasets[metaid].metadata),
+          y: yAxis.type === 'dsid'
+            ?ds.id
+            :this.getNestedData(yKeys, ds.metadatasets[metaid].metadata)
+        })
+      }
+      data = [this.sortData(data)]
+    }
+    return data
+  }
+
   render(){
-    var {classes, xAxis, yAxis, datasets, chartType, t} = this.props
+    var {classes, xAxis, yAxis, datasets, chartType, t, metaid} = this.props
 
     // Do not display anything if axis are not chosen
     if(xAxis === null || yAxis === null){
       return ''
     }
 
+    // An array and a single value
     var yArr = yAxis.type === 'array'
     if(xAxis.type === 'array' ?!yArr :yArr){
       return <section>
@@ -246,7 +323,29 @@ class CompChartChart extends React.PureComponent{
           </Paper>
         </section>
     }
-    return <div/>
+
+    var data = this.transformData(xAxis, yAxis, datasets, metaid)
+    // display the graph!
+    return (
+      <div className={classes.chartContainer}>
+        <XYPlot
+          height={500}
+          width={500}
+          xType='linear'
+          yType='linear'
+        >
+          <XAxis title={xAxis.label}/>
+          <YAxis title={yAxis.label}/>
+          <VerticalGridLines/>
+          <HorizontalGridLines/>
+          {data.map((d, idx) => {
+            console.log(chartType, ChartType[chartType])
+            var Component = ChartType[chartType].class
+            return <Component data={d} key={idx}/>
+          })}
+        </XYPlot>
+      </div>
+    )
   }
 }
 

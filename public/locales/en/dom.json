@@ -2,7 +2,9 @@
   "charts":{
     "ChartType":{
       "line": "Line",
-      "bar": "Bar"
+      "bar": "Bar",
+      "mark": "Mark",
+      "linemark": "Line with marks"
     }
   },
   "ChooseMetaDatasetsCard":{
