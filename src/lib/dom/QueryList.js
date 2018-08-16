@@ -31,4 +31,6 @@ const QueryList = ({classes, queryVals, t}) => {
   )
 }
 
-export default translate('dom')(withStyles(styles)(QueryList))
+export default translate('dom')(
+  withStyles(styles)(QueryList)
+)

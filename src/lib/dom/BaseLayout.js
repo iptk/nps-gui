@@ -25,6 +25,7 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar
 })
 
+@withStyles(styles)
 class BaseLayout extends React.Component {
   constructor(props){
     super(props)
@@ -102,6 +103,4 @@ class BaseLayout extends React.Component {
   }
 }
 
-export default translate('dom')(
-  withStyles(styles)(BaseLayout)
-)
+export default translate('dom')(BaseLayout)

@@ -1,4 +1,12 @@
 {
+  "charts":{
+    "ChartType":{
+      "line": "Line",
+      "bar": "Bar",
+      "mark": "Mark",
+      "linemark": "Line with marks"
+    }
+  },
   "ChooseMetaDatasetsCard":{
     "metasets": "Metadatasets"
   },
@@ -32,6 +40,13 @@
     "generatenewid": "(Leave empty to generate a random ID)"
   },
   "MetaDatasetComparisonCard":{
+    "chart":{
+      "arraywarning": "Only one of your chosen axis represents an array. Please choose two sequences or two single-value fields.",
+      "charttype": "Chart type",
+      "sequence": "sequence",
+      "xaxis": "X-Axis",
+      "yaxis": "Y-Axis"
+    },
     "csvexport": "Export to CSV",
     "dataset": "Dataset-ID"
   },
