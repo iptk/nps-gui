@@ -1,4 +1,12 @@
 {
+  "charts":{
+    "ChartType":{
+      "line": "Linie",
+      "bar": "Balken",
+      "mark": "Punkte",
+      "linemark": "Linie mit Punkten"
+    }
+  },
   "ChooseMetaDatasetsCard":{
     "metasets": "Metadatensätze"
   },
@@ -32,6 +40,13 @@
     "generatenewid": "(Leer lassen für zufällige ID)"
   },
   "MetaDatasetComparisonCard":{
+    "chart":{
+      "arraywarning": "Nur eine der Ausgewählten Achsen repräsentiert eine Sequenz. Bitte wählen Sie zwei Sequenzen oder zwei einfach-wertige Felder.",
+      "charttype": "Graphen-Art",
+      "sequence": "Sequenz",
+      "xaxis": "X-Achse",
+      "yaxis": "Y-Achse"
+    },
     "csvexport": "Als CSV exportieren",
     "dataset": "Datensatz-ID"
   },
