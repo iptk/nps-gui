@@ -32,6 +32,10 @@ import {ChartType} from './charts'
 import CollapsableCard from './CollapsableCard'
 
 const styles = theme => ({
+  tableContainer: {
+    width: '100%',
+    overflowX: 'scroll'
+  },
   textFieldContainer: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -60,9 +64,10 @@ const styles = theme => ({
   }
 })
 
+@withStyles(styles)
 class CompTable extends React.PureComponent{
   render(){
-    var {datasets, metaid, t} = this.props
+    var {classes, datasets, metaid, t} = this.props
     var metaKeys = []
     var flat = []
     // two arrays instead of an {id: meta}-object to prevent additional
@@ -110,7 +115,7 @@ class CompTable extends React.PureComponent{
     csv = btoa(csv)
 
     return (
-      <div>
+      <div className={classes.tableContainer}>
         <Table>
           <TableHead>
             <TableRow>
