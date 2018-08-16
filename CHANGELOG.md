@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.2.4
+- Graphs on metadatset-comparison page
+
 ## v0.2.3
 - Customization
 - CI/CD
