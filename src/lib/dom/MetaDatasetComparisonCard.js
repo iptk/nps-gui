@@ -276,18 +276,14 @@ class CompChartChart extends React.PureComponent{
         var x = this.getNestedData(xKeys, ds.metadatasets[metaid].metadata)
         var y = this.getNestedData(yKeys, ds.metadatasets[metaid].metadata)
         var dat = []
-        if(x.length > y.length){
-          data.push(this.sortData(x.map((val, idx) => ({
-            x: val,
-            y: idx < y.length ?y[idx] :0
-          }))))
+        var length = x.length > y.length ?x.length :y.length
+        for(var i = 0; i < length; i++){
+          dat.push({
+            x: i < x.length ?x[i] :0,
+            y: i < y.length ?y[i] :0
+          })
         }
-        else{
-          data.push(this.sortData(x.map((val, idx) => ({
-            y: val,
-            x: idx < x.length ?x[idx] :0
-          }))))
-        }
+        data.push(this.sortData(dat))
       }
     }
     else{
@@ -298,15 +294,43 @@ class CompChartChart extends React.PureComponent{
         data.push({
           x: xAxis.type === 'dsid'
             ?ds.id
-            :this.getNestedData(xKeys, ds.metadatasets[metaid].metadata),
+            :(this.getNestedData(xKeys, ds.metadatasets[metaid].metadata) || ''),
           y: yAxis.type === 'dsid'
             ?ds.id
-            :this.getNestedData(yKeys, ds.metadatasets[metaid].metadata)
+            :(this.getNestedData(yKeys, ds.metadatasets[metaid].metadata) || '')
         })
       }
       data = [this.sortData(data)]
     }
     return data
+  }
+
+  getAxisTypes(xAxis, yAxis, data){
+    const determineType = (dat) => {
+      // number
+      if(typeof dat === 'number'){
+        return 'linear'
+      }
+      // date
+      var date = new Date(dat)
+      if(date instanceof Date && !isNaN(date)){
+        return 'time'
+      }
+      // strings
+      return 'ordinal'
+    }
+    const transformType = (axis, data, idx) => {
+      // numbers are always linear
+      if(axis.type === 'number'){
+        return 'linear'
+      }
+      // strings and array need extra checks
+      return determineType(data[0][0][idx])
+    }
+    return {
+      x: transformType(xAxis, data, 'x'),
+      y: transformType(yAxis, data, 'y')
+    }
   }
 
   render(){
@@ -330,19 +354,24 @@ class CompChartChart extends React.PureComponent{
     }
 
     var data = this.transformData(xAxis, yAxis, datasets, metaid)
+    var axisTypes = this.getAxisTypes(xAxis, yAxis, data)
+    console.log(axisTypes, data)
     // display the graph!
     return (
       <div className={classes.chartContainer}>
+        {/*TODO: margin exactly content-fitting*/}
         <FlexibleXYPlot
-          xType='linear'
-          yType='linear'
+          xType={axisTypes.x}
+          yType={axisTypes.y}
+          margin={{left: '80', bottom: '80'}}
         >
-          <XAxis title={xAxis.label}/>
-          <YAxis title={yAxis.label}/>
           <VerticalGridLines/>
           <HorizontalGridLines/>
+          <XAxis title={xAxis.label}
+            tickLabelAngle={axisTypes.x === 'linear' ?0 :-90}/>
+          <YAxis title={yAxis.label}/>
           {data.map((d, idx) => {
-            console.log(chartType, ChartType[chartType])
+            console.log(d, idx)
             var Component = ChartType[chartType].class
             return <Component data={d} key={idx}/>
           })}
