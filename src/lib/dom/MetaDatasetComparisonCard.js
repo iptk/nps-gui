@@ -299,10 +299,10 @@ class CompChartChart extends React.PureComponent{
         data.push({
           x: xAxis.type === 'dsid'
             ?ds.id
-            :(this.getNestedData(xKeys, ds.metadatasets[metaid].metadata) || ''),
+            :(this.getNestedData(xKeys, ds.metadatasets[metaid].metadata) || 0),
           y: yAxis.type === 'dsid'
             ?ds.id
-            :(this.getNestedData(yKeys, ds.metadatasets[metaid].metadata) || '')
+            :(this.getNestedData(yKeys, ds.metadatasets[metaid].metadata) || 0)
         })
       }
       data = [this.sortData(data)]
@@ -360,7 +360,6 @@ class CompChartChart extends React.PureComponent{
 
     var data = this.transformData(xAxis, yAxis, datasets, metaid)
     var axisTypes = this.getAxisTypes(xAxis, yAxis, data)
-    console.log(axisTypes, data)
     // display the graph!
     return (
       <div className={classes.chartContainer}>
@@ -368,7 +367,7 @@ class CompChartChart extends React.PureComponent{
         <FlexibleXYPlot
           xType={axisTypes.x}
           yType={axisTypes.y}
-          margin={{left: '80', bottom: '80'}}
+          margin={{left: 80, bottom: 80}}
         >
           <VerticalGridLines/>
           <HorizontalGridLines/>
@@ -376,7 +375,6 @@ class CompChartChart extends React.PureComponent{
             tickLabelAngle={axisTypes.x === 'linear' ?0 :-90}/>
           <YAxis title={yAxis.label}/>
           {data.map((d, idx) => {
-            console.log(d, idx)
             var Component = ChartType[chartType].class
             return <Component data={d} key={idx}/>
           })}
