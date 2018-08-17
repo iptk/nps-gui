@@ -2,7 +2,7 @@
 NPS-GUI is a web-client for the [Neuroimage Processing System (NPS)](https://github.com/neuro/nps). It is build using React, material-ui and Redux to provide a responsive user interface with minimal server load.
 
 # Configuration
-The `conf`-directory contains all files used to configure the client. Please duplicate the `*.default.json` file to remove the `.default` and adjust them to your needs. `*.default.json` are used as a fallback.
+The `conf`-directory contains all files used to configure the client. Please duplicate the `*.json` files from the `conf.default`-directory to the `conf`-directory and adjust them to your needs. `conf.default/*.json` are used as a fallback.
 
 file | description
 --- | ---
