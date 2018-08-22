@@ -42,8 +42,10 @@ const _collectionCards = connect(
 class MetadataCollections extends Page{
   constructor(props){
     super(props, reducer)
-    const load = this.loadCollections.bind(this)
-    load()
+  }
+
+  componentDidMount(){
+    this.loadCollections()
   }
 
   loadCollections(){
