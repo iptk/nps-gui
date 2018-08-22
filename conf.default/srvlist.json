@@ -4,7 +4,8 @@
       "uri": "http://localhost:8080/",
       "description": "Local test-server",
       "cors": true,
-      "credentials": true
+      "credentials": true,
+      "elasticsearchurl": ""
     }
   },
   "default": "localhost"

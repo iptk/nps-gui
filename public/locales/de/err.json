@@ -12,6 +12,7 @@
   "datasetmeta":{
     "err":{
       "deletemeta": "Fehler beim entfernen des Metadatensatzes",
+      "fetchrelated": "Fehler beim Laden der relatierten Datensätze aus elasticsearch",
       "savemeta": "Fehler beim speichern der Metadaten"
     },
     "succ":{

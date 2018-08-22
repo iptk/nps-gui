@@ -1,6 +1,7 @@
 import {
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
+  RECEIVE_RELATED_DATASETS,
   METADATA_SAVED
 } from '../actions/datasetmeta'
 
@@ -12,7 +13,8 @@ const init = {
     files: []
   },
   downloadurl: undefined,
-  filesbaseurl: "#"
+  filesbaseurl: "#",
+  related: []
 }
 const reducer = (state = init, action) => {
   switch(action.type){
@@ -33,6 +35,12 @@ const reducer = (state = init, action) => {
         dataset: action.result,
         downloadurl: action.result.getDownloadURL(),
         filesbaseurl: action.result.getDataDownloadBaseURL()
+      }
+
+    case RECEIVE_RELATED_DATASETS:
+      return {
+        ...state,
+        related: action.dsids
       }
 
     case METADATA_SAVED:

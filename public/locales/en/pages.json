@@ -9,7 +9,8 @@
       "reload": "Reload",
       "reloadmaliases": "Reload metadaten aliases",
       "removefromcomp": "Remove from comparison"
-    }
+    },
+    "relatedds": "Related datasets"
   },
   "metadatacollections":{
     "count": "Total",

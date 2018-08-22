@@ -60,16 +60,17 @@ class NPS{
 }
 
 class Server{
-  constructor({name, uri, cors=true, credentials=true, description=''}){
+  constructor({name, uri, cors=true, credentials=true, description='', elasticsearchurl=''}){
     this.name = name
     this.uri = uri
     this._cors = cors
     this._credentials = credentials
     this.description = description
+    this.elasticsearchurl = elasticsearchurl
   }
 
   get cors(){
-    return this._cors == undefined ? false : this._cors
+    return this._cors ?'cors' :'same-origin'
   }
   get credentials(){
     return this._credentials ? 'include' : 'omit'
