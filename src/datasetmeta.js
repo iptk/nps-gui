@@ -12,6 +12,7 @@ import Icon from '@material-ui/core/Icon'
 import {
   G_ADD_DATASETS_TO_COMPARISON,
   G_REMOVE_DATASETS_FROM_COMPARISON,
+  G_RESTORE_LOCAL_STORE_DEFAULTS,
   gFetchMetadataAliases
 } from './lib/actions/_common'
 import {
@@ -100,6 +101,7 @@ class DatasetMeta extends Page{
 
   componentDidUpdate(prevProps){
     if(this.props.match.params.dsid !== prevProps.match.params.dsid){
+      this.store.dispatch({type: G_RESTORE_LOCAL_STORE_DEFAULTS})
       this.initState()
     }
   }

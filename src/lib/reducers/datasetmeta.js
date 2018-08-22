@@ -5,6 +5,8 @@ import {
   METADATA_SAVED
 } from '../actions/datasetmeta'
 
+import {G_RESTORE_LOCAL_STORE_DEFAULTS} from '../actions/_common'
+
 import {MetaDataset} from '../api'
 
 const init = {
@@ -52,6 +54,11 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         dataset: ds
+      }
+
+    case G_RESTORE_LOCAL_STORE_DEFAULTS:
+      return {
+        ...init
       }
 
     default:
