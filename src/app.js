@@ -16,7 +16,7 @@ import render_dom_delayed from './lib/dom/render_dom'
 import {i18n, history} from './lib/util'
 
 import loadTheme from './lib/util/theme'
-import {loadDefaults, loadCustom} from './lib/util/custom-nps'
+import {loadDefaults, loadCustom, loadVersion} from './lib/util/custom-nps'
 import NPSContext from './lib/util/NPSContext'
 
 Promise.all([
@@ -26,7 +26,8 @@ Promise.all([
   loadTheme(),
   // customisation
   loadDefaults(),
-  loadCustom()
+  loadCustom(),
+  loadVersion()
 ]).then(results => {
   const muiTheme = createMuiTheme(results[1])
   render_dom_delayed(
@@ -34,7 +35,7 @@ Promise.all([
       <Router history={history}>
         <MuiThemeProvider theme={muiTheme}>
           <NPSContext.Provider defaults={results[2]} custom={results[3]}>
-            <BaseLayout>
+            <BaseLayout version={results[4]}>
               <Route exact path="/" component={SearchDataset}/>
               <Route path="/search" component={SearchDataset}/>
               <Route path="/dataset">
