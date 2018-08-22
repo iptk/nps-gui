@@ -92,6 +92,19 @@ const _compBtn = translate('pages')(connect(
 class DatasetMeta extends Page{
   constructor(props){
     super(props, reducer)
+  }
+
+  componentDidMount(){
+    this.initState()
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.match.params.dsid !== prevProps.match.params.dsid){
+      this.initState()
+    }
+  }
+
+  initState(){
     this.fetchMAliases = this.fetchMAliases.bind(this)
     this.fetchMAliases()
     this.fetchDs = this.fetchDs.bind(this)
