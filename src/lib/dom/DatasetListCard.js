@@ -8,6 +8,8 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 
+import {Link} from 'react-router-dom'
+
 import CollapsableCard from './CollapsableCard'
 
 class DatasetListCard extends CollapsableCard{
@@ -15,7 +17,9 @@ class DatasetListCard extends CollapsableCard{
     var {dsids, onDelete, t} = this.props
     var rows = dsids.map((id) => (
       <ListItem key={id}>
-        <ListItemText primary={id}/>
+        <ListItemText primary={
+          <Link to={"/dataset/"+id}>{id}</Link>
+        }/>
         <ListItemSecondaryAction>
           <IconButton onClick={onDelete.bind(this, id)}>
             <Icon>clear</Icon>
