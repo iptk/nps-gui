@@ -1,8 +1,11 @@
 import {
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
+  RECEIVE_RELATED_DATASETS,
   METADATA_SAVED
 } from '../actions/datasetmeta'
+
+import {G_RESTORE_LOCAL_STORE_DEFAULTS} from '../actions/_common'
 
 import {MetaDataset} from '../api'
 
@@ -12,7 +15,8 @@ const init = {
     files: []
   },
   downloadurl: undefined,
-  filesbaseurl: "#"
+  filesbaseurl: "#",
+  related: []
 }
 const reducer = (state = init, action) => {
   switch(action.type){
@@ -35,6 +39,12 @@ const reducer = (state = init, action) => {
         filesbaseurl: action.result.getDataDownloadBaseURL()
       }
 
+    case RECEIVE_RELATED_DATASETS:
+      return {
+        ...state,
+        related: action.dsids
+      }
+
     case METADATA_SAVED:
       var ds = state.dataset.updateMetaDataset(action.metadataset)
       if(action.isNewSet){
@@ -44,6 +54,11 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         dataset: ds
+      }
+
+    case G_RESTORE_LOCAL_STORE_DEFAULTS:
+      return {
+        ...init
       }
 
     default:

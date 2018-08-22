@@ -47,7 +47,7 @@ const _notificationSnackbar = connect(
   }
 )
 
-class Page extends React.Component{
+class Page extends React.PureComponent{
   constructor(props, reducer){
     super(props)
     var mergedReducer = combineReducers({
@@ -68,7 +68,7 @@ class Page extends React.Component{
   render(children = ''){
     return (
       <Provider store={this.store}>
-        <div>
+        <div match={this.props.match}>
           {children}
           <_loadingIcon/>
           <_notificationSnackbar onClose={this.closeNotification}/>

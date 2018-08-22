@@ -1,3 +1,5 @@
+import {NetworkException} from '../api/exceptions'
+
 const loadDefaults = async () => {
   return await fetch(
     '/conf/npsdefaults',

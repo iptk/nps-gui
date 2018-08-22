@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.5
+- Minor fixes
+- Move default config-files to `conf.default`-directory
+
 ## v0.2.4
 - Graphs on metadatset-comparison page
 

@@ -1,11 +1,12 @@
-import {Dataset} from '../api'
+import {Dataset, NPS} from '../api'
 import {G_START_LOADING, G_STOP_LOADING} from './_common'
 import {NotificationLevel, notifyUser} from '../util/notification'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET',
   ALIASES_SAVED = 'ALIASES_SAVED',
   METADATA_SAVED = 'METADATA_SAVED',
-  ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET'
+  ADD_EMPTY_METADATASET = 'ADD_EMPTY_METADATASET',
+  RECEIVE_RELATED_DATASETS = 'RECEIVE_RELATED_DATASETS'
 
 const deleteMetadata = (dataset, metaid) => {
   return (dispatch) => {
@@ -84,12 +85,53 @@ const saveMetadata = (metaset) => {
   }
 }
 
+const fetchRelatedDatasets = (id) => {
+  return (dispatch) => {
+    // TODO:
+    // we need an api-call for this!
+    var srv = NPS.getServer()
+    var url = srv.elasticsearchurl
+    url += '/iptk-meta-*/_search?q='+id
+
+    dispatch({type: G_START_LOADING})
+    fetch(
+        url,
+        {
+          method: 'GET',
+          redirect: 'follow',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: srv.cors,
+          credentials: srv.credentials
+        }
+      )
+      .then(resp => resp.json())
+      .then(json => {
+        if(!json.hits){
+          throw "Elasticsearch-request does not contain hits-field"
+        }
+        var dsids = json.hits.hits.map(hit => hit._id)
+        dispatch({type: RECEIVE_RELATED_DATASETS, dsids: dsids})
+      })
+      .catch(err => {
+        notifyUser(dispatch, {
+          message: "datasetmeta.err.fetchrelated",
+          level: NotificationLevel.ERROR
+        })
+      })
+      .finally(dispatch({type: G_STOP_LOADING}))
+  }
+}
+
 export {
   deleteMetadata,
   fetchDataset,
+  fetchRelatedDatasets,
   saveMetadata,
   ADD_EMPTY_METADATASET,
   RECEIVE_DATASET,
+  RECEIVE_RELATED_DATASETS,
   ALIASES_SAVED,
   METADATA_SAVED
 }

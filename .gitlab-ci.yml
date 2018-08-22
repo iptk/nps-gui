@@ -25,7 +25,7 @@ deploy to production:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    - kubectl set image deployment/web-ui-prod web-ui=$CONTAINER_IMAGE:${CI_COMMIT_SHA:0:10}
+    - kubectl set image deployment/search web-ui=$CONTAINER_IMAGE:${CI_COMMIT_SHA:0:10}
   environment:
     name: production
     url: https://search.nps.neuro.ukm.ms

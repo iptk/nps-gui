@@ -51,6 +51,9 @@ const _metaComparisonCards = connect(
 class DatasetCompare extends Page{
   constructor(props){
     super(props, reducer)
+  }
+
+  componentDidMount(){
     this.store.dispatch(fetchDatasets(this.store.getState().g.datasetCompare))
   }
 

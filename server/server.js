@@ -5,13 +5,14 @@ const express = require('express'),
 const app = express()
 const publicPath = path.resolve(__dirname, '..', 'public')
 const confPath = path.resolve(__dirname, '..', 'conf')
+const confDefaultPath = path.resolve(__dirname, '..', 'conf.default')
 
 // serve config
 app.get('/conf/:name', function(req, res){
   var name = req.params.name
   var srvPath = path.resolve(confPath, name+'.json')
   if(!fs.existsSync(srvPath)){
-    srvPath = path.resolve(confPath, name+'.default.json')
+    srvPath = path.resolve(confDefaultPath, name+'.json')
   }
   res.sendFile(srvPath)
 })

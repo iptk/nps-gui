@@ -1,3 +1,5 @@
+import {NetworkException} from '../api/exceptions'
+
 const loadTheme = async () => {
   return await fetch(
     '/conf/theme',

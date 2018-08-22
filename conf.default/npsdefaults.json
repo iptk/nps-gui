@@ -1,7 +1,7 @@
 {
   "searchdataset": {
     "count": 15,
-    "fields": "",
+    "fields": "PatientName,SeriesDescription,AcquisitionsDate",
     "filter": "",
     "filterGlobal": ""
   }

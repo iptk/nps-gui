@@ -81,6 +81,9 @@ const _directDSLinks = translate('pages')(connect(
 class SearchDataset extends Page{
   constructor(props){
     super(props, reducer)
+  }
+
+  componentDidMount(){
     this.applyDefaults()
   }
 

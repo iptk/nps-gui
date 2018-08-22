@@ -12,15 +12,22 @@ import Icon from '@material-ui/core/Icon'
 import {
   G_ADD_DATASETS_TO_COMPARISON,
   G_REMOVE_DATASETS_FROM_COMPARISON,
+  G_RESTORE_LOCAL_STORE_DEFAULTS,
   gFetchMetadataAliases
 } from './lib/actions/_common'
 import {
   deleteMetadata,
   fetchDataset,
+  fetchRelatedDatasets,
   saveMetadata,
   ADD_EMPTY_METADATASET
 } from './lib/actions/datasetmeta'
-import {DatasetFilesCard, MetaDatasetCardCollection, Page} from './lib/dom'
+import {
+  DatasetFilesCard,
+  DatasetListCard,
+  MetaDatasetCardCollection,
+  Page
+} from './lib/dom'
 import reducer from './lib/reducers/datasetmeta'
 
 // from lib/dom
@@ -34,6 +41,10 @@ const _subscribedMDColl = connect(
     aliases: state.g.metadataAliases
   })
 )(MetaDatasetCardCollection)
+
+const _relatedDSCard = connect(
+  (state) => ({dsids: state.l.related})
+)(DatasetListCard)
 
 // locally defined
 const _actionCardTitle = translate('pages')(connect(
@@ -82,10 +93,25 @@ const _compBtn = translate('pages')(connect(
 class DatasetMeta extends Page{
   constructor(props){
     super(props, reducer)
+  }
+
+  componentDidMount(){
+    this.initState()
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.match.params.dsid !== prevProps.match.params.dsid){
+      this.store.dispatch({type: G_RESTORE_LOCAL_STORE_DEFAULTS})
+      this.initState()
+    }
+  }
+
+  initState(){
     this.fetchMAliases = this.fetchMAliases.bind(this)
     this.fetchMAliases()
     this.fetchDs = this.fetchDs.bind(this)
     this.fetchDs()
+    this.store.dispatch(fetchRelatedDatasets(this.props.match.params.dsid))
   }
 
   fetchMAliases(){
@@ -136,6 +162,10 @@ class DatasetMeta extends Page{
             </Button>
             <_compBtn onClick={this.toggleComp.bind(this)}/>
           </Card>
+          <br/>
+        </section>
+        <section>
+          <_relatedDSCard title={t('datasetmeta.relatedds')}/>
           <br/>
         </section>
         <section>
