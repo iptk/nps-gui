@@ -2,7 +2,8 @@
   "charts":{
     "ChartType":{
       "line": "Line",
-      "bar": "Bar",
+      "barhorz": "Bar (horizontal)",
+      "barvert": "Bar (vertical)",
       "mark": "Mark",
       "linemark": "Line with marks"
     }
