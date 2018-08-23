@@ -30,5 +30,20 @@ const loadCustom = async () => {
   })
 }
 
-export default {loadDefaults, loadCustom}
-export {loadDefaults, loadCustom}
+const loadVersion = async () => {
+  return await fetch(
+    '/version',
+    {method: 'GET', redirect: 'follow'}
+  )
+  .then(resp => resp.text())
+  .then(vers => vers.replace(/(?:\r\n|\r|\n)/g, '\n').split('\n'))
+  .catch(err => {
+    throw new NetworkException({
+      msg: "Error fetching version",
+      ancestor: err
+    })
+  })
+}
+
+export default {loadDefaults, loadCustom, loadVersion}
+export {loadDefaults, loadCustom, loadVersion}

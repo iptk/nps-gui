@@ -6,7 +6,8 @@ import {
   G_NOTIFICATION_CLOSE,
   G_RECEIVE_METADATA_ALIASES,
   G_REMOVE_DATASETS_FROM_COMPARISON,
-  G_RESTORE_STATE_FROM_COOKIES
+  G_RESTORE_STATE_FROM_COOKIES,
+  G_RESTORE_GLOBAL_STORE_DEFAULTS
 } from '../actions/_common'
 import Cookie from 'js-cookie'
 
@@ -107,6 +108,11 @@ const commonReducer = (state=init, action) => {
       return {
         ...state,
         datasetCompare: changed ?[...comp] :comp
+      }
+
+    case G_RESTORE_GLOBAL_STORE_DEFAULTS:
+      return {
+        ...init
       }
 
     default:

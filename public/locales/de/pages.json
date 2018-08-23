@@ -9,7 +9,8 @@
       "reload": "Neu laden",
       "reloadmaliases": "Metadaten-Aliase neu laden",
       "removefromcomp": "Aus dem Vergleich entfernen"
-    }
+    },
+    "relatedds": "Relatierte Datensätze"
   },
   "metadatacollections":{
     "count": "Anzahl",

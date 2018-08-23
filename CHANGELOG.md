@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.6
+- Show related datasets in dataset-view
+- Show version in navigation
+- Link from compare datasets-page to datasets
+
 ## v0.2.5
 - Minor fixes
 - Move default config-files to `conf.default`-directory

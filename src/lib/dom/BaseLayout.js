@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {translate} from 'react-i18next'
 
 import AppBar from '@material-ui/core/AppBar'
+import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import Icon from '@material-ui/core/Icon'
@@ -45,7 +46,7 @@ class BaseLayout extends React.Component {
   }
 
   render() {
-    const {classes, t} = this.props
+    const {classes, t, version} = this.props
     const drawer = (
       <div>
         <div className={classes.toolbar}/>
@@ -61,6 +62,10 @@ class BaseLayout extends React.Component {
           </ListItem>
           <ListItem onClick={()=>{changePage('/datasets/compare')}} button>
             <ListItemText primary={t('navigation.datasetcompare')}/>
+          </ListItem>
+          <Divider/>
+          <ListItem>
+            <ListItemText primary={version[0]} secondary={version[1]}/>
           </ListItem>
         </List>
       </div>

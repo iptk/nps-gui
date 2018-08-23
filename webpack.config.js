@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const VersionFile = require('webpack-version-file')
+const gitRevision = new (require('git-revision-webpack-plugin'))()
 
 jspath = path.resolve(__dirname, 'src')
+console.log(JSON.stringify(gitRevision.branch()), JSON.stringify(gitRevision.commithash()).substr(0, 5))
 
 module.exports = {
   entry: {
@@ -44,7 +46,11 @@ module.exports = {
     new VersionFile({
       output: './public/version',
       package: './package.json',
-      template: './versiontemplate.ejs'
+      template: './versiontemplate.ejs',
+      data:{
+        gitbranch: JSON.stringify(gitRevision.branch()).slice(1, -1),
+        gitcommit: JSON.stringify(gitRevision.commithash()).substr(1, 7)
+      }
     })
   ]
 }
