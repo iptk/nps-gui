@@ -24,6 +24,7 @@ import {
   FlexibleXYPlot,
   HorizontalGridLines,
   VerticalGridLines,
+  LineSeries,
   XAxis,
   YAxis
 } from 'react-vis'
@@ -262,8 +263,19 @@ class CompChartChart extends React.PureComponent{
     return cur
   }
 
-  sortData(data){
-    data.sort((a,b) => a.x-b.x)
+  sortData(data, xType){
+    switch(xType){
+      // dates are timestamps. see transformData.ensureType
+      case 'linear':
+      case 'time':
+      case 'time-utc':
+        data.sort((a,b) => a.x-b.x)
+        break
+
+      case 'ordinale':
+        data.sort((a,b) => a.localeCompare(b, {kn: true}, {sesitivity: 'base'}))
+        break
+    }
     return data
   }
 
@@ -271,6 +283,32 @@ class CompChartChart extends React.PureComponent{
     var data = []
     var xKeys = xAxis.label.split('.')
     var yKeys = yAxis.label.split('.')
+    var xType = xAxis.type === 'dsid' ?'ordinal' :undefined
+    var yType = yAxis.type === 'dsid' ?'ordinal' :undefined
+
+    const determineType = (dat) => {
+      // number
+      if(typeof dat === 'number'){
+        return 'linear'
+      }
+      // date
+      if(!isNaN(Date.parse(dat))){
+        return 'time'
+      }
+      // strings
+      return 'ordinal'
+    }
+
+    const ensureType = (val, type) => {
+      if(type === 'time' || type === 'time-utc'){
+        if(typeof val === 'number'){
+          return val
+        }
+        val = Date.parse(val)
+        return isNaN(val) ?0 :val
+      }
+      return val
+    }
 
     // if xAxis is an array, yAxis also is one
     if(xAxis.type === 'array'){
@@ -278,63 +316,77 @@ class CompChartChart extends React.PureComponent{
         if(!(metaid in ds.metadatasets)){
           continue
         }
+
+        // get data
         var x = this.getNestedData(xKeys, ds.metadatasets[metaid].metadata)
         var y = this.getNestedData(yKeys, ds.metadatasets[metaid].metadata)
+
+        // prepare merging
         var dat = []
         var length = x.length > y.length ?x.length :y.length
+
+        // get types
+        if(!xType && x.length > 0){
+          xType = determineType(x[0])
+        }
+        if(!yType && y.length > 0){
+          yType = determineType(y[0])
+        }
+
+        // merge
         for(var i = 0; i < length; i++){
           dat.push({
-            x: i < x.length ?x[i] :0,
-            y: i < y.length ?y[i] :0
+            x: ensureType(i < x.length ?x[i] :0, xType),
+            y: ensureType(i < y.length ?y[i] :0, yType)
           })
         }
+
+        // push data
         data.push(this.sortData(dat))
       }
     }
     else{
+      const getVal = (axisType, ds, keys) => {
+        var val = axisType === 'dsid'
+          ?ds.id
+          :this.getNestedData(keys, ds.metadatasets[metaid].metadata)
+        return {
+          val: val || 0,
+          noval: val === null || val === undefined
+        }
+      }
+
       for(var ds of datasets){
         if(!(metaid in ds.metadatasets)){
           continue
         }
+
+        // get values
+        var x = getVal(xAxis.type, ds, xKeys)
+        var y = getVal(yAxis.type, ds, yKeys)
+
+        // get types
+        if(!xType && !x.noval){
+          xType = determineType(x.val)
+        }
+        if(!yType && !y.noval){
+          yType = determineType(y.val)
+        }
+
+        // push data-point
         data.push({
-          x: xAxis.type === 'dsid'
-            ?ds.id
-            :(this.getNestedData(xKeys, ds.metadatasets[metaid].metadata) || 0),
-          y: yAxis.type === 'dsid'
-            ?ds.id
-            :(this.getNestedData(yKeys, ds.metadatasets[metaid].metadata) || 0)
+          x: ensureType(x.val, xType),
+          y: ensureType(y.val, yType)
         })
       }
       data = [this.sortData(data)]
     }
-    return data
-  }
-
-  getAxisTypes(xAxis, yAxis, data){
-    const determineType = (dat) => {
-      // number
-      if(typeof dat === 'number'){
-        return 'linear'
-      }
-      // date
-      var date = new Date(dat)
-      if(date instanceof Date && !isNaN(date)){
-        return 'time'
-      }
-      // strings
-      return 'ordinal'
-    }
-    const transformType = (axis, data, idx) => {
-      // numbers are always linear
-      if(axis.type === 'number'){
-        return 'linear'
-      }
-      // strings and array need extra checks
-      return determineType(data[0][0][idx])
-    }
     return {
-      x: transformType(xAxis, data, 'x'),
-      y: transformType(yAxis, data, 'y')
+      data: data,
+      axisTypes: {
+        x: xType || 'ordinal',
+        y: yType || 'ordinal'
+      }
     }
   }
 
@@ -358,8 +410,26 @@ class CompChartChart extends React.PureComponent{
         </section>
     }
 
-    var data = this.transformData(xAxis, yAxis, datasets, metaid)
-    var axisTypes = this.getAxisTypes(xAxis, yAxis, data)
+    var {data, axisTypes} = this.transformData(xAxis, yAxis, datasets, metaid)
+    console.log(data, axisTypes)
+    const valueGetter = (format, axis, data) => {
+      console.log(format, axis, data)
+      if(format === 'time' || format === 'time-utc'){
+        var date = data[axis]
+        if(typeof date === 'string'){
+          date = Date.parse(date)
+        }
+        console.log(isNaN(date) ?0 :date)
+        return isNaN(date) ?0 :date
+      }
+      return data[axis]
+    }
+
+    /*
+
+        getX={valueGetter.bind(this, axisTypes.x, 'x')}
+        getY={valueGetter.bind(this, axisTypes.y, 'y')}
+    */
     // display the graph!
     return (
       <div className={classes.chartContainer}>
