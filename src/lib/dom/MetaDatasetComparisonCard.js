@@ -264,7 +264,6 @@ class CompChartChart extends React.PureComponent{
   }
 
   sortData(data, xType){
-    console.log(data[0])
     switch(xType){
       // dates are timestamps. see transformData.ensureType
       case 'linear':
@@ -414,15 +413,12 @@ class CompChartChart extends React.PureComponent{
     }
 
     var {data, axisTypes} = this.transformData(xAxis, yAxis, datasets, metaid)
-    console.log(data, axisTypes)
     const valueGetter = (format, axis, data) => {
-      console.log(format, axis, data)
       if(format === 'time' || format === 'time-utc'){
         var date = data[axis]
         if(typeof date === 'string'){
           date = Date.parse(date)
         }
-        console.log(isNaN(date) ?0 :date)
         return isNaN(date) ?0 :date
       }
       return data[axis]
