@@ -264,6 +264,7 @@ class CompChartChart extends React.PureComponent{
   }
 
   sortData(data, xType){
+    console.log(data[0])
     switch(xType){
       // dates are timestamps. see transformData.ensureType
       case 'linear':
@@ -273,7 +274,9 @@ class CompChartChart extends React.PureComponent{
         break
 
       case 'ordinale':
-        data.sort((a,b) => a.localeCompare(b, {kn: true}, {sesitivity: 'base'}))
+        data.sort(
+          (a,b) => a.x.localeCompare(b.x, {kn: true}, {sesitivity: 'base'})
+        )
         break
     }
     return data
@@ -342,7 +345,7 @@ class CompChartChart extends React.PureComponent{
         }
 
         // push data
-        data.push(this.sortData(dat))
+        data.push(this.sortData(dat, xType))
       }
     }
     else{
@@ -379,7 +382,7 @@ class CompChartChart extends React.PureComponent{
           y: ensureType(y.val, yType)
         })
       }
-      data = [this.sortData(data)]
+      data = [this.sortData(data, xType)]
     }
     return {
       data: data,
