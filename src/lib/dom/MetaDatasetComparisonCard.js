@@ -413,22 +413,7 @@ class CompChartChart extends React.PureComponent{
     }
 
     var {data, axisTypes} = this.transformData(xAxis, yAxis, datasets, metaid)
-    const valueGetter = (format, axis, data) => {
-      if(format === 'time' || format === 'time-utc'){
-        var date = data[axis]
-        if(typeof date === 'string'){
-          date = Date.parse(date)
-        }
-        return isNaN(date) ?0 :date
-      }
-      return data[axis]
-    }
-
-    /*
-
-        getX={valueGetter.bind(this, axisTypes.x, 'x')}
-        getY={valueGetter.bind(this, axisTypes.y, 'y')}
-    */
+    
     // display the graph!
     return (
       <div className={classes.chartContainer}>
