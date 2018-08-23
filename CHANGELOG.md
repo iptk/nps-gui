@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.7
+- Fix graphs in comparison view:
+  - Fix problem with dates
+  - Sort data correctly
+  - Add horizontal and vertical bar charts
+
 ## v0.2.6
 - Show related datasets in dataset-view
 - Show version in navigation

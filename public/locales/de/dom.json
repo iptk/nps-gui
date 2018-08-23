@@ -2,7 +2,8 @@
   "charts":{
     "ChartType":{
       "line": "Linie",
-      "bar": "Balken",
+      "barhorz": "Balken (horizontal)",
+      "barvert": "Balken (vertikal)",
       "mark": "Punkte",
       "linemark": "Linie mit Punkten"
     }

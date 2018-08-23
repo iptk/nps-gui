@@ -4,7 +4,6 @@ const VersionFile = require('webpack-version-file')
 const gitRevision = new (require('git-revision-webpack-plugin'))()
 
 jspath = path.resolve(__dirname, 'src')
-console.log(JSON.stringify(gitRevision.branch()), JSON.stringify(gitRevision.commithash()).substr(0, 5))
 
 module.exports = {
   entry: {
