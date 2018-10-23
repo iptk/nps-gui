@@ -71,7 +71,7 @@ const _directDSLinks = translate('pages')(connect(
       <p>
         {t('searchdataset.jumptods')}
         {ids.map((id) => (
-          <Button component={Link} to={'/dataset/'+id}>{id}</Button>
+          <Button component={Link} to={'/ds/dataset/'+id}>{id}</Button>
         ))}
       </p>
     )
@@ -137,7 +137,7 @@ class SearchDataset extends Page{
         level: NotificationLevel.SUCCESS,
         message: "searchdataset.updatedcomp",
         link: {
-          href: '/datasets/compare', text: '_common.go', needsTranslation: true
+          href: '/ds/datasets/compare', text: '_common.go', needsTranslation: true
         }
       }
     )

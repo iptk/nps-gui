@@ -154,7 +154,7 @@ class DatasetTable extends React.Component{
       }
       if(editBtn){
         btns.push(
-          <Button key='__btnedit' onClick={()=>{changePage('/dataset/'+ds.id)}}>
+          <Button key='__btnedit' onClick={()=>{changePage('/ds/dataset/'+ds.id)}}>
             <Icon>create</Icon>
           </Button>
         )

@@ -23,7 +23,7 @@ class DatasetListCard extends CollapsableCard{
     var rows = dsids.map((id) => (
       <ListItem key={id}>
         <ListItemText primary={
-          <Link to={"/dataset/"+id}>{id}</Link>
+          <Link to={"/ds/dataset/"+id}>{id}</Link>
         }/>
         {onDelete &&
           <ListItemSecondaryAction>
