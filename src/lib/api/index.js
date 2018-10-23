@@ -1,4 +1,3 @@
-import {Dataset} from './dataset'
 import {
   Exception,
   BackendException,
@@ -7,22 +6,21 @@ import {
   InvalidArgumentException,
   NetworkException
 } from './exceptions'
-import KeyValueMetadata from './metadata'
-import MetadataCollection from './metadatacollection'
-import {MetaDataset} from './metadataset'
 import {NPS} from './NPS'
 
+import DsAPI from './dsapi'
+import MAPI from './mapi'
+
 export {
-  Dataset,
   Exception,
   BackendException,
   ConfigurationException,
   ExecutionException,
   InvalidArgumentException,
   NetworkException,
-  KeyValueMetadata,
-  MetadataCollection,
-  MetaDataset,
-  NPS
+  NPS,
+
+  DsAPI,
+  MAPI
 }
 export default NPS

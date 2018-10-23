@@ -1,8 +1,8 @@
-import {InvalidArgumentException} from './exceptions'
-import {Request} from './request'
+import {InvalidArgumentException} from '../exceptions'
+import {Request} from '../request'
 import {KeyValueMetadata} from './metadata'
 import {MetaDataset} from './metadataset'
-import {NPS} from './NPS'
+import {NPS} from '../NPS'
 
 class Dataset{
   constructor({

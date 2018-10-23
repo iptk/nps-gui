@@ -1,11 +1,11 @@
-import {Request} from './request'
+import {Request} from '../request'
 import {KeyValueMetadata} from './metadata'
 import {
   BackendException,
   ExecutionException,
   InvalidArgumentException
-} from './exceptions'
-import {generateID} from './util'
+} from '../exceptions'
+import {generateID} from '../util'
 
 class MetaDataset{
   constructor({dataset_id = "", id="", metadata = []}){

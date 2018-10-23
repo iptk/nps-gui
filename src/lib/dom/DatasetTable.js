@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 
-import {Dataset} from '../api/dataset'
+import {Dataset} from '../api/dsapi/dataset'
 import {changePage} from '../util'
 
 class DatasetTable extends React.Component{

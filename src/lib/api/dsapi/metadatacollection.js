@@ -1,5 +1,5 @@
-import {BackendException} from './exceptions'
-import {Request} from './request'
+import {BackendException} from '../exceptions'
+import {Request} from '../request'
 
 class MetadataCollection{
   constructor({

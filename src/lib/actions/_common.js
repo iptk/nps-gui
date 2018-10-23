@@ -1,4 +1,4 @@
-import {MetaDataset} from '../api/metadataset'
+import {MetaDataset} from '../api/dsapi/metadataset'
 import {NotificationLevel, notifyUser} from '../util/notification'
 
 const G_START_LOADING = 'G_START_LOADING',

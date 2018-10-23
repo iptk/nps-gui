@@ -3,7 +3,7 @@ import {
   UPDATE_SELECTED_MIDS
 } from '../../actions/dsapi/datasetcompare'
 
-import {MetaDataset} from '../../api'
+import {MetaDataset} from '../../api/dsapi'
 
 const init = {
   datasets: [],

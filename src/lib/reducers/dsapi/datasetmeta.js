@@ -7,7 +7,7 @@ import {
 
 import {G_RESTORE_LOCAL_STORE_DEFAULTS} from '../../actions/_common'
 
-import {MetaDataset} from '../../api'
+import {MetaDataset} from '../../api/dsapi'
 
 const init = {
   dataset: {

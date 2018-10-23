@@ -1,4 +1,4 @@
-import {MetadataCollection} from '../../api'
+import {MetadataCollection} from '../../api/dsapi'
 import {G_START_LOADING, G_STOP_LOADING} from '../_common'
 import {NotificationLevel, notifyUser} from '../../util/notification'
 
