@@ -3,7 +3,7 @@ import DatasetMeta from './datasetmeta'
 import MetadataCollections from './metadatacollections'
 import SearchDataset from './searchdataset'
 
-export {
+export default {
   DatasetCompare,
   DatasetMeta,
   MetadataCollections,

@@ -1,6 +1,6 @@
-import {Dataset} from '../api'
-import {G_START_LOADING, G_STOP_LOADING, G_NOTIFICATION_ADD} from './_common'
-import {NotificationLevel, notifyUser} from '../util/notification'
+import {Dataset} from '../../api'
+import {G_START_LOADING, G_STOP_LOADING, G_NOTIFICATION_ADD} from '../_common'
+import {NotificationLevel, notifyUser} from '../../util/notification'
 
 const RECEIVE_DATASETS = 'RECEIVE_DATASETS',
   UPDATE_SELECTED_MIDS = 'UPDATE_SELECTED_MIDS'

@@ -3,11 +3,11 @@ import {
   RECEIVE_DATASET,
   RECEIVE_RELATED_DATASETS,
   METADATA_SAVED
-} from '../actions/datasetmeta'
+} from '../../actions/dsapi/datasetmeta'
 
-import {G_RESTORE_LOCAL_STORE_DEFAULTS} from '../actions/_common'
+import {G_RESTORE_LOCAL_STORE_DEFAULTS} from '../../actions/_common'
 
-import {MetaDataset} from '../api'
+import {MetaDataset} from '../../api'
 
 const init = {
   dataset: {

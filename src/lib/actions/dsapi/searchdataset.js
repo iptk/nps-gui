@@ -1,7 +1,7 @@
-import {Dataset} from '../api'
+import {Dataset} from '../../api'
 
-import {G_START_LOADING, G_STOP_LOADING} from './_common'
-import {NotificationLevel, notifyUser} from '../util/notification'
+import {G_START_LOADING, G_STOP_LOADING} from '../_common'
+import {NotificationLevel, notifyUser} from '../../util/notification'
 
 const FILTER_GLOBAL_CHANGE = 'FILTER_GLOBAL_CHANGE',
   FILTER_SINGLE_CHANGE = 'FILTER_SINGLE_CHANGE',

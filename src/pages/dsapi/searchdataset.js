@@ -13,13 +13,13 @@ import TextField from '@material-ui/core/TextField'
 import {
   G_ADD_DATASETS_TO_COMPARISON,
   G_REMOVE_DATASETS_FROM_COMPARISON
-} from './lib/actions/_common'
-import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, FIELDS_CHANGE, START_CHANGE, COUNT_CHANGE, fetchDataset} from './lib/actions/searchdataset'
-import {DatasetTable, Page, QueryList} from './lib/dom'
-import reducer from './lib/reducers/searchdataset'
-import {debounceWrapper} from './lib/util'
-import {notifyUser, NotificationLevel} from './lib/util/notification.js'
-import NPSContext from './lib/util/NPSContext'
+} from '../../lib/actions/_common'
+import {FILTER_SINGLE_CHANGE, FILTER_GLOBAL_CHANGE, FIELDS_CHANGE, START_CHANGE, COUNT_CHANGE, fetchDataset} from '../../lib/actions/dsapi/searchdataset'
+import {DatasetTable, Page, QueryList} from '../../lib/dom'
+import reducer from '../../lib/reducers/dsapi/searchdataset'
+import {debounceWrapper} from '../../lib/util'
+import {notifyUser, NotificationLevel} from '../../lib/util/notification.js'
+import NPSContext from '../../lib/util/NPSContext'
 
 const _subscribedDatasetTable = connect(
   (state) => ({

@@ -5,12 +5,7 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
 import NPS from './lib/api'
 
-import {
-  DatasetCompare,
-  DatasetMeta,
-  MetadataCollections,
-  SearchDataset
-} from './index';
+import Pages from './pages';
 import {BaseLayout} from './lib/dom'
 import render_dom_delayed from './lib/dom/render_dom'
 import {i18n, history} from './lib/util'
@@ -36,16 +31,16 @@ Promise.all([
         <MuiThemeProvider theme={muiTheme}>
           <NPSContext.Provider defaults={results[2]} custom={results[3]}>
             <BaseLayout version={results[4]}>
-              <Route exact path="/" component={SearchDataset}/>
-              <Route path="/search" component={SearchDataset}/>
+              <Route exact path="/" component={Pages.DsAPI.SearchDataset}/>
+              <Route path="/search" component={Pages.DsAPI.SearchDataset}/>
               <Route path="/dataset">
-                <Route path="/dataset/:dsid" component={DatasetMeta}/>
+                <Route path="/dataset/:dsid" component={Pages.DsAPI.DatasetMeta}/>
               </Route>
               <Route path="/datasets">
-                <Route path="/datasets/compare" component={DatasetCompare}/>
+                <Route path="/datasets/compare" component={Pages.DsAPI.DatasetCompare}/>
               </Route>
               <Route path="/metadata">
-                <Route path="/metadata/collections" component={MetadataCollections}/>
+                <Route path="/metadata/collections" component={Pages.DsAPI.MetadataCollections}/>
               </Route>
             </BaseLayout>
           </NPSContext.Provider>

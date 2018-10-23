@@ -1,6 +1,6 @@
-import {MetadataCollection} from '../api'
-import {G_START_LOADING, G_STOP_LOADING} from './_common'
-import {NotificationLevel, notifyUser} from '../util/notification'
+import {MetadataCollection} from '../../api'
+import {G_START_LOADING, G_STOP_LOADING} from '../_common'
+import {NotificationLevel, notifyUser} from '../../util/notification'
 
 const RECEIVE_DATASET = 'RECEIVE_DATASET'
 

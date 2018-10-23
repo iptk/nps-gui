@@ -7,15 +7,15 @@ import {translate} from 'react-i18next'
 import {
   G_REMOVE_DATASETS_FROM_COMPARISON,
   gFetchMetadataAliases
-} from './lib/actions/_common'
-import {fetchDatasets, UPDATE_SELECTED_MIDS} from './lib/actions/datasetcompare'
+} from '../../lib/actions/_common'
+import {fetchDatasets, UPDATE_SELECTED_MIDS} from '../../lib/actions/dsapi/datasetcompare'
 import {
   ChooseMetaDatasetsCard,
   DatasetListCard,
   MetaDatasetComparisonCard,
   Page
-} from './lib/dom'
-import reducer from './lib/reducers/datasetcompare'
+} from '../../lib/dom'
+import reducer from '../../lib/reducers/dsapi/datasetcompare'
 
 const _dsListCard = connect(
   (state) => ({dsids: state.g.datasetCompare})

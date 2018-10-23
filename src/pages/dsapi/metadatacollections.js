@@ -9,11 +9,11 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
 
-import {fetchCollections} from './lib/actions/metadatacollections'
-import reducer from './lib/reducers/metadatacollections'
-import {Page, MetadataCollectionCard} from './lib/dom'
+import {fetchCollections} from '../../lib/actions/dsapi/metadatacollections'
+import reducer from '../../lib/reducers/dsapi/metadatacollections'
+import {Page, MetadataCollectionCard} from '../../lib/dom'
 
-import {NPS} from './lib/api'
+import {NPS} from '../../lib/api'
 
 const _subCardTitle = translate('pages')(connect(
   (state) => ({count: state.l.total})

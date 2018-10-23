@@ -1,6 +1,6 @@
 import {
   RECEIVE_DATASET
-} from '../actions/metadatacollections'
+} from '../../actions/dsapi/metadatacollections'
 
 const init = {
   total: 0,

@@ -14,21 +14,21 @@ import {
   G_REMOVE_DATASETS_FROM_COMPARISON,
   G_RESTORE_LOCAL_STORE_DEFAULTS,
   gFetchMetadataAliases
-} from './lib/actions/_common'
+} from '../../lib/actions/_common'
 import {
   deleteMetadata,
   fetchDataset,
   fetchRelatedDatasets,
   saveMetadata,
   ADD_EMPTY_METADATASET
-} from './lib/actions/datasetmeta'
+} from '../../lib/actions/dsapi/datasetmeta'
 import {
   DatasetFilesCard,
   DatasetListCard,
   MetaDatasetCardCollection,
   Page
-} from './lib/dom'
-import reducer from './lib/reducers/datasetmeta'
+} from '../../lib/dom'
+import reducer from '../../lib/reducers/dsapi/datasetmeta'
 
 // from lib/dom
 const _subscribedFilesCard = connect(
