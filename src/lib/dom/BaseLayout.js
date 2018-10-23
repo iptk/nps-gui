@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import ListSubheader from '@material-ui/core/ListSubheader'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import {withStyles} from '@material-ui/core/styles'
@@ -54,13 +55,14 @@ class BaseLayout extends React.Component {
           <ListItem onClick={()=>{changePage('/')}} button>
             <ListItemText primary={t('navigation.home')}/>
           </ListItem>
-          <Divider/>
+          <ListSubheader>{t('navigation.dsapi._head')}</ListSubheader>
           <ListItem onClick={()=>{changePage('/search')}} button>
-            <ListItemText primary={t('navigation.searchdataset')}/>
+            <ListItemText primary={t('navigation.dsapi.searchdataset')}/>
           </ListItem>
           <ListItem onClick={()=>{changePage('/datasets/compare')}} button>
-            <ListItemText primary={t('navigation.datasetcompare')}/>
+            <ListItemText primary={t('navigation.dsapi.datasetcompare')}/>
           </ListItem>
+          <ListSubheader>{t('navigation.mapi._head')}</ListSubheader>
           <Divider/>
           <ListItem>
             <ListItemText primary={version[0]} secondary={version[1]}/>

@@ -61,9 +61,15 @@
     "queries": "Abfragen"
   },
   "navigation":{
-    "datasetcompare": "Datensätze vergleichen",
     "home": "Home",
-    "searchdataset": "Suche",
-    "metadatasetcollections": "Metadaten"
+    "dsapi":{
+      "_head": "Datensätze",
+      "datasetcompare": "Datensätze vergleichen",
+      "searchdataset": "Suche",
+      "metadatasetcollections": "Metadaten"
+    },
+    "mapi":{
+      "_head": "Studien"
+    }
   }
 }
