@@ -54,11 +54,9 @@ class BaseLayout extends React.Component {
           <ListItem onClick={()=>{changePage('/')}} button>
             <ListItemText primary={t('navigation.home')}/>
           </ListItem>
+          <Divider/>
           <ListItem onClick={()=>{changePage('/search')}} button>
             <ListItemText primary={t('navigation.searchdataset')}/>
-          </ListItem>
-          <ListItem onClick={()=>{changePage('/metadata/collections')}} button>
-            <ListItemText primary={t('navigation.metadatasetcollections')}/>
           </ListItem>
           <ListItem onClick={()=>{changePage('/datasets/compare')}} button>
             <ListItemText primary={t('navigation.datasetcompare')}/>
