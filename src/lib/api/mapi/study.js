@@ -4,7 +4,7 @@ import Entity from './entity'
 class Study extends Entity{
   apipath = 'study'
 
-  constructor({id, name, cohortIDs, cohorts}){
+  constructor({id=null, name="", cohortIDs=[], cohorts=[]}){
     super()
     this.id = id
     this.name = name
