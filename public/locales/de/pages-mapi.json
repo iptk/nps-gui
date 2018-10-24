@@ -1,4 +1,12 @@
 {
-  "newstudy":{
+  "studydetails":{
+    "newstudy": "Neue Studie",
+    "unnamedstudy": "Unbenannte Studie",
+    "studycard":{
+      "title": "Studie",
+      "createcohort": "Kohorte hinzufügen",
+      "save": "Studie speichern",
+      "startedit": "Studie bearbeiten"
+    }
   }
 }

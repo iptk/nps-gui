@@ -69,7 +69,8 @@
       "metadatasetcollections": "Metadata"
     },
     "mapi":{
-      "_head": "Studies"
+      "_head": "Studies",
+      "newstudy": "New study"
     }
   }
 }

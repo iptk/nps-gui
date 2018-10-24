@@ -1,12 +1,12 @@
-import NewStudy from './newstudy'
+import StudyDetails from './studydetails'
 
 import Routes from './_routes'
 
 export default {
-  NewStudy,
+  StudyDetails,
   Routes
 }
 export {
-  NewStudy,
+  StudyDetails,
   Routes
 }

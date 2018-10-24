@@ -1,11 +1,12 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
-import NewStudy from './newstudy'
+import StudyDetails from './studydetails'
 
 const Routes = ({urlbase}) => (
   <React.Fragment>
-    <Route exact path={urlbase} component={NewStudy}/>
+    <Route exact path={urlbase} component={StudyDetails}/>
+    <Route path={urlbase+'/study/:id?'} component={StudyDetails}/>
   </React.Fragment>
 )
 
