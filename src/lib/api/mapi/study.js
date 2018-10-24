@@ -12,6 +12,17 @@ class Study extends Entity{
     this.cohorts = cohorts || []
   }
 
+  addCohort(cohort){
+    if(this.id){
+      cohort.studyID = this.id
+    }
+    cohort.study = this
+    if(cohort.id){
+      this.cohortIDs.push(cohort.id)
+      this.cohorts.push(cohort)
+    }
+  }
+
   static get(id, recursive){
     return super.get(id).then(json => new Study({
         id: resp.json.id,
