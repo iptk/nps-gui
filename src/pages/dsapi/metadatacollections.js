@@ -15,7 +15,7 @@ import {Page, MetadataCollectionCard} from '../../lib/dom'
 
 import {NPS} from '../../lib/api'
 
-const _subCardTitle = withNamespaces('pages')(connect(
+const _subCardTitle = withNamespaces('pages-dsapi')(connect(
   (state) => ({count: state.l.total})
 )(
   ({count, t}) => (

@@ -47,7 +47,7 @@ const _relatedDSCard = connect(
 )(DatasetListCard)
 
 // locally defined
-const _actionCardTitle = withNamespaces('pages')(connect(
+const _actionCardTitle = withNamespaces('pages-dsapi')(connect(
   (state) => ({dsid: state.l.dataset.id})
 )(
   ({dsid, t}) => (
@@ -56,7 +56,7 @@ const _actionCardTitle = withNamespaces('pages')(connect(
   )
 ))
 
-const _dlBtn = withNamespaces('pages')(connect(
+const _dlBtn = withNamespaces('pages-dsapi')(connect(
   (state) => ({url: state.l.downloadurl})
 )(
   ({url, t}) => (
@@ -67,7 +67,7 @@ const _dlBtn = withNamespaces('pages')(connect(
   )
 ))
 
-const _compBtn = withNamespaces('pages')(connect(
+const _compBtn = withNamespaces('pages-dsapi')(connect(
   (state) => ({dsid: state.l.dataset.id, dsComp: state.g.datasetCompare})
 )(
   ({dsid, dsComp, onClick, t}) => {
