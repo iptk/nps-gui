@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -228,4 +228,4 @@ class DatasetTable extends React.Component{
   }
 }
 
-export default translate('dom')(DatasetTable)
+export default withNamespaces('dom')(DatasetTable)

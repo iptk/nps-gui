@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import {withStyles} from '@material-ui/core/styles'
 import classNames from 'classnames'
 import {Link} from 'react-router-dom'
@@ -105,7 +105,7 @@ class NotificationSnackbar extends React.Component{
   }
 }
 
-NotificationSnackbar = translate('err')(NotificationSnackbar)
+NotificationSnackbar = withNamespaces('err')(NotificationSnackbar)
 
 export default NotificationSnackbar
 export {NotificationSnackbar}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import Button from '@material-ui/core/Button'
 import Icon from '@material-ui/core/Icon'
 import Table from '@material-ui/core/Table'
@@ -130,4 +130,4 @@ class ObjectTable extends React.Component{
   }
 }
 
-export default translate('dom')(ObjectTable)
+export default withNamespaces('dom')(ObjectTable)

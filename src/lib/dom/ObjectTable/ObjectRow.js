@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import TableCell from '@material-ui/core/TableCell'
@@ -110,7 +110,7 @@ class _ObjectRow extends React.Component{
   }
 }
 
-const ObjectRow = translate('dom')(_ObjectRow)
+const ObjectRow = withNamespaces('dom')(_ObjectRow)
 
 export {ObjectRow}
 export default ObjectRow

@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import {withStyles} from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip'
@@ -31,6 +31,6 @@ const QueryList = ({classes, queryVals, t}) => {
   )
 }
 
-export default translate('dom')(
+export default withNamespaces('dom')(
   withStyles(styles)(QueryList)
 )

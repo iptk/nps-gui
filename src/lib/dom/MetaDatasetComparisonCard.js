@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import {withStyles} from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button'
@@ -493,4 +493,4 @@ class MetaDatasetComparisonCard extends CollapsableCard{
   }
 }
 
-export default translate('dom')(MetaDatasetComparisonCard)
+export default withNamespaces('dom')(MetaDatasetComparisonCard)

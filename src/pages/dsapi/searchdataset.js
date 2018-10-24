@@ -2,7 +2,7 @@ import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import {Link} from 'react-router-dom'
 
@@ -41,7 +41,7 @@ const _subscribedQueryList = connect(
   }
 )(QueryList)
 
-const _resultNums = translate('pages')(connect(
+const _resultNums = withNamespaces('pages-dsapi')(connect(
   (state) => ({
     start: state.l.filter.start,
     end: state.l.filter.end,
@@ -60,7 +60,7 @@ const _resultNums = translate('pages')(connect(
   }
 ))
 
-const _directDSLinks = translate('pages')(connect(
+const _directDSLinks = withNamespaces('pages-dsapi')(connect(
   (state) => ({ids: state.l.filter.recognizedIDs})
 )(
   ({ids, t}) => {
@@ -194,7 +194,7 @@ class SearchDataset extends Page{
   }
 }
 
-export default translate('pages-dsapi')(
+export default withNamespaces('pages-dsapi')(
   (props) => (
     <NPSContext.defaults.Consumer>
       {({searchdataset}) => (

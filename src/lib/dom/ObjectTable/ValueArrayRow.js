@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import TableCell from '@material-ui/core/TableCell'
@@ -108,7 +108,7 @@ class _ValueArrayRow extends React.Component{
   }
 }
 
-const ValueArrayRow = translate('dom')(_ValueArrayRow)
+const ValueArrayRow = withNamespaces('dom')(_ValueArrayRow)
 
 export {ValueArrayRow}
 export default ValueArrayRow

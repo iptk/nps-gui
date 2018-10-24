@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Icon from '@material-ui/core/Icon'
 import List from '@material-ui/core/List'
@@ -31,4 +31,4 @@ class DatasetFilesCard extends CollapsableCard{
   }
 }
 
-export default translate('dom')(DatasetFilesCard)
+export default withNamespaces('dom')(DatasetFilesCard)

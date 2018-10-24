@@ -2,7 +2,7 @@ import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -15,7 +15,7 @@ import {Page, MetadataCollectionCard} from '../../lib/dom'
 
 import {NPS} from '../../lib/api'
 
-const _subCardTitle = translate('pages')(connect(
+const _subCardTitle = withNamespaces('pages')(connect(
   (state) => ({count: state.l.total})
 )(
   ({count, t}) => (
@@ -71,4 +71,4 @@ class MetadataCollections extends Page{
   }
 }
 
-export default translate('pages-dsapi')(MetadataCollections)
+export default withNamespaces('pages-dsapi')(MetadataCollections)

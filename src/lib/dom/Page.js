@@ -2,7 +2,7 @@ import React from 'react'
 import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {Provider, connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import {
   G_NOTIFICATION_CLOSE, G_RESTORE_STATE_FROM_COOKIES

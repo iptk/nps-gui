@@ -2,7 +2,7 @@ import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import {
   G_REMOVE_DATASETS_FROM_COMPARISON,
@@ -83,4 +83,4 @@ class DatasetCompare extends Page{
   }
 }
 
-export default translate('pages-dsapi')(DatasetCompare)
+export default withNamespaces('pages-dsapi')(DatasetCompare)

@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import Icon from '@material-ui/core/Icon'
 import IconButton from '@material-ui/core/IconButton'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -56,7 +56,7 @@ const _ValueInput = ({type, onChange, value, expanded, onExpand, readonly}) => {
   )
 }
 
-const TypeInput = translate('dom')(_TypeInput)
-const ValueInput = translate('dom')(_ValueInput)
+const TypeInput = withNamespaces('dom')(_TypeInput)
+const ValueInput = withNamespaces('dom')(_ValueInput)
 
 export {KeyInput, TypeInput, ValueInput}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Checkbox from '@material-ui/core/Checkbox'
 import Icon from '@material-ui/core/Icon'
@@ -58,4 +58,4 @@ class ChooseMetaDatasetsCard extends CollapsableCard{
   }
 }
 
-export default translate('dom')(ChooseMetaDatasetsCard)
+export default withNamespaces('dom')(ChooseMetaDatasetsCard)

@@ -2,7 +2,7 @@ import 'babel-polyfill' // for cross-fetch
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -47,7 +47,7 @@ const _relatedDSCard = connect(
 )(DatasetListCard)
 
 // locally defined
-const _actionCardTitle = translate('pages')(connect(
+const _actionCardTitle = withNamespaces('pages')(connect(
   (state) => ({dsid: state.l.dataset.id})
 )(
   ({dsid, t}) => (
@@ -56,7 +56,7 @@ const _actionCardTitle = translate('pages')(connect(
   )
 ))
 
-const _dlBtn = translate('pages')(connect(
+const _dlBtn = withNamespaces('pages')(connect(
   (state) => ({url: state.l.downloadurl})
 )(
   ({url, t}) => (
@@ -67,7 +67,7 @@ const _dlBtn = translate('pages')(connect(
   )
 ))
 
-const _compBtn = translate('pages')(connect(
+const _compBtn = withNamespaces('pages')(connect(
   (state) => ({dsid: state.l.dataset.id, dsComp: state.g.datasetCompare})
 )(
   ({dsid, dsComp, onClick, t}) => {
@@ -178,4 +178,4 @@ class DatasetMeta extends Page{
   }
 }
 
-export default translate('pages-dsapi')(DatasetMeta)
+export default withNamespaces('pages-dsapi')(DatasetMeta)

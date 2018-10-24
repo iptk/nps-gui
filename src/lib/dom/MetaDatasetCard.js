@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import Autocomplete from './Autocomplete'
 import CollapsableCard from './CollapsableCard'
@@ -61,7 +61,7 @@ class _MetaDatasetCard extends CollapsableCard{
   }
 }
 
-const MetaDatasetCard = translate('dom')(_MetaDatasetCard)
+const MetaDatasetCard = withNamespaces('dom')(_MetaDatasetCard)
 
 export default MetaDatasetCard
 export {MetaDatasetCard}

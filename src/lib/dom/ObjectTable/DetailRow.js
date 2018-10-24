@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 import Button from '@material-ui/core/Button'
 import Collapse from '@material-ui/core/Collapse'
 import Icon from '@material-ui/core/Icon'
@@ -128,7 +128,7 @@ class _DetailRow extends React.Component{
   }
 }
 
-const DetailRow = translate('dom')(_DetailRow)
+const DetailRow = withNamespaces('dom')(_DetailRow)
 
 export {DetailRow}
 export default DetailRow

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {translate} from 'react-i18next'
+import {withNamespaces} from 'react-i18next'
 
 import AppBar from '@material-ui/core/AppBar'
 import Divider from '@material-ui/core/Divider'
@@ -108,4 +108,4 @@ class BaseLayout extends React.Component {
   }
 }
 
-export default translate('dom')(BaseLayout)
+export default withNamespaces('dom')(BaseLayout)
