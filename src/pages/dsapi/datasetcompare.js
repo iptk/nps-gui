@@ -83,4 +83,4 @@ class DatasetCompare extends Page{
   }
 }
 
-export default translate('pages')(DatasetCompare)
+export default translate('pages-dsapi')(DatasetCompare)

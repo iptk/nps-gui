@@ -71,4 +71,4 @@ class MetadataCollections extends Page{
   }
 }
 
-export default translate('pages')(MetadataCollections)
+export default translate('pages-dsapi')(MetadataCollections)

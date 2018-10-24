@@ -178,4 +178,4 @@ class DatasetMeta extends Page{
   }
 }
 
-export default translate('pages')(DatasetMeta)
+export default translate('pages-dsapi')(DatasetMeta)

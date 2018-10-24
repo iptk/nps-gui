@@ -194,7 +194,7 @@ class SearchDataset extends Page{
   }
 }
 
-export default translate('pages')(
+export default translate('pages-dsapi')(
   (props) => (
     <NPSContext.defaults.Consumer>
       {({searchdataset}) => (
