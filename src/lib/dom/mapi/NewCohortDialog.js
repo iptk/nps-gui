@@ -62,6 +62,7 @@ class NewCohortDialog extends React.Component{
             type="number"
             margin="normal"
             defaultValue={0}
+            inputProps={{min: "0", step: "1"}}
             fullWidth/>
           <TextField label={t('NewCohortDialog.participantcreatecount')}
             onChange={(evt) => this.setState({
@@ -70,10 +71,14 @@ class NewCohortDialog extends React.Component{
             margin="normal"
             type="number"
             defaultValue={0}
+            inputProps={{min: "0", step: "1"}}
             fullWidth/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.save.bind(this)} fullWidth>
+          <Button onClick={this.save.bind(this)}
+            disabled={this.state.name.length == 0}
+            fullWidth
+          >
             {t('NewCohortDialog.createcohort')}
           </Button>
           <Button onClick={this.close.bind(this)} fullWidth>

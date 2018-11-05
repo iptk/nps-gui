@@ -2,6 +2,7 @@
   "studydetails":{
     "newstudy": "New study",
     "unnamedstudy": "Unnamed study",
+    "participant": "Participant",
     "studycard":{
       "title": "Study",
       "createcohort": "Add cohort",

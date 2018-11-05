@@ -1,4 +1,5 @@
 import {
+  ADD_COHORT,
   CHANGE_STUDY_NAME,
   RECEIVE_STUDY,
   START_EDIT
@@ -12,6 +13,14 @@ const init = {
 }
 const reducer = (state = init, action) => {
   switch(action.type){
+    case ADD_COHORT:
+      var study = state.study
+      study.addCohort(action.cohort)
+      return {
+        ...state,
+        study: {...study}
+      }
+
     case CHANGE_STUDY_NAME:
       state.study.name = action.value
       return {
@@ -21,7 +30,7 @@ const reducer = (state = init, action) => {
           name: action.value
         }
       }
-      
+
     case RECEIVE_STUDY:
       return {
         ...state,

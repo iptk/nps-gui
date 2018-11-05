@@ -12,25 +12,30 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
 import {
+  ADD_COHORT,
   CHANGE_STUDY_NAME,
   START_EDIT
 } from '../../lib/actions/mapi/studydetails'
 import reducer from '../../lib/reducers/mapi/studydetails'
 import {Page} from '../../lib/dom'
+import CohortCard from '../../lib/dom/mapi/CohortCard'
 import NewCohortDialog from '../../lib/dom/mapi/NewCohortDialog'
 
-const _Title = withNamespaces('pages-mapi')(connect(
+import {Cohort, Participant} from '../../lib/api/mapi'
+
+const _CohortCards = connect(
   (state) => ({
-    title: state.l.study.id ?state.l.study.name :null,
-    hasID: !!state.l.study.id
+    study: state.l.study
   })
 )(
-  ({title, hasID, t}) => (
-    <Typography variant="display1" color="inherit">
-      {title || t('studydetails.'+(hasID ?'unnamedstudy' :'newstudy'))}
-    </Typography>
+  ({study}) => study.cohorts.map(c =>
+    <div key={c.name}>
+      <br/>
+      <CohortCard cohort={c}/>
+    </div>
   )
-))
+)
+
 const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
   (state) => ({
     study: state.l.study,
@@ -91,8 +96,26 @@ class StudyDetails extends Page{
     }
   }
 
-  createCohort(vals){
-    console.log(vals)
+  addParticipants = (count, cohort, startIndex = 0) => {
+    var name = (this.props.t
+      ?this.props.t('studydetails.participant')
+      :'Participant')
+    for(var i = 0; i < count; i++){
+      cohort.addParticipant(
+        new Participant({alias: name+' '+(i+startIndex)})
+      )
+    }
+  }
+
+  createCohort({name, plannedParticipantCount, createParticipantCount}){
+    if(name){
+      var cohort = new Cohort({
+        name: name,
+        plannedParticipantCount: plannedParticipantCount
+      })
+      this.addParticipants(createParticipantCount, cohort)
+      this.store.dispatch({type: ADD_COHORT, cohort: cohort})
+    }
     this.setState({
       newCohortDialog: false
     })
@@ -142,6 +165,7 @@ class StudyDetails extends Page{
             />
           :null
         }
+        <_CohortCards/>
       </div>
     )
   }

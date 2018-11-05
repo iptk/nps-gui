@@ -1,4 +1,7 @@
 {
+  "CohortCard":{
+    "opendetail": "Detailansicht"
+  },
   "NewCohortDialog":{
     "title":"Neue Kohorte hinzufügen",
     "cancel": "Abbrechen",

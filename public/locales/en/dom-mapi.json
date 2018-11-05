@@ -1,4 +1,7 @@
 {
+  "CohortCard":{
+    "opendetail": "Detail view"
+  },
   "NewCohortDialog":{
     "title": "Add cohort",
     "cancel": "Cancel",
