@@ -59,6 +59,10 @@ class Page extends React.PureComponent{
       applyMiddleware(thunkMiddleware)
     )
     this.store.dispatch({type: G_RESTORE_STATE_FROM_COOKIES})
+
+    if(process.env.NODE_ENV != 'production'){
+      window._s = this.store
+    }
   }
 
   closeNotification = () => {

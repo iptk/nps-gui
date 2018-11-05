@@ -73,7 +73,6 @@ const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
 class StudyDetails extends Page{
   constructor(props){
     super(props, reducer)
-    window._s = this.store
     this.state = {
       newCohortDialog: false
     }
