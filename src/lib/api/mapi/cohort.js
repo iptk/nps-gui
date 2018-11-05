@@ -49,7 +49,10 @@ class Cohort extends Entity{
         this.participantIDs = json.participants
 
         if(recursive){
-          return Promise.all(this.participants.map(c => c.save(true)))
+          return Promise.all(this.participants.map(c => {
+            c.cohortID = this.id
+            return c.save(true)
+          }))
         }
 
         return this

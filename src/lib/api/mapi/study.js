@@ -55,7 +55,10 @@ class Study extends Entity{
         this.cohortIDs = resp.json.cohorts
 
         if(recursive){
-          return Promise.all(this.cohorts.map(c => c.save(true)))
+          return Promise.all(this.cohorts.map(c => {
+            c.studyID = this.id
+            return c.save(true)
+          }))
         }
 
         return this

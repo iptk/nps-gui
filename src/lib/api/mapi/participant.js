@@ -67,8 +67,14 @@ class Participant extends Entity{
 
         if(recursive){
           return Promise.all([
-            Promise.all(this.dates.map(d => d.save())),
-            Promise.all(this.datasets.map(d => d.save()))
+            Promise.all(this.dates.map(d => {
+              d.participantID = this.id
+              return d.save()
+            })),
+            Promise.all(this.datasets.map(d => {
+              d.participantID = this.id
+              return d.save()
+            }))
           ])
         }
 
