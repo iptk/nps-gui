@@ -1,0 +1,10 @@
+{
+  "NewCohortDialog":{
+    "title": "Add cohort",
+    "cancel": "Cancel",
+    "createcohort": "Create cohort",
+    "cohortname": "Cohort's name",
+    "participantcount": "Planned participant count",
+    "participantcreatecount": "Number of participants to create automatically"
+  }
+}

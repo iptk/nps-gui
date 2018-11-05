@@ -1,4 +1,8 @@
-import {RECEIVE_STUDY, START_EDIT} from '../../actions/mapi/studydetails'
+import {
+  CHANGE_STUDY_NAME,
+  RECEIVE_STUDY,
+  START_EDIT
+} from '../../actions/mapi/studydetails'
 import {Study} from '../../api/mapi'
 
 const init = {
@@ -8,6 +12,16 @@ const init = {
 }
 const reducer = (state = init, action) => {
   switch(action.type){
+    case CHANGE_STUDY_NAME:
+      state.study.name = action.value
+      return {
+        ...state,
+        study: {
+          ...state.study,
+          name: action.value
+        }
+      }
+      
     case RECEIVE_STUDY:
       return {
         ...state,

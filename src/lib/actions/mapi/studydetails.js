@@ -2,7 +2,8 @@ import {Dataset} from '../../api/mapi'
 import {G_START_LOADING, G_STOP_LOADING} from '../_common'
 import {NotificationLevel, notifyUser} from '../../util/notification'
 
-const RECEIVE_STUDY = 'RECEIVE_STUDY',
+const CHANGE_STUDY_NAME = 'CHANGE_STUDY_NAME',
+  RECEIVE_STUDY = 'RECEIVE_STUDY',
   START_EDIT = 'START_EDIT'
 
 const saveStudy = (study) => {
@@ -30,6 +31,7 @@ const saveStudy = (study) => {
 
 export {
   saveStudy,
+  CHANGE_STUDY_NAME,
   RECEIVE_STUDY,
   START_EDIT
 }

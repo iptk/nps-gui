@@ -6,7 +6,8 @@
       "title": "Studie",
       "createcohort": "Kohorte hinzufügen",
       "save": "Studie speichern",
-      "startedit": "Studie bearbeiten"
+      "startedit": "Studie bearbeiten",
+      "studyname": "Name der Studie"
     }
   }
 }
