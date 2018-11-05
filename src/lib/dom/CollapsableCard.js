@@ -26,7 +26,7 @@ class CollapsableCard extends React.PureComponent{
       _expanded: !this.state._expanded
     })
   }
-  render(header = '', content = ''){
+  render(header = '', content = '', footer = null){
     var cardHeader = ''
     if((typeof header) === 'string'){
       header = [header, '']
@@ -62,6 +62,7 @@ class CollapsableCard extends React.PureComponent{
         <Collapse in={this.state._expanded} timeout='auto' style={{width: '100%', overflowX: 'auto'}}>
           {content}
         </Collapse>
+        {footer}
       </Card>)
   }
 }
