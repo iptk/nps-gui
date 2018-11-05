@@ -17,9 +17,9 @@ class Study extends Entity{
       cohort.studyID = this.id
     }
     cohort.study = this
+    this.cohorts.push(cohort)
     if(cohort.id){
       this.cohortIDs.push(cohort.id)
-      this.cohorts.push(cohort)
     }
   }
 
