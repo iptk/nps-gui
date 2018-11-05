@@ -70,6 +70,19 @@ const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
   }
 ))
 
+const _Title = withNamespaces('pages-mapi')(connect(
+  (state) => ({
+    title: state.l.study.id ?state.l.study.name :null,
+    hasID: !!state.l.study.id
+  })
+)(
+  ({title, hasID, t}) => (
+    <Typography variant="display1" color="inherit" margin="normal">
+      {title || t('studydetails.'+(hasID ?'unnamedstudy' :'newstudy'))}
+    </Typography>
+  )
+))
+
 class StudyDetails extends Page{
   constructor(props){
     super(props, reducer)
