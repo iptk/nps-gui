@@ -82,7 +82,7 @@ const _Title = withNamespaces('pages-mapi')(connect(
   })
 )(
   ({title, hasID, t}) => (
-    <Typography variant="display1" color="inherit" margin="normal">
+    <Typography variant="display1" color="inherit" paragraph>
       {title || t('studydetails.'+(hasID ?'unnamedstudy' :'newstudy'))}
     </Typography>
   )
