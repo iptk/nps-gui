@@ -8,11 +8,11 @@ class Participant extends Entity{
   constructor({id, alias, cohort, cohortID, datasetIDs, dateIDs, datasets, dates}){
     super()
     this.id = id
-    this.alias = alias
+    this.alias = alias || ''
     this.cohort = cohort || null
     this.cohortID = cohortID
-    this.datasetIDs = datasetIDs
-    this.dateIDs = dateIDs
+    this.datasetIDs = datasetIDs || []
+    this.dateIDs = dateIDs || []
     this.datasets = datasets || []
     this.dates = dates || []
   }
