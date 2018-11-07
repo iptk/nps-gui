@@ -8,7 +8,7 @@ import {Study} from '../../api/mapi'
 
 const init = {
   study: new Study({}),
-  edit: false,
+  edit: true,
   manualEdit: false
 }
 const reducer = (state = init, action) => {
