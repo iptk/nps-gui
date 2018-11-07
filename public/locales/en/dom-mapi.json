@@ -1,6 +1,17 @@
 {
   "CohortCard":{
-    "opendetail": "Detail view"
+    "id": "id",
+    "last": "last",
+    "name": "Name",
+    "opendetail": "Detail view",
+    "participant":{
+      "name": "Name",
+      "datasetCount": "Dataset count",
+      "dateCount": "Date count"
+    },
+    "participantCount": "actual participant count",
+    "participantTableHeadline": "Participant information",
+    "plannedParticipantCount": "Planned participant count",
   },
   "NewCohortDialog":{
     "title": "Add cohort",

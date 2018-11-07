@@ -1,6 +1,17 @@
 {
   "CohortCard":{
-    "opendetail": "Detailansicht"
+    "id": "ID",
+    "last": "Letzter",
+    "name": "Name",
+    "opendetail": "Detailansicht",
+    "participant":{
+      "name": "Name",
+      "datasetCount": "Anzahl Datensätze",
+      "dateCount": "Anzahl Termine"
+    },
+    "participantCount": "Tatsächliche Teilnehmerzahl",
+    "participantTableHeadline": "Teilnehmerinformationen",
+    "plannedParticipantCount": "Geplante Teilnehmerzahl"
   },
   "NewCohortDialog":{
     "title":"Neue Kohorte hinzufügen",
