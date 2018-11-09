@@ -3,6 +3,10 @@ import {InvalidArgumentException, BackendException} from '../exceptions'
 class Entity{
   apipath = ''
 
+  clone(){
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
+  }
+
   delete(){
     if(!this.id){
       return false
