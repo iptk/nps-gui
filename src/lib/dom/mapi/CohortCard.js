@@ -18,7 +18,7 @@ class CohortCard extends CollapsableCard{
   openDetail(){
     if(this.props.onCohortDetail){
       this.props.onCohortDetail(
-        null, `${c.props.cohort.name}.${this.props.cohort.id}`
+        null, `${this.props.cohort.name}.${this.props.cohort.id||''}`
       )
     }
   }
