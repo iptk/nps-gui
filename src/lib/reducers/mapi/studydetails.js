@@ -14,21 +14,18 @@ const init = {
 const reducer = (state = init, action) => {
   switch(action.type){
     case ADD_COHORT:
-      var study = state.study
+      var study = state.study.clone()
       study.addCohort(action.cohort)
       return {
         ...state,
-        study: {...study}
+        study: study
       }
 
     case CHANGE_STUDY_NAME:
       state.study.name = action.value
       return {
         ...state,
-        study: {
-          ...state.study,
-          name: action.value
-        }
+        study: state.study.clone()
       }
 
     case RECEIVE_STUDY:
