@@ -9,6 +9,7 @@ import Tabs from '@material-ui/core/Tabs'
 import reducer from '../../lib/reducers/mapi/studydetails'
 import {Page} from '../../lib/dom'
 
+import CohortTab from './studydetails/CohortTab'
 import StudyTab from './studydetails/StudyTab'
 
 const _Tabs = withNamespaces('pages-mapi')(connect(
@@ -73,7 +74,9 @@ class StudyDetails extends Page{
         {this.state.tab.type === this.TAB_STUDY
           && <StudyTab store={this.store} onCohortDetail={this.changeTab.bind(this)}/>
         }
-        {this.state.tab.type === this.TAB_COHORT && <div>{tab.name||'n'}.{tab.id||'i'}</div>}
+        {this.state.tab.type === this.TAB_COHORT
+          && <CohortTab store={this.store} id={tab.id} name={tab.name}/>
+        }
       </div>
     )
   }
