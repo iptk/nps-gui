@@ -14,6 +14,15 @@ import Typography from '@material-ui/core/Typography'
 import CollapsableCard from '../CollapsableCard'
 
 class CohortCard extends CollapsableCard{
+
+  openDetail(){
+    if(this.props.onCohortDetail){
+      this.props.onCohortDetail(
+        null, `${c.props.cohort.name}.${this.props.cohort.id}`
+      )
+    }
+  }
+
   render(){
     var {cohort, t} = this.props
 
@@ -85,7 +94,9 @@ class CohortCard extends CollapsableCard{
         {participantTable}
       </CardContent>,
       <CardActions>
-        <Button>{t('CohortCard.opendetail')}</Button>
+        <Button onClick={this.openDetail.bind(this)}>
+          {t('CohortCard.opendetail')}
+        </Button>
       </CardActions>
     )
   }
