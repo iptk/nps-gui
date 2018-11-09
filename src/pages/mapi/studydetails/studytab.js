@@ -56,14 +56,17 @@ const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
         <CardContent>
           <TextField
             onChange={onChangeName} margin="normal" defaultValue={currentName}
-            label={t('studydetails.studycard.studyname')} fullWidth/>
+            label={t('studydetails.studycard.studyname')} fullWidth
+            error={study.name.length === 0}/>
         </CardContent>
         <CardActions>
           <Button onClick={onCreateCohort} fullWidth>
             <Icon>add</Icon>
             {t('studydetails.studycard.createcohort')}
           </Button>
-          <Button onClick={onSaveStudy} fullWidth>
+          <Button onClick={onSaveStudy} fullWidth
+            disabled={study.name.length === 0}
+          >
             <Icon>save</Icon>
             {t('studydetails.studycard.save')}
           </Button>
