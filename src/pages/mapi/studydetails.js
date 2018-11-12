@@ -25,7 +25,7 @@ const _Tabs = withNamespaces('pages-mapi')(connect(
     >
       <Tab label={t('studydetails.studytab')}
         value={studytabVal}
-        key="__study"/>
+        key={studytabVal}/>
       {study.cohorts.map(c => (
         <Tab label={c.name} key={`${c.name}.${c.id}`}
           value={`${c.name||''}.${c.id||''}`}/>
