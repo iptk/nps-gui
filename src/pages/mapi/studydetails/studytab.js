@@ -14,7 +14,8 @@ import Typography from '@material-ui/core/Typography'
 import {
   ADD_COHORT,
   CHANGE_STUDY_NAME,
-  START_EDIT
+  START_EDIT,
+  saveStudy
 } from '../../../lib/actions/mapi/studydetails'
 import CohortCard from '../../../lib/dom/mapi/CohortCard'
 import NewCohortDialog from '../../../lib/dom/mapi/NewCohortDialog'
@@ -128,8 +129,8 @@ class StudyTab extends React.PureComponent{
     })
   }
 
-  saveStudy(){
-    //
+  onSaveStudy(){
+    this.props.store.dispatch(saveStudy(this.props.store.getState().l.study))
   }
 
   startEdit(){
@@ -154,7 +155,7 @@ class StudyTab extends React.PureComponent{
           <_StudyCardEdit
             onStartEdit={this.startEdit.bind(this)}
             onCreateCohort={this.openCreateCohortDialog.bind(this)}
-            onSaveStudy={this.saveStudy.bind(this)}
+            onSaveStudy={this.onSaveStudy.bind(this)}
             onChangeName={this.changeName.bind(this)}
             currentName={this.props.store.getState().l.study.name}
           />
