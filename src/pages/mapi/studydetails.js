@@ -64,6 +64,10 @@ class StudyDetails extends Page{
 
   render(){
     var {selectedTab, tab} = this.state
+    var cohort = (tab.type == this.TAB_STUDY
+      ?null
+      :this.store.getState().l.study.getCohortByIDorName(tab.id, tab.name)
+    )
     return super.render(
       <div>
         <AppBar position="static">
@@ -71,11 +75,11 @@ class StudyDetails extends Page{
             value={selectedTab} studytabVal={this.STUDYTAB_VALUE}/>
         </AppBar>
         <br/>
-        {this.state.tab.type === this.TAB_STUDY
+        {tab.type === this.TAB_STUDY
           && <StudyTab store={this.store} onCohortDetail={this.changeTab.bind(this)}/>
         }
-        {this.state.tab.type === this.TAB_COHORT
-          && <CohortTab store={this.store} id={tab.id} name={tab.name}/>
+        {tab.type === this.TAB_COHORT
+          && <CohortTab store={this.store} cohort={cohort}/>
         }
       </div>
     )

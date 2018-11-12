@@ -20,11 +20,7 @@ class CohortTab extends React.PureComponent{
   }
 
   render(){
-    var {t} = this.props
-
-    // temp!! TODO
-    var {id, name} = this.props
-    var cohort = {id, name}
+    var {cohort, t} = this.props
 
     return (
       <div>
