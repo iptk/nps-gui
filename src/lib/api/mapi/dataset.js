@@ -14,21 +14,21 @@ class Dataset extends Entity{
 
   static get(id, recursive, participant){
     super.get(id).then(json => new Dataset({
-      id: json.id,
-      datasetID: json.dataset_id,
-      participant: (participant && participant.id == json.participant_id)
+      id: json.dataset.id,
+      datasetID: json.dataset.datasetID,
+      participant: (participant && participant.id == json.dataset.participantID)
         ?participant :null,
-      participantID: json.participant_id,
-      dateID: json.date_id
+      participantID: json.dataset.participantID,
+      dateID: json.dataset.dateID
     }))
   }
 
   save(recursive=true){
     return super.save({name: this.name}).then(json => {
-        this.id = json.id
-        this.datasetID = json.dataset_id
-        this.participantID = json.participant_id
-        this.dateID = json.date_id
+        this.id = json.dataset.id
+        this.datasetID = json.dataset.datasetID
+        this.participantID = json.dataset.participantID
+        this.dateID = json.dataset.dateID
 
         if(recursive){
           return Promise.all(this.cohorts.map(c => c.save(true)))

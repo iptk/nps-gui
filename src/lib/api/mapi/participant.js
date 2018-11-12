@@ -19,12 +19,12 @@ class Participant extends Entity{
 
   static get(id, recursive, cohort){
     return super.get(id).then(json => new Participant({
-          id: json.id,
-          alias: json.alias,
-          cohortID: json.cohort_id,
-          datasetIDs: json.dataset_ids,
-          dateIDs: json.date_ids,
-          cohort: (cohort && cohort.id == json.cohort_id) ?cohort :null
+          id: json.participant.id,
+          alias: json.participant.alias,
+          cohortID: json.participant.cohortID,
+          datasetIDs: json.participant.datasetIDs,
+          dateIDs: json.participant.dateIDs,
+          cohort: (cohort && cohort.id == json.participant.cohortID) ?cohort :null
         })
       )
       .then(p => {
@@ -59,11 +59,11 @@ class Participant extends Entity{
 
   save(recursive=true){
     return super.save({name: this.name}).then(json => {
-        this.id = json.id
-        this.alias = json.alias
-        this.cohortID = json.cohort_id
-        this.datasetIDs = json.dataset_ids
-        this.dateIDs = json.date_ids
+        this.id = json.participant.id
+        this.alias = json.participant.alias
+        this.cohortID = json.participant.cohortID
+        this.datasetIDs = json.participant.datasetIDs
+        this.dateIDs = json.participant.dateIDs
 
         if(recursive){
           return Promise.all([

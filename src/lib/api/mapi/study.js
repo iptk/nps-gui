@@ -25,9 +25,9 @@ class Study extends Entity{
 
   static get(id, recursive){
     return super.get(id).then(json => new Study({
-        id: resp.json.id,
-        name: resp.json.name,
-        cohortIDs: resp.json.cohorts
+        id: json.study.id,
+        name: json.study.name,
+        cohortIDs: json.study.cohortIDs
       }))
       .then(s => {
         if(recursive){
@@ -49,10 +49,10 @@ class Study extends Entity{
   }
 
   save(recursive=true){
-    super.save({name: this.name}).then(json => {
-        this.id = resp.json.id
-        this.name = resp.json.name
-        this.cohortIDs = resp.json.cohorts
+    return super.save({name: this.name}).then(json => {
+        this.id = json.study.id
+        this.name = json.study.name
+        this.cohortIDs = json.study.cohortIDs
 
         if(recursive){
           return Promise.all(this.cohorts.map(c => {

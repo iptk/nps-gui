@@ -19,12 +19,12 @@ class Cohort extends Entity{
 
   static get(id, recursive, study=null){
     super.get(id).then(json => new Cohort({
-        id: json.id,
-        name: json.name,
-        studyID: json.studyID,
-        study: (study && study.id == json.studyID) ?study :null,
-        plannedParticipantCount: json.plannedParticipantCount,
-        participantIDs: json.participantIDs
+        id: json.cohort.id,
+        name: json.cohort.name,
+        studyID: json.cohort.studyID,
+        study: (study && study.id == json.cohort.studyID) ?study :null,
+        plannedParticipantCount: json.cohort.plannedParticipantCount,
+        participantIDs: json.cohort.participantIDs
       }))
       .then(c => {
         if(recursive){
@@ -63,11 +63,11 @@ class Cohort extends Entity{
         studyID: this.studyID
       })
       .then(json => {
-        this.id = json.id
-        this.name = json.name
-        this.studyID = json.studyID
-        this.participantIDs = json.participants
-        this.plannedParticipantCount = json.plannedParticipantCount
+        this.id = json.cohort.id
+        this.name = json.cohort.name
+        this.studyID = json.cohort.studyID
+        this.participantIDs = json.cohort.participants
+        this.plannedParticipantCount = json.cohort.plannedParticipantCount
 
         if(recursive){
           return Promise.all(this.participants.map(c => {
