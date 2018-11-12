@@ -1,4 +1,5 @@
 import {InvalidArgumentException, BackendException} from '../exceptions'
+import {Request} from '../request'
 
 class Entity{
   apipath = ''
