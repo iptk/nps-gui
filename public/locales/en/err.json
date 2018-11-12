@@ -25,5 +25,13 @@
   },
   "searchdataset":{
     "updatedcomp": "Comparison changed"
+  },
+  "studydetails":{
+    "err":{
+      "savestudy": "Error while saving the study"
+    },
+    "succ":{
+      "savestudy": "Study saved"
+    }
   }
 }

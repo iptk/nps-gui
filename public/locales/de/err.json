@@ -25,5 +25,13 @@
   },
   "searchdataset":{
     "updatedcomp": "Vergleich erfolgreich geändert"
+  },
+  "studydetails":{
+    "err":{
+      "savestudy": "Fehler beim Speichern der Studie"
+    },
+    "succ":{
+      "savestudy": "Studie gespeichert"
+    }
   }
 }
