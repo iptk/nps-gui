@@ -32,7 +32,7 @@ const reducer = (state = init, action) => {
       return {
         ...state,
         study: action.result,
-        edit: manualEdit || !!action.result.id
+        edit: state.manualEdit || !!action.result.id
       }
 
     case START_EDIT:
