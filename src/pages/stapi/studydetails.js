@@ -6,13 +6,13 @@ import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 
-import reducer from '../../lib/reducers/mapi/studydetails'
+import reducer from '../../lib/reducers/stapi/studydetails'
 import {Page} from '../../lib/dom'
 
 import CohortTab from './studydetails/CohortTab'
 import StudyTab from './studydetails/StudyTab'
 
-const _Tabs = withNamespaces('pages-mapi')(connect(
+const _Tabs = withNamespaces('pages-stapi')(connect(
   (state) => ({
     study: state.l.study
   })

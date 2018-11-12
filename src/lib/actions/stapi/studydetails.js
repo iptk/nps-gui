@@ -1,4 +1,4 @@
-import {Dataset} from '../../api/mapi'
+import {Dataset} from '../../api/stapi'
 import {G_START_LOADING, G_STOP_LOADING} from '../_common'
 import {NotificationLevel, notifyUser} from '../../util/notification'
 

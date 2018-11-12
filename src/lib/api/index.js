@@ -9,7 +9,7 @@ import {
 import {NPS} from './NPS'
 
 import DsAPI from './dsapi'
-import MAPI from './mapi'
+import StAPI from './stapi'
 
 export {
   Exception,
@@ -21,6 +21,6 @@ export {
   NPS,
 
   DsAPI,
-  MAPI
+  StAPI
 }
 export default NPS

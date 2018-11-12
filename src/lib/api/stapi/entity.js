@@ -14,7 +14,7 @@ class Entity{
     }
     // Database is designed to cascade deletion
     return (new Request({
-        url: `/v4/mapi/${this.apipath}/${this.id}`,
+        url: `/v4/stapi/${this.apipath}/${this.id}`,
         method: 'DELETE'
       }))
       .fetch()
@@ -23,7 +23,7 @@ class Entity{
 
   static get(id){
     return (new Request({
-        url: `/v4/mapi/${this.apipath}/${id}`,
+        url: `/v4/stapi/${this.apipath}/${id}`,
         method: 'GET'
       }))
       .fetch()
@@ -39,7 +39,7 @@ class Entity{
   }
 
   save(data){
-    var url = `/v4/mapi/${this.apipath}`
+    var url = `/v4/stapi/${this.apipath}`
     if(this.id){
       url += `/${this.id}`
     }

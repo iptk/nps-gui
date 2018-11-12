@@ -90,4 +90,4 @@ class NewCohortDialog extends React.Component{
   }
 }
 
-export default withNamespaces('dom-mapi')(NewCohortDialog)
+export default withNamespaces('dom-stapi')(NewCohortDialog)

@@ -70,7 +70,7 @@ class Study extends Entity{
 
   static search({filter, limit, offset}){
     return (new Request({
-        url: '/v4/mapi/study',
+        url: '/v4/stapi/study',
         method: 'GET',
         data: {
           filter: filter,

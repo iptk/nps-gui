@@ -16,11 +16,11 @@ import {
   CHANGE_STUDY_NAME,
   START_EDIT,
   saveStudy
-} from '../../../lib/actions/mapi/studydetails'
-import CohortCard from '../../../lib/dom/mapi/CohortCard'
-import NewCohortDialog from '../../../lib/dom/mapi/NewCohortDialog'
+} from '../../../lib/actions/stapi/studydetails'
+import CohortCard from '../../../lib/dom/stapi/CohortCard'
+import NewCohortDialog from '../../../lib/dom/stapi/NewCohortDialog'
 
-import {Cohort, Participant} from '../../../lib/api/mapi'
+import {Cohort, Participant} from '../../../lib/api/stapi'
 
 const _CohortCards = connect(
   (state) => ({
@@ -35,7 +35,7 @@ const _CohortCards = connect(
   )
 )
 
-const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
+const _StudyCardEdit = withNamespaces('pages-stapi')(connect(
   (state) => ({
     study: state.l.study,
     edit: state.l.edit
@@ -77,7 +77,7 @@ const _StudyCardEdit = withNamespaces('pages-mapi')(connect(
   }
 ))
 
-const _Title = withNamespaces('pages-mapi')(connect(
+const _Title = withNamespaces('pages-stapi')(connect(
   (state) => ({
     title: state.l.study.id ?state.l.study.name :null,
     hasID: !!state.l.study.id
@@ -173,4 +173,4 @@ class StudyTab extends React.PureComponent{
   }
 }
 
-export default withNamespaces('pages-mapi')(StudyTab)
+export default withNamespaces('pages-stapi')(StudyTab)

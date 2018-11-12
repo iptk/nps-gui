@@ -68,7 +68,7 @@
       "searchdataset": "Search",
       "metadatasetcollections": "Metadata"
     },
-    "mapi":{
+    "stapi":{
       "_head": "Studies",
       "newstudy": "New study"
     }

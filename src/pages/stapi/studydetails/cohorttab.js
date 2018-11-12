@@ -35,4 +35,4 @@ class CohortTab extends React.PureComponent{
   }
 }
 
-export default withNamespaces('pages-mapi')(CohortTab)
+export default withNamespaces('pages-stapi')(CohortTab)

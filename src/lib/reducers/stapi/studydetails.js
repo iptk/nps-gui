@@ -3,8 +3,8 @@ import {
   CHANGE_STUDY_NAME,
   RECEIVE_STUDY,
   START_EDIT
-} from '../../actions/mapi/studydetails'
-import {Study} from '../../api/mapi'
+} from '../../actions/stapi/studydetails'
+import {Study} from '../../api/stapi'
 
 const init = {
   study: new Study({}),

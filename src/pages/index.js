@@ -1,11 +1,11 @@
 import DsAPI from './dsapi'
-import MAPI from './mapi'
+import StAPI from './stapi'
 
 export default {
   DsAPI: DsAPI.Routes,
-  MAPI: MAPI.Routes
+  StAPI: StAPI.Routes
 }
 export {
   DsAPI,
-  MAPI
+  StAPI
 }

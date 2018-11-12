@@ -34,7 +34,7 @@ Promise.all([
             <BaseLayout version={results[4]}>
               <Route exact path="/" component={SearchDataset}/>
               <Route path="/ds" render={() => <Pages.DsAPI urlbase="/ds"/>}/>
-              <Route path="/st" render={() => <Pages.MAPI urlbase="/st"/>}/>
+              <Route path="/st" render={() => <Pages.StAPI urlbase="/st"/>}/>
             </BaseLayout>
           </NPSContext.Provider>
         </MuiThemeProvider>

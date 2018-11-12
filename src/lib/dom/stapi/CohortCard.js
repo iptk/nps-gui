@@ -102,4 +102,4 @@ class CohortCard extends CollapsableCard{
   }
 }
 
-export default withNamespaces('dom-mapi')(CohortCard)
+export default withNamespaces('dom-stapi')(CohortCard)
