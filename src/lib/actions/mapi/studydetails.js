@@ -17,10 +17,14 @@ const saveStudy = (study) => {
       .save()
       .then(res => {
         dispatch({type: RECEIVE_STUDY, result: res})
+        notifyUser(dispatch, {
+          message: "studydetails.succ.savestudy",
+          level: NotificationLevel.SUCCESS
+        })
       })
       .catch(err => {
         notifyUser(dispatch, {
-          message: "metadatacollections.fetch",
+          message: "studydetails.err.savestudy",
           level: NotificationLevel.ERROR
         })
       })
