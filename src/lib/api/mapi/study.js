@@ -90,6 +90,31 @@ class Study extends Entity{
         }))
       })
   }
+
+  getCohortByID(id){
+    for(var c of this.cohorts){
+      if(c.id == id){
+        return c
+      }
+    }
+    return null
+  }
+  getCohortByName(name){
+    for(var c of this.cohorts){
+      if(c.name == name){
+        return c
+      }
+    }
+    return null
+  }
+  getCohortByIDorName(id, name){
+    for(var c of this.cohorts){
+      if(c.id == id || c.name == name){
+        return c
+      }
+    }
+    return null
+  }
 }
 
 export default Study
