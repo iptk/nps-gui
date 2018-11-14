@@ -1,4 +1,5 @@
 import {InvalidArgumentException, BackendException} from '../exceptions'
+import {Request} from '../request'
 import Entity from './entity'
 
 class Study extends Entity{
@@ -69,25 +70,34 @@ class Study extends Entity{
   }
 
   static search({filter, limit, offset}){
+    const addparam = (url, param, value) => {
+      if(value && param){
+        var delimiter = url.includes('?') ?'&' :'?'
+        url += delimiter+encodeURIComponent(param)+'='+encodeURIComponent(value)
+      }
+      return url
+    }
+    var url = addparam('/v4/stapi/study', 'filter', filter)
+    url = addparam(url, 'limit', limit)
+    url = addparam(url, 'offset', offset)
+
     return (new Request({
-        url: '/v4/stapi/study',
-        method: 'GET',
-        data: {
-          filter: filter,
-          limit: limit,
-          offset: offset
-        }
+        url: url,
+        method: 'GET'
       }))
       .fetch()
       .then(resp => {
         if(resp.statuscode != 200){
           throw new BackendException({msg: 'Cannot find studies', data: resp})
         }
-        resp.json.studies.map(s => new Study({
-          id: s.id,
-          name: s.name,
-          cohortIDs: s.cohorts
-        }))
+        return {
+          studies: resp.json.studies.map(s => new Study({
+            id: s.id,
+            name: s.name,
+            cohortIDs: s.cohorts
+          })),
+          range: resp.json.range
+        }
       })
   }
 
