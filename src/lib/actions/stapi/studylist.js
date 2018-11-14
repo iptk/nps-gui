@@ -4,9 +4,11 @@ import {NotificationLevel, notifyUser} from '../../util/notification'
 
 const RECEIVE_STUDIES = 'RECEIVE_STUDIES'
 
-const saveStudy = (params) => {
+const saveStudy = ({page, numResults, ...params}) => {
   return (dispatch) => {
     dispatch({type: G_START_LOADING})
+    params['limit'] = numResults
+    params['offset'] = page*numResults
     study
       .search(params)
       .then(res => {

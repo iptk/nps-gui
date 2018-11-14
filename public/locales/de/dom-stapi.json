@@ -20,5 +20,12 @@
     "cohortname": "Name der Kohorte",
     "participantcount": "Geplante Teilnehmerzahl",
     "participantcreatecount": "Anzahl an automatisch zu erstellenden Teilnehmern"
+  },
+  "StudiesTable":{
+    "id": "ID",
+    "name": "Name",
+    "cohortcount": "Anzahl an Kohorten",
+    "date": "Erstellt am",
+    "rowsperpage": "Ergebnisse pro Seite"
   }
 }

@@ -7,14 +7,39 @@ import TextField from '@material-ui/core/TextField'
 import reducer from '../../lib/reducers/stapi/studylist'
 import {Page} from '../../lib/dom'
 
-class StudyList extends Page{
+import StudiesTable from '../../lib/dom/stapi/StudiesTable'
 
+const _StudiesTable = connect(
+  (state) => ({
+    studies: state.l.studies,
+    range: state.l.range
+  })
+)(
+  (props) => <StudiesTable {...props}/>
+)
+class StudyList extends Page{
   constructor(props){
     super(props, reducer)
+    this.state = {
+      page: 0,
+      numResults: 25
+    }
   }
 
   onChangeSearch(evt){
     //
+  }
+
+  onChangePage(page){
+    this.setState({
+      page: page
+    })
+  }
+
+  onChangeRowsPerPage(num){
+    this.setState({
+      numResults: num
+    })
   }
 
   render(){
@@ -27,6 +52,11 @@ class StudyList extends Page{
           margin="normal"
           type="search"
           fullWidth/>
+        <_StudiesTable
+          onChangeRowsPerPage={this.onChangeRowsPerPage.bind(this)}
+          onChangePage={this.onChangePage.bind(this)}
+          rowsPerPage={this.state.numResults}
+        />
       </div>
     )
   }
