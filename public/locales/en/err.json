@@ -28,6 +28,7 @@
   },
   "studydetails":{
     "err":{
+      "loadstudy": "The study could not be loaded",
       "savestudy": "Error while saving the study"
     },
     "succ":{

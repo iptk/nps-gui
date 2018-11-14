@@ -28,6 +28,7 @@
   },
   "studydetails":{
     "err":{
+      "loadstudy": "Die Studie konnte nicht geladen werden",
       "savestudy": "Fehler beim Speichern der Studie"
     },
     "succ":{

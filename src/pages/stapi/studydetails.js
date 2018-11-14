@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 
+import {loadStudy} from '../../lib/actions/stapi/studydetails'
 import reducer from '../../lib/reducers/stapi/studydetails'
 import {Page} from '../../lib/dom'
 
@@ -44,6 +45,9 @@ class StudyDetails extends Page{
     this.state = {
       tab: {type: this.TAB_STUDY},
       selectedTab: this.STUDYTAB_VALUE
+    }
+    if(this.props.match.params.id){
+      this.store.dispatch(loadStudy(this.props.match.params.id))
     }
   }
 
