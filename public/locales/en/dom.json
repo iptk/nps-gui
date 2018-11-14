@@ -70,7 +70,8 @@
     },
     "stapi":{
       "_head": "Studies",
-      "newstudy": "New study"
+      "newstudy": "New study",
+      "studysearch": "List of studies"
     }
   }
 }

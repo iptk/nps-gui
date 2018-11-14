@@ -11,5 +11,8 @@
       "studyname": "Name of this study"
     },
     "studytab": "Overview"
+  },
+  "studylist":{
+    "search": "Filter studies"
   }
 }

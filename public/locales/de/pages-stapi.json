@@ -11,5 +11,8 @@
       "studyname": "Name der Studie"
     },
     "studytab": "Studienübersicht"
+  },
+  "studylist":{
+    "search": "Studien filtern"
   }
 }

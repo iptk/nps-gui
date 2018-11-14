@@ -63,6 +63,9 @@ class BaseLayout extends React.Component {
             <ListItemText primary={t('navigation.dsapi.datasetcompare')}/>
           </ListItem>
           <ListSubheader>{t('navigation.stapi._head')}</ListSubheader>
+          <ListItem onClick={()=>{changePage('/st/studies')}} button>
+            <ListItemText primary={t('navigation.stapi.studysearch')}/>
+          </ListItem>
           <ListItem onClick={()=>{changePage('/st/study')}} button>
             <ListItemText primary={t('navigation.stapi.newstudy')}/>
           </ListItem>
