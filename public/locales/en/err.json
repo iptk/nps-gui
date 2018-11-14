@@ -33,5 +33,10 @@
     "succ":{
       "savestudy": "Study saved"
     }
+  },
+  "studylist":{
+    "err":{
+      "loadstudies": "Error while loading the list of studies"
+    }
   }
 }
