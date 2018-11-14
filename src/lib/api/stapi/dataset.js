@@ -3,7 +3,7 @@ import Entity from './entity'
 class Dataset extends Entity{
   apipath = 'dataset'
 
-  constructor({id, datasetID, participant, participantID, dateID}){
+  constructor({id, datasetID, participant, participantID, dateID}={}){
     super()
     this.id = id
     this.datasetID = datasetID
@@ -13,7 +13,7 @@ class Dataset extends Entity{
   }
 
   static get(id, recursive, participant){
-    super.get(id).then(json => new Dataset({
+    super.get(id, (new Dataset()).apipath).then(json => new Dataset({
       id: json.dataset.id,
       datasetID: json.dataset.datasetID,
       participant: (participant && participant.id == json.dataset.participantID)

@@ -5,7 +5,7 @@ import Entity from './entity'
 class Study extends Entity{
   apipath = 'study'
 
-  constructor({id=null, name="", cohortIDs=[], cohorts=[]}){
+  constructor({id=null, name="", cohortIDs=[], cohorts=[]}={}){
     super()
     this.id = id
     this.name = name
@@ -25,7 +25,7 @@ class Study extends Entity{
   }
 
   static get(id, recursive){
-    return super.get(id).then(json => new Study({
+    return super.get(id, (new Study()).apipath).then(json => new Study({
         id: json.study.id,
         name: json.study.name,
         cohortIDs: json.study.cohortIDs
@@ -42,7 +42,7 @@ class Study extends Entity{
     if(!this.id){
       return Promise.resolve(this)
     }
-    var cohorts = s.cohortIDs.map(cid => Cohort.get(id, recursive))
+    var cohorts = this.cohortIDs.map(cid => Cohort.get(id, recursive))
     return Promise.all(cohorts).then(cs => {
       this.cohorts = cs
       return this

@@ -5,7 +5,7 @@ import MDate from './date'
 class Participant extends Entity{
   apipath = 'participant'
 
-  constructor({id, alias, cohort, cohortID, datasetIDs, dateIDs, datasets, dates}){
+  constructor({id, alias, cohort, cohortID, datasetIDs, dateIDs, datasets, dates}={}){
     super()
     this.id = id
     this.alias = alias || ''
@@ -18,7 +18,7 @@ class Participant extends Entity{
   }
 
   static get(id, recursive, cohort){
-    return super.get(id).then(json => new Participant({
+    return super.get(id, (new Participant()).apipath).then(json => new Participant({
           id: json.participant.id,
           alias: json.participant.alias,
           cohortID: json.participant.cohortID,

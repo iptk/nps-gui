@@ -4,6 +4,10 @@ import {Request} from '../request'
 class Entity{
   apipath = ''
 
+  static _getApipath(cls){
+    return (new cls()).apipath
+  }
+
   clone(){
     return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
@@ -21,16 +25,16 @@ class Entity{
       .then(resp => (resp.statuscode == 200 && resp.json.success))
   }
 
-  static get(id){
+  static get(id, apipath){
     return (new Request({
-        url: `/v4/stapi/${this.apipath}/${id}`,
+        url: `/v4/stapi/${apipath}/${id}`,
         method: 'GET'
       }))
       .fetch()
       .then(resp => {
         if(resp.statuscode != 200 || !resp.json.success){
           throw new InvalidArgumentException({
-            msg: `${path} ${this.id} does not exist`,
+            msg: `${apipath} ${id} does not exist`,
             data: resp
           })
         }

@@ -6,7 +6,7 @@ class Cohort extends Entity{
 
   constructor({
     id, name, studyID, participantIDs, participants, plannedParticipantCount, study
-  }){
+  }={}){
     super()
     this.id = id
     this.name = name
@@ -18,7 +18,7 @@ class Cohort extends Entity{
   }
 
   static get(id, recursive, study=null){
-    super.get(id).then(json => new Cohort({
+    super.get(id, (new Cohort()).apipath).then(json => new Cohort({
         id: json.cohort.id,
         name: json.cohort.name,
         studyID: json.cohort.studyID,
@@ -49,7 +49,7 @@ class Cohort extends Entity{
     if(!this.id){
       return Promise.resolve(this)
     }
-    var parts = s.participantIDs.map(cid => Participant.get(id, recursive))
+    var parts = this.participantIDs.map(cid => Participant.get(id, recursive))
     return Promise.all(parts).then(ps => {
       this.participants = ps
       return this
