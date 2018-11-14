@@ -1,7 +1,9 @@
 import React from 'react'
 import {withNamespaces} from 'react-i18next'
 
+import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
+import Icon from '@material-ui/core/Icon'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -38,6 +40,7 @@ class StudiesTable extends React.PureComponent{
               <TableCell>{t('StudiesTable.name')}</TableCell>
               <TableCell>{t('StudiesTable.cohortcount')}</TableCell>
               <TableCell>{t('StudiesTable.date')}</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -47,6 +50,11 @@ class StudiesTable extends React.PureComponent{
                 <TableCell>{s.name}</TableCell>
                 <TableCell>{s.cohortIDs.length}</TableCell>
                 <TableCell>unknown</TableCell>
+                <TableCell>
+                  <Button href={'/st/study/'+s.id}>
+                    <Icon>arrow_forward</Icon>
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
