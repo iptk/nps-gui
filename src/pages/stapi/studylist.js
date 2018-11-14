@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withNamespaces} from 'react-i18next'
+import debounceWrapper from '../../lib/util/debounceWrapper'
 
 import TextField from '@material-ui/core/TextField'
 
+import {searchStudies} from '../../lib/actions/stapi/studylist'
 import reducer from '../../lib/reducers/stapi/studylist'
 import {Page} from '../../lib/dom'
 
@@ -22,24 +24,35 @@ class StudyList extends Page{
     super(props, reducer)
     this.state = {
       page: 0,
-      numResults: 25
+      numResults: 25,
+      searchterm: ''
     }
+    this.fetchNewResults()
   }
 
-  onChangeSearch(evt){
-    //
+  onChangeSearch(target){
+    var searchterm = target.value
+    var newstate = {searchterm: searchterm}
+    this.setState(newstate)
+    this.fetchNewResults(newstate)
   }
 
   onChangePage(page){
-    this.setState({
-      page: page
-    })
+    var page = Math.max(page-1, 0)
+    var newstate = {page: page}
+    this.setState(newstate)
+    this.fetchNewResults(newstate)
   }
 
   onChangeRowsPerPage(num){
-    this.setState({
-      numResults: num
-    })
+    var newstate = {numResults: num}
+    this.setState(newstate)
+    this.fetchNewResults(newstate)
+  }
+
+  fetchNewResults(specialProps={}){
+    var props = {...this.state, ...specialProps}
+    this.store.dispatch(searchStudies(props))
   }
 
   render(){
@@ -48,7 +61,7 @@ class StudyList extends Page{
       <div>
         <TextField
           label={t('studylist.search')}
-          onChange={this.onChangeSearch.bind(this)}
+          onChange={debounceWrapper(this.onChangeSearch.bind(this), 600)}
           margin="normal"
           type="search"
           fullWidth/>

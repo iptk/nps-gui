@@ -1,3 +1,5 @@
+import {RECEIVE_STUDIES} from '../../actions/stapi/studylist'
+
 const init = {
   studies: [],
   range: {
@@ -8,6 +10,12 @@ const init = {
 }
 const reducer = (state = init, action) => {
   switch(action.type){
+    case RECEIVE_STUDIES:
+      return {
+        studies: action.result.studies,
+        range: action.result.range
+      }
+      
     default:
       return state
   }

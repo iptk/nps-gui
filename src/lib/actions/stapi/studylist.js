@@ -4,19 +4,24 @@ import {NotificationLevel, notifyUser} from '../../util/notification'
 
 const RECEIVE_STUDIES = 'RECEIVE_STUDIES'
 
-const saveStudy = ({page, numResults, ...params}) => {
+const searchStudies = ({page=0, numResults=25, searchterm, ...params}) => {
   return (dispatch) => {
     dispatch({type: G_START_LOADING})
-    params['limit'] = numResults
-    params['offset'] = page*numResults
-    study
+    if(!params['limit'] && !params['offset']){
+      params['limit'] = numResults
+      params['offset'] = page*numResults
+    }
+    if(searchterm && searchterm.length > 0 && !params['filter']){
+      params['filter'] = searchterm
+    }
+    Study
       .search(params)
       .then(res => {
         dispatch({type: RECEIVE_STUDIES, result: res})
       })
       .catch(err => {
         notifyUser(dispatch, {
-          message: "studydetails.err.loadstudies",
+          message: "studylist.err.loadstudies",
           level: NotificationLevel.ERROR
         })
       })
@@ -27,9 +32,6 @@ const saveStudy = ({page, numResults, ...params}) => {
 }
 
 export {
-  saveStudy,
-  ADD_COHORT,
-  CHANGE_STUDY_NAME,
-  RECEIVE_STUDY,
-  START_EDIT
+  searchStudies,
+  RECEIVE_STUDIES,
 }

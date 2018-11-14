@@ -36,7 +36,7 @@
   },
   "studylist":{
     "err":{
-      "loadstudies": "Fehler beim Laden der Studienlist"
+      "loadstudies": "Fehler beim Laden der Studienliste"
     }
   }
 }
