@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow'
 
 class StudiesTable extends React.PureComponent{
   onChangeRowsPerPage(evt){
-    console.log(evt.target)
     var num = evt.target.value
     if(this.props.onChangeRowsPerPage){
       this.props.onChangeRowsPerPage(num)
@@ -32,7 +31,7 @@ class StudiesTable extends React.PureComponent{
     }
     return (
       <div>
-        <Table fullWidth>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>{t('StudiesTable.id')}</TableCell>
@@ -43,7 +42,7 @@ class StudiesTable extends React.PureComponent{
           </TableHead>
           <TableBody>
             {studies.map(s => (
-              <TableRow>
+              <TableRow key={s.id}>
                 <TableCell>{s.id}</TableCell>
                 <TableCell>{s.name}</TableCell>
                 <TableCell>{s.cohortIDs.length}</TableCell>
@@ -60,7 +59,6 @@ class StudiesTable extends React.PureComponent{
           labelRowsPerPage={t('StudiesTable.rowsperpage')}
           onChangeRowsPerPage={this.onChangeRowsPerPage.bind(this)}
           onChangePage={this.onChangePage.bind(this)}
-          fullWidth
           component='div'
         />
         <Divider/>
