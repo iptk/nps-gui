@@ -8,7 +8,9 @@
       "createcohort": "Kohorte hinzufügen",
       "save": "Studie speichern",
       "startedit": "Studie bearbeiten",
-      "studyname": "Name der Studie"
+      "studyname": "Name der Studie",
+      "studyid": "Interne ID der Studie",
+      "cohortcount": "Anzahl an Kohorten"
     },
     "studytab": "Studienübersicht"
   },

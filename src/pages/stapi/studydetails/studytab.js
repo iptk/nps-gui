@@ -8,6 +8,10 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
@@ -42,9 +46,26 @@ const _StudyCardEdit = withNamespaces('pages-stapi')(connect(
   })
 )(
   ({study, edit, t, onStartEdit, onCreateCohort, onSaveStudy, onChangeName, currentName}) => {
+    var infoTable = (
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell>{t('studydetails.studycard.studyid')}</TableCell>
+            <TableCell>{study.id}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>{t('studydetails.studycard.cohortcount')}</TableCell>
+            <TableCell>
+              {Math.max(study.cohortIDs.length, study.cohorts.length)}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    )
     if(!edit){
       return (
         <CardActions>
+          {infoTable}
           <Button onClick={onStartEdit} fullWidth>
             <Icon>edit</Icon>
             {t('studydetails.studycard.startedit')}
@@ -55,6 +76,8 @@ const _StudyCardEdit = withNamespaces('pages-stapi')(connect(
     return (
       <React.Fragment>
         <CardContent>
+          {infoTable}
+          <br/>
           <TextField
             onChange={onChangeName} margin="normal" defaultValue={currentName}
             label={t('studydetails.studycard.studyname')} fullWidth
