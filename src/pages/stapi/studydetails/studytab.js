@@ -64,13 +64,17 @@ const _StudyCardEdit = withNamespaces('pages-stapi')(connect(
     )
     if(!edit){
       return (
-        <CardActions>
-          {infoTable}
-          <Button onClick={onStartEdit} fullWidth>
-            <Icon>edit</Icon>
-            {t('studydetails.studycard.startedit')}
-          </Button>
-        </CardActions>
+        <React.Fragment>
+          <CardContent>
+            {infoTable}
+          </CardContent>
+          <CardActions>
+            <Button onClick={onStartEdit} fullWidth>
+              <Icon>edit</Icon>
+              {t('studydetails.studycard.startedit')}
+            </Button>
+          </CardActions>
+        </React.Fragment>
       )
     }
     return (
