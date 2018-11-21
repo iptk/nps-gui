@@ -37,7 +37,12 @@ class NewCohortDialog extends React.Component{
   }
 
   render(){
-    var {t} = this.props
+    var {reservedNames, t} = this.props
+
+    const testName = () => (
+      this.state.name.length == 0
+      || reservedNames.includes(this.state.name)
+    )
 
     return (
       <Dialog
@@ -54,7 +59,7 @@ class NewCohortDialog extends React.Component{
             onChange={(evt) => this.setState({name: evt.target.value})}
             fullWidth
             margin="normal"
-            error={this.state.name.length == 0}/>
+            error={testName()}/>
           <TextField label={t('NewCohortDialog.participantcount')}
             onChange={(evt) => this.setState({
               participantCount: Math.max(evt.target.value, 0)
@@ -76,7 +81,7 @@ class NewCohortDialog extends React.Component{
         </DialogContent>
         <DialogActions>
           <Button onClick={this.save.bind(this)}
-            disabled={this.state.name.length == 0}
+            disabled={testName()}
             fullWidth
           >
             {t('NewCohortDialog.createcohort')}

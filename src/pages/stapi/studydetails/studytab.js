@@ -191,6 +191,9 @@ class StudyTab extends React.PureComponent{
           ?<NewCohortDialog
             onClose={() => this.setState({newCohortDialog: false})}
             onSave={this.createCohort.bind(this)}
+            reservedNames={
+              this.props.store.getState().l.study.cohorts.map(c => c.name)
+            }
             />
           :null
         }
