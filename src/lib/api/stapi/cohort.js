@@ -1,5 +1,6 @@
 import {InvalidArgumentException, BackendException} from '../exceptions'
 import Entity from './entity'
+import Participant from './participant'
 
 class Cohort extends Entity{
   apipath = 'cohort'
