@@ -32,7 +32,7 @@ const _CohortCards = connect(
   })
 )(
   ({onCohortDetail, study}) => study.cohorts.map(c =>
-    <div key={c.name}>
+    <div key={c.name+(c.id||'')}>
       <br/>
       <CohortCard cohort={c} onCohortDetail={onCohortDetail}/>
     </div>
