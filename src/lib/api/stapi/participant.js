@@ -58,7 +58,7 @@ class Participant extends Entity{
   }
 
   save(recursive=true){
-    return super.save({name: this.name}).then(json => {
+    return super.save({alias: this.alias, cohortID: this.cohortID}).then(json => {
         this.id = json.participant.id
         this.alias = json.participant.alias
         this.cohortID = json.participant.cohortID
