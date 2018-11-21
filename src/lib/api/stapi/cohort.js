@@ -25,7 +25,7 @@ class Cohort extends Entity{
         studyID: json.cohort.studyID,
         study: (study && study.id == json.cohort.studyID) ?study :null,
         plannedParticipantCount: json.cohort.plannedParticipantCount,
-        participantIDs: json.cohort.participantIDs
+        participantIDs: json.cohort.participants
       }))
       .then(c => {
         if(recursive){
