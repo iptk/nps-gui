@@ -17,7 +17,7 @@ class Participant extends Entity{
     this.dates = dates || []
   }
 
-  static get(id, recursive, cohort){
+  static get(id, recursive, cohort=null){
     return super.get(id, (new Participant()).apipath).then(json => new Participant({
           id: json.participant.id,
           alias: json.participant.alias,
@@ -29,9 +29,9 @@ class Participant extends Entity{
       )
       .then(p => {
         if(recursive){
-          return Promise.all(p.loadDatasets(), p.loadDates()).then(p => p[0])
+          return Promise.all([p.loadDatasets(), p.loadDates()]).then(p => p[0])
         }
-        return this
+        return p
       })
   }
 
@@ -39,7 +39,7 @@ class Participant extends Entity{
     if(!this.id){
       return Promise.resolve(this)
     }
-    var datas = this.datasetIDs.map(id => Dataset.get(id))
+    var datas = this.datasetIDs.map(id => Dataset.get(id, false, this))
     return Promise.all(datas).then(ds => {
       this.datasets = ds
       return this
@@ -50,7 +50,7 @@ class Participant extends Entity{
     if(!this.id){
       return Promise.resolve(this)
     }
-    var dates = this.dateIDs.map(id => MDate.get(id))
+    var dates = this.dateIDs.map(id => MDate.get(id, false, this))
     return Promise.all(dates).then(ds => {
       this.dates = ds
       return this
