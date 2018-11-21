@@ -9,8 +9,8 @@
       "save": "Save study",
       "startedit": "Edit study",
       "studyname": "Name of this study",
-      "studyid": "Interne ID der Studie",
-      "cohortcount": "Anzahl an Kohorten"
+      "studyid": "Internal study-ID",
+      "cohortcount": "Number of cohorts"
     },
     "studytab": "Overview"
   },
