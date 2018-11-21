@@ -8,6 +8,10 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
 import Icon from '@material-ui/core/Icon'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
@@ -29,10 +33,30 @@ class CohortTab extends React.PureComponent{
         </Typography>
         <Card>
           <CardHeader title={cohort.name}/>
+          <CardContent>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{t('studydetails.cohorttab.cohortid')}</TableCell>
+                  <TableCell>{cohort.id}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{t('dom-stapi:CohortCard.plannedParticipantCount')}</TableCell>
+                  <TableCell>{cohort.plannedParticipantCount}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>{t('dom-stapi:CohortCard.participantCount')}</TableCell>
+                  <TableCell>
+                    {Math.max(cohort.participantIDs.length, cohort.participants.length)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
         </Card>
       </div>
     )
   }
 }
 
-export default withNamespaces('pages-stapi')(CohortTab)
+export default withNamespaces('pages-stapi', 'dom-stapi')(CohortTab)

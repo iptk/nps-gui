@@ -1,5 +1,8 @@
 {
   "studydetails":{
+    "cohorttab":{
+      "cohortid": "Internal cohort-ID"
+    },
     "newstudy": "New study",
     "unnamedstudy": "Unnamed study",
     "participant": "Participant",
