@@ -13,7 +13,7 @@ class Dataset extends Entity{
   }
 
   static get(id, recursive, participant){
-    super.get(id, (new Dataset()).apipath).then(json => new Dataset({
+    return super.get(id, (new Dataset()).apipath).then(json => new Dataset({
       id: json.dataset.id,
       datasetID: json.dataset.datasetID,
       participant: (participant && participant.id == json.dataset.participantID)

@@ -1,5 +1,6 @@
 import {InvalidArgumentException, BackendException} from '../exceptions'
 import {Request} from '../request'
+import Cohort from './cohort'
 import Entity from './entity'
 
 class Study extends Entity{

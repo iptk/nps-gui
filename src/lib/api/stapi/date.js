@@ -13,7 +13,7 @@ class Date extends Entity{
   }
 
   static get(id, recursive, participant){
-    super.get(id, (new Date()).apipath).then(json => new Dataset({
+    return super.get(id, (new Date()).apipath).then(json => new Dataset({
       id: json.date.id,
       datasetID: json.date.datasetID,
       participant: (participant && participant.id == json.date.participantID)

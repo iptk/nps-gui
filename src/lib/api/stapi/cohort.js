@@ -18,7 +18,7 @@ class Cohort extends Entity{
   }
 
   static get(id, recursive, study=null){
-    super.get(id, (new Cohort()).apipath).then(json => new Cohort({
+    return super.get(id, (new Cohort()).apipath).then(json => new Cohort({
         id: json.cohort.id,
         name: json.cohort.name,
         studyID: json.cohort.studyID,
