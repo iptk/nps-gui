@@ -120,13 +120,23 @@ class Study extends Entity{
     }
     return null
   }
-  getCohortByIDorName(id, name){
-    for(var c of this.cohorts){
-      if(c.id == id || c.name == name){
-        return c
+  getCohortByIDorName(id, name, greedy=false){
+    if(greedy){
+      for(var c of this.cohorts){
+        if(c.id == id || c.name == name){
+          return c
+        }
       }
+      return null
     }
-    return null
+    var c = null
+    if(id){
+      c = this.getCohortByID(id)
+    }
+    if(!c && name){
+      c = this.getCohortByName(name)
+    }
+    return c
   }
 }
 
