@@ -51,7 +51,9 @@ class Cohort extends Entity{
     }
     var parts = this.participantIDs.map(cid => Participant.get(id, recursive))
     return Promise.all(parts).then(ps => {
-      this.participants = ps
+      this.participants = ps.sort(
+        (a,b) => a.alias.localeCompare(b.alias, {kn: true}, {sesitivity: 'base'})
+      )
       return this
     })
   }

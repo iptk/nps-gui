@@ -45,7 +45,9 @@ class Study extends Entity{
     }
     var cohorts = this.cohortIDs.map(cid => Cohort.get(cid, recursive, this))
     return Promise.all(cohorts).then(cs => {
-      this.cohorts = cs
+      this.cohorts = cs.sort(
+        (a,b) => a.name.localeCompare(b.name, {kn: true}, {sesitivity: 'base'})
+      )
       return this
     })
   }
