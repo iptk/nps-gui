@@ -10,7 +10,7 @@ class Study extends Entity{
     super()
     this.id = id
     this.name = name
-    this.cohortIDs = []
+    this.cohortIDs = cohortIDs || []
     this.cohorts = cohorts || []
   }
 
