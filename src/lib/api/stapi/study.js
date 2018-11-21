@@ -43,7 +43,7 @@ class Study extends Entity{
     if(!this.id){
       return Promise.resolve(this)
     }
-    var cohorts = this.cohortIDs.map(cid => Cohort.get(id, recursive))
+    var cohorts = this.cohortIDs.map(cid => Cohort.get(cid, recursive, this))
     return Promise.all(cohorts).then(cs => {
       this.cohorts = cs
       return this
