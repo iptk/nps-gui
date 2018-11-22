@@ -15,6 +15,17 @@ import TableRow from '@material-ui/core/TableRow'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 
+import ParticipantCard from '../../../lib/dom/stapi/ParticipantCard'
+
+const _ParticipantCards = ({participants, ...props}) => (
+  participants.map(p =>
+    <React.Fragment>
+      <br/>
+      <ParticipantCard key={p.alias+(p.id||'')} participant={p} {...props}/>
+    </React.Fragment>
+  )
+)
+
 class CohortTab extends React.PureComponent{
   constructor(props){
     super(props)
@@ -54,6 +65,8 @@ class CohortTab extends React.PureComponent{
             </Table>
           </CardContent>
         </Card>
+        <br/>
+        <_ParticipantCards participants={cohort.participants}/>
       </div>
     )
   }

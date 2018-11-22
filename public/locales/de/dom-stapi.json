@@ -21,6 +21,24 @@
     "participantcount": "Geplante Teilnehmerzahl",
     "participantcreatecount": "Anzahl an automatisch zu erstellenden Teilnehmern"
   },
+  "ParticipantCard":{
+    "alias": "Alias",
+    "dataset": {
+      "id": "Datensatz-ID in der Studienverwaltung",
+      "datasetID": "Referenz-ID",
+      "date": "Zugeordneter Termin"
+    },
+    "datasetCount": "Anzahl an assoziierten Datensätzen",
+    "datasetTableHeadline": "Datensätze",
+    "date": {
+      "id": "Interne ID",
+      "date": "Termin",
+      "datasetCount": "Anzahl an zugeordneten Datensätzen"
+    },
+    "dateCount": "Anzahl an Terminen",
+    "dateTableHeadline": "Termine",
+    "id": "Interne ID"
+  },
   "StudiesTable":{
     "id": "ID",
     "name": "Name",

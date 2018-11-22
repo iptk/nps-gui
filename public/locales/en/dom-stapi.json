@@ -21,6 +21,24 @@
     "participantcount": "Planned participant count",
     "participantcreatecount": "Number of participants to create automatically"
   },
+  "ParticipantCard":{
+    "alias": "Alias",
+    "dataset": {
+      "id": "Dataset-ID (study-management)",
+      "datasetID": "Reference-ID",
+      "date": "Associated Date"
+    },
+    "datasetCount": "Number of associated datasets",
+    "datasetTableHeadline": "Datasets",
+    "date": {
+      "id": "Internal ID",
+      "date": "Date",
+      "datasetCount": "Number of associated datasets"
+    },
+    "dateCount": "Number of Dates",
+    "dateTableHeadline": "Dates",
+    "id": "Internal ID"
+  },
   "StudiesTable":{
     "id": "ID",
     "name": "Name",
