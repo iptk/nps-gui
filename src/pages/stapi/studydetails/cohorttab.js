@@ -19,9 +19,9 @@ import ParticipantCard from '../../../lib/dom/stapi/ParticipantCard'
 
 const _ParticipantCards = ({participants, ...props}) => (
   participants.map(p =>
-    <React.Fragment>
+    <React.Fragment key={p.alias+(p.id||'')}>
       <br/>
-      <ParticipantCard key={p.alias+(p.id||'')} participant={p} {...props}/>
+      <ParticipantCard participant={p} {...props}/>
     </React.Fragment>
   )
 )
